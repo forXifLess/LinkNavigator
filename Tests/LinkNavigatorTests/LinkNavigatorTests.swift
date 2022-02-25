@@ -6,6 +6,6 @@ final class LinkNavigatorTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(LinkNavigator().text, "Hello, World!")
+//        XCTAssertEqual(LinkNavigator().text, "Hello, World!")
     }
 }

@@ -7,7 +7,7 @@ let package = Package(
     name: "LinkNavigator",
     platforms: [
         .iOS(.v14),
-    ]
+    ],
     products: [
         .library(
             name: "LinkNavigator",
