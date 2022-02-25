@@ -8,4 +8,10 @@ public struct ViewableRouter {
   public static func emptyView() -> ViewableRouter {
     .init(key: "empty", viewController: UIViewController(), matchURL: .defaultValue())
   }
+
+  public init(key: String, viewController: UIViewController, matchURL: MatchURL) {
+    self.key = key
+    self.viewController = viewController
+    self.matchURL = matchURL
+  }
 }

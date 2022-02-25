@@ -1,5 +1,7 @@
 import Foundation
+import LinkNavigator
 
 protocol DependencyType {
-  var enviroment: EnviromentType { get }
+  var appEnviroment: EnviromentType { get }
+  var appRouteBuildGroup: RouterBuildGroupType { get }
 }

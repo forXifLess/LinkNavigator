@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "LinkNavigator",
+        "repositoryURL": "https://github.com/interactord/LinkNavigator.git",
+        "state": {
+          "branch": "main",
+          "revision": "6aa26fc184d3b5e8ffc2d939c2b42238ec432273",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

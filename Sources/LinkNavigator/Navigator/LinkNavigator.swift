@@ -21,7 +21,7 @@ extension LinkNavigator: LinkNavigatorType {
     rootNavigationController.popViewController(animated: true)
   }
 
-  public func href(url: String) {
+  public func href(url: String, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
     let currentViewControllers = rootNavigationController.viewControllers.compactMap {
       $0 as? WrapperController
     }
@@ -29,16 +29,21 @@ extension LinkNavigator: LinkNavigatorType {
     guard let absURL = convertAbsolute(url: url, matches: newHistory.stack.map(\.matchURL)) else { return }
     guard let matchURL = MatchURL.serialzied(url: absURL) else { return }
 
-    let newStack = routerGroup.build(
-      history: newHistory,
-      match: matchURL,
-      enviroment: enviroment,
-      navigator: self)
+    do {
+      let newStack = try routerGroup.build(
+        history: newHistory,
+        match: matchURL,
+        enviroment: enviroment,
+        navigator: self)
 
-    currentHistoryStack = currentHistoryStack.mutate(stack: newStack)
+      currentHistoryStack = currentHistoryStack.mutate(stack: newStack)
 
-    rootNavigationController
-      .setViewControllers(currentHistoryStack.stack.map(\.viewController), animated: true)
+      rootNavigationController
+        .setViewControllers(currentHistoryStack.stack.map(\.viewController), animated: true)
+    } catch {
+      didOccuredError?(self, .notFound)
+      return
+    }
   }
 
   func convertAbsolute(url: String, matches: [MatchURL]) -> String? {
@@ -50,31 +55,44 @@ extension LinkNavigator: LinkNavigatorType {
     return lastMatch.pathes.joined(separator: "/") + convertedURL
   }
 
-  public func replace(url: String) {
-    guard let matchURL = MatchURL.serialzied(url: url) else { return }
+  @discardableResult
+  public func replace(url: String, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+    guard let matchURL = MatchURL.serialzied(url: url) else {
+      didOccuredError?(self, .notAllowedURL)
+      return rootNavigator
+    }
 
-    let newStack = routerGroup.build(
-      history: .init(),
-      match: matchURL,
-      enviroment: enviroment,
-      navigator: self)
+    do {
+      let newStack = try routerGroup.build(
+        history: .init(),
+        match: matchURL,
+        enviroment: enviroment,
+        navigator: self)
 
-    currentHistoryStack = currentHistoryStack.mutate(stack: newStack)
+      currentHistoryStack = currentHistoryStack.mutate(stack: newStack)
 
-    rootNavigationController.dismiss(animated: false)
-    rootNavigationController
-      .setViewControllers(currentHistoryStack.stack.map(\.viewController), animated: false)
+      rootNavigationController
+        .setViewControllers(currentHistoryStack.stack.map(\.viewController), animated: true)
+    } catch {
+      didOccuredError?(self, .notFound)
+    }
+
+    return rootNavigator
+  }
+
+  public func alert(model: Alert) {
+    rootNavigationController.present(model.build(), animated: true, completion: .none)
   }
 }
 
-struct RootNavigator: UIViewControllerRepresentable {
+public struct RootNavigator: UIViewControllerRepresentable {
 
   let navigationController: UINavigationController
 
-  func makeUIViewController(context: Context) -> some UIViewController {
+  public func makeUIViewController(context: Context) -> some UIViewController {
     navigationController
   }
 
-  func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+  public func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
   }
 }

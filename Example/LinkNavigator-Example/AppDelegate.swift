@@ -1,15 +1,22 @@
-import UIKit
-import SwiftUI
 import LinkNavigator
+import SwiftUI
+import UIKit
+
+// MARK: - AppDelegate
 
 final class AppDelegate: NSObject {
-//  let linkRouter: LinkNavigatorType = LinkNavigator(
-//    enviroment: Environment(),
-//    routerGroup: )
+  let linkRouter: LinkNavigatorType = {
+    let dependency: DependencyType = AppDependency()
+    return LinkNavigator(
+      enviroment: dependency.appEnviroment,
+      routerGroup: dependency.appRouteBuildGroup)
+  }()
 }
 
+// MARK: UIApplicationDelegate
+
 extension AppDelegate: UIApplicationDelegate {
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    return true
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+    true
   }
 }
