@@ -31,7 +31,7 @@ extension LinkNavigator: LinkNavigatorType {
     }
   }
 
-  public func href(url: String, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+  public func href(url: String, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
     let currentViewControllers = rootNavigationController.viewControllers.compactMap {
       $0 as? WrapperController
     }
@@ -49,7 +49,7 @@ extension LinkNavigator: LinkNavigatorType {
       currentHistoryStack = currentHistoryStack.mutate(stack: newStack)
 
       rootNavigationController
-        .setViewControllers(currentHistoryStack.stack.map(\.viewController), animated: true)
+        .setViewControllers(currentHistoryStack.stack.map(\.viewController), animated: animated)
     } catch {
       didOccuredError?(self, .notFound)
       return
@@ -73,7 +73,6 @@ extension LinkNavigator: LinkNavigatorType {
         enviroment: enviroment,
         navigator: self)
 
-
       rootNavigationController.dismiss(animated: animated) { [weak self] in
         guard let self = self else { return }
         let subHistory = HistoryStack(stack: openStack)
@@ -87,7 +86,7 @@ extension LinkNavigator: LinkNavigatorType {
   }
 
   @discardableResult
-  public func replace(url: String, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+  public func replace(url: String, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
     guard let matchURL = MatchURL.serialzied(url: url) else {
       didOccuredError?(self, .notAllowedURL)
       return rootNavigator
@@ -101,9 +100,11 @@ extension LinkNavigator: LinkNavigatorType {
         navigator: self)
 
       currentHistoryStack = currentHistoryStack.mutate(stack: newStack)
-
-      rootNavigationController
-        .setViewControllers(currentHistoryStack.stack.map(\.viewController), animated: true)
+      rootNavigationController.dismiss(animated: false) { [weak self] in
+        guard let self = self else { return }
+        self.rootNavigationController
+          .setViewControllers(self.currentHistoryStack.stack.map(\.viewController), animated: animated)
+      }
     } catch {
       didOccuredError?(self, .notFound)
     }
