@@ -21,7 +21,7 @@ extension AppMain: App {
               appDeletate.linkRouter.alert(model: .init(
                 message: "잘못된 주소입니다.",
                 buttons: [
-                  .init(title: "ok", style: .cancel, action: {})
+                  .init(title: "ok", style: .cancel, action: {}),
                 ],
                 flagType: .error))
             })

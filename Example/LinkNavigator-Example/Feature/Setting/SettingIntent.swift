@@ -43,7 +43,7 @@ extension SettingIntent: IntentType, SettingIntentType {
     case .onTapNotification:
       navigator.href(url: "/notification", didOccuredError: .none)
     case .onTapBack:
-      navigator.back()
+      navigator.back(animated: false)
     }
   }
 }

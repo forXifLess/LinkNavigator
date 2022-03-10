@@ -6,6 +6,7 @@ enum HomeModel {
 
   enum ViewAction: Equatable {
     case onTapSetting
+    case onTapNewNotification
     case onTapRouteError
   }
 }

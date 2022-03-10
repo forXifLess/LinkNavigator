@@ -2,9 +2,14 @@ import UIKit
 import SwiftUI
 
 public final class LinkNavigator {
-  var rootNavigationController = RootNavigationController()
+  let rootNavigationController = RootNavigationController()
+  let subNavigationController = RootNavigationController()
+
   lazy var rootNavigator: RootNavigator = {
     RootNavigator(navigationController: rootNavigationController)
+  }()
+  lazy var subNavigator: RootNavigator = {
+    RootNavigator(navigationController: subNavigationController)
   }()
   private(set) var currentHistoryStack = HistoryStack()
   let enviroment: EnviromentType
@@ -17,8 +22,13 @@ public final class LinkNavigator {
 }
 
 extension LinkNavigator: LinkNavigatorType {
-  public func back() {
-    rootNavigationController.popViewController(animated: true)
+
+  public func back(animated: Bool) {
+    if rootNavigationController.presentedViewController == .none {
+      rootNavigationController.popViewController(animated: animated)
+    } else {
+      rootNavigationController.dismiss(animated: animated, completion: .none)
+    }
   }
 
   public func href(url: String, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
@@ -46,13 +56,34 @@ extension LinkNavigator: LinkNavigatorType {
     }
   }
 
-  func convertAbsolute(url: String, matches: [MatchURL]) -> String? {
-    guard let compoent = URLComponents(string: url) else { return .none }
-    guard compoent.host == .none else { return url }
-    guard let lastMatch = matches.last else { return .none }
-    guard let convertedURL = compoent.url?.absoluteString else { return .none }
+  public func alert(model: Alert) {
+    rootNavigationController.present(model.build(), animated: true, completion: .none)
+  }
 
-    return lastMatch.pathes.joined(separator: "/") + convertedURL
+  public func sheet(url: String, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+    guard let matchURL = MatchURL.serialzied(url: url) else {
+      didOccuredError?(self, .notAllowedURL)
+      return
+    }
+
+    do {
+      let openStack = try routerGroup.build(
+        history: .init(),
+        match: matchURL,
+        enviroment: enviroment,
+        navigator: self)
+
+
+      rootNavigationController.dismiss(animated: animated) { [weak self] in
+        guard let self = self else { return }
+        let subHistory = HistoryStack(stack: openStack)
+        self.subNavigationController.setViewControllers(subHistory.stack.map(\.viewController), animated: false)
+        self.rootNavigationController.present(self.subNavigationController, animated: animated, completion: .none)
+      }
+    } catch {
+      rootNavigationController.dismiss(animated: false, completion: .none)
+      didOccuredError?(self, .notFound)
+    }
   }
 
   @discardableResult
@@ -79,9 +110,16 @@ extension LinkNavigator: LinkNavigatorType {
 
     return rootNavigator
   }
+}
 
-  public func alert(model: Alert) {
-    rootNavigationController.present(model.build(), animated: true, completion: .none)
+extension LinkNavigator {
+  fileprivate func convertAbsolute(url: String, matches: [MatchURL]) -> String? {
+    guard let compoent = URLComponents(string: url) else { return .none }
+    guard compoent.host == .none else { return url }
+    guard let lastMatch = matches.last else { return .none }
+    guard let convertedURL = compoent.url?.absoluteString else { return .none }
+
+    return lastMatch.pathes.joined(separator: "/") + convertedURL
   }
 }
 

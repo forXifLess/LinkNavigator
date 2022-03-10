@@ -20,6 +20,9 @@ extension HomeView: View {
       Button(action: { intent.send(action: .onTapRouteError)}) {
         Text("Route Error")
       }
+      Button(action: { intent.send(action: .onTapNewNotification)}) {
+        Text("open sheet type notification")
+      }
     }
   }
 }

@@ -43,7 +43,7 @@ extension NotificationIntent: IntentType, NotificationIntentType {
     case .onTapPlaceList:
       navigator.href(url: "/placeList", didOccuredError: .none)
     case .onTapBack:
-      navigator.back()
+      navigator.back(animated: true)
     }
   }
 }

@@ -50,7 +50,7 @@ extension PlaceListIntent: IntentType, PlaceListIntentType {
       navigator.href(url: "/place?place_id=\(id)", didOccuredError: .none)
 
     case .onTapBack:
-      navigator.back()
+      navigator.back(animated: true)
     }
   }
 }
