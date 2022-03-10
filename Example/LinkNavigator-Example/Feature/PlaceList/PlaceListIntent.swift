@@ -47,7 +47,7 @@ extension PlaceListIntent: IntentType, PlaceListIntentType {
         }
 
     case let .onTapPlace(id):
-      navigator.href(url: "/place?place_id=\(id)", animated: true, didOccuredError: .none)
+      navigator.href(url: "/place?place_id=\(id)", target: .root, animated: true, didOccuredError: .none)
 
     case .onTapBack:
       navigator.back(animated: true)

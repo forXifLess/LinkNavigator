@@ -41,7 +41,9 @@ extension NotificationIntent: IntentType, NotificationIntentType {
   func mutate(action: NotificationModel.ViewAction, viewEffect: (() -> Void)?) {
     switch action {
     case .onTapPlaceList:
-      navigator.href(url: "/placeList", animated: true, didOccuredError: .none)
+      navigator.href(url: "/placeList", target: navigator.isOpenedModal ? .sheet : .root, animated: true, didOccuredError: { _, error in
+        print(error)
+      })
     case .onTapBack:
       navigator.back(animated: true)
     }

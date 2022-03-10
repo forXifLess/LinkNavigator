@@ -11,7 +11,9 @@ public final class LinkNavigator {
   lazy var subNavigator: RootNavigator = {
     RootNavigator(navigationController: subNavigationController)
   }()
-  private(set) var currentHistoryStack = HistoryStack()
+  private(set) var rootHistoryStack = HistoryStack()
+  private(set) var subHistoryStack = HistoryStack()
+
   let enviroment: EnviromentType
   let routerGroup: RouterBuildGroupType
 
@@ -23,93 +25,108 @@ public final class LinkNavigator {
 
 extension LinkNavigator: LinkNavigatorType {
 
+  public var isOpenedModal: Bool {
+    rootNavigationController.presentedViewController != .none
+  }
+
   public func back(animated: Bool) {
-    if rootNavigationController.presentedViewController == .none {
+    guard rootNavigationController.presentedViewController != .none else {
       rootNavigationController.popViewController(animated: animated)
-    } else {
-      rootNavigationController.dismiss(animated: animated, completion: .none)
+      return
     }
+
+    guard subNavigationController.viewControllers.count > 1 else {
+      rootNavigationController.dismiss(animated: animated, completion: .none)
+      return
+    }
+
+    subNavigationController.popViewController(animated: animated)
+  }
+
+  public func dismiss(animated: Bool) {
+    rootNavigationController.dismiss(animated: animated, completion: .none)
   }
 
   public func href(url: String, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
-    let currentViewControllers = rootNavigationController.viewControllers.compactMap {
-      $0 as? WrapperController
+    href(url: url, target: .default, animated: animated, didOccuredError: didOccuredError)
+  }
+
+  public func href(url: String, target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+    switch target {
+    case .default:
+      href(url: url, target: isOpenedModal ? .sheet : .root, animated: animated, didOccuredError: didOccuredError)
+
+    case .root:
+      href(
+        historyStack: rootHistoryStack,
+        navigatorController: rootNavigationController,
+        url: url,
+        animated: animated,
+        didCompleted: {[weak self] newStack in
+          guard let self = self else { return }
+          self.rootHistoryStack = self.rootHistoryStack.mutate(stack: newStack)
+        },
+        didOccuredError: didOccuredError)
+      
+    case .sheet:
+      href(
+        historyStack: subHistoryStack,
+        navigatorController: subNavigationController,
+        url: url,
+        animated: animated,
+        didCompleted: {[weak self] newStack in
+          guard let self = self else { return }
+          self.subHistoryStack = self.subHistoryStack.mutate(stack: newStack)
+        },
+        didOccuredError: didOccuredError)
+
     }
-    let newHistory = currentHistoryStack.reorderStack(viewControllers: currentViewControllers)
-    guard let absURL = convertAbsolute(url: url, matches: newHistory.stack.map(\.matchURL)) else { return }
-    guard let matchURL = MatchURL.serialzied(url: absURL) else { return }
 
-    do {
-      let newStack = try routerGroup.build(
-        history: newHistory,
-        match: matchURL,
-        enviroment: enviroment,
-        navigator: self)
-
-      currentHistoryStack = currentHistoryStack.mutate(stack: newStack)
-
-      rootNavigationController
-        .setViewControllers(currentHistoryStack.stack.map(\.viewController), animated: animated)
-    } catch {
-      didOccuredError?(self, .notFound)
-      return
-    }
   }
 
   public func alert(model: Alert) {
     rootNavigationController.present(model.build(), animated: true, completion: .none)
   }
 
-  public func sheet(url: String, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
-    guard let matchURL = MatchURL.serialzied(url: url) else {
-      didOccuredError?(self, .notAllowedURL)
-      return
-    }
-
-    do {
-      let openStack = try routerGroup.build(
-        history: .init(),
-        match: matchURL,
-        enviroment: enviroment,
-        navigator: self)
-
-      rootNavigationController.dismiss(animated: animated) { [weak self] in
-        guard let self = self else { return }
-        let subHistory = HistoryStack(stack: openStack)
-        self.subNavigationController.setViewControllers(subHistory.stack.map(\.viewController), animated: false)
-        self.rootNavigationController.present(self.subNavigationController, animated: animated, completion: .none)
-      }
-    } catch {
-      rootNavigationController.dismiss(animated: false, completion: .none)
-      didOccuredError?(self, .notFound)
-    }
+  @discardableResult
+  public func replace(url: String, animated: Bool, didOccuredError: (
+    (LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+      replace(url: url, target: .default, animated: animated, didOccuredError: didOccuredError)
   }
 
   @discardableResult
-  public func replace(url: String, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
-    guard let matchURL = MatchURL.serialzied(url: url) else {
-      didOccuredError?(self, .notAllowedURL)
-      return rootNavigator
+  public func replace(url: String, target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+
+    switch target {
+    case .root, .default:
+      return replace(
+        historyStack: rootHistoryStack,
+        navigationController: rootNavigationController,
+        navigator: rootNavigator,
+        url: url,
+        didCompleted: { [weak self] stack in
+          guard let self = self else { return }
+          self.rootHistoryStack = self.rootHistoryStack.mutate(stack: stack)
+          self.rootNavigationController.setViewControllers(self.rootHistoryStack.stack.map(\.viewController), animated: animated)
+        },
+        didOccuredError: didOccuredError)
+
+    case .sheet:
+      return replace(
+        historyStack: subHistoryStack,
+        navigationController: subNavigationController,
+        navigator: subNavigator,
+        url: url, didCompleted: { [weak self] newStack in
+          guard let self = self else { return }
+          self.subHistoryStack = self.subHistoryStack.mutate(stack: newStack)
+          self.subNavigationController.setViewControllers(self.subHistoryStack.stack.map(\.viewController), animated: animated)
+
+          if self.rootNavigationController.presentedViewController == .none {
+            self.rootNavigationController.present(self.subNavigationController, animated: animated, completion: .none)
+          }
+        },
+        didOccuredError: didOccuredError)
     }
-
-    do {
-      let newStack = try routerGroup.build(
-        history: .init(),
-        match: matchURL,
-        enviroment: enviroment,
-        navigator: self)
-
-      currentHistoryStack = currentHistoryStack.mutate(stack: newStack)
-      rootNavigationController.dismiss(animated: false) { [weak self] in
-        guard let self = self else { return }
-        self.rootNavigationController
-          .setViewControllers(self.currentHistoryStack.stack.map(\.viewController), animated: animated)
-      }
-    } catch {
-      didOccuredError?(self, .notFound)
-    }
-
-    return rootNavigator
   }
 }
 
@@ -121,6 +138,58 @@ extension LinkNavigator {
     guard let convertedURL = compoent.url?.absoluteString else { return .none }
 
     return lastMatch.pathes.joined(separator: "/") + convertedURL
+  }
+
+  fileprivate func href(
+    historyStack: HistoryStack,
+    navigatorController: RootNavigationController,
+    url: String,
+    animated: Bool,
+    didCompleted: @escaping ([ViewableRouter]) -> Void,
+    didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+    let currentViewControllers = navigatorController.viewControllers.compactMap {
+      $0 as? WrapperController
+    }
+    let newHistory = historyStack.reorderStack(viewControllers: currentViewControllers)
+    guard let absURL = convertAbsolute(url: url, matches: newHistory.stack.map(\.matchURL)) else { return }
+    guard let matchURL = MatchURL.serialzied(url: absURL) else { return }
+
+    do {
+      let newStack = try routerGroup.build(
+        history: newHistory,
+        match: matchURL,
+        enviroment: enviroment,
+        navigator: self)
+
+      didCompleted(newStack)
+      navigatorController
+        .setViewControllers(newStack.map(\.viewController), animated: animated)
+    } catch {
+      didOccuredError?(self, .notFound)
+    }
+  }
+
+  fileprivate func replace(historyStack: HistoryStack, navigationController: RootNavigationController, navigator: RootNavigator, url: String, didCompleted: @escaping ([ViewableRouter]) -> Void, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+    guard let matchURL = MatchURL.serialzied(url: url) else {
+      didOccuredError?(self, .notAllowedURL)
+      return navigator
+    }
+
+    do {
+      let newStack = try routerGroup.build(
+        history: .init(),
+        match: matchURL,
+        enviroment: enviroment,
+        navigator: self)
+
+      navigationController.dismiss(animated: false) {
+        didCompleted(newStack)
+      }
+    } catch {
+      didOccuredError?(self, .notFound)
+    }
+
+    return navigator
   }
 }
 
