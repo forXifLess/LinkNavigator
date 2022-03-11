@@ -12,7 +12,7 @@ public struct Alert {
   let flagType: FlagType
 
   public init(title: String? = .none, message: String?, buttons: [ActionButton], flagType: FlagType) {
-    self.title = title
+    self.title = title ?? ""
     self.message = message ?? ""
     self.buttons = buttons
     self.flagType = flagType
