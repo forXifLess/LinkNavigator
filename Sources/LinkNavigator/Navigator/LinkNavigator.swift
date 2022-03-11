@@ -29,6 +29,12 @@ extension LinkNavigator: LinkNavigatorType {
     rootNavigationController.presentedViewController != .none
   }
 
+  public func isCurrentContain(path: String) -> Bool {
+    isOpenedModal
+      ? isContain(navigationController: subNavigationController, path: path)
+      : isContain(navigationController: rootNavigationController, path: path)
+  }
+
   public func back(animated: Bool) {
     guard rootNavigationController.presentedViewController != .none else {
       rootNavigationController.popViewController(animated: animated)
@@ -217,6 +223,13 @@ extension LinkNavigator {
     }
 
     return navigator
+  }
+
+  fileprivate func isContain(navigationController: RootNavigationController, path: String) -> Bool {
+    let currentViewControllers = navigationController.viewControllers.compactMap {
+      $0 as? WrapperController
+    }
+    return currentViewControllers.first(where: { $0.key == path }) != .none
   }
 }
 
