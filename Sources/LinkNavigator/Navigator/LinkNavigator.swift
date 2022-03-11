@@ -4,6 +4,7 @@ import SwiftUI
 public final class LinkNavigator {
   let rootNavigationController = RootNavigationController()
   let subNavigationController = RootNavigationController()
+  let defaultScheme: String
 
   lazy var rootNavigator: RootNavigator = {
     RootNavigator(navigationController: rootNavigationController)
@@ -17,7 +18,8 @@ public final class LinkNavigator {
   let enviroment: EnviromentType
   let routerGroup: RouterBuildGroupType
 
-  public init(enviroment: EnviromentType, routerGroup: RouterBuildGroupType) {
+  public init(defaultScheme: String, enviroment: EnviromentType, routerGroup: RouterBuildGroupType) {
+    self.defaultScheme = defaultScheme
     self.enviroment = enviroment
     self.routerGroup = routerGroup
   }
@@ -61,13 +63,17 @@ extension LinkNavigator: LinkNavigatorType {
       : back(path: path, target: .root, animated: animated)
     case .root:
       back(historyStack: rootHistoryStack, navigationController: rootNavigationController, path: path, animated: animated)
+      clearSubNavigatorAndHistory()
     case .sheet:
       back(historyStack: subHistoryStack, navigationController: subNavigationController, path: path, animated: animated)
     }
   }
 
   public func dismiss(animated: Bool, didCompletion: (() -> Void)?) {
-    rootNavigationController.dismiss(animated: animated, completion: didCompletion)
+    rootNavigationController.dismiss(animated: animated, completion: { [weak self] in
+      self?.clearSubNavigatorAndHistory()
+      didCompletion?()
+    })
   }
 
   public func href(url: String, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
@@ -88,6 +94,7 @@ extension LinkNavigator: LinkNavigatorType {
         didCompleted: {[weak self] newStack in
           guard let self = self else { return }
           self.rootHistoryStack = self.rootHistoryStack.mutate(stack: newStack)
+          self.clearSubNavigatorAndHistory()
         },
         didOccuredError: didOccuredError)
       
@@ -105,6 +112,36 @@ extension LinkNavigator: LinkNavigatorType {
 
     }
 
+  }
+
+  public func href(paths: [String], parameters: [String : String], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+    href(
+      url: makeRelativeURL(paths: paths, parameters: parameters),
+      target: target,
+      animated: animated,
+      didOccuredError: didOccuredError)
+  }
+
+  public func href(paths: [String], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+    href(
+      url: makeRelativeURL(paths: paths, parameters: [:]),
+      target: target,
+      animated: animated,
+      didOccuredError: didOccuredError)
+  }
+
+  public func href(paths: [String], parameters: [String : String], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+    href(
+      url: makeRelativeURL(paths: paths, parameters: parameters),
+      animated: animated,
+      didOccuredError: didOccuredError)
+  }
+
+  public func href(paths: [String], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+    href(
+      url: makeRelativeURL(paths: paths, parameters: [:]),
+      animated: animated,
+      didOccuredError: didOccuredError)
   }
 
   public func alert(model: Alert) {
@@ -144,6 +181,7 @@ extension LinkNavigator: LinkNavigatorType {
           guard let self = self else { return }
           self.rootHistoryStack = self.rootHistoryStack.mutate(stack: stack)
           self.rootNavigationController.setViewControllers(self.rootHistoryStack.stack.map(\.viewController), animated: animated)
+          self.clearSubNavigatorAndHistory()
         },
         didOccuredError: didOccuredError)
 
@@ -163,6 +201,40 @@ extension LinkNavigator: LinkNavigatorType {
         },
         didOccuredError: didOccuredError)
     }
+  }
+
+  @discardableResult
+  public func replace(paths: [String], parameters: [String : String], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+    replace(
+      url: makeAbsouteURL(paths: paths, parameters: parameters),
+      animated: animated,
+      didOccuredError: didOccuredError)
+  }
+
+  @discardableResult
+  public func replace(paths: [String], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+    replace(
+      url: makeAbsouteURL(paths: paths, parameters: [:]),
+      animated: animated,
+      didOccuredError: didOccuredError)
+  }
+
+  @discardableResult
+  public func replace(paths: [String], parameters: [String : String], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+    replace(
+      url: makeAbsouteURL(paths: paths, parameters: parameters),
+      target: target,
+      animated: animated,
+      didOccuredError: didOccuredError)
+  }
+
+  @discardableResult
+  public func replace(paths: [String], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+    replace(
+      url: makeAbsouteURL(paths: paths, parameters: [:]),
+      target: target,
+      animated: animated,
+      didOccuredError: didOccuredError)
   }
 }
 
@@ -242,6 +314,30 @@ extension LinkNavigator {
       $0 as? WrapperController
     }
     return currentViewControllers.first(where: { $0.key == path }) != .none
+  }
+
+  fileprivate func makeAbsouteURL(paths: [String], parameters: [String: String]) -> String {
+    var queryParameter: String {
+      guard !parameters.isEmpty else { return "" }
+      return "?\(parameters.map{ "\($0.key)=\($0.value)" }.joined(separator: "&"))"
+    }
+    let path = paths.joined(separator: "/")
+    return "\(defaultScheme)://\(path)\(convert(parameters: parameters))"
+  }
+
+  fileprivate func makeRelativeURL(paths: [String], parameters: [String: String]) -> String {
+    let path = paths.joined(separator: "/")
+    return "/\(path)\(convert(parameters: parameters))"
+  }
+
+  fileprivate func convert(parameters: [String: String]) -> String {
+    guard !parameters.isEmpty else { return "" }
+    return "?\(parameters.map{ "\($0.key)=\($0.value)" }.joined(separator: "&"))"
+  }
+
+  fileprivate func clearSubNavigatorAndHistory() {
+    subNavigationController.setViewControllers([], animated: false)
+    subHistoryStack = subHistoryStack.mutate(stack: [])
   }
 }
 

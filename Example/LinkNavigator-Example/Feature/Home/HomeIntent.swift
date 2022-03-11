@@ -41,7 +41,7 @@ extension HomeIntent: IntentType, HomeIntentType {
   func mutate(action: HomeModel.ViewAction, viewEffect: (() -> Void)?) {
     switch action {
     case .onTapSetting:
-      navigator.href(url: "/setting", target: .root, animated: true, didOccuredError: .none)
+      navigator.href(paths: ["setting"], animated: true, didOccuredError: .none)
     case .onTapRouteError:
       navigator.href(url: "/noPage", target: .root, animated: true) { navigatorType, error in
         navigatorType.alert(model: .init(

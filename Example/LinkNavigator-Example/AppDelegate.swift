@@ -8,6 +8,7 @@ final class AppDelegate: NSObject {
   let linkRouter: LinkNavigatorType = {
     let dependency: DependencyType = AppDependency()
     return LinkNavigator(
+      defaultScheme: "link-navigator",
       enviroment: dependency.appEnviroment,
       routerGroup: dependency.appRouteBuildGroup)
   }()

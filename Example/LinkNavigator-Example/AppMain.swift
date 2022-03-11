@@ -14,7 +14,7 @@ extension AppMain: App {
   var body: some Scene {
     WindowGroup {
       appDeletate.linkRouter
-        .replace(url: "link-navigator://home", target: .root, animated: true, didOccuredError: .none)
+        .replace(paths: ["home"], animated: false, didOccuredError: .none)
         .onOpenURL { url in
           _ = appDeletate.linkRouter
             .replace(url: url.absoluteString, target: .root, animated: true, didOccuredError: { _, _ in
