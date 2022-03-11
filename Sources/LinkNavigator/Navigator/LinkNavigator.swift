@@ -66,7 +66,7 @@ extension LinkNavigator: LinkNavigatorType {
     }
   }
 
-  public func dismiss(animated: Bool, didCompletion: @escaping () -> Void) {
+  public func dismiss(animated: Bool, didCompletion: (() -> Void)?) {
     rootNavigationController.dismiss(animated: animated, completion: didCompletion)
   }
 
