@@ -102,7 +102,8 @@ extension LinkNavigator: LinkNavigatorType {
   }
 
   public func alert(model: Alert) {
-    rootNavigationController.present(model.build(), animated: true, completion: .none)
+    let controller = isOpenedModal ? subNavigationController : rootNavigationController
+    controller.present(model.build(), animated: true, completion: .none)
   }
 
   @discardableResult
