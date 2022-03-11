@@ -43,8 +43,25 @@ extension LinkNavigator: LinkNavigatorType {
     subNavigationController.popViewController(animated: animated)
   }
 
-  public func dismiss(animated: Bool) {
-    rootNavigationController.dismiss(animated: animated, completion: .none)
+  public func back(path: String, animated: Bool) {
+    back(path: path, target: .default, animated: animated)
+  }
+
+  public func back(path: String, target: LinkTarget, animated: Bool) {
+    switch target {
+    case .default:
+      isOpenedModal
+      ? back(path: path, target: .sheet, animated: animated)
+      : back(path: path, target: .root, animated: animated)
+    case .root:
+      back(historyStack: rootHistoryStack, navigationController: rootNavigationController, path: path, animated: animated)
+    case .sheet:
+      back(historyStack: subHistoryStack, navigationController: subNavigationController, path: path, animated: animated)
+    }
+  }
+
+  public func dismiss(animated: Bool, didCompletion: @escaping () -> Void) {
+    rootNavigationController.dismiss(animated: animated, completion: didCompletion)
   }
 
   public func href(url: String, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
@@ -59,7 +76,7 @@ extension LinkNavigator: LinkNavigatorType {
     case .root:
       href(
         historyStack: rootHistoryStack,
-        navigatorController: rootNavigationController,
+        navigationController: rootNavigationController,
         url: url,
         animated: animated,
         didCompleted: {[weak self] newStack in
@@ -71,7 +88,7 @@ extension LinkNavigator: LinkNavigatorType {
     case .sheet:
       href(
         historyStack: subHistoryStack,
-        navigatorController: subNavigationController,
+        navigationController: subNavigationController,
         url: url,
         animated: animated,
         didCompleted: {[weak self] newStack in
@@ -140,14 +157,23 @@ extension LinkNavigator {
     return lastMatch.pathes.joined(separator: "/") + convertedURL
   }
 
+  fileprivate func back(historyStack: HistoryStack, navigationController: RootNavigationController, path: String, animated: Bool) {
+    let currentViewControllers = navigationController.viewControllers.compactMap {
+      $0 as? WrapperController
+    }
+
+    guard let pickViewController = currentViewControllers.first(where: { $0.key == path }) else { return }
+    navigationController.popToViewController(pickViewController, animated: animated)
+  }
+
   fileprivate func href(
     historyStack: HistoryStack,
-    navigatorController: RootNavigationController,
+    navigationController: RootNavigationController,
     url: String,
     animated: Bool,
     didCompleted: @escaping ([ViewableRouter]) -> Void,
     didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
-    let currentViewControllers = navigatorController.viewControllers.compactMap {
+    let currentViewControllers = navigationController.viewControllers.compactMap {
       $0 as? WrapperController
     }
     let newHistory = historyStack.reorderStack(viewControllers: currentViewControllers)
@@ -162,7 +188,7 @@ extension LinkNavigator {
         navigator: self)
 
       didCompleted(newStack)
-      navigatorController
+      navigationController
         .setViewControllers(newStack.map(\.viewController), animated: animated)
     } catch {
       didOccuredError?(self, .notFound)
@@ -202,5 +228,11 @@ public struct RootNavigator: UIViewControllerRepresentable {
   }
 
   public func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+  }
+}
+
+extension Array {
+  subscript (safe index: Int) -> Element? {
+    return indices ~= index ? self[index] : .none
   }
 }

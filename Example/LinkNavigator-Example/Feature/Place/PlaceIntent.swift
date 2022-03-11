@@ -43,7 +43,8 @@ extension PlaceIntent: IntentType, PlaceIntentType {
     case .onTapSetting:
       navigator.href(url: "/setting", target: .root, animated: true, didOccuredError: .none)
     case .onTapBack:
-      navigator.back(animated: false)
+      navigator.back(path: "notification", animated: true)
+//      navigator.back(animated: false)
     }
   }
 }

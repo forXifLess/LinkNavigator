@@ -9,7 +9,9 @@ public enum LinkTarget {
 public protocol LinkNavigatorType: AnyObject {
   var isOpenedModal: Bool { get }
   func back(animated: Bool)
-  func dismiss(animated: Bool)
+  func back(path: String, animated: Bool)
+  func back(path: String, target: LinkTarget, animated: Bool)
+  func dismiss(animated: Bool, didCompletion: @escaping () -> Void)
   func alert(model: Alert)
   func href(url: String, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?)
   func href(url: String, target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?)
