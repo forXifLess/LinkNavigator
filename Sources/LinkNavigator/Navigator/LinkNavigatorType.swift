@@ -14,6 +14,7 @@ public protocol LinkNavigatorType: AnyObject {
   func back(path: String, target: LinkTarget, animated: Bool)
   func dismiss(animated: Bool, didCompletion: (() -> Void)?)
   func alert(model: Alert)
+  func alert(target: LinkTarget, model: Alert)
   func href(url: String, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?)
   func href(url: String, target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?)
 
