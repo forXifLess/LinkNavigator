@@ -1,7 +1,7 @@
 import UIKit
 
-public struct Alert {
-  public enum FlagType {
+public struct Alert: Equatable {
+  public enum FlagType: Equatable {
     case error
     case `default`
   }
@@ -25,5 +25,4 @@ public struct Alert {
     }
     return controller
   }
-
 }
