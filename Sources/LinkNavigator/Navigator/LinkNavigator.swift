@@ -114,9 +114,9 @@ extension LinkNavigator: LinkNavigatorType {
 
   }
 
-  public func href(paths: [String], parameters: [String : String], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+  public func href(paths: [String], queryItems: [String : QueryItemConvertable], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
     href(
-      url: makeRelativeURL(paths: paths, parameters: parameters),
+      url: makeRelativeURL(paths: paths, queryItems: queryItems),
       target: target,
       animated: animated,
       didOccuredError: didOccuredError)
@@ -124,22 +124,22 @@ extension LinkNavigator: LinkNavigatorType {
 
   public func href(paths: [String], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
     href(
-      url: makeRelativeURL(paths: paths, parameters: [:]),
+      url: makeRelativeURL(paths: paths, queryItems: [:]),
       target: target,
       animated: animated,
       didOccuredError: didOccuredError)
   }
 
-  public func href(paths: [String], parameters: [String : String], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+  public func href(paths: [String], queryItems: [String : QueryItemConvertable], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
     href(
-      url: makeRelativeURL(paths: paths, parameters: parameters),
+      url: makeRelativeURL(paths: paths, queryItems: queryItems),
       animated: animated,
       didOccuredError: didOccuredError)
   }
 
   public func href(paths: [String], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
     href(
-      url: makeRelativeURL(paths: paths, parameters: [:]),
+      url: makeRelativeURL(paths: paths, queryItems: [:]),
       animated: animated,
       didOccuredError: didOccuredError)
   }
@@ -204,9 +204,9 @@ extension LinkNavigator: LinkNavigatorType {
   }
 
   @discardableResult
-  public func replace(paths: [String], parameters: [String : String], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+  public func replace(paths: [String], queryItems: [String : QueryItemConvertable], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
     replace(
-      url: makeAbsouteURL(paths: paths, parameters: parameters),
+      url: makeAbsouteURL(paths: paths, queryItems: queryItems),
       animated: animated,
       didOccuredError: didOccuredError)
   }
@@ -214,15 +214,15 @@ extension LinkNavigator: LinkNavigatorType {
   @discardableResult
   public func replace(paths: [String], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
     replace(
-      url: makeAbsouteURL(paths: paths, parameters: [:]),
+      url: makeAbsouteURL(paths: paths, queryItems: [:]),
       animated: animated,
       didOccuredError: didOccuredError)
   }
 
   @discardableResult
-  public func replace(paths: [String], parameters: [String : String], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+  public func replace(paths: [String], queryItems: [String : QueryItemConvertable], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
     replace(
-      url: makeAbsouteURL(paths: paths, parameters: parameters),
+      url: makeAbsouteURL(paths: paths, queryItems: queryItems),
       target: target,
       animated: animated,
       didOccuredError: didOccuredError)
@@ -231,7 +231,7 @@ extension LinkNavigator: LinkNavigatorType {
   @discardableResult
   public func replace(paths: [String], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
     replace(
-      url: makeAbsouteURL(paths: paths, parameters: [:]),
+      url: makeAbsouteURL(paths: paths, queryItems: [:]),
       target: target,
       animated: animated,
       didOccuredError: didOccuredError)
@@ -245,7 +245,7 @@ extension LinkNavigator {
     guard let lastMatch = matches.last else { return .none }
     guard let convertedURL = compoent.url?.absoluteString else { return .none }
 
-    return lastMatch.pathes.joined(separator: "/") + convertedURL
+    return "\(defaultScheme)://" + lastMatch.pathes.joined(separator: "/") + convertedURL
   }
 
   fileprivate func back(historyStack: HistoryStack, navigationController: RootNavigationController, path: String, animated: Bool) {
@@ -270,6 +270,8 @@ extension LinkNavigator {
     let newHistory = historyStack.reorderStack(viewControllers: currentViewControllers)
     guard let absURL = convertAbsolute(url: url, matches: newHistory.stack.map(\.matchURL)) else { return }
     guard let matchURL = MatchURL.serialzied(url: absURL) else { return }
+
+    print("matchURL ", matchURL)
 
     do {
       let newStack = try routerGroup.build(
@@ -316,23 +318,23 @@ extension LinkNavigator {
     return currentViewControllers.first(where: { $0.key == path }) != .none
   }
 
-  fileprivate func makeAbsouteURL(paths: [String], parameters: [String: String]) -> String {
+  fileprivate func makeAbsouteURL(paths: [String], queryItems: [String: QueryItemConvertable]) -> String {
     var queryParameter: String {
-      guard !parameters.isEmpty else { return "" }
-      return "?\(parameters.map{ "\($0.key)=\($0.value)" }.joined(separator: "&"))"
+      guard !queryItems.isEmpty else { return "" }
+      return "?\(queryItems.map{ "\($0.key)=\($0.value)" }.joined(separator: "&"))"
     }
     let path = paths.joined(separator: "/")
-    return "\(defaultScheme)://\(path)\(convert(parameters: parameters))"
+    return "\(defaultScheme)://\(path)\(convert(queryItems: queryItems))"
   }
 
-  fileprivate func makeRelativeURL(paths: [String], parameters: [String: String]) -> String {
+  fileprivate func makeRelativeURL(paths: [String], queryItems: [String: QueryItemConvertable]) -> String {
     let path = paths.joined(separator: "/")
-    return "/\(path)\(convert(parameters: parameters))"
+    return "/\(path)\(convert(queryItems: queryItems))"
   }
 
-  fileprivate func convert(parameters: [String: String]) -> String {
-    guard !parameters.isEmpty else { return "" }
-    return "?\(parameters.map{ "\($0.key)=\($0.value)" }.joined(separator: "&"))"
+  fileprivate func convert(queryItems: [String: QueryItemConvertable]) -> String {
+    guard !queryItems.isEmpty else { return "" }
+    return "?\(queryItems.map{ "\($0.key)=\($0.value.serializedQueryItem().value)" }.joined(separator: "&"))"
   }
 
   fileprivate func clearSubNavigatorAndHistory() {

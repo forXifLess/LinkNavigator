@@ -2,7 +2,7 @@ import Foundation
 
 public struct MatchURL {
   public var pathes: [String]
-  public var query: [String: String]
+  public var query: [String: QueryItem]
 
   public static func defaultValue() -> Self {
     self.init(pathes: [], query: [:])
@@ -34,10 +34,66 @@ public struct MatchURL {
     return lastPath
   }
 
-  static func getQuery(_ quertItems: [URLQueryItem]?) -> [String: String] {
+  static func getQuery(_ quertItems: [URLQueryItem]?) -> [String: QueryItem] {
     guard let quertItems = quertItems else { return [:] }
-    return quertItems.reduce([String: String](), { curr, next in
-      curr.merging([next.name: next.value ?? ""]) { $1 }
+    return quertItems.reduce([String: QueryItem](), { curr, next in
+      guard let value = next.value else { return curr }
+      return curr.merging([next.name: value.serializedQueryItem()]) { $1 }
     })
+  }
+}
+
+public protocol QueryItemConvertable {
+  func serializedQueryItem() -> QueryItem
+}
+
+public struct QueryItem: Equatable {
+
+  public let value: String
+
+  public init(value: String) {
+    self.value = value
+  }
+
+  static var empty: Self {
+    .init(value: "")
+  }
+
+  public func decodedValue() -> String {
+    value.removingPercentEncoding ?? value
+  }
+
+  public func decoded<T: Decodable>() -> T? {
+    guard let percentDecoded = value.removingPercentEncoding else { return .none }
+    guard let data = percentDecoded.data(using: .utf8) else { return .none }
+    return try? JSONDecoder().decode(T.self, from: data)
+  }
+}
+
+extension String: QueryItemConvertable {
+  public func serializedQueryItem() -> QueryItem {
+    guard let value = self
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+      return .empty
+    }
+    return .init(value: value)
+  }
+}
+
+extension Encodable {
+  public func serializedQueryItem() -> QueryItem {
+    guard
+      let data = self.toJSONData(),
+      let encoded = String(data: data, encoding: .utf8),
+      let value = encoded
+        .trimmingCharacters(in: .whitespacesAndNewlines)
+        .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed  )
+    else { return .empty }
+    return .init(value: value)
+  }
+
+  fileprivate func toJSONData() -> Data? {
+    try? JSONEncoder().encode(self)
   }
 }

@@ -6,13 +6,12 @@ struct PlaceRouteBuilder: RouteBuildeableType {
 
   var build: (EnviromentType, String, MatchURL, LinkNavigator) -> ViewableRouter {
     { enviroment, matchPath, matchURL, navigator in
-      var placeID: Int {
-        let strID = matchURL.query.first(where: { $0.key == "place_id" })?.value ?? "0"
-        return Int(strID) ?? .zero
+      var model: PlaceViewModel.DomainInfo {
+        let model: PlaceViewModel.DomainInfo? = matchURL.query.first(where: { $0.key == "placeInfo"})?.value.decoded()
+        return model ?? .init(imageURL: "", size: .zero, name: "", address: "", detailAddress: "", coordinateUnit: .init(longtitude: 0, latitude: 0), link: .none, qrImageURL: .none, status: .none, isLinkAccessable: false)
       }
-
       let intent = PlaceIntent(
-        initialState: .init(placeID: placeID),
+        initialState: .init(placeID: 0),
         enviroment: enviroment,
         navigator: navigator)
       let view = PlaceView.build(intent: intent)
