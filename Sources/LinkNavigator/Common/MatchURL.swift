@@ -64,7 +64,7 @@ public struct QueryItem: Equatable {
   }
 
   public func decoded<T: Decodable>() -> T? {
-    guard let percentDecoded = value.removingPercentEncoding else { return .none }
+    guard let percentDecoded = value.decodedBase64().removingPercentEncoding else { return .none }
     guard let data = percentDecoded.data(using: .utf8) else { return .none }
     return try? JSONDecoder().decode(T.self, from: data)
   }
@@ -88,6 +88,7 @@ extension Encodable {
       let encoded = String(data: data, encoding: .utf8),
       let value = encoded
         .trimmingCharacters(in: .whitespacesAndNewlines)
+        .encodedBase64()
         .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed  )
     else { return .empty }
     return .init(value: value)
@@ -95,5 +96,17 @@ extension Encodable {
 
   fileprivate func toJSONData() -> Data? {
     try? JSONEncoder().encode(self)
+  }
+}
+
+extension String {
+  fileprivate func encodedBase64() -> String {
+    guard let data = self.data(using: .utf8) else { return self }
+    return data.base64EncodedString()
+  }
+
+  fileprivate func decodedBase64() -> String {
+    guard let data = Data(base64Encoded: self) else { return self }
+    return String(data: data, encoding: .utf8) ?? self
   }
 }
