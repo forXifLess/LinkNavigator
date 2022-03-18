@@ -64,7 +64,7 @@ public struct QueryItem: Equatable {
   }
 
   public func decoded<T: Decodable>() -> T? {
-    guard let percentDecoded = value.decodedBase64().removingPercentEncoding else { return .none }
+    guard let percentDecoded = value.removingPercentEncoding?.decodedBase64() else { return .none }
     guard let data = percentDecoded.data(using: .utf8) else { return .none }
     return try? JSONDecoder().decode(T.self, from: data)
   }

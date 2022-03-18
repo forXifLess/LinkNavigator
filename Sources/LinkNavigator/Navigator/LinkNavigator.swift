@@ -47,25 +47,33 @@ extension LinkNavigator: LinkNavigatorType {
       rootNavigationController.dismiss(animated: animated, completion: .none)
       return
     }
-
     subNavigationController.popViewController(animated: animated)
   }
 
   public func back(path: String, animated: Bool) {
-    back(path: path, target: .default, animated: animated)
+    back(path: path, animated: animated, isReload: false)
+  }
+
+  public func back(path: String, animated: Bool, isReload: Bool) {
+    back(path: path, target: .default, animated: animated, isReload: isReload)
   }
 
   public func back(path: String, target: LinkTarget, animated: Bool) {
+    back(path: path, target: target, animated: animated, isReload: false)
+  }
+  
+
+  public func back(path: String, target: LinkTarget, animated: Bool, isReload: Bool) {
     switch target {
     case .default:
       isOpenedModal
-      ? back(path: path, target: .sheet, animated: animated)
-      : back(path: path, target: .root, animated: animated)
+      ? back(path: path, target: .sheet, animated: animated, isReload: isReload)
+      : back(path: path, target: .root, animated: animated, isReload: isReload)
     case .root:
-      back(historyStack: rootHistoryStack, navigationController: rootNavigationController, path: path, animated: animated)
+      back(historyStack: rootHistoryStack, isReload: isReload, navigationController: rootNavigationController, path: path, animated: animated)
       clearSubNavigatorAndHistory()
     case .sheet:
-      back(historyStack: subHistoryStack, navigationController: subNavigationController, path: path, animated: animated)
+      back(historyStack: subHistoryStack, isReload: isReload, navigationController: subNavigationController, path: path, animated: animated)
     }
   }
 
@@ -248,12 +256,13 @@ extension LinkNavigator {
     return "\(defaultScheme)://" + lastMatch.pathes.joined(separator: "/") + convertedURL
   }
 
-  fileprivate func back(historyStack: HistoryStack, navigationController: RootNavigationController, path: String, animated: Bool) {
+  fileprivate func back(historyStack: HistoryStack, isReload: Bool, navigationController: RootNavigationController, path: String, animated: Bool) {
     let currentViewControllers = navigationController.viewControllers.compactMap {
       $0 as? WrapperController
     }
 
     guard let pickViewController = currentViewControllers.first(where: { $0.key == path }) else { return }
+    if isReload { pickViewController.reloadCompletion? () }
     navigationController.popToViewController(pickViewController, animated: animated)
   }
 
@@ -346,6 +355,10 @@ extension LinkNavigator {
 public struct RootNavigator: UIViewControllerRepresentable {
 
   let navigationController: UINavigationController
+
+  public init(navigationController: UINavigationController) {
+    self.navigationController = navigationController
+  }
 
   public func makeUIViewController(context: Context) -> some UIViewController {
     navigationController

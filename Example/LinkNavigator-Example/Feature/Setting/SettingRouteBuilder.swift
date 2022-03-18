@@ -10,7 +10,9 @@ struct SettingRouteBuilder: RouteBuildeableType {
         enviroment: enviroment,
         navigator: navigator)
       let view = SettingView.build(intent: intent)
-      let viewController = WrapperController(rootView: .init(view), key: matchPath)
+      let viewController = WrapperController(rootView: .init(view), key: matchPath) {
+        print("AAA")
+      }
       return .init(
         key: matchPath,
         viewController: viewController,

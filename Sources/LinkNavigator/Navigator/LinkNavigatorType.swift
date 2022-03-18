@@ -13,7 +13,9 @@ public protocol LinkNavigatorType: AnyObject {
 
   func back(animated: Bool)
   func back(path: String, animated: Bool)
+  func back(path: String, animated: Bool, isReload: Bool)
   func back(path: String, target: LinkTarget, animated: Bool)
+  func back(path: String, target: LinkTarget, animated: Bool, isReload: Bool)
 
   func dismiss(animated: Bool, didCompletion: (() -> Void)?)
 

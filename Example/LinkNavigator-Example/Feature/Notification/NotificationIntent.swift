@@ -45,7 +45,7 @@ extension NotificationIntent: IntentType, NotificationIntentType {
         print(error)
       })
     case .onTapBack:
-      navigator.back(animated: true)
+      navigator.back(path: "setting", animated: true, isReload: true)
     }
   }
 }
