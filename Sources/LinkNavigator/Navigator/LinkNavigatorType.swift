@@ -4,6 +4,7 @@ public enum LinkTarget {
   case `default`
   case root
   case sheet
+  case sheetFull
 }
 
 public protocol LinkNavigatorType: AnyObject {

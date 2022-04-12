@@ -72,7 +72,7 @@ extension LinkNavigator: LinkNavigatorType {
     case .root:
       back(historyStack: rootHistoryStack, isReload: isReload, navigationController: rootNavigationController, path: path, animated: animated)
       clearSubNavigatorAndHistory()
-    case .sheet:
+    case .sheet, .sheetFull:
       back(historyStack: subHistoryStack, isReload: isReload, navigationController: subNavigationController, path: path, animated: animated)
     }
   }
@@ -106,7 +106,13 @@ extension LinkNavigator: LinkNavigatorType {
         },
         didOccuredError: didOccuredError)
       
-    case .sheet:
+    case .sheet, .sheetFull:
+      if target == .sheetFull {
+        subNavigationController.mutatedPresentationStyle(modalPresentationStyle: .fullScreen)
+      } else {
+        subNavigationController.mutatedPresentationStyle()
+      }
+
       href(
         historyStack: subHistoryStack,
         navigationController: subNavigationController,
@@ -164,7 +170,7 @@ extension LinkNavigator: LinkNavigatorType {
         : alert(target: .root, model: model)
     case .root:
       rootNavigationController.present(model.build(), animated: true, completion: .none)
-    case .sheet:
+    case .sheet, .sheetFull:
       subNavigationController.present(model.build(), animated: true, completion: .none)
     }
   }
@@ -193,7 +199,12 @@ extension LinkNavigator: LinkNavigatorType {
         },
         didOccuredError: didOccuredError)
 
-    case .sheet:
+    case .sheet, .sheetFull:
+      if target == .sheetFull {
+        subNavigationController.mutatedPresentationStyle(modalPresentationStyle: .fullScreen)
+      } else {
+        subNavigationController.mutatedPresentationStyle()
+      }
       return replace(
         historyStack: subHistoryStack,
         navigationController: subNavigationController,
@@ -371,5 +382,14 @@ public struct RootNavigator: UIViewControllerRepresentable {
 extension Array {
   subscript (safe index: Int) -> Element? {
     return indices ~= index ? self[index] : .none
+  }
+}
+
+extension UIViewController {
+  func mutatedPresentationStyle(
+    modalPresentationStyle: UIModalPresentationStyle = .automatic,
+    modalTransitionStyle: UIModalTransitionStyle = .coverVertical) {
+    self.modalPresentationStyle = modalPresentationStyle
+    self.modalTransitionStyle = modalTransitionStyle
   }
 }

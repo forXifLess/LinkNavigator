@@ -32,12 +32,12 @@
 		2991BBC727C74C8C00768787 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2991BBC627C74C8C00768787 /* Preview Assets.xcassets */; };
 		29A9D73327CEFDD200634D0F /* HomeRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9D73227CEFDD200634D0F /* HomeRouteBuilder.swift */; };
 		29AFC4B627C890E60095BB8A /* RouteBuildGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4B527C890E60095BB8A /* RouteBuildGroup.swift */; };
-		29AFC4BB27C892040095BB8A /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 29AFC4BA27C892040095BB8A /* LinkNavigator */; };
 		29AFC4BF27C895E80095BB8A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4BE27C895E80095BB8A /* HomeView.swift */; };
 		29AFC4C127C895EC0095BB8A /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C027C895EC0095BB8A /* HomeModel.swift */; };
 		29AFC4C327C895F20095BB8A /* HomeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C227C895F20095BB8A /* HomeIntent.swift */; };
 		29AFC4C627C8963F0095BB8A /* IntentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C527C8963F0095BB8A /* IntentType.swift */; };
 		29AFC4C827C8965F0095BB8A /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C727C8965F0095BB8A /* Container.swift */; };
+		D2B361942805323000D4B429 /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = D2B361932805323000D4B429 /* LinkNavigator */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +73,7 @@
 		29AFC4C227C895F20095BB8A /* HomeIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIntent.swift; sourceTree = "<group>"; };
 		29AFC4C527C8963F0095BB8A /* IntentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentType.swift; sourceTree = "<group>"; };
 		29AFC4C727C8965F0095BB8A /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		D2B36191280531FD00D4B429 /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29AFC4BB27C892040095BB8A /* LinkNavigator in Frameworks */,
+				D2B361942805323000D4B429 /* LinkNavigator in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,8 +145,10 @@
 		2991BBB327C74C8B00768787 = {
 			isa = PBXGroup;
 			children = (
+				D2B36190280531FD00D4B429 /* Packages */,
 				2991BBBE27C74C8B00768787 /* LinkNavigator-Example */,
 				2991BBBD27C74C8B00768787 /* Products */,
+				D2B361922805323000D4B429 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -221,6 +224,21 @@
 			path = ArchetectureKit;
 			sourceTree = "<group>";
 		};
+		D2B36190280531FD00D4B429 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				D2B36191280531FD00D4B429 /* LinkNavigator */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		D2B361922805323000D4B429 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -239,7 +257,7 @@
 			);
 			name = "LinkNavigator-Example";
 			packageProductDependencies = (
-				29AFC4BA27C892040095BB8A /* LinkNavigator */,
+				D2B361932805323000D4B429 /* LinkNavigator */,
 			);
 			productName = "LinkNavigator-Example";
 			productReference = 2991BBBC27C74C8B00768787 /* LinkNavigator-Example.app */;
@@ -270,7 +288,6 @@
 			);
 			mainGroup = 2991BBB327C74C8B00768787;
 			packageReferences = (
-				29AFC4B927C892040095BB8A /* XCRemoteSwiftPackageReference "LinkNavigator" */,
 			);
 			productRefGroup = 2991BBBD27C74C8B00768787 /* Products */;
 			projectDirPath = "";
@@ -549,21 +566,9 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		29AFC4B927C892040095BB8A /* XCRemoteSwiftPackageReference "LinkNavigator" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/interactord/LinkNavigator.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		29AFC4BA27C892040095BB8A /* LinkNavigator */ = {
+		D2B361932805323000D4B429 /* LinkNavigator */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 29AFC4B927C892040095BB8A /* XCRemoteSwiftPackageReference "LinkNavigator" */;
 			productName = LinkNavigator;
 		};
 /* End XCSwiftPackageProductDependency section */

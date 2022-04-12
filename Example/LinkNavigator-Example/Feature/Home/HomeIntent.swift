@@ -55,7 +55,7 @@ extension HomeIntent: IntentType, HomeIntentType {
           flagType: .error))
       }
     case .onTapNewNotification:
-      navigator.replace(url: "link-navigator://notification", target: .sheet, animated: true, didOccuredError: .none)
+      navigator.replace(url: "link-navigator://notification", target: .sheetFull, animated: true, didOccuredError: .none)
     }
   }
 }
