@@ -38,6 +38,10 @@ final class HomeIntent: ObservableObject {
 // MARK: IntentType, HomeIntentType
 
 extension HomeIntent: IntentType, HomeIntentType {
+  func receiveCallback(item: String) {
+    print(item)
+  }
+
   func mutate(action: HomeModel.ViewAction, viewEffect: (() -> Void)?) {
     switch action {
     case .onTapSetting:
@@ -55,7 +59,7 @@ extension HomeIntent: IntentType, HomeIntentType {
           flagType: .error))
       }
     case .onTapNewNotification:
-      navigator.replace(url: "link-navigator://notification", target: .sheetFull, animated: true, didOccuredError: .none)
+      navigator.replace(url: "link-navigator://notification", target: .sheet, animated: true, didOccuredError: .none)
     }
   }
 }

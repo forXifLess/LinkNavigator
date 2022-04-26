@@ -20,6 +20,11 @@ extension NotificationView: View {
       Button(action: { intent.send(action: .onTapPlaceList) }) {
         Text("Go to Place List")
       }
+      if intent.navigator.isOpenedModal {
+        Button(action: { intent.send(action: .onTapCallBackHome) }) {
+          Text("Closed after callback")
+        }
+      }
     }
   }
 }

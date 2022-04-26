@@ -9,8 +9,14 @@ struct HomeRouteBuilder: RouteBuildeableType {
         initialState: .init(),
         enviroment: enviroment,
         navigator: navigator)
+
       let view = HomeView.build(intent: intent)
-      let viewController = WrapperController(rootView: .init(view), key: matchPath)
+      let viewController = WrapperController(rootView: .init(view), key: matchPath, callbackCompletion: { dic in
+        guard let item = dic.first(where: { $0.key == "homeKey"})?.value.value else { return }
+        intent.receiveCallback(item: item)
+
+      })
+
       return .init(
         key: matchPath,
         viewController: viewController,

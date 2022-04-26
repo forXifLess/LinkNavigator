@@ -48,6 +48,13 @@ extension NotificationIntent: IntentType, NotificationIntentType {
       navigator.isOpenedModal
         ? navigator.back(animated: true)
         : navigator.back(path: "setting", animated: true, isReload: true)
+
+    case .onTapCallBackHome:
+      navigator.dismiss(animated: true, didCompletion: { [weak self] in
+        self?.navigator.back(path: "home", target: .root, animated: true, callBackItem: [
+          "homeKey": .init(value: "Test"),
+        ])
+      })
     }
   }
 }

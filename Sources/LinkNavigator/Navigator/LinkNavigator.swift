@@ -77,6 +77,20 @@ extension LinkNavigator: LinkNavigatorType {
     }
   }
 
+  public func back(path: String, target: LinkTarget, animated: Bool, callBackItem: [String : QueryItem]?) {
+    switch target {
+    case .default:
+      isOpenedModal
+      ? back(path: path, target: .sheet, animated: animated, callBackItem: callBackItem ?? [:])
+      : back(path: path, target: .root, animated: animated, callBackItem: callBackItem ?? [:])
+    case .root:
+      back(historyStack: rootHistoryStack, callBackItem: callBackItem ?? [:], navigationController: rootNavigationController, path: path, animated: animated)
+      clearSubNavigatorAndHistory()
+    case .sheet, .sheetFull:
+      back(historyStack: subHistoryStack, callBackItem: callBackItem ?? [:], navigationController: subNavigationController, path: path, animated: animated)
+    }
+  }
+
   public func dismiss(animated: Bool, didCompletion: (() -> Void)?) {
     rootNavigationController.dismiss(animated: animated, completion: { [weak self] in
       self?.clearSubNavigatorAndHistory()
@@ -273,7 +287,17 @@ extension LinkNavigator {
     }
 
     guard let pickViewController = currentViewControllers.first(where: { $0.key == path }) else { return }
-    if isReload { pickViewController.reloadCompletion? () }
+    if isReload { pickViewController.reloadCompletion?() }
+    navigationController.popToViewController(pickViewController, animated: animated)
+  }
+
+  fileprivate func back(historyStack: HistoryStack, callBackItem: [String: QueryItem], navigationController: RootNavigationController, path: String, animated: Bool) {
+    let currentViewControllers = navigationController.viewControllers.compactMap {
+      $0 as? WrapperController
+    }
+
+    guard let pickViewController = currentViewControllers.first(where: { $0.key == path }) else { return }
+    pickViewController.callbackCompletion?(callBackItem)
     navigationController.popToViewController(pickViewController, animated: animated)
   }
 

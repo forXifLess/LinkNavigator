@@ -7,5 +7,6 @@ enum NotificationModel {
   enum ViewAction: Equatable {
     case onTapPlaceList
     case onTapBack
+    case onTapCallBackHome
   }
 }
