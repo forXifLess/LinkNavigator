@@ -2,8 +2,8 @@ import UIKit
 import SwiftUI
 
 public final class LinkNavigator {
-  let rootNavigationController = RootNavigationController()
-  let subNavigationController = RootNavigationController()
+  let rootNavigationController: RootNavigationController
+  let subNavigationController: RootNavigationController
   let defaultScheme: String
 
   lazy var rootNavigator: RootNavigator = {
@@ -18,10 +18,22 @@ public final class LinkNavigator {
   let enviroment: EnviromentType
   let routerGroup: RouterBuildGroupType
 
-  public init(defaultScheme: String, enviroment: EnviromentType, routerGroup: RouterBuildGroupType) {
+  public init(
+    rootNavigationBarHidden: Bool = false,
+    subNavigationBarHidden: Bool = false,
+    defaultScheme: String,
+    enviroment: EnviromentType,
+    routerGroup: RouterBuildGroupType)
+  {
     self.defaultScheme = defaultScheme
     self.enviroment = enviroment
     self.routerGroup = routerGroup
+
+    rootNavigationController = .init()
+    rootNavigationController.isNavigationBarHidden = rootNavigationBarHidden
+
+    subNavigationController = .init()
+    subNavigationController.isNavigationBarHidden = rootNavigationBarHidden
   }
 }
 
