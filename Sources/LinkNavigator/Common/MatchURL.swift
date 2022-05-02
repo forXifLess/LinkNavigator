@@ -12,7 +12,13 @@ public struct MatchURL {
     guard let components = URLComponents(string: url) else { return .none }
 
     var compositePaths: [String] {
-      let paths = components.path.split(separator: "/").map(String.init)
+      let paths: [String] = components.path.split(separator: "/").map(String.init)
+        .reduce([]) { current, next in
+          current.contains(where: { $0 == next })
+            ? current
+            : current + [next]
+        }
+
       guard let host = components.host else {
         return paths
       }

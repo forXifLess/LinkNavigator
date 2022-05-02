@@ -327,8 +327,6 @@ extension LinkNavigator {
     guard let absURL = convertAbsolute(url: url, matches: newHistory.stack.map(\.matchURL)) else { return }
     guard let matchURL = MatchURL.serialzied(url: absURL) else { return }
 
-    print("matchURL ", matchURL)
-
     do {
       let newStack = try routerGroup.build(
         history: newHistory,
