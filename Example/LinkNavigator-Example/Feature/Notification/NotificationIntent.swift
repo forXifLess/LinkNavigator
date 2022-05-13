@@ -6,7 +6,7 @@ import LinkNavigator
 
 protocol NotificationIntentType {
   var state: NotificationModel.State { get }
-  var enviroment: EnviromentType { get }
+  var environment: EnvironmentType { get }
   var navigator: LinkNavigatorType { get }
 
   func send(action: NotificationModel.ViewAction)
@@ -18,9 +18,9 @@ final class NotificationIntent: ObservableObject {
 
   // MARK: Lifecycle
 
-  init(initialState: State, enviroment: EnviromentType, navigator: LinkNavigatorType) {
+  init(initialState: State, environment: EnvironmentType, navigator: LinkNavigatorType) {
     state = initialState
-    self.enviroment = enviroment
+    self.environment = environment
     self.navigator = navigator
   }
 
@@ -30,7 +30,7 @@ final class NotificationIntent: ObservableObject {
   typealias ViewAction = NotificationModel.ViewAction
 
   @Published var state: State = .init()
-  let enviroment: EnviromentType
+  let environment: EnvironmentType
   let navigator: LinkNavigatorType
   var cancellable: Set<AnyCancellable> = []
 }

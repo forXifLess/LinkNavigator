@@ -6,7 +6,7 @@ import LinkNavigator
 
 protocol PlaceListIntentType {
   var state: PlaceListModel.State { get }
-  var enviroment: EnviromentType { get }
+  var enviroment: EnvironmentType { get }
   var navigator: LinkNavigatorType { get }
 
   func send(action: PlaceListModel.ViewAction)
@@ -18,7 +18,7 @@ final class PlaceListIntent: ObservableObject {
 
   // MARK: Lifecycle
 
-  init(initialState: State, enviroment: EnviromentType, navigator: LinkNavigatorType) {
+  init(initialState: State, enviroment: EnvironmentType, navigator: LinkNavigatorType) {
     state = initialState
     self.enviroment = enviroment
     self.navigator = navigator
@@ -30,7 +30,7 @@ final class PlaceListIntent: ObservableObject {
   typealias ViewAction = PlaceListModel.ViewAction
 
   @Published var state: State = .init(places: [])
-  let enviroment: EnviromentType
+  let enviroment: EnvironmentType
   let navigator: LinkNavigatorType
   var cancellable: Set<AnyCancellable> = []
 }

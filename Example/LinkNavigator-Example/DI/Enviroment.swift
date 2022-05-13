@@ -3,12 +3,12 @@ import LinkNavigator
 
 // MARK: - Enviroment
 
-struct Enviroment: EnviromentType {
-  let content = EnviromentContent()
+struct Environment: EnvironmentType {
+  let content = EnvironmentContent()
 }
 
 // MARK: - EnviromentContent
 
-struct EnviromentContent {
+struct EnvironmentContent {
 
 }

@@ -4,7 +4,7 @@ import LinkNavigator
 struct PlaceListRouteBuilder: RouteBuildeableType {
   let matchPath: String
 
-  var build: (EnviromentType, String, MatchURL, LinkNavigator) -> ViewableRouter {
+  var build: (EnvironmentType, String, MatchURL, LinkNavigator) -> ViewableRouter {
     { enviroment, matchPath, matchURL, navigator in
       let intent = PlaceListIntent(
         initialState: .init(places: []),

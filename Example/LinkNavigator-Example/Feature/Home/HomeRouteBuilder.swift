@@ -3,11 +3,11 @@ import LinkNavigator
 
 struct HomeRouteBuilder: RouteBuildeableType {
   let matchPath: String
-  var build: (EnviromentType, String, MatchURL, LinkNavigator) -> ViewableRouter {
+  var build: (EnvironmentType, String, MatchURL, LinkNavigator) -> ViewableRouter {
     { enviroment, matchPath, matchURL, navigator in
       let intent = HomeIntent(
         initialState: .init(),
-        enviroment: enviroment,
+        environment: enviroment,
         navigator: navigator)
 
       let view = HomeView.build(intent: intent)

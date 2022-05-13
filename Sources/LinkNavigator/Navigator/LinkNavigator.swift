@@ -15,18 +15,18 @@ public final class LinkNavigator {
   private(set) var rootHistoryStack = HistoryStack()
   private(set) var subHistoryStack = HistoryStack()
 
-  let enviroment: EnviromentType
+  let environment: EnvironmentType
   let routerGroup: RouterBuildGroupType
 
   public init(
     rootNavigationBarHidden: Bool = false,
     subNavigationBarHidden: Bool = false,
     defaultScheme: String,
-    enviroment: EnviromentType,
+    environment: EnvironmentType,
     routerGroup: RouterBuildGroupType)
   {
     self.defaultScheme = defaultScheme
-    self.enviroment = enviroment
+    self.environment = environment
     self.routerGroup = routerGroup
 
     rootNavigationController = .init()
@@ -331,7 +331,7 @@ extension LinkNavigator {
       let newStack = try routerGroup.build(
         history: newHistory,
         match: matchURL,
-        enviroment: enviroment,
+        environment: environment,
         navigator: self)
 
       didCompleted(newStack)
@@ -352,7 +352,7 @@ extension LinkNavigator {
       let newStack = try routerGroup.build(
         history: .init(),
         match: matchURL,
-        enviroment: enviroment,
+        environment: environment,
         navigator: self)
 
       navigationController.dismiss(animated: false) {
