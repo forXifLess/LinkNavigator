@@ -75,14 +75,11 @@ extension LinkNavigator: LinkNavigatorType {
   public func back(path: String, target: LinkTarget, animated: Bool) {
     back(path: path, target: target, animated: animated, isReload: false)
   }
-  
 
   public func back(path: String, target: LinkTarget, animated: Bool, isReload: Bool) {
     switch target {
     case .default:
-      isOpenedModal
-      ? back(path: path, target: .sheet, animated: animated, isReload: isReload)
-      : back(path: path, target: .root, animated: animated, isReload: isReload)
+      back(path: path, target: isOpenedModal ? .sheet : .root, animated: animated, isReload: isReload)
     case .root:
       back(historyStack: rootHistoryStack, isReload: isReload, navigationController: rootNavigationController, path: path, animated: animated)
       clearSubNavigatorAndHistory()
@@ -94,9 +91,8 @@ extension LinkNavigator: LinkNavigatorType {
   public func back(path: String, target: LinkTarget, animated: Bool, callBackItem: [String : QueryItem]?) {
     switch target {
     case .default:
-      isOpenedModal
-      ? back(path: path, target: .sheet, animated: animated, callBackItem: callBackItem ?? [:])
-      : back(path: path, target: .root, animated: animated, callBackItem: callBackItem ?? [:])
+      back(path: path, target: isOpenedModal ? .sheet : .root, animated: animated, callBackItem: callBackItem ?? [:])
+
     case .root:
       back(historyStack: rootHistoryStack, callBackItem: callBackItem ?? [:], navigationController: rootNavigationController, path: path, animated: animated)
       clearSubNavigatorAndHistory()
@@ -113,7 +109,6 @@ extension LinkNavigator: LinkNavigatorType {
   }
 
   public func href(url: String, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
-    href(url: url, target: .default, animated: animated, errorAction: errorAction)
     href(url: url, target: .default, animated: animated, errorAction: errorAction)
   }
 
@@ -154,7 +149,6 @@ extension LinkNavigator: LinkNavigatorType {
         errorAction: errorAction)
 
     }
-
   }
 
   public func href(paths: [String], queryItems: [String : QueryItemConvertable], target: LinkTarget, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
@@ -334,8 +328,6 @@ extension LinkNavigator {
     navigationController.setViewControllers(newStack.map(\.viewController), animated: animated)
   }
 
-
-
   fileprivate func href(
     historyStack: HistoryStack,
     navigationController: RootNavigationController,
@@ -358,8 +350,7 @@ extension LinkNavigator {
         navigator: self)
 
       didCompleted(newStack)
-      navigationController
-        .setViewControllers(newStack.map(\.viewController), animated: animated)
+      navigationController.setViewControllers(newStack.map(\.viewController), animated: animated)
     } catch {
       errorAction?(self, .notFound)
     }
