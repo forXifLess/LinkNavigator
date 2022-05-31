@@ -7,7 +7,7 @@ public protocol RouterBuildGroupType {
 
 extension RouterBuildGroupType {
   public func build(history: HistoryStack, match: MatchURL, environment: EnvironmentType,  navigator: LinkNavigator) throws -> [ViewableRouter] {
-    let result = try match.pathes.map {
+    let result = try match.paths.map {
       try $0.getOrNewBuild(
         history: history,
         match: match,

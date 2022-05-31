@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 
 // MARK: - SystemActionButton
@@ -40,3 +42,5 @@ public struct ActionButton: Equatable {
     .init(title: title, style: style.uiRawValue) { _ in action() }
   }
 }
+
+#endif

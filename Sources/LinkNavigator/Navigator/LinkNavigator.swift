@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 import SwiftUI
 
@@ -110,14 +112,15 @@ extension LinkNavigator: LinkNavigatorType {
     })
   }
 
-  public func href(url: String, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
-    href(url: url, target: .default, animated: animated, didOccuredError: didOccuredError)
+  public func href(url: String, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+    href(url: url, target: .default, animated: animated, errorAction: errorAction)
+    href(url: url, target: .default, animated: animated, errorAction: errorAction)
   }
 
-  public func href(url: String, target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+  public func href(url: String, target: LinkTarget, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
     switch target {
     case .default:
-      href(url: url, target: isOpenedModal ? .sheet : .root, animated: animated, didOccuredError: didOccuredError)
+      href(url: url, target: isOpenedModal ? .sheet : .root, animated: animated, errorAction: errorAction)
 
     case .root:
       href(
@@ -130,8 +133,8 @@ extension LinkNavigator: LinkNavigatorType {
           self.rootHistoryStack = self.rootHistoryStack.mutate(stack: newStack)
           self.clearSubNavigatorAndHistory()
         },
-        didOccuredError: didOccuredError)
-      
+        errorAction: errorAction)
+
     case .sheet, .sheetFull:
       if target == .sheetFull {
         subNavigationController.mutatedPresentationStyle(modalPresentationStyle: .fullScreen)
@@ -148,40 +151,51 @@ extension LinkNavigator: LinkNavigatorType {
           guard let self = self else { return }
           self.subHistoryStack = self.subHistoryStack.mutate(stack: newStack)
         },
-        didOccuredError: didOccuredError)
+        errorAction: errorAction)
 
     }
 
   }
 
-  public func href(paths: [String], queryItems: [String : QueryItemConvertable], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+  public func href(paths: [String], queryItems: [String : QueryItemConvertable], target: LinkTarget, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
     href(
       url: makeRelativeURL(paths: paths, queryItems: queryItems),
       target: target,
       animated: animated,
-      didOccuredError: didOccuredError)
+      errorAction: errorAction)
   }
 
-  public func href(paths: [String], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+  public func href(paths: [String], target: LinkTarget, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
     href(
       url: makeRelativeURL(paths: paths, queryItems: [:]),
       target: target,
       animated: animated,
-      didOccuredError: didOccuredError)
+      errorAction: errorAction)
   }
 
-  public func href(paths: [String], queryItems: [String : QueryItemConvertable], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+  public func href(paths: [String], queryItems: [String : QueryItemConvertable], animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
     href(
       url: makeRelativeURL(paths: paths, queryItems: queryItems),
       animated: animated,
-      didOccuredError: didOccuredError)
+      errorAction: errorAction)
   }
 
-  public func href(paths: [String], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+  public func href(paths: [String], animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
     href(
       url: makeRelativeURL(paths: paths, queryItems: [:]),
       animated: animated,
-      didOccuredError: didOccuredError)
+      errorAction: errorAction)
+  }
+
+  public func remove(paths: [String], animated: Bool, target: LinkTarget) {
+    switch target {
+    case .default:
+      return remove(paths: paths, animated: animated, target: isOpenedModal ? .sheet : .root)
+    case .sheet, .sheetFull:
+      return removePaths(historyStack: subHistoryStack, navigationController: subNavigationController, paths: paths, animated: animated)
+    case .root:
+      return removePaths(historyStack: rootHistoryStack, navigationController: rootNavigationController, paths: paths, animated: animated)
+    }
   }
 
   public func alert(model: Alert) {
@@ -191,24 +205,22 @@ extension LinkNavigator: LinkNavigatorType {
   public func alert(target: LinkTarget, model: Alert) {
     switch target {
     case .default:
-      isOpenedModal
-        ? alert(target: .sheet, model: model)
-        : alert(target: .root, model: model)
+      return alert(target: isOpenedModal ? .sheet : .root, model: model)
     case .root:
-      rootNavigationController.present(model.build(), animated: true, completion: .none)
+      return rootNavigationController.present(model.build(), animated: true, completion: .none)
     case .sheet, .sheetFull:
-      subNavigationController.present(model.build(), animated: true, completion: .none)
+      return subNavigationController.present(model.build(), animated: true, completion: .none)
     }
   }
 
   @discardableResult
-  public func replace(url: String, animated: Bool, didOccuredError: (
+  public func replace(url: String, animated: Bool, errorAction: (
     (LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
-      replace(url: url, target: .default, animated: animated, didOccuredError: didOccuredError)
+      replace(url: url, target: .default, animated: animated, errorAction: errorAction)
   }
 
   @discardableResult
-  public func replace(url: String, target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+  public func replace(url: String, target: LinkTarget, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
 
     switch target {
     case .root, .default:
@@ -223,7 +235,7 @@ extension LinkNavigator: LinkNavigatorType {
           self.rootNavigationController.setViewControllers(self.rootHistoryStack.stack.map(\.viewController), animated: animated)
           self.clearSubNavigatorAndHistory()
         },
-        didOccuredError: didOccuredError)
+        errorAction: errorAction)
 
     case .sheet, .sheetFull:
       if target == .sheetFull {
@@ -244,53 +256,53 @@ extension LinkNavigator: LinkNavigatorType {
             self.rootNavigationController.present(self.subNavigationController, animated: animated, completion: .none)
           }
         },
-        didOccuredError: didOccuredError)
+        errorAction: errorAction)
     }
   }
 
   @discardableResult
-  public func replace(paths: [String], queryItems: [String : QueryItemConvertable], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+  public func replace(paths: [String], queryItems: [String : QueryItemConvertable], animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
     replace(
-      url: makeAbsouteURL(paths: paths, queryItems: queryItems),
+      url: makeAbsoluteURL(paths: paths, queryItems: queryItems),
       animated: animated,
-      didOccuredError: didOccuredError)
+      errorAction: errorAction)
   }
 
   @discardableResult
-  public func replace(paths: [String], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+  public func replace(paths: [String], animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
     replace(
-      url: makeAbsouteURL(paths: paths, queryItems: [:]),
+      url: makeAbsoluteURL(paths: paths, queryItems: [:]),
       animated: animated,
-      didOccuredError: didOccuredError)
+      errorAction: errorAction)
   }
 
   @discardableResult
-  public func replace(paths: [String], queryItems: [String : QueryItemConvertable], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+  public func replace(paths: [String], queryItems: [String : QueryItemConvertable], target: LinkTarget, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
     replace(
-      url: makeAbsouteURL(paths: paths, queryItems: queryItems),
+      url: makeAbsoluteURL(paths: paths, queryItems: queryItems),
       target: target,
       animated: animated,
-      didOccuredError: didOccuredError)
+      errorAction: errorAction)
   }
 
   @discardableResult
-  public func replace(paths: [String], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+  public func replace(paths: [String], target: LinkTarget, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
     replace(
-      url: makeAbsouteURL(paths: paths, queryItems: [:]),
+      url: makeAbsoluteURL(paths: paths, queryItems: [:]),
       target: target,
       animated: animated,
-      didOccuredError: didOccuredError)
+      errorAction: errorAction)
   }
 }
 
 extension LinkNavigator {
   fileprivate func convertAbsolute(url: String, matches: [MatchURL]) -> String? {
-    guard let compoent = URLComponents(string: url) else { return .none }
-    guard compoent.host == .none else { return url }
+    guard let components = URLComponents(string: url) else { return .none }
+    guard components.host == .none else { return url }
     guard let lastMatch = matches.last else { return .none }
-    guard let convertedURL = compoent.url?.absoluteString else { return .none }
+    guard let convertedURL = components.url?.absoluteString else { return .none }
 
-    return "\(defaultScheme)://" + lastMatch.pathes.joined(separator: "/") + convertedURL
+    return "\(defaultScheme)://" + lastMatch.paths.joined(separator: "/") + convertedURL
   }
 
   fileprivate func back(historyStack: HistoryStack, isReload: Bool, navigationController: RootNavigationController, path: String, animated: Bool) {
@@ -313,19 +325,30 @@ extension LinkNavigator {
     navigationController.popToViewController(pickViewController, animated: animated)
   }
 
+  func removePaths(
+    historyStack: HistoryStack,
+    navigationController: RootNavigationController,
+    paths: [String],
+    animated: Bool) {
+    let newStack = historyStack.stack.filter { !paths.contains($0.key) }
+    navigationController.setViewControllers(newStack.map(\.viewController), animated: animated)
+  }
+
+
+
   fileprivate func href(
     historyStack: HistoryStack,
     navigationController: RootNavigationController,
     url: String,
     animated: Bool,
     didCompleted: @escaping ([ViewableRouter]) -> Void,
-    didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
+    errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) {
     let currentViewControllers = navigationController.viewControllers.compactMap {
       $0 as? WrapperController
     }
     let newHistory = historyStack.reorderStack(viewControllers: currentViewControllers)
     guard let absURL = convertAbsolute(url: url, matches: newHistory.stack.map(\.matchURL)) else { return }
-    guard let matchURL = MatchURL.serialzied(url: absURL) else { return }
+    guard let matchURL = MatchURL.serialized(url: absURL) else { return }
 
     do {
       let newStack = try routerGroup.build(
@@ -338,13 +361,13 @@ extension LinkNavigator {
       navigationController
         .setViewControllers(newStack.map(\.viewController), animated: animated)
     } catch {
-      didOccuredError?(self, .notFound)
+      errorAction?(self, .notFound)
     }
   }
 
-  fileprivate func replace(historyStack: HistoryStack, navigationController: RootNavigationController, navigator: RootNavigator, url: String, didCompleted: @escaping ([ViewableRouter]) -> Void, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
-    guard let matchURL = MatchURL.serialzied(url: url) else {
-      didOccuredError?(self, .notAllowedURL)
+  fileprivate func replace(historyStack: HistoryStack, navigationController: RootNavigationController, navigator: RootNavigator, url: String, didCompleted: @escaping ([ViewableRouter]) -> Void, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator {
+    guard let matchURL = MatchURL.serialized(url: url) else {
+      errorAction?(self, .notAllowedURL)
       return navigator
     }
 
@@ -359,7 +382,7 @@ extension LinkNavigator {
         didCompleted(newStack)
       }
     } catch {
-      didOccuredError?(self, .notFound)
+      errorAction?(self, .notFound)
     }
 
     return navigator
@@ -372,7 +395,7 @@ extension LinkNavigator {
     return currentViewControllers.first(where: { $0.key == path }) != .none
   }
 
-  fileprivate func makeAbsouteURL(paths: [String], queryItems: [String: QueryItemConvertable]) -> String {
+  fileprivate func makeAbsoluteURL(paths: [String], queryItems: [String: QueryItemConvertable]) -> String {
     var queryParameter: String {
       guard !queryItems.isEmpty else { return "" }
       return "?\(queryItems.map{ "\($0.key)=\($0.value)" }.joined(separator: "&"))"
@@ -415,7 +438,7 @@ public struct RootNavigator: UIViewControllerRepresentable {
 
 extension Array {
   subscript (safe index: Int) -> Element? {
-    return indices ~= index ? self[index] : .none
+    indices ~= index ? self[index] : .none
   }
 }
 
@@ -427,3 +450,5 @@ extension UIViewController {
     self.modalTransitionStyle = modalTransitionStyle
   }
 }
+
+#endif

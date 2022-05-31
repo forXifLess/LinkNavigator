@@ -9,7 +9,7 @@ final class AppDelegate: NSObject {
     let dependency: DependencyType = AppDependency()
     return LinkNavigator(
       defaultScheme: "link-navigator",
-      environment: dependency.appEnviroment,
+      environment: dependency.appEnvironment,
       routerGroup: dependency.appRouteBuildGroup)
   }()
 }

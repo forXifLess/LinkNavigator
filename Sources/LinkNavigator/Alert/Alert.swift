@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 
 public struct Alert: Equatable {
@@ -26,3 +28,5 @@ public struct Alert: Equatable {
     return controller
   }
 }
+
+#endif

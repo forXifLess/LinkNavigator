@@ -1,14 +1,14 @@
 import Foundation
 
 public struct MatchURL {
-  public var pathes: [String]
+  public var paths: [String]
   public var query: [String: QueryItem]
 
   public static func defaultValue() -> Self {
-    self.init(pathes: [], query: [:])
+    self.init(paths: [], query: [:])
   }
 
-  static func serialzied(url: String) -> Self? {
+  static func serialized(url: String) -> Self? {
     guard let components = URLComponents(string: url) else { return .none }
 
     var compositePaths: [String] {
@@ -26,7 +26,7 @@ public struct MatchURL {
     }
 
     return .init(
-      pathes: getPath(compositePaths),
+      paths: getPath(compositePaths),
       query: getQuery(components.queryItems))
   }
 
@@ -35,14 +35,14 @@ public struct MatchURL {
     return path.dropLast()
   }
 
-  static func getFlagment(_ path: [String]) -> String? {
+  static func getFragment(_ path: [String]) -> String? {
     guard let lastPath = path.last, lastPath.hasPrefix(":") else { return .none }
     return lastPath
   }
 
-  static func getQuery(_ quertItems: [URLQueryItem]?) -> [String: QueryItem] {
-    guard let quertItems = quertItems else { return [:] }
-    return quertItems.reduce([String: QueryItem](), { curr, next in
+  static func getQuery(_ queryItems: [URLQueryItem]?) -> [String: QueryItem] {
+    guard let queryItems = queryItems else { return [:] }
+    return queryItems.reduce([String: QueryItem](), { curr, next in
       guard let value = next.value else { return curr }
       return curr.merging([next.name: value.serializedQueryItem()]) { $1 }
     })
@@ -78,9 +78,7 @@ public struct QueryItem: Equatable {
 
 extension String: QueryItemConvertable {
   public func serializedQueryItem() -> QueryItem {
-    guard let value = self
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+    guard let value = trimmingCharacters(in: .whitespacesAndNewlines).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
       return .empty
     }
     return .init(value: value)
@@ -90,7 +88,7 @@ extension String: QueryItemConvertable {
 extension Encodable {
   public func serializedQueryItem() -> QueryItem {
     guard
-      let data = self.toJSONData(),
+      let data = toJSONData(),
       let encoded = String(data: data, encoding: .utf8),
       let value = encoded
         .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -107,7 +105,7 @@ extension Encodable {
 
 extension String {
   fileprivate func encodedBase64() -> String {
-    guard let data = self.data(using: .utf8) else { return self }
+    guard let data = data(using: .utf8) else { return self }
     return data.base64EncodedString()
   }
 

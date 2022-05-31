@@ -24,17 +24,17 @@ public protocol LinkNavigatorType: AnyObject {
   func alert(model: Alert)
   func alert(target: LinkTarget, model: Alert)
 
-  func href(url: String, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?)
-  func href(url: String, target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?)
-  func href(paths: [String], queryItems: [String: QueryItemConvertable], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?)
-  func href(paths: [String], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?)
-  func href(paths: [String], queryItems: [String: QueryItemConvertable], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?)
-  func href(paths: [String], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?)
+  func href(url: String, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?)
+  func href(url: String, target: LinkTarget, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?)
+  func href(paths: [String], queryItems: [String: QueryItemConvertable], target: LinkTarget, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?)
+  func href(paths: [String], target: LinkTarget, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?)
+  func href(paths: [String], queryItems: [String: QueryItemConvertable], animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?)
+  func href(paths: [String], animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?)
 
-  @discardableResult func replace(url: String, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator
-  @discardableResult func replace(paths: [String], queryItems: [String: QueryItemConvertable], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator
-  @discardableResult func replace(paths: [String], animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator
-  @discardableResult func replace(url: String, target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator
-  @discardableResult func replace(paths: [String], queryItems: [String: QueryItemConvertable], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator
-  @discardableResult func replace(paths: [String], target: LinkTarget, animated: Bool, didOccuredError: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator
+  @discardableResult func replace(url: String, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator
+  @discardableResult func replace(paths: [String], queryItems: [String: QueryItemConvertable], animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator
+  @discardableResult func replace(paths: [String], animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator
+  @discardableResult func replace(url: String, target: LinkTarget, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator
+  @discardableResult func replace(paths: [String], queryItems: [String: QueryItemConvertable], target: LinkTarget, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator
+  @discardableResult func replace(paths: [String], target: LinkTarget, animated: Bool, errorAction: ((LinkNavigatorType, LinkNavigatorError) -> Void)?) -> RootNavigator
 }

@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 import SwiftUI
 
@@ -17,3 +19,5 @@ public final class WrapperController: UIHostingController<AnyView> {
     fatalError("init(coder:) has not been implemented")
   }
 }
+
+#endif

@@ -41,7 +41,7 @@ extension SettingIntent: IntentType, SettingIntentType {
   func mutate(action: SettingModel.ViewAction, viewEffect: (() -> Void)?) {
     switch action {
     case .onTapNotification:
-      navigator.href(url: "/notification", target: .root, animated: true, didOccuredError: .none)
+      navigator.href(url: "/notification", target: .root, animated: true, errorAction: .none)
     case .onTapBack:
       navigator.back(animated: false)
     }

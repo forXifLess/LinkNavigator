@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 
 final class RootNavigationController: UINavigationController {
@@ -11,3 +13,5 @@ extension RootNavigationController: UINavigationControllerDelegate {
   func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
   }
 }
+
+#endif

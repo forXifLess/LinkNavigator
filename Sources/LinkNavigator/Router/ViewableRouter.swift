@@ -1,3 +1,5 @@
+#if canImport(UIKit)
+
 import UIKit
 
 public struct ViewableRouter {
@@ -15,3 +17,5 @@ public struct ViewableRouter {
     self.matchURL = matchURL
   }
 }
+
+#endif

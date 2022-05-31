@@ -1,4 +1,4 @@
-import UIKit
+#if canImport(UIKit)
 
 public struct HistoryStack {
 
@@ -21,3 +21,5 @@ extension HistoryStack {
     self.init(stack: [])
   }
 }
+
+#endif

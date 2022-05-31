@@ -62,8 +62,8 @@ extension PlaceListIntent: IntentType, PlaceListIntentType {
           status: .none,
           isLinkAccessable: true)],
         animated: true,
-        didOccuredError: .none)
-//      navigator.href(url: "/place?place_id=\(id)", animated: true, didOccuredError: .none)
+        errorAction: .none)
+//      navigator.href(url: "/place?place_id=\(id)", animated: true, errorAction: .none)
 
     case .onTapBack:
 //      navigator.back(animated: true)

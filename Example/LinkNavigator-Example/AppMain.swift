@@ -14,10 +14,10 @@ extension AppMain: App {
   var body: some Scene {
     WindowGroup {
       appDeletate.linkRouter
-        .replace(paths: ["home"], animated: false, didOccuredError: .none)
+        .replace(paths: ["home"], animated: false, errorAction: .none)
         .onOpenURL { url in
           _ = appDeletate.linkRouter
-            .replace(url: url.absoluteString, target: .root, animated: true, didOccuredError: { _, _ in
+            .replace(url: url.absoluteString, target: .root, animated: true, errorAction: { _, _ in
               appDeletate.linkRouter.alert(model: .init(
                 message: "잘못된 주소입니다.",
                 buttons: [

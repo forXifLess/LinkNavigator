@@ -45,21 +45,21 @@ extension HomeIntent: IntentType, HomeIntentType {
   func mutate(action: HomeModel.ViewAction, viewEffect: (() -> Void)?) {
     switch action {
     case .onTapSetting:
-      navigator.href(paths: ["setting"], animated: true, didOccuredError: .none)
+      navigator.href(paths: ["setting"], animated: true, errorAction: .none)
     case .onTapRouteError:
       navigator.href(url: "/noPage", target: .root, animated: true) { navigatorType, error in
         navigatorType.alert(model: .init(
           message: error.localizedDescription,
           buttons: [
             .init(title: "Go To Notification", style: .default, action: {
-              navigatorType.href(url: "/notification", target: .root, animated: false, didOccuredError: .none)
+              navigatorType.href(url: "/notification", target: .root, animated: false, errorAction: .none)
             }),
             .init(title: "ok", style: .cancel, action: {}),
           ],
           flagType: .error))
       }
     case .onTapNewNotification:
-      navigator.replace(url: "link-navigator://notification", target: .sheet, animated: true, didOccuredError: .none)
+      navigator.replace(url: "link-navigator://notification", target: .sheet, animated: true, errorAction: .none)
     }
   }
 }

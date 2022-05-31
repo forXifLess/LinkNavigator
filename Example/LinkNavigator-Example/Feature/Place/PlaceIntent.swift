@@ -41,7 +41,7 @@ extension PlaceIntent: IntentType, PlaceIntentType {
   func mutate(action: PlaceModel.ViewAction, viewEffect: (() -> Void)?) {
     switch action {
     case .onTapSetting:
-      navigator.href(url: "/setting", target: .root, animated: true, didOccuredError: .none)
+      navigator.href(url: "/setting", target: .root, animated: true, errorAction: .none)
     case .onTapBack:
       navigator.back(path: "notification", animated: true)
 //      navigator.back(animated: false)
