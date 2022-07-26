@@ -45,10 +45,19 @@ extension LinkNavigator: LinkNavigatorType {
     rootNavigationController.presentedViewController != .none
   }
 
+  public var currentPath: [String] {
+    rootHistoryStack.stack.map(\.key)
+  }
+
   public func isCurrentContain(path: String) -> Bool {
     isOpenedModal
       ? isContain(navigationController: subNavigationController, path: path)
       : isContain(navigationController: rootNavigationController, path: path)
+  }
+
+  public func getPath(locationPath: String) -> [String] {
+    let endIndex = currentPath.enumerated().first(where: {$0.element == locationPath})?.offset ?? currentPath.endIndex - 1
+    return Array(currentPath[currentPath.startIndex...endIndex])
   }
 
   public func back(animated: Bool) {

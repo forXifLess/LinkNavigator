@@ -9,8 +9,10 @@ public enum LinkTarget {
 
 public protocol LinkNavigatorType: AnyObject {
   var isOpenedModal: Bool { get }
+  var currentPath: [String] { get }
   
   func isCurrentContain(path: String) -> Bool
+  func getPath(locationPath: String) -> [String]
 
   func back(animated: Bool)
   func back(path: String, animated: Bool)
