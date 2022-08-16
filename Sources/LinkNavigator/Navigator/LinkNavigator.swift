@@ -62,7 +62,8 @@ extension LinkNavigator: LinkNavigatorType {
 
   public func back(animated: Bool) {
     guard rootNavigationController.presentedViewController != .none else {
-      rootNavigationController.popViewController(animated: animated)
+      rootNavigationController.popViewController(animated: true)
+      rootHistoryStack = rootHistoryStack.mutate(stack: rootHistoryStack.stack.dropLast())
       return
     }
 
@@ -71,6 +72,7 @@ extension LinkNavigator: LinkNavigatorType {
       return
     }
     subNavigationController.popViewController(animated: animated)
+    subHistoryStack = subHistoryStack.mutate(stack: subHistoryStack.stack.dropLast())
   }
 
   public func back(path: String, animated: Bool) {
@@ -90,9 +92,11 @@ extension LinkNavigator: LinkNavigatorType {
     case .default:
       back(path: path, target: isOpenedModal ? .sheet : .root, animated: animated, isReload: isReload)
     case .root:
+      removeBackPath(target: target, path: path)
       back(historyStack: rootHistoryStack, isReload: isReload, navigationController: rootNavigationController, path: path, animated: animated)
       clearSubNavigatorAndHistory()
     case .sheet, .sheetFull:
+      removeBackPath(target: target, path: path)
       back(historyStack: subHistoryStack, isReload: isReload, navigationController: subNavigationController, path: path, animated: animated)
     }
   }
@@ -101,11 +105,12 @@ extension LinkNavigator: LinkNavigatorType {
     switch target {
     case .default:
       back(path: path, target: isOpenedModal ? .sheet : .root, animated: animated, callBackItem: callBackItem ?? [:])
-
     case .root:
+      removeBackPath(target: target, path: path)
       back(historyStack: rootHistoryStack, callBackItem: callBackItem ?? [:], navigationController: rootNavigationController, path: path, animated: animated)
       clearSubNavigatorAndHistory()
     case .sheet, .sheetFull:
+      removeBackPath(target: target, path: path)
       back(historyStack: subHistoryStack, callBackItem: callBackItem ?? [:], navigationController: subNavigationController, path: path, animated: animated)
     }
   }
@@ -417,6 +422,23 @@ extension LinkNavigator {
   fileprivate func clearSubNavigatorAndHistory() {
     subNavigationController.setViewControllers([], animated: false)
     subHistoryStack = subHistoryStack.mutate(stack: [])
+  }
+
+  fileprivate func removeBackPath(target: LinkTarget, path: String) {
+    switch target {
+    case .root:
+      rootHistoryStack = rootHistoryStack.mutate(stack: rootHistoryStack.stack.reduce([]) { current, next in
+        guard current.contains(where: { $0.key == path }) else { return current + [next] }
+        return current
+      })
+    case .sheet, .sheetFull:
+      subHistoryStack = subHistoryStack.mutate(stack: subHistoryStack.stack.reduce([]) { current, next in
+        guard current.contains(where: { $0.key == path }) else { return current + [next] }
+        return current
+      })
+    default:
+      return
+    }
   }
 }
 

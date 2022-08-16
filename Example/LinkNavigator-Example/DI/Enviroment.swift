@@ -1,13 +1,13 @@
 import Foundation
 import LinkNavigator
 
-// MARK: - Enviroment
+// MARK: - Environment
 
 struct Environment: EnvironmentType {
   let content = EnvironmentContent()
 }
 
-// MARK: - EnviromentContent
+// MARK: - EnvironmentContent
 
 struct EnvironmentContent {
 
