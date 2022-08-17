@@ -6,8 +6,6 @@ import LinkNavigator
 
 protocol SettingIntentType {
   var state: SettingModel.State { get }
-  var environment: EnvironmentType { get }
-  var navigator: LinkNavigatorType { get }
 
   func send(action: SettingModel.ViewAction)
 }
@@ -18,10 +16,8 @@ final class SettingIntent: ObservableObject {
 
   // MARK: Lifecycle
 
-  init(initialState: State, environment: EnvironmentType, navigator: LinkNavigatorType) {
+  init(initialState: State) {
     state = initialState
-    self.environment = environment
-    self.navigator = navigator
   }
 
   // MARK: Internal
@@ -30,8 +26,6 @@ final class SettingIntent: ObservableObject {
   typealias ViewAction = SettingModel.ViewAction
 
   @Published var state: State = .init()
-  let environment: EnvironmentType
-  let navigator: LinkNavigatorType
   var cancellable: Set<AnyCancellable> = []
 }
 
@@ -41,9 +35,9 @@ extension SettingIntent: IntentType, SettingIntentType {
   func mutate(action: SettingModel.ViewAction, viewEffect: (() -> Void)?) {
     switch action {
     case .onTapNotification:
-      navigator.href(url: "/notification", target: .root, animated: true, errorAction: .none)
+      break
     case .onTapBack:
-      navigator.back(animated: false)
+      break
     }
   }
 }

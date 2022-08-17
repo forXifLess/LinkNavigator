@@ -1,17 +1,13 @@
-import LinkNavigator
 import SwiftUI
 import UIKit
+import LinkNavigator
 
 // MARK: - AppDelegate
 
 final class AppDelegate: NSObject {
-  let linkRouter: LinkNavigatorType = {
-    let dependency: DependencyType = AppDependency()
-    return LinkNavigator(
-      defaultScheme: "link-navigator",
-      environment: dependency.appEnvironment,
-      routerGroup: dependency.appRouteBuildGroup)
-  }()
+  var navigator: LinkNavigator {
+    LinkNavigator(dependency: AppDependency(), builders: AppRouterGroup().routers)
+  }
 }
 
 // MARK: UIApplicationDelegate

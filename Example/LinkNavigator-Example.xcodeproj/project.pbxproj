@@ -9,71 +9,59 @@
 /* Begin PBXBuildFile section */
 		290C8E3327C74D6F0073B327 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290C8E3227C74D6F0073B327 /* AppDelegate.swift */; };
 		290C8E3527C74D9F0073B327 /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290C8E3427C74D9F0073B327 /* AppMain.swift */; };
-		290C8E3A27C74EC00073B327 /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290C8E3927C74EC00073B327 /* Enviroment.swift */; };
-		290C8E3D27C74F2C0073B327 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290C8E3C27C74F2C0073B327 /* AppDependency.swift */; };
-		290C8E3F27C74F590073B327 /* DependencyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290C8E3E27C74F590073B327 /* DependencyType.swift */; };
 		294A9A5D27CF6F78002279C0 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A5C27CF6F78002279C0 /* SettingView.swift */; };
 		294A9A5F27CF6F80002279C0 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A5E27CF6F80002279C0 /* SettingModel.swift */; };
 		294A9A6127CF6F85002279C0 /* SettingIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A6027CF6F85002279C0 /* SettingIntent.swift */; };
-		294A9A6327CF6F92002279C0 /* SettingRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A6227CF6F92002279C0 /* SettingRouteBuilder.swift */; };
 		294A9A6627CF727F002279C0 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A6527CF727F002279C0 /* NotificationView.swift */; };
 		294A9A6827CF7283002279C0 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A6727CF7283002279C0 /* NotificationModel.swift */; };
 		294A9A6A27CF7286002279C0 /* NotificationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A6927CF7286002279C0 /* NotificationIntent.swift */; };
-		294A9A6C27CF7298002279C0 /* NotificationRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A6B27CF7298002279C0 /* NotificationRouteBuilder.swift */; };
 		294A9A6F27D050B1002279C0 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A6E27D050B1002279C0 /* PlaceModel.swift */; };
 		294A9A7127D050B5002279C0 /* PlaceIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A7027D050B5002279C0 /* PlaceIntent.swift */; };
 		294A9A7327D050BD002279C0 /* PlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A7227D050BD002279C0 /* PlaceView.swift */; };
-		294A9A7527D050C6002279C0 /* PlaceRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A7427D050C6002279C0 /* PlaceRouteBuilder.swift */; };
 		294A9A7827D08669002279C0 /* PlaceListIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A7727D08669002279C0 /* PlaceListIntent.swift */; };
 		294A9A7A27D0866D002279C0 /* PlaceListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A7927D0866D002279C0 /* PlaceListModel.swift */; };
-		294A9A7C27D08673002279C0 /* PlaceListRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A7B27D08673002279C0 /* PlaceListRouteBuilder.swift */; };
 		294A9A7E27D08677002279C0 /* PlaceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A7D27D08677002279C0 /* PlaceListView.swift */; };
 		2991BBC427C74C8C00768787 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2991BBC327C74C8C00768787 /* Assets.xcassets */; };
 		2991BBC727C74C8C00768787 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2991BBC627C74C8C00768787 /* Preview Assets.xcassets */; };
-		29A9D73327CEFDD200634D0F /* HomeRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9D73227CEFDD200634D0F /* HomeRouteBuilder.swift */; };
-		29AFC4B627C890E60095BB8A /* RouteBuildGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4B527C890E60095BB8A /* RouteBuildGroup.swift */; };
 		29AFC4BF27C895E80095BB8A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4BE27C895E80095BB8A /* HomeView.swift */; };
 		29AFC4C127C895EC0095BB8A /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C027C895EC0095BB8A /* HomeModel.swift */; };
 		29AFC4C327C895F20095BB8A /* HomeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C227C895F20095BB8A /* HomeIntent.swift */; };
 		29AFC4C627C8963F0095BB8A /* IntentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C527C8963F0095BB8A /* IntentType.swift */; };
 		29AFC4C827C8965F0095BB8A /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C727C8965F0095BB8A /* Container.swift */; };
 		D2B361942805323000D4B429 /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = D2B361932805323000D4B429 /* LinkNavigator */; };
+		D2C601CD28AC80BA001CA0A6 /* AppRouterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C601CC28AC80BA001CA0A6 /* AppRouterGroup.swift */; };
+		D2C601D128AC821E001CA0A6 /* HomeRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C601D028AC821E001CA0A6 /* HomeRouteBuilder.swift */; };
+		D2E7AE0328ACB7A200157DA7 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E7AE0228ACB7A200157DA7 /* AppDependency.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		290C8E3227C74D6F0073B327 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		290C8E3427C74D9F0073B327 /* AppMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
-		290C8E3927C74EC00073B327 /* Enviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
-		290C8E3C27C74F2C0073B327 /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
-		290C8E3E27C74F590073B327 /* DependencyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyType.swift; sourceTree = "<group>"; };
 		294A9A5C27CF6F78002279C0 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		294A9A5E27CF6F80002279C0 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 		294A9A6027CF6F85002279C0 /* SettingIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingIntent.swift; sourceTree = "<group>"; };
-		294A9A6227CF6F92002279C0 /* SettingRouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRouteBuilder.swift; sourceTree = "<group>"; };
 		294A9A6527CF727F002279C0 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		294A9A6727CF7283002279C0 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		294A9A6927CF7286002279C0 /* NotificationIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationIntent.swift; sourceTree = "<group>"; };
-		294A9A6B27CF7298002279C0 /* NotificationRouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRouteBuilder.swift; sourceTree = "<group>"; };
 		294A9A6E27D050B1002279C0 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		294A9A7027D050B5002279C0 /* PlaceIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceIntent.swift; sourceTree = "<group>"; };
 		294A9A7227D050BD002279C0 /* PlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceView.swift; sourceTree = "<group>"; };
-		294A9A7427D050C6002279C0 /* PlaceRouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRouteBuilder.swift; sourceTree = "<group>"; };
 		294A9A7727D08669002279C0 /* PlaceListIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListIntent.swift; sourceTree = "<group>"; };
 		294A9A7927D0866D002279C0 /* PlaceListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListModel.swift; sourceTree = "<group>"; };
-		294A9A7B27D08673002279C0 /* PlaceListRouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListRouteBuilder.swift; sourceTree = "<group>"; };
 		294A9A7D27D08677002279C0 /* PlaceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListView.swift; sourceTree = "<group>"; };
 		2983781527D0B47700FD761C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2991BBBC27C74C8B00768787 /* LinkNavigator-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LinkNavigator-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2991BBC327C74C8C00768787 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2991BBC627C74C8C00768787 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		29A9D73227CEFDD200634D0F /* HomeRouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouteBuilder.swift; sourceTree = "<group>"; };
-		29AFC4B527C890E60095BB8A /* RouteBuildGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteBuildGroup.swift; sourceTree = "<group>"; };
 		29AFC4BE27C895E80095BB8A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		29AFC4C027C895EC0095BB8A /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		29AFC4C227C895F20095BB8A /* HomeIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIntent.swift; sourceTree = "<group>"; };
 		29AFC4C527C8963F0095BB8A /* IntentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentType.swift; sourceTree = "<group>"; };
 		29AFC4C727C8965F0095BB8A /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		D2B36191280531FD00D4B429 /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ..; sourceTree = "<group>"; };
+		D2C601CC28AC80BA001CA0A6 /* AppRouterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterGroup.swift; sourceTree = "<group>"; };
+		D2C601D028AC821E001CA0A6 /* HomeRouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouteBuilder.swift; sourceTree = "<group>"; };
+		D2E7AE0228ACB7A200157DA7 /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,22 +76,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		290C8E3B27C74F200073B327 /* DI */ = {
-			isa = PBXGroup;
-			children = (
-				290C8E3C27C74F2C0073B327 /* AppDependency.swift */,
-				290C8E3E27C74F590073B327 /* DependencyType.swift */,
-				290C8E3927C74EC00073B327 /* Enviroment.swift */,
-			);
-			path = DI;
-			sourceTree = "<group>";
-		};
 		294A9A5B27CF6F6F002279C0 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
 				294A9A6027CF6F85002279C0 /* SettingIntent.swift */,
 				294A9A5E27CF6F80002279C0 /* SettingModel.swift */,
-				294A9A6227CF6F92002279C0 /* SettingRouteBuilder.swift */,
 				294A9A5C27CF6F78002279C0 /* SettingView.swift */,
 			);
 			path = Setting;
@@ -114,7 +91,6 @@
 			children = (
 				294A9A6927CF7286002279C0 /* NotificationIntent.swift */,
 				294A9A6727CF7283002279C0 /* NotificationModel.swift */,
-				294A9A6B27CF7298002279C0 /* NotificationRouteBuilder.swift */,
 				294A9A6527CF727F002279C0 /* NotificationView.swift */,
 			);
 			path = Notification;
@@ -125,7 +101,6 @@
 			children = (
 				294A9A7027D050B5002279C0 /* PlaceIntent.swift */,
 				294A9A6E27D050B1002279C0 /* PlaceModel.swift */,
-				294A9A7427D050C6002279C0 /* PlaceRouteBuilder.swift */,
 				294A9A7227D050BD002279C0 /* PlaceView.swift */,
 			);
 			path = Place;
@@ -136,7 +111,6 @@
 			children = (
 				294A9A7727D08669002279C0 /* PlaceListIntent.swift */,
 				294A9A7927D0866D002279C0 /* PlaceListModel.swift */,
-				294A9A7B27D08673002279C0 /* PlaceListRouteBuilder.swift */,
 				294A9A7D27D08677002279C0 /* PlaceListView.swift */,
 			);
 			path = PlaceList;
@@ -166,12 +140,12 @@
 				2983781527D0B47700FD761C /* Info.plist */,
 				29AFC4C427C896160095BB8A /* ArchetectureKit */,
 				290C8E3227C74D6F0073B327 /* AppDelegate.swift */,
+				D2C601CC28AC80BA001CA0A6 /* AppRouterGroup.swift */,
 				290C8E3427C74D9F0073B327 /* AppMain.swift */,
+				D2E7AE0228ACB7A200157DA7 /* AppDependency.swift */,
 				2991BBC327C74C8C00768787 /* Assets.xcassets */,
-				290C8E3B27C74F200073B327 /* DI */,
 				29AFC4BC27C895BF0095BB8A /* Feature */,
 				2991BBC527C74C8C00768787 /* Preview Content */,
-				29AFC4B427C890CD0095BB8A /* RouteBuilders */,
 			);
 			path = "LinkNavigator-Example";
 			sourceTree = "<group>";
@@ -182,14 +156,6 @@
 				2991BBC627C74C8C00768787 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		29AFC4B427C890CD0095BB8A /* RouteBuilders */ = {
-			isa = PBXGroup;
-			children = (
-				29AFC4B527C890E60095BB8A /* RouteBuildGroup.swift */,
-			);
-			path = RouteBuilders;
 			sourceTree = "<group>";
 		};
 		29AFC4BC27C895BF0095BB8A /* Feature */ = {
@@ -209,8 +175,8 @@
 			children = (
 				29AFC4C227C895F20095BB8A /* HomeIntent.swift */,
 				29AFC4C027C895EC0095BB8A /* HomeModel.swift */,
-				29A9D73227CEFDD200634D0F /* HomeRouteBuilder.swift */,
 				29AFC4BE27C895E80095BB8A /* HomeView.swift */,
+				D2C601D028AC821E001CA0A6 /* HomeRouteBuilder.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -338,30 +304,24 @@
 				294A9A6827CF7283002279C0 /* NotificationModel.swift in Sources */,
 				29AFC4C327C895F20095BB8A /* HomeIntent.swift in Sources */,
 				294A9A7327D050BD002279C0 /* PlaceView.swift in Sources */,
+				D2C601D128AC821E001CA0A6 /* HomeRouteBuilder.swift in Sources */,
 				29AFC4C827C8965F0095BB8A /* Container.swift in Sources */,
 				294A9A7127D050B5002279C0 /* PlaceIntent.swift in Sources */,
-				290C8E3D27C74F2C0073B327 /* AppDependency.swift in Sources */,
 				294A9A6F27D050B1002279C0 /* PlaceModel.swift in Sources */,
 				294A9A5D27CF6F78002279C0 /* SettingView.swift in Sources */,
 				290C8E3327C74D6F0073B327 /* AppDelegate.swift in Sources */,
-				294A9A6C27CF7298002279C0 /* NotificationRouteBuilder.swift in Sources */,
 				294A9A5F27CF6F80002279C0 /* SettingModel.swift in Sources */,
 				294A9A6627CF727F002279C0 /* NotificationView.swift in Sources */,
 				29AFC4C127C895EC0095BB8A /* HomeModel.swift in Sources */,
 				29AFC4C627C8963F0095BB8A /* IntentType.swift in Sources */,
-				29AFC4B627C890E60095BB8A /* RouteBuildGroup.swift in Sources */,
-				29A9D73327CEFDD200634D0F /* HomeRouteBuilder.swift in Sources */,
 				294A9A6A27CF7286002279C0 /* NotificationIntent.swift in Sources */,
-				290C8E3F27C74F590073B327 /* DependencyType.swift in Sources */,
 				294A9A7E27D08677002279C0 /* PlaceListView.swift in Sources */,
-				294A9A7C27D08673002279C0 /* PlaceListRouteBuilder.swift in Sources */,
 				290C8E3527C74D9F0073B327 /* AppMain.swift in Sources */,
 				29AFC4BF27C895E80095BB8A /* HomeView.swift in Sources */,
 				294A9A7827D08669002279C0 /* PlaceListIntent.swift in Sources */,
-				290C8E3A27C74EC00073B327 /* Enviroment.swift in Sources */,
-				294A9A7527D050C6002279C0 /* PlaceRouteBuilder.swift in Sources */,
+				D2E7AE0328ACB7A200157DA7 /* AppDependency.swift in Sources */,
 				294A9A6127CF6F85002279C0 /* SettingIntent.swift in Sources */,
-				294A9A6327CF6F92002279C0 /* SettingRouteBuilder.swift in Sources */,
+				D2C601CD28AC80BA001CA0A6 /* AppRouterGroup.swift in Sources */,
 				294A9A7A27D0866D002279C0 /* PlaceListModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

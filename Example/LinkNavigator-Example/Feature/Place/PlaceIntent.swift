@@ -6,8 +6,6 @@ import LinkNavigator
 
 protocol PlaceIntentType {
   var state: PlaceModel.State { get }
-  var environment: EnvironmentType { get }
-  var navigator: LinkNavigatorType { get }
 
   func send(action: PlaceModel.ViewAction)
 }
@@ -18,10 +16,8 @@ final class PlaceIntent: ObservableObject {
 
   // MARK: Lifecycle
 
-  init(initialState: State, environment: EnvironmentType, navigator: LinkNavigatorType) {
+  init(initialState: State) {
     state = initialState
-    self.environment = environment
-    self.navigator = navigator
   }
 
   // MARK: Internal
@@ -30,8 +26,6 @@ final class PlaceIntent: ObservableObject {
   typealias ViewAction = PlaceModel.ViewAction
 
   @Published var state: State = .init(placeID: .zero)
-  let environment: EnvironmentType
-  let navigator: LinkNavigatorType
   var cancellable: Set<AnyCancellable> = []
 }
 
@@ -41,12 +35,9 @@ extension PlaceIntent: IntentType, PlaceIntentType {
   func mutate(action: PlaceModel.ViewAction, viewEffect: (() -> Void)?) {
     switch action {
     case .onTapSetting:
-      navigator.href(url: "/setting", target: .root, animated: true, errorAction: .none)
+      break
     case .onTapBack:
-      print(navigator.currentPath)
-      print(navigator.getPath(locationPath: "place1"))
-      navigator.back(path: "notification", animated: true)
-//      navigator.back(animated: false)
+      break
     }
   }
 }
