@@ -9,6 +9,7 @@ public protocol LinkNavigatorType {
   func replace(paths: [String], items: [String: String], isAnimated: Bool)
   func backOrNext(path: String, items: [String: String], isAnimated: Bool)
   func back(isAnimated: Bool)
+  func remove(paths: [String])
   func close(completeAction: @escaping () -> Void)
 }
 
@@ -106,6 +107,14 @@ extension LinkNavigator: LinkNavigatorType {
 
     guard isSubNavigationControllerPresented else { return }
     currentActivityNavigationController.dismiss(animated: isAnimated)
+  }
+
+  public func remove(paths: [String]) {
+    let new = currentActivityNavigationController
+      .viewControllers
+      .compactMap{ $0 as? WrappingController }
+      .filter{ !paths.contains($0.matchingKey) }
+    currentActivityNavigationController.setViewControllers(new, animated: false)
   }
 
   public func close(completeAction: @escaping () -> Void) {
