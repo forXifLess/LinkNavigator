@@ -115,6 +115,8 @@ extension LinkNavigator: LinkNavigatorType {
       .viewControllers
       .compactMap{ $0 as? WrappingController }
       .filter{ !paths.contains($0.matchingKey) }
+
+    guard new.count != currentActivityNavigationController.viewControllers.count else { return }
     currentActivityNavigationController.setViewControllers(new, animated: false)
   }
 
