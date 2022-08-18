@@ -14,7 +14,7 @@ public protocol LinkNavigatorType {
   func range(path: String) -> [String]
 }
 
-public struct LinkNavigator {
+public final class LinkNavigator {
 	let rootNavigationController: UINavigationController
 	let subNavigationController: UINavigationController
 	let dependency: DependencyType
@@ -152,11 +152,4 @@ extension LinkNavigator {
       .compactMap { $0 as? WrappingController }
       .first(where: { $0.matchingKey == path })
   }
-}
-
-enum NavigationType {
-  case auto
-  case root
-  case sheet
-  case fullSheet
 }
