@@ -11,6 +11,7 @@ public protocol LinkNavigatorType {
   func back(isAnimated: Bool)
   func remove(paths: [String])
   func close(completeAction: @escaping () -> Void)
+  func range(path: String) -> [String]
 }
 
 public struct LinkNavigator {
@@ -120,6 +121,12 @@ extension LinkNavigator: LinkNavigatorType {
   public func close(completeAction: @escaping () -> Void) {
     guard isSubNavigationControllerPresented else { return }
     rootNavigationController.dismiss(animated: true, completion: completeAction)
+  }
+
+  public func range(path: String) -> [String] {
+    let start = currentPaths.startIndex
+    let end = currentPaths.enumerated().first(where: { $0.element == path})?.offset ?? currentPaths.endIndex - 1
+    return Array(currentPaths[start...max(start, end)])
   }
 }
 
