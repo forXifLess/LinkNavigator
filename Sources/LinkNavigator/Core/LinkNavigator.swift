@@ -57,7 +57,7 @@ extension LinkNavigator: LinkNavigatorType {
     let new = paths.compactMap { path in
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }
-    rootNavigationController.setViewControllers(current + new, animated: isAnimated)
+    currentActivityNavigationController.setViewControllers(current + new, animated: isAnimated)
   }
 
   public func sheet(paths:[String], items: [String: String], isAnimated: Bool) {
