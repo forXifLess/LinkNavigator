@@ -1,10 +1,12 @@
 import Combine
 import Foundation
+import LinkNavigator
 
 // MARK: - HomeIntentType
 
 protocol HomeIntentType {
   var state: HomeModel.State { get }
+  var navigator: LinkNavigatorType { get }
 
   func send(action: HomeModel.ViewAction)
 }
@@ -15,8 +17,9 @@ final class HomeIntent: ObservableObject {
 
   // MARK: Lifecycle
 
-  init(initialState: State) {
+  init(initialState: State, navigator: LinkNavigatorType) {
     state = initialState
+    self.navigator = navigator
   }
 
   // MARK: Internal
@@ -25,6 +28,7 @@ final class HomeIntent: ObservableObject {
   typealias ViewAction = HomeModel.ViewAction
 
   @Published var state: State = .init()
+  let navigator: LinkNavigatorType
   var cancellable: Set<AnyCancellable> = []
 }
 
@@ -38,7 +42,7 @@ extension HomeIntent: IntentType, HomeIntentType {
   func mutate(action: HomeModel.ViewAction, viewEffect: (() -> Void)?) {
     switch action {
     case .onTapSetting:
-      break
+      navigator.fullSheet(paths: ["setting"], items: [:], isAnimated: true)
     case .onTapRouteError:
       break
     case .onTapNewNotification:

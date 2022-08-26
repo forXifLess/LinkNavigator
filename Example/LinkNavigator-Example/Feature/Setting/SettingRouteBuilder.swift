@@ -2,14 +2,13 @@ import LinkNavigator
 import UIKit
 import SwiftUI
 
-struct HomeRouteBuilder: RouteBuilder {
-  var matchPath: String { "home" }
+struct SettingRouteBuilder: RouteBuilder {
+  var matchPath: String { "setting" }
 
   var build: (LinkNavigatorType, [String: String], DependencyType) -> UIViewController? {
     { navigator, items, dep in
       WrappingController(matchingKey: matchPath) {
-        AnyView(HomeView.build(
-          intent: .init(initialState: .init(), navigator: navigator)))
+        AnyView(SettingView.build(intent: .init(initialState: .init())))
       }
     }
   }

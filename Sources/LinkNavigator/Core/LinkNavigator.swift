@@ -63,7 +63,7 @@ extension LinkNavigator: LinkNavigatorType {
   public func sheet(paths:[String], items: [String: String], isAnimated: Bool) {
     rootNavigationController.dismiss(animated: false)
 
-    rootNavigationController.modalPresentationStyle = .automatic
+    subNavigationController.modalPresentationStyle = .automatic
     let new = paths.compactMap { path in
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }
@@ -74,7 +74,7 @@ extension LinkNavigator: LinkNavigatorType {
   public func fullSheet(paths: [String], items: [String: String], isAnimated: Bool) {
     rootNavigationController.dismiss(animated: false)
 
-    rootNavigationController.modalPresentationStyle = .fullScreen
+    subNavigationController.modalPresentationStyle = .fullScreen
     let new = paths.compactMap { path in
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }

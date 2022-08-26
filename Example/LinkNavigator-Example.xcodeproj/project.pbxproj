@@ -28,6 +28,7 @@
 		29AFC4C327C895F20095BB8A /* HomeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C227C895F20095BB8A /* HomeIntent.swift */; };
 		29AFC4C627C8963F0095BB8A /* IntentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C527C8963F0095BB8A /* IntentType.swift */; };
 		29AFC4C827C8965F0095BB8A /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C727C8965F0095BB8A /* Container.swift */; };
+		D25AA93B28B862B900F374E2 /* SettingRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AA93A28B862B900F374E2 /* SettingRouteBuilder.swift */; };
 		D2B361942805323000D4B429 /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = D2B361932805323000D4B429 /* LinkNavigator */; };
 		D2C601CD28AC80BA001CA0A6 /* AppRouterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C601CC28AC80BA001CA0A6 /* AppRouterGroup.swift */; };
 		D2C601D128AC821E001CA0A6 /* HomeRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C601D028AC821E001CA0A6 /* HomeRouteBuilder.swift */; };
@@ -58,6 +59,7 @@
 		29AFC4C227C895F20095BB8A /* HomeIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIntent.swift; sourceTree = "<group>"; };
 		29AFC4C527C8963F0095BB8A /* IntentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentType.swift; sourceTree = "<group>"; };
 		29AFC4C727C8965F0095BB8A /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		D25AA93A28B862B900F374E2 /* SettingRouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRouteBuilder.swift; sourceTree = "<group>"; };
 		D2B36191280531FD00D4B429 /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ..; sourceTree = "<group>"; };
 		D2C601CC28AC80BA001CA0A6 /* AppRouterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterGroup.swift; sourceTree = "<group>"; };
 		D2C601D028AC821E001CA0A6 /* HomeRouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouteBuilder.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			children = (
 				294A9A6027CF6F85002279C0 /* SettingIntent.swift */,
 				294A9A5E27CF6F80002279C0 /* SettingModel.swift */,
+				D25AA93A28B862B900F374E2 /* SettingRouteBuilder.swift */,
 				294A9A5C27CF6F78002279C0 /* SettingView.swift */,
 			);
 			path = Setting;
@@ -314,6 +317,7 @@
 				294A9A6627CF727F002279C0 /* NotificationView.swift in Sources */,
 				29AFC4C127C895EC0095BB8A /* HomeModel.swift in Sources */,
 				29AFC4C627C8963F0095BB8A /* IntentType.swift in Sources */,
+				D25AA93B28B862B900F374E2 /* SettingRouteBuilder.swift in Sources */,
 				294A9A6A27CF7286002279C0 /* NotificationIntent.swift in Sources */,
 				294A9A7E27D08677002279C0 /* PlaceListView.swift in Sources */,
 				290C8E3527C74D9F0073B327 /* AppMain.swift in Sources */,

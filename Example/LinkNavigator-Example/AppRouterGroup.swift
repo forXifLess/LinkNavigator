@@ -4,7 +4,8 @@ import Foundation
 struct AppRouterGroup {
   var routers: [RouteBuilder] {
     [
-      HomeRouteBuilder()
+      HomeRouteBuilder(),
+      SettingRouteBuilder(),
     ]
   }
 }
