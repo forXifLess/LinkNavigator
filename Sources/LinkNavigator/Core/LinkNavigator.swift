@@ -7,6 +7,7 @@ public protocol LinkNavigatorType {
   func rootNext(paths: [String], items: [String: String], isAnimated: Bool)
   func sheet(paths:[String], items: [String: String], isAnimated: Bool)
   func fullSheet(paths: [String], items: [String: String], isAnimated: Bool)
+  func customSheet(paths: [String], items: [String: String], isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle)
   func replace(paths: [String], items: [String: String], isAnimated: Bool)
   func backOrNext(path: String, items: [String: String], isAnimated: Bool)
   func rootBackOrNext(path: String, items: [String: String], isAnimated: Bool)
@@ -85,6 +86,22 @@ extension LinkNavigator: LinkNavigatorType {
     rootNavigationController.dismiss(animated: false)
 
     subNavigationController.modalPresentationStyle = .fullScreen
+    let new = paths.compactMap { path in
+      builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
+    }
+    subNavigationController.setViewControllers(new, animated: false)
+    rootNavigationController.present(subNavigationController, animated: isAnimated)
+  }
+
+  public func customSheet(paths: [String], items: [String: String], isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle) {
+    rootNavigationController.dismiss(animated: false)
+
+    if UIDevice.current.userInterfaceIdiom == .phone {
+      subNavigationController.modalPresentationStyle = iPhonePresentationStyle
+    } else {
+      subNavigationController.modalPresentationStyle = iPadPresentationStyle
+    }
+
     let new = paths.compactMap { path in
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }
