@@ -96,11 +96,9 @@ extension LinkNavigator: LinkNavigatorType {
   public func customSheet(paths: [String], items: [String: String], isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle) {
     rootNavigationController.dismiss(animated: false)
 
-    if UIDevice.current.userInterfaceIdiom == .phone {
-      subNavigationController.modalPresentationStyle = iPhonePresentationStyle
-    } else {
-      subNavigationController.modalPresentationStyle = iPadPresentationStyle
-    }
+    subNavigationController.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone
+      ? iPhonePresentationStyle
+      : iPadPresentationStyle
 
     let new = paths.compactMap { path in
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
