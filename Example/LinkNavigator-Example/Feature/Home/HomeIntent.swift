@@ -41,12 +41,17 @@ extension HomeIntent: IntentType, HomeIntentType {
 
   func mutate(action: HomeModel.ViewAction, viewEffect: (() -> Void)?) {
     switch action {
-    case .onTapSetting:
-      navigator.fullSheet(paths: ["setting"], items: [:], isAnimated: true)
-    case .onTapRouteError:
-      break
-    case .onTapNewNotification:
-      break
+    case .getPaths:
+      state.paths = navigator.currentPaths
+
+    case .onTapPage1:
+      navigator.next(paths: ["page1"], items: [:], isAnimated: true)
+
+    case .onTapPage3:
+      navigator.next(paths: ["page1", "page2", "page3"], items: [:], isAnimated: true)
+      
+    case .onTapSheet:
+      navigator.sheet(paths: ["page1", "page2"], items: [:], isAnimated: true)
     }
   }
 }

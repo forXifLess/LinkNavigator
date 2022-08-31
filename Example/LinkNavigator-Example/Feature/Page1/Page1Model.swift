@@ -1,14 +1,14 @@
 import Foundation
 
-enum HomeModel {
+enum Page1Model {
   struct State: Equatable {
     var paths: [String] = []
   }
 
   enum ViewAction: Equatable {
     case getPaths
-    case onTapPage1
-    case onTapPage3
-    case onTapSheet
+    case onTapPage2
+    case onTapRandomBackOrNext
+    case onTapBack
   }
 }
