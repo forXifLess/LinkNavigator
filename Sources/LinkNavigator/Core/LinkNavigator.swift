@@ -14,6 +14,8 @@ public protocol LinkNavigatorType {
 
   /// 특정 화면을 Full Sheet Modal 형태로 올립니다. 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
   func fullSheet(paths: [String], items: [String: String], isAnimated: Bool)
+  
+  func customSheet(paths: [String], items: [String: String], isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle)
 
   /// Navigation 스택을 교체합니다. 다른 맥락의 스택으로 이동하거나, 복잡하게 쌓인 스택을 청소할 때 사용합니다.
   func replace(paths: [String], items: [String: String], isAnimated: Bool)
@@ -104,6 +106,20 @@ extension LinkNavigator: LinkNavigatorType {
     rootNavigationController.dismiss(animated: false)
 
     subNavigationController.modalPresentationStyle = .fullScreen
+    let new = paths.compactMap { path in
+      builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
+    }
+    subNavigationController.setViewControllers(new, animated: false)
+    rootNavigationController.present(subNavigationController, animated: isAnimated)
+  }
+
+  public func customSheet(paths: [String], items: [String: String], isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle) {
+    rootNavigationController.dismiss(animated: false)
+
+    subNavigationController.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone
+      ? iPhonePresentationStyle
+      : iPadPresentationStyle
+
     let new = paths.compactMap { path in
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }
