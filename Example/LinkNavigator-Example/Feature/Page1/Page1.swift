@@ -16,10 +16,7 @@ extension Page1: View {
       Text("Page 1")
         .font(.largeTitle)
 
-      GroupBox {
-        Text(state.paths.joined(separator: " → "))
-      }
-      .padding(.horizontal)
+      NavigationStackViewer(paths: state.paths)
 
       Button(action: { intent.send(action: .onTapPage2)}) {
         VStack {

@@ -27,6 +27,7 @@
 		7A34DE6528BF39780079C6A6 /* Page3Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A34DE6428BF39780079C6A6 /* Page3Intent.swift */; };
 		7A34DE6728BF39970079C6A6 /* Page3Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A34DE6628BF39970079C6A6 /* Page3Model.swift */; };
 		7A34DE6928BF39AB0079C6A6 /* Page3RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A34DE6828BF39AB0079C6A6 /* Page3RouteBuilder.swift */; };
+		7ABFED4828BF66FD00395641 /* NavigationStackViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFED4728BF66FD00395641 /* NavigationStackViewer.swift */; };
 		D25AA93B28B862B900F374E2 /* Page1RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AA93A28B862B900F374E2 /* Page1RouteBuilder.swift */; };
 		D2B361942805323000D4B429 /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = D2B361932805323000D4B429 /* LinkNavigator */; };
 		D2C601CD28AC80BA001CA0A6 /* AppRouterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C601CC28AC80BA001CA0A6 /* AppRouterGroup.swift */; };
@@ -57,6 +58,7 @@
 		7A34DE6428BF39780079C6A6 /* Page3Intent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page3Intent.swift; sourceTree = "<group>"; };
 		7A34DE6628BF39970079C6A6 /* Page3Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page3Model.swift; sourceTree = "<group>"; };
 		7A34DE6828BF39AB0079C6A6 /* Page3RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page3RouteBuilder.swift; sourceTree = "<group>"; };
+		7ABFED4728BF66FD00395641 /* NavigationStackViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationStackViewer.swift; sourceTree = "<group>"; };
 		D25AA93A28B862B900F374E2 /* Page1RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page1RouteBuilder.swift; sourceTree = "<group>"; };
 		D2B36191280531FD00D4B429 /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ..; sourceTree = "<group>"; };
 		D2C601CC28AC80BA001CA0A6 /* AppRouterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterGroup.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				294A9A5B27CF6F6F002279C0 /* Page1 */,
 				294A9A6427CF7271002279C0 /* Page2 */,
 				7A34DE6128BF389C0079C6A6 /* Page3 */,
+				7ABFED4628BF66D300395641 /* Common */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -180,6 +183,14 @@
 				7A34DE6828BF39AB0079C6A6 /* Page3RouteBuilder.swift */,
 			);
 			path = Page3;
+			sourceTree = "<group>";
+		};
+		7ABFED4628BF66D300395641 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7ABFED4728BF66FD00395641 /* NavigationStackViewer.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		D2B36190280531FD00D4B429 /* Packages */ = {
@@ -298,6 +309,7 @@
 				7A34DE6528BF39780079C6A6 /* Page3Intent.swift in Sources */,
 				D2C601D128AC821E001CA0A6 /* HomeRouteBuilder.swift in Sources */,
 				29AFC4C827C8965F0095BB8A /* Container.swift in Sources */,
+				7ABFED4828BF66FD00395641 /* NavigationStackViewer.swift in Sources */,
 				294A9A5D27CF6F78002279C0 /* Page1.swift in Sources */,
 				7A34DE6928BF39AB0079C6A6 /* Page3RouteBuilder.swift in Sources */,
 				290C8E3327C74D6F0073B327 /* AppDelegate.swift in Sources */,

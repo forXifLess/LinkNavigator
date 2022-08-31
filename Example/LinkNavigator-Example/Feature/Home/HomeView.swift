@@ -16,10 +16,7 @@ extension HomeView: View {
       Text("Home")
         .font(.largeTitle)
 
-      GroupBox {
-        Text(state.paths.joined(separator: " → "))
-      }
-      .padding(.horizontal)
+      NavigationStackViewer(paths: state.paths)
 
       Button(action: { intent.send(action: .onTapPage1) }) {
         VStack {
