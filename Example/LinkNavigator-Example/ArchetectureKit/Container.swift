@@ -26,9 +26,9 @@ extension IntentType {
   }
 }
 
-// MARK: - IntentBidingType
+// MARK: - IntentBindingType
 
-protocol IntentBidingType {
+protocol IntentBindingType {
   associatedtype IntentType
   associatedtype State
 

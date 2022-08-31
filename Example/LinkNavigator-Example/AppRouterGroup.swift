@@ -5,7 +5,9 @@ struct AppRouterGroup {
   var routers: [RouteBuilder] {
     [
       HomeRouteBuilder(),
-      SettingRouteBuilder(),
+      Page1RouteBuilder(),
+      Page2RouteBuilder(),
+      Page3RouteBuilder(),
     ]
   }
 }

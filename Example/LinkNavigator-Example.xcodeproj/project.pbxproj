@@ -9,18 +9,12 @@
 /* Begin PBXBuildFile section */
 		290C8E3327C74D6F0073B327 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290C8E3227C74D6F0073B327 /* AppDelegate.swift */; };
 		290C8E3527C74D9F0073B327 /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290C8E3427C74D9F0073B327 /* AppMain.swift */; };
-		294A9A5D27CF6F78002279C0 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A5C27CF6F78002279C0 /* SettingView.swift */; };
-		294A9A5F27CF6F80002279C0 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A5E27CF6F80002279C0 /* SettingModel.swift */; };
-		294A9A6127CF6F85002279C0 /* SettingIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A6027CF6F85002279C0 /* SettingIntent.swift */; };
-		294A9A6627CF727F002279C0 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A6527CF727F002279C0 /* NotificationView.swift */; };
-		294A9A6827CF7283002279C0 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A6727CF7283002279C0 /* NotificationModel.swift */; };
-		294A9A6A27CF7286002279C0 /* NotificationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A6927CF7286002279C0 /* NotificationIntent.swift */; };
-		294A9A6F27D050B1002279C0 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A6E27D050B1002279C0 /* PlaceModel.swift */; };
-		294A9A7127D050B5002279C0 /* PlaceIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A7027D050B5002279C0 /* PlaceIntent.swift */; };
-		294A9A7327D050BD002279C0 /* PlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A7227D050BD002279C0 /* PlaceView.swift */; };
-		294A9A7827D08669002279C0 /* PlaceListIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A7727D08669002279C0 /* PlaceListIntent.swift */; };
-		294A9A7A27D0866D002279C0 /* PlaceListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A7927D0866D002279C0 /* PlaceListModel.swift */; };
-		294A9A7E27D08677002279C0 /* PlaceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A7D27D08677002279C0 /* PlaceListView.swift */; };
+		294A9A5D27CF6F78002279C0 /* Page1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A5C27CF6F78002279C0 /* Page1.swift */; };
+		294A9A5F27CF6F80002279C0 /* Page1Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A5E27CF6F80002279C0 /* Page1Model.swift */; };
+		294A9A6127CF6F85002279C0 /* Page1Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A6027CF6F85002279C0 /* Page1Intent.swift */; };
+		294A9A6627CF727F002279C0 /* Page2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A6527CF727F002279C0 /* Page2.swift */; };
+		294A9A6827CF7283002279C0 /* Page2Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A6727CF7283002279C0 /* Page2Model.swift */; };
+		294A9A6A27CF7286002279C0 /* Page2Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A9A6927CF7286002279C0 /* Page2Intent.swift */; };
 		2991BBC427C74C8C00768787 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2991BBC327C74C8C00768787 /* Assets.xcassets */; };
 		2991BBC727C74C8C00768787 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2991BBC627C74C8C00768787 /* Preview Assets.xcassets */; };
 		29AFC4BF27C895E80095BB8A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4BE27C895E80095BB8A /* HomeView.swift */; };
@@ -28,7 +22,12 @@
 		29AFC4C327C895F20095BB8A /* HomeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C227C895F20095BB8A /* HomeIntent.swift */; };
 		29AFC4C627C8963F0095BB8A /* IntentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C527C8963F0095BB8A /* IntentType.swift */; };
 		29AFC4C827C8965F0095BB8A /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C727C8965F0095BB8A /* Container.swift */; };
-		D25AA93B28B862B900F374E2 /* SettingRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AA93A28B862B900F374E2 /* SettingRouteBuilder.swift */; };
+		7A34DE6028BF2A4B0079C6A6 /* Page2RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A34DE5F28BF2A4B0079C6A6 /* Page2RouteBuilder.swift */; };
+		7A34DE6328BF38B00079C6A6 /* Page3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A34DE6228BF38B00079C6A6 /* Page3.swift */; };
+		7A34DE6528BF39780079C6A6 /* Page3Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A34DE6428BF39780079C6A6 /* Page3Intent.swift */; };
+		7A34DE6728BF39970079C6A6 /* Page3Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A34DE6628BF39970079C6A6 /* Page3Model.swift */; };
+		7A34DE6928BF39AB0079C6A6 /* Page3RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A34DE6828BF39AB0079C6A6 /* Page3RouteBuilder.swift */; };
+		D25AA93B28B862B900F374E2 /* Page1RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AA93A28B862B900F374E2 /* Page1RouteBuilder.swift */; };
 		D2B361942805323000D4B429 /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = D2B361932805323000D4B429 /* LinkNavigator */; };
 		D2C601CD28AC80BA001CA0A6 /* AppRouterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C601CC28AC80BA001CA0A6 /* AppRouterGroup.swift */; };
 		D2C601D128AC821E001CA0A6 /* HomeRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C601D028AC821E001CA0A6 /* HomeRouteBuilder.swift */; };
@@ -38,18 +37,12 @@
 /* Begin PBXFileReference section */
 		290C8E3227C74D6F0073B327 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		290C8E3427C74D9F0073B327 /* AppMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
-		294A9A5C27CF6F78002279C0 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		294A9A5E27CF6F80002279C0 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
-		294A9A6027CF6F85002279C0 /* SettingIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingIntent.swift; sourceTree = "<group>"; };
-		294A9A6527CF727F002279C0 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
-		294A9A6727CF7283002279C0 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
-		294A9A6927CF7286002279C0 /* NotificationIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationIntent.swift; sourceTree = "<group>"; };
-		294A9A6E27D050B1002279C0 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
-		294A9A7027D050B5002279C0 /* PlaceIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceIntent.swift; sourceTree = "<group>"; };
-		294A9A7227D050BD002279C0 /* PlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceView.swift; sourceTree = "<group>"; };
-		294A9A7727D08669002279C0 /* PlaceListIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListIntent.swift; sourceTree = "<group>"; };
-		294A9A7927D0866D002279C0 /* PlaceListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListModel.swift; sourceTree = "<group>"; };
-		294A9A7D27D08677002279C0 /* PlaceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListView.swift; sourceTree = "<group>"; };
+		294A9A5C27CF6F78002279C0 /* Page1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page1.swift; sourceTree = "<group>"; };
+		294A9A5E27CF6F80002279C0 /* Page1Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page1Model.swift; sourceTree = "<group>"; };
+		294A9A6027CF6F85002279C0 /* Page1Intent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page1Intent.swift; sourceTree = "<group>"; };
+		294A9A6527CF727F002279C0 /* Page2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page2.swift; sourceTree = "<group>"; };
+		294A9A6727CF7283002279C0 /* Page2Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page2Model.swift; sourceTree = "<group>"; };
+		294A9A6927CF7286002279C0 /* Page2Intent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page2Intent.swift; sourceTree = "<group>"; };
 		2983781527D0B47700FD761C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2991BBBC27C74C8B00768787 /* LinkNavigator-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LinkNavigator-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2991BBC327C74C8C00768787 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,7 +52,12 @@
 		29AFC4C227C895F20095BB8A /* HomeIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIntent.swift; sourceTree = "<group>"; };
 		29AFC4C527C8963F0095BB8A /* IntentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentType.swift; sourceTree = "<group>"; };
 		29AFC4C727C8965F0095BB8A /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
-		D25AA93A28B862B900F374E2 /* SettingRouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRouteBuilder.swift; sourceTree = "<group>"; };
+		7A34DE5F28BF2A4B0079C6A6 /* Page2RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page2RouteBuilder.swift; sourceTree = "<group>"; };
+		7A34DE6228BF38B00079C6A6 /* Page3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page3.swift; sourceTree = "<group>"; };
+		7A34DE6428BF39780079C6A6 /* Page3Intent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page3Intent.swift; sourceTree = "<group>"; };
+		7A34DE6628BF39970079C6A6 /* Page3Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page3Model.swift; sourceTree = "<group>"; };
+		7A34DE6828BF39AB0079C6A6 /* Page3RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page3RouteBuilder.swift; sourceTree = "<group>"; };
+		D25AA93A28B862B900F374E2 /* Page1RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page1RouteBuilder.swift; sourceTree = "<group>"; };
 		D2B36191280531FD00D4B429 /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ..; sourceTree = "<group>"; };
 		D2C601CC28AC80BA001CA0A6 /* AppRouterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterGroup.swift; sourceTree = "<group>"; };
 		D2C601D028AC821E001CA0A6 /* HomeRouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouteBuilder.swift; sourceTree = "<group>"; };
@@ -78,45 +76,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		294A9A5B27CF6F6F002279C0 /* Setting */ = {
+		294A9A5B27CF6F6F002279C0 /* Page1 */ = {
 			isa = PBXGroup;
 			children = (
-				294A9A6027CF6F85002279C0 /* SettingIntent.swift */,
-				294A9A5E27CF6F80002279C0 /* SettingModel.swift */,
-				D25AA93A28B862B900F374E2 /* SettingRouteBuilder.swift */,
-				294A9A5C27CF6F78002279C0 /* SettingView.swift */,
+				294A9A5C27CF6F78002279C0 /* Page1.swift */,
+				294A9A5E27CF6F80002279C0 /* Page1Model.swift */,
+				294A9A6027CF6F85002279C0 /* Page1Intent.swift */,
+				D25AA93A28B862B900F374E2 /* Page1RouteBuilder.swift */,
 			);
-			path = Setting;
+			path = Page1;
 			sourceTree = "<group>";
 		};
-		294A9A6427CF7271002279C0 /* Notification */ = {
+		294A9A6427CF7271002279C0 /* Page2 */ = {
 			isa = PBXGroup;
 			children = (
-				294A9A6927CF7286002279C0 /* NotificationIntent.swift */,
-				294A9A6727CF7283002279C0 /* NotificationModel.swift */,
-				294A9A6527CF727F002279C0 /* NotificationView.swift */,
+				294A9A6527CF727F002279C0 /* Page2.swift */,
+				294A9A6727CF7283002279C0 /* Page2Model.swift */,
+				294A9A6927CF7286002279C0 /* Page2Intent.swift */,
+				7A34DE5F28BF2A4B0079C6A6 /* Page2RouteBuilder.swift */,
 			);
-			path = Notification;
-			sourceTree = "<group>";
-		};
-		294A9A6D27D0509F002279C0 /* Place */ = {
-			isa = PBXGroup;
-			children = (
-				294A9A7027D050B5002279C0 /* PlaceIntent.swift */,
-				294A9A6E27D050B1002279C0 /* PlaceModel.swift */,
-				294A9A7227D050BD002279C0 /* PlaceView.swift */,
-			);
-			path = Place;
-			sourceTree = "<group>";
-		};
-		294A9A7627D08660002279C0 /* PlaceList */ = {
-			isa = PBXGroup;
-			children = (
-				294A9A7727D08669002279C0 /* PlaceListIntent.swift */,
-				294A9A7927D0866D002279C0 /* PlaceListModel.swift */,
-				294A9A7D27D08677002279C0 /* PlaceListView.swift */,
-			);
-			path = PlaceList;
+			path = Page2;
 			sourceTree = "<group>";
 		};
 		2991BBB327C74C8B00768787 = {
@@ -164,11 +143,10 @@
 		29AFC4BC27C895BF0095BB8A /* Feature */ = {
 			isa = PBXGroup;
 			children = (
-				294A9A7627D08660002279C0 /* PlaceList */,
-				294A9A6D27D0509F002279C0 /* Place */,
-				294A9A6427CF7271002279C0 /* Notification */,
-				294A9A5B27CF6F6F002279C0 /* Setting */,
 				29AFC4BD27C895CC0095BB8A /* Home */,
+				294A9A5B27CF6F6F002279C0 /* Page1 */,
+				294A9A6427CF7271002279C0 /* Page2 */,
+				7A34DE6128BF389C0079C6A6 /* Page3 */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -176,9 +154,9 @@
 		29AFC4BD27C895CC0095BB8A /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				29AFC4C227C895F20095BB8A /* HomeIntent.swift */,
-				29AFC4C027C895EC0095BB8A /* HomeModel.swift */,
 				29AFC4BE27C895E80095BB8A /* HomeView.swift */,
+				29AFC4C027C895EC0095BB8A /* HomeModel.swift */,
+				29AFC4C227C895F20095BB8A /* HomeIntent.swift */,
 				D2C601D028AC821E001CA0A6 /* HomeRouteBuilder.swift */,
 			);
 			path = Home;
@@ -191,6 +169,17 @@
 				29AFC4C727C8965F0095BB8A /* Container.swift */,
 			);
 			path = ArchetectureKit;
+			sourceTree = "<group>";
+		};
+		7A34DE6128BF389C0079C6A6 /* Page3 */ = {
+			isa = PBXGroup;
+			children = (
+				7A34DE6228BF38B00079C6A6 /* Page3.swift */,
+				7A34DE6628BF39970079C6A6 /* Page3Model.swift */,
+				7A34DE6428BF39780079C6A6 /* Page3Intent.swift */,
+				7A34DE6828BF39AB0079C6A6 /* Page3RouteBuilder.swift */,
+			);
+			path = Page3;
 			sourceTree = "<group>";
 		};
 		D2B36190280531FD00D4B429 /* Packages */ = {
@@ -304,29 +293,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				294A9A6827CF7283002279C0 /* NotificationModel.swift in Sources */,
+				294A9A6827CF7283002279C0 /* Page2Model.swift in Sources */,
 				29AFC4C327C895F20095BB8A /* HomeIntent.swift in Sources */,
-				294A9A7327D050BD002279C0 /* PlaceView.swift in Sources */,
+				7A34DE6528BF39780079C6A6 /* Page3Intent.swift in Sources */,
 				D2C601D128AC821E001CA0A6 /* HomeRouteBuilder.swift in Sources */,
 				29AFC4C827C8965F0095BB8A /* Container.swift in Sources */,
-				294A9A7127D050B5002279C0 /* PlaceIntent.swift in Sources */,
-				294A9A6F27D050B1002279C0 /* PlaceModel.swift in Sources */,
-				294A9A5D27CF6F78002279C0 /* SettingView.swift in Sources */,
+				294A9A5D27CF6F78002279C0 /* Page1.swift in Sources */,
+				7A34DE6928BF39AB0079C6A6 /* Page3RouteBuilder.swift in Sources */,
 				290C8E3327C74D6F0073B327 /* AppDelegate.swift in Sources */,
-				294A9A5F27CF6F80002279C0 /* SettingModel.swift in Sources */,
-				294A9A6627CF727F002279C0 /* NotificationView.swift in Sources */,
+				294A9A5F27CF6F80002279C0 /* Page1Model.swift in Sources */,
+				294A9A6627CF727F002279C0 /* Page2.swift in Sources */,
 				29AFC4C127C895EC0095BB8A /* HomeModel.swift in Sources */,
 				29AFC4C627C8963F0095BB8A /* IntentType.swift in Sources */,
-				D25AA93B28B862B900F374E2 /* SettingRouteBuilder.swift in Sources */,
-				294A9A6A27CF7286002279C0 /* NotificationIntent.swift in Sources */,
-				294A9A7E27D08677002279C0 /* PlaceListView.swift in Sources */,
+				D25AA93B28B862B900F374E2 /* Page1RouteBuilder.swift in Sources */,
+				7A34DE6028BF2A4B0079C6A6 /* Page2RouteBuilder.swift in Sources */,
+				7A34DE6328BF38B00079C6A6 /* Page3.swift in Sources */,
+				294A9A6A27CF7286002279C0 /* Page2Intent.swift in Sources */,
 				290C8E3527C74D9F0073B327 /* AppMain.swift in Sources */,
 				29AFC4BF27C895E80095BB8A /* HomeView.swift in Sources */,
-				294A9A7827D08669002279C0 /* PlaceListIntent.swift in Sources */,
 				D2E7AE0328ACB7A200157DA7 /* AppDependency.swift in Sources */,
-				294A9A6127CF6F85002279C0 /* SettingIntent.swift in Sources */,
+				7A34DE6728BF39970079C6A6 /* Page3Model.swift in Sources */,
+				294A9A6127CF6F85002279C0 /* Page1Intent.swift in Sources */,
 				D2C601CD28AC80BA001CA0A6 /* AppRouterGroup.swift in Sources */,
-				294A9A7A27D0866D002279C0 /* PlaceListModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +445,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LinkNavigator-Example/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "LinkNavigator-Example/Info.plist";
@@ -486,6 +475,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LinkNavigator-Example/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "LinkNavigator-Example/Info.plist";
