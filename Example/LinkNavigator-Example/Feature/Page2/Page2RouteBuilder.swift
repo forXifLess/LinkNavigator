@@ -1,13 +1,13 @@
 import LinkNavigator
 import SwiftUI
 
-struct HomeRouteBuilder: RouteBuilder {
-  var matchPath: String { "home" }
+struct Page2RouteBuilder: RouteBuilder {
+  var matchPath: String { "page2" }
 
   var build: (LinkNavigatorType, [String: String], DependencyType) -> UIViewController? {
     { navigator, items, dep in
       WrappingController(matchingKey: matchPath) {
-        AnyView(HomeView.build(
+        AnyView(Page2.build(
           intent: .init(initialState: .init(), navigator: navigator)))
       }
     }
