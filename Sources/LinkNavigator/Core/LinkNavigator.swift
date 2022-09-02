@@ -1,20 +1,43 @@
 import UIKit
 
 public protocol LinkNavigatorType {
+
+  /// - Note: 현재의 Navigation 스택을 배열 형태로 반환합니다.
   var currentPaths: [String] { get }
 
+  /// - Note: 특정 화면으로 이동합니다. 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
   func next(paths: [String], items: [String: String], isAnimated: Bool)
+
   func rootNext(paths: [String], items: [String: String], isAnimated: Bool)
-  func sheet(paths:[String], items: [String: String], isAnimated: Bool)
+
+  /// - Note: 특정 화면을 Sheet Modal 형태로 올립니다. 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
+  func sheet(paths: [String], items: [String: String], isAnimated: Bool)
+
+  /// - Note: 특정 화면을 Full Sheet Modal 형태로 올립니다. 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
   func fullSheet(paths: [String], items: [String: String], isAnimated: Bool)
+
   func customSheet(paths: [String], items: [String: String], isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle)
+
+  /// - Note: Navigation 스택을 교체합니다. 다른 맥락의 스택으로 이동하거나, 복잡하게 쌓인 스택을 청소할 때 사용합니다.
   func replace(paths: [String], items: [String: String], isAnimated: Bool)
+
+  /// - Note: 하나의 특정 화면으로 이동합니다. 만약 그 경로가 이미 Navigation 스택에 있다면, 그 화면으로 돌아갑니다.
+  /// 스택에 존재하지 않는 경로라면, 그 화면으로 이동하면서 Navigation 스택을 쌓습니다.
   func backOrNext(path: String, items: [String: String], isAnimated: Bool)
+
   func rootBackOrNext(path: String, items: [String: String], isAnimated: Bool)
+
+  /// - Note: 직전 화면으로 돌아갑니다. Navigation, Modal 모두에서 사용 가능합니다.
   func back(isAnimated: Bool)
+
+  /// - Note: Navigation 스택에서 특정 화면을 선택적으로 제거합니다.
   func remove(paths: [String])
+  
   func close(completeAction: @escaping () -> Void)
+
+  /// - Note: Navigation 스택에서 특정 화면까지의 경로를 배열 형태로 반환합니다.
   func range(path: String) -> [String]
+
 }
 
 public final class LinkNavigator {
@@ -125,7 +148,7 @@ extension LinkNavigator: LinkNavigatorType {
     next(paths: [path], items: items, isAnimated: isAnimated)
   }
 
-  public func rootBackOrNext(path: String, items: [String : String], isAnimated: Bool) {
+  public func rootBackOrNext(path: String, items: [String: String], isAnimated: Bool) {
     if isCurrentContainRootViewController(path: path) {
       guard let pick = findViewControllerRootView(path: path) else { return }
       rootNavigationController.popToViewController(pick, animated: isAnimated)
