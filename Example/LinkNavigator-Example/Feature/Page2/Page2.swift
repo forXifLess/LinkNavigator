@@ -27,6 +27,15 @@ extension Page2: View {
         }
       }
 
+      Button(action: { intent.send(action: .onTapRootPage3)}) {
+        VStack {
+          Text("*root* next")
+          Text("navigator.rootNext(paths: [\"page3\"], items: [:], isAnimated: true)")
+            .font(.caption)
+            .foregroundColor(.secondary)
+        }
+      }
+
       Button(action: { intent.send(action: .onRemovePage1) }) {
         VStack {
           Text("remove Page 1")
@@ -46,6 +55,7 @@ extension Page2: View {
         }
       }
     }
+    .padding(.horizontal)
     .navigationTitle("Page 2")
     .onAppear {
       intent.send(action: .getPaths)

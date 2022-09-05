@@ -42,6 +42,9 @@ extension Page2Intent: IntentType, Page2IntentType {
     case .onTapPage3:
       navigator.next(paths: ["page3"], items: [:], isAnimated: true)
 
+    case .onTapRootPage3:
+      navigator.rootNext(paths: ["page3"], items: [:], isAnimated: true)
+
     case .onRemovePage1:
       navigator.remove(paths: ["page1"])
       state.paths = navigator.currentPaths

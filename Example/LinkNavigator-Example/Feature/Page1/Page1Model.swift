@@ -9,6 +9,7 @@ enum Page1Model {
     case getPaths
     case onTapPage2
     case onTapRandomBackOrNext
+    case onTapRootRandomBackOrNext
     case onTapBack
   }
 }

@@ -8,6 +8,7 @@ enum Page2Model {
   enum ViewAction: Equatable {
     case getPaths
     case onTapPage3
+    case onTapRootPage3
     case onRemovePage1
     case onTapBack
   }

@@ -46,6 +46,16 @@ extension Page3: View {
         }
       }
 
+      Button(action: { intent.send(action: .onTapClose) }) {
+        VStack {
+          Text("close (only available in modal)")
+            .foregroundColor(.red)
+          Text("navigator.close { print(\"modal dismissed!\") }")
+            .font(.caption)
+            .foregroundColor(.secondary)
+        }
+      }
+
       Button(action: { intent.send(action: .onTapReset) }) {
         VStack {
           Text("reset")
@@ -56,6 +66,7 @@ extension Page3: View {
         }
       }
     }
+    .padding(.horizontal)
     .navigationTitle("Page 3")
     .onAppear {
       intent.send(action: .getPaths)
