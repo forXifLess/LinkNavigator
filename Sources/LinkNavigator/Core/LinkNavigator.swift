@@ -115,7 +115,7 @@ extension LinkNavigator: LinkNavigatorType {
   }
 
   public func sheet(paths:[String], items: [String: String], isAnimated: Bool) {
-    rootNavigationController.dismiss(animated: false)
+    rootNavigationController.dismiss(animated: true)
 
     subNavigationController.modalPresentationStyle = .automatic
     let new = paths.compactMap { path in
@@ -126,7 +126,7 @@ extension LinkNavigator: LinkNavigatorType {
   }
 
   public func fullSheet(paths: [String], items: [String: String], isAnimated: Bool) {
-    rootNavigationController.dismiss(animated: false)
+    rootNavigationController.dismiss(animated: true)
 
     subNavigationController.modalPresentationStyle = .fullScreen
     let new = paths.compactMap { path in
@@ -143,7 +143,7 @@ extension LinkNavigator: LinkNavigatorType {
     iPhonePresentationStyle: UIModalPresentationStyle,
     iPadPresentationStyle: UIModalPresentationStyle)
   {
-    rootNavigationController.dismiss(animated: false)
+    rootNavigationController.dismiss(animated: true)
 
     subNavigationController.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone
       ? iPhonePresentationStyle
