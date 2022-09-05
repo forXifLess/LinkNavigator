@@ -20,7 +20,7 @@ extension HomeView: View {
 
       Button(action: { intent.send(action: .onTapPage1) }) {
         VStack {
-          Text("go to Page 1")
+          Text("go to next Page")
           Text("navigator.next(paths: [\"page1\"], items: [:], isAnimated: true)")
             .font(.caption)
             .foregroundColor(.secondary)
@@ -29,7 +29,7 @@ extension HomeView: View {
 
       Button(action: { intent.send(action: .onTapPage3)}) {
         VStack {
-          Text("go to Page 3")
+          Text("go to last Page")
           Text("navigator.next(paths: [\"page1\", \"page2\", \"page3\"], items: [:], isAnimated: true)")
             .font(.caption)
             .foregroundColor(.secondary)

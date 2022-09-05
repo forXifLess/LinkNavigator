@@ -20,7 +20,7 @@ extension Page2: View {
       
       Button(action: { intent.send(action: .onTapPage3) }) {
         VStack {
-          Text("go to Page 3")
+          Text("go to next Page")
           Text("navigator.next(paths: [\"page3\"], items: [:], isAnimated: true)")
             .font(.caption)
             .foregroundColor(.secondary)

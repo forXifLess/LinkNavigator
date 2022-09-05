@@ -16,7 +16,14 @@ public protocol LinkNavigatorType {
   /// - Note: 특정 화면을 Full Sheet Modal 형태로 올립니다. 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
   func fullSheet(paths: [String], items: [String: String], isAnimated: Bool)
 
-  func customSheet(paths: [String], items: [String: String], isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle)
+  /// - Note: 특정 화면을 Sheet Modal 형태로 올립니다. 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
+  /// 아이폰과 아이패드 각각에서 어떤 Modal Presentation Style 을 사용할 것인지 분기처리할 수 있습니다.
+  func customSheet(
+    paths: [String],
+    items: [String: String],
+    isAnimated: Bool,
+    iPhonePresentationStyle: UIModalPresentationStyle,
+    iPadPresentationStyle: UIModalPresentationStyle)
 
   /// - Note: Navigation 스택을 교체합니다. 다른 맥락의 스택으로 이동하거나, 복잡하게 쌓인 스택을 청소할 때 사용합니다.
   func replace(paths: [String], items: [String: String], isAnimated: Bool)
@@ -116,7 +123,13 @@ extension LinkNavigator: LinkNavigatorType {
     rootNavigationController.present(subNavigationController, animated: isAnimated)
   }
 
-  public func customSheet(paths: [String], items: [String: String], isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle) {
+  public func customSheet(
+    paths: [String],
+    items: [String: String],
+    isAnimated: Bool,
+    iPhonePresentationStyle: UIModalPresentationStyle,
+    iPadPresentationStyle: UIModalPresentationStyle)
+  {
     rootNavigationController.dismiss(animated: false)
 
     subNavigationController.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone
