@@ -29,8 +29,17 @@ extension Page1: View {
 
       Button(action: { intent.send(action: .onTapRandomBackOrNext) }) {
         VStack {
-          Text("random backOrNext")
+          Text("backOrNext")
           Text("navigator.backOrNext(path: Bool.random() ? \"home\" : \"page2\", items: [:], isAnimated: true)")
+            .font(.caption)
+            .foregroundColor(.secondary)
+        }
+      }
+
+      Button(action: { intent.send(action: .onTapRootRandomBackOrNext)}) {
+        VStack {
+          Text("*root* backOrNext")
+          Text("navigator.rootBackOrNext(path: Bool.random() ? \"home\" : \"page2\", items: [:], isAnimated: true)")
             .font(.caption)
             .foregroundColor(.secondary)
         }
@@ -45,6 +54,7 @@ extension Page1: View {
         }
       }
     }
+    .padding(.horizontal)
     .navigationTitle("Page 1")
     .onAppear {
       intent.send(action: .getPaths)

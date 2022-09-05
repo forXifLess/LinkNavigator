@@ -10,6 +10,7 @@ enum Page3Model {
     case onTapBackOrNext
     case onRemovePage1and2
     case onTapBack
+    case onTapClose
     case onTapReset
   }
 }

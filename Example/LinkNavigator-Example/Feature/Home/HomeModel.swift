@@ -10,5 +10,6 @@ enum HomeModel {
     case onTapPage1
     case onTapPage3
     case onTapSheet
+    case onTapFullSheet
   }
 }

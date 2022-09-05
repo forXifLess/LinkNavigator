@@ -8,15 +8,21 @@ public protocol LinkNavigatorType {
   /// - Note: 특정 화면으로 이동합니다. 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
   func next(paths: [String], items: [String: String], isAnimated: Bool)
 
+  /// - Note: Modal 이 올라와 있는 상황에서, 뒤에 있는 화면이 특정 화면으로 이동합니다.
+  /// Modal 이 없는 상황에서는 next(path:items:isAnimated) 메서드와 동일하게 동작합니다.
+  /// 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
   func rootNext(paths: [String], items: [String: String], isAnimated: Bool)
 
-  /// - Note: 특정 화면을 Sheet Modal 형태로 올립니다. 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
+  /// - Note: 특정 화면을 Sheet Modal 형태로 올립니다.
+  /// 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
   func sheet(paths: [String], items: [String: String], isAnimated: Bool)
 
-  /// - Note: 특정 화면을 Full Sheet Modal 형태로 올립니다. 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
+  /// - Note: 특정 화면을 Full Sheet Modal 형태로 올립니다.
+  /// 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
   func fullSheet(paths: [String], items: [String: String], isAnimated: Bool)
 
-  /// - Note: 특정 화면을 Sheet Modal 형태로 올립니다. 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
+  /// - Note: 특정 화면을 Sheet Modal 형태로 올립니다.
+  /// 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
   /// 아이폰과 아이패드 각각에서 어떤 Modal Presentation Style 을 사용할 것인지 분기처리할 수 있습니다.
   func customSheet(
     paths: [String],
@@ -32,6 +38,10 @@ public protocol LinkNavigatorType {
   /// 스택에 존재하지 않는 경로라면, 그 화면으로 이동하면서 Navigation 스택을 쌓습니다.
   func backOrNext(path: String, items: [String: String], isAnimated: Bool)
 
+  /// - Note: Modal 이 올라와 있는 상황에서, 뒤에 있는 화면이 하나의 특정 화면으로 이동합니다.
+  /// 만약 그 경로가 이미 Navigation 스택에 있다면, 그 화면으로 돌아갑니다.
+  /// 스택에 존재하지 않는 경로라면, 그 화면으로 이동하면서 Navigation 스택을 쌓습니다.
+  /// Modal 이 없는 상황에서는 backOrNext(path:items:isAnimated:) 메서드와 동일하게 동작합니다.
   func rootBackOrNext(path: String, items: [String: String], isAnimated: Bool)
 
   /// - Note: 직전 화면으로 돌아갑니다. Navigation, Modal 모두에서 사용 가능합니다.
@@ -39,10 +49,13 @@ public protocol LinkNavigatorType {
 
   /// - Note: Navigation 스택에서 특정 화면을 선택적으로 제거합니다.
   func remove(paths: [String])
-  
+
+  /// - Note: Modal 을 dismiss 하고 클로저를 실행합니다.
+  /// 만약 Modal 이 올라와 있는 상황이 아니라면, 이 메서드는 무시됩니다.
   func close(completeAction: @escaping () -> Void)
 
   /// - Note: Navigation 스택에서 특정 화면까지의 경로를 배열 형태로 반환합니다.
+  /// path 인자값으로 들어온 경로가 스택에 없는 경우, 현재의 Navigation 스택을 배열 형태로 반환합니다.
   func range(path: String) -> [String]
 
 }

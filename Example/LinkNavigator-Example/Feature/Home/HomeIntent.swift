@@ -52,6 +52,9 @@ extension HomeIntent: IntentType, HomeIntentType {
       
     case .onTapSheet:
       navigator.sheet(paths: ["page1", "page2"], items: [:], isAnimated: true)
+
+    case .onTapFullSheet:
+      navigator.fullSheet(paths: ["page1", "page2"], items: [:], isAnimated: true)
     }
   }
 }
