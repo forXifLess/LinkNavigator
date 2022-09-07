@@ -1,5 +1,13 @@
 # 🚤 LinkNavigator
 
+[![Swift Version][swift-image]][swift-url]
+[![License][license-image]][license-url]
+
+[swift-url]: https://swift.org/
+[swift-image]:https://img.shields.io/badge/swift-5.0-orange.svg
+[license-image]: https://img.shields.io/badge/License-MIT-blue.svg
+[license-url]: LICENSE
+
 ## - Concept
 
 **✨ LinkNavigator 는 SwiftUI 에서 화면을 자유롭게 이동할 수 있도록 도와주는 라이브러리입니다.**<br>
@@ -247,4 +255,4 @@ let package = Package(
 <br>
 
 ## - License
-This library is released under the MIT license.
+This library is released under the MIT license. See [LICENSE](https://github.com/interactord/LinkNavigator/blob/main/LICENSE.md) for details.
