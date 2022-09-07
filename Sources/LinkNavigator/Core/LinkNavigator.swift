@@ -23,7 +23,7 @@ public protocol LinkNavigatorType {
 
   /// - Note: 특정 화면을 Sheet Modal 형태로 올립니다.
   /// 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
-  /// 아이폰과 아이패드 각각에서 어떤 Modal Presentation Style 을 사용할 것인지 분기처리할 수 있습니다.
+  /// iOS 와 iPad 각각에서 어떤 Modal Presentation Style 을 사용할 것인지 분기처리할 수 있습니다.
   func customSheet(
     paths: [String],
     items: [String: String],
