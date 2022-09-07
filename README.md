@@ -4,7 +4,7 @@
 [![License][license-image]][license-url]
 
 [swift-url]: https://swift.org/
-[swift-image]:https://img.shields.io/badge/swift-5.0-orange.svg
+[swift-image]:https://img.shields.io/badge/swift-5.5-orange.svg
 [license-image]: https://img.shields.io/badge/License-MIT-blue.svg
 [license-url]: LICENSE
 
