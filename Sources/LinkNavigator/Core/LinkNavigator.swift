@@ -52,7 +52,7 @@ public protocol LinkNavigatorType {
 
   /// - Note: Modal 을 dismiss 하고 클로저를 실행합니다.
   /// 만약 Modal 이 올라와 있는 상황이 아니라면, 이 메서드는 무시됩니다.
-  func close(completeAction: @escaping () -> Void)
+  func close(isAnimated: Bool, completeAction: @escaping () -> Void)
 
   /// - Note: Navigation 스택에서 특정 화면까지의 경로를 배열 형태로 반환합니다.
   /// path 인자값으로 들어온 경로가 스택에 없는 경우, 현재의 Navigation 스택을 배열 형태로 반환합니다.
@@ -204,12 +204,10 @@ extension LinkNavigator: LinkNavigatorType {
     currentActivityNavigationController.setViewControllers(new, animated: false)
   }
 
-  public func close(completeAction: @escaping () -> Void) {
+  public func close(isAnimated: Bool, completeAction: @escaping () -> Void) {
     guard isSubNavigationControllerPresented else { return }
-    rootNavigationController.dismiss(animated: true, completion: {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.23) {
-        completeAction()
-      }
+    rootNavigationController.dismiss(animated: isAnimated, completion: {
+      completeAction()
     })
   }
 
