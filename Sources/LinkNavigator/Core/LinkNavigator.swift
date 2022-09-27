@@ -5,6 +5,9 @@ public protocol LinkNavigatorType {
   /// - Note: 현재의 Navigation 스택을 배열 형태로 반환합니다.
   var currentPaths: [String] { get }
 
+  /// - Note: 현재의 Root Navigation 스택을 배열 형태로 반환합니다.
+  var rootCurrentPath: [String] { get }
+
   /// - Note: 특정 화면으로 이동합니다. 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
   func next(paths: [String], items: [String: String], isAnimated: Bool)
 
@@ -50,6 +53,9 @@ public protocol LinkNavigatorType {
   /// - Note: Navigation 스택에서 특정 화면을 선택적으로 제거합니다.
   func remove(paths: [String])
 
+  /// - Note: Navigation 루트 스택에서 특정 화면을 선택적으로 제거합니다.
+  func rootRemove(paths: [String])
+
   /// - Note: Modal 을 dismiss 하고 클로저를 실행합니다.
   /// 만약 Modal 이 올라와 있는 상황이 아니라면, 이 메서드는 무시됩니다.
   func close(isAnimated: Bool, completeAction: @escaping () -> Void)
@@ -58,6 +64,8 @@ public protocol LinkNavigatorType {
   /// path 인자값으로 들어온 경로가 스택에 없는 경우, 현재의 Navigation 스택을 배열 형태로 반환합니다.
   func range(path: String) -> [String]
 
+  /// - Note: 루트 네비게이션 스택에 마지막 ViewController를 다시만들어서 구성하는 기능입니다.
+  func rootLastReload(isAnimated: Bool, items: [String : String])
 }
 
 public final class LinkNavigator {
@@ -93,6 +101,13 @@ extension LinkNavigator: LinkNavigatorType {
 
   public var currentPaths: [String] {
     currentActivityNavigationController
+      .viewControllers
+      .compactMap { $0 as? WrappingController }
+      .map(\.matchingKey)
+  }
+
+  public var rootCurrentPath: [String] {
+    rootNavigationController
       .viewControllers
       .compactMap { $0 as? WrappingController }
       .map(\.matchingKey)
@@ -204,6 +219,16 @@ extension LinkNavigator: LinkNavigatorType {
     currentActivityNavigationController.setViewControllers(new, animated: false)
   }
 
+  public func rootRemove(paths: [String]) {
+    let new = rootNavigationController
+      .viewControllers
+      .compactMap{ $0 as? WrappingController }
+      .filter{ !paths.contains($0.matchingKey) }
+
+    guard new.count != rootNavigationController.viewControllers.count else { return }
+    rootNavigationController.setViewControllers(new, animated: false)
+  }
+
   public func close(isAnimated: Bool, completeAction: @escaping () -> Void) {
     guard isSubNavigationControllerPresented else { return }
     rootNavigationController.dismiss(animated: isAnimated, completion: {
@@ -215,6 +240,13 @@ extension LinkNavigator: LinkNavigatorType {
     let start = currentPaths.startIndex
     let end = currentPaths.enumerated().first(where: { $0.element == path})?.offset ?? currentPaths.endIndex - 1
     return Array(currentPaths[start...max(start, end)])
+  }
+
+  public func rootLastReload(isAnimated: Bool, items: [String : String]) {
+    guard let lastPath = rootCurrentPath.last else { return }
+    guard let new = builders.first(where: { $0.matchPath == lastPath })?.build(self, items, dependency) else { return }
+    let joinViewControllers = Array(subNavigationController.viewControllers.dropLast()) + [new]
+    rootNavigationController.setViewControllers(joinViewControllers, animated: isAnimated)
   }
 }
 
