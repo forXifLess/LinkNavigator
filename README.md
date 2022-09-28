@@ -62,7 +62,7 @@
 - close a modal and call completion closure.
 
   ```swift
-  navigator.close { print("modal dismissed!") }
+  navigator.close(isAnimated: true) { print("modal dismissed!") }
   ```
 
 <br>
@@ -96,6 +96,12 @@
     isAnimated: true,
     iPhonePresentationStyle: .fullScreen,
     iPadPresentationStyle: .pageSheet)
+  ```
+  
+- forcely reload the last page behind the modal. This is useful when you need to call the [onAppear(perform:)](https://developer.apple.com/documentation/swiftui/view/onappear(perform:)) again.
+
+  ```swift
+  navigator.rootReloadLast(isAnimated: false, items: [:])
   ```
 
 <br>
