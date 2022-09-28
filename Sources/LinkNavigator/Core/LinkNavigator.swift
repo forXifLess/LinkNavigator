@@ -6,7 +6,7 @@ public protocol LinkNavigatorType {
   var currentPaths: [String] { get }
 
   /// Modal 이 올라와 있는 상황에서, Root Navigation 스택을 배열 형태로 반환합니다.
-  var rootCurrentPath: [String] { get }
+  var rootCurrentPaths: [String] { get }
 
   /// 특정 화면으로 이동합니다. 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
   func next(paths: [String], items: [String: String], isAnimated: Bool)
@@ -106,7 +106,7 @@ extension LinkNavigator: LinkNavigatorType {
       .map(\.matchingKey)
   }
 
-  public var rootCurrentPath: [String] {
+  public var rootCurrentPaths: [String] {
     rootNavigationController
       .viewControllers
       .compactMap { $0 as? WrappingController }
@@ -243,7 +243,7 @@ extension LinkNavigator: LinkNavigatorType {
   }
 
   public func rootReloadLast(isAnimated: Bool, items: [String : String]) {
-    guard let lastPath = rootCurrentPath.last else { return }
+    guard let lastPath = rootCurrentPaths.last else { return }
     guard let new = builders.first(where: { $0.matchPath == lastPath })?.build(self, items, dependency) else { return }
     let joinedViewControllers = Array(rootNavigationController.viewControllers.dropLast()) + [new]
     rootNavigationController.setViewControllers(joinedViewControllers, animated: isAnimated)
