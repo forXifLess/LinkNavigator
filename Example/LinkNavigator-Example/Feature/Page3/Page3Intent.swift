@@ -50,7 +50,7 @@ extension Page3Intent: IntentType, Page3IntentType {
       navigator.back(isAnimated: true)
 
     case .onTapClose:
-      navigator.close { print("modal dismissed!") }
+      navigator.close(isAnimated: true) { print("modal dismissed!") }
 
     case .onTapReset:
       navigator.replace(paths: ["home"], items: [:], isAnimated: true)
