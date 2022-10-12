@@ -10,12 +10,12 @@
 
 ## - Concept
 
-**✨ LinkNavigator 는 SwiftUI 에서 화면을 자유롭게 이동할 수 있도록 도와주는 라이브러리입니다.**<br>
+**✨ LinkNavigator is a library that helps you easily navigate between pages in SwiftUI.**<br>
 
-- URL path 형식의 표현 방법을 통해, 화면 이동에 대한 직관적인 syntax 를 제공합니다.
-- 딥링크 처리 방식으로 어떤 화면이든 간편하게 이동할 수 있습니다.
-- 화면 이동과 함께 매개변수를 주입할 수 있습니다.
-- MVI 디자인 패턴, 혹은 pointfreeco 의 [The Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture) 와 같은 Uni-directional Architecture 에서 사용할 목적으로 디자인 되었지만, 그 외의 Architecture 에서도 사용하기 좋습니다.
+- LinkNavigator provides an intuitive syntax for navigating pages via URL path-like expressions.
+- You can easily go to any page with the deep-link processing style.
+- You can inject parameters with page transition.
+- LinkNavigator is designed for use in Uni-directional Architecture such as MVI design pattern or [The Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture) from pointfreeco, but it is good to use in other architectures as well.
 
 <br>
 
@@ -108,7 +108,9 @@
 
 ## - Example
 
-[Example App](https://github.com/interactord/LinkNavigator/tree/main/Example) 에서 LinkNavigator 의 기능을 체험해볼 수 있습니다.
+You can test the functions of LinkNavigator in [Example App](https://github.com/interactord/LinkNavigator/tree/main/Example).
+
+<p align="leading"><img src="https://user-images.githubusercontent.com/107832509/195277796-c56916f4-98fd-4008-8602-8cc394b8b3de.gif" width="25%"></p> 
 
 <br>
 
@@ -116,13 +118,13 @@
 
 ### Step 1
 
-- SwiftUI 프로젝트에 LinkNavigator 를 설치하기 위해서, 총 4개의 파일을 설정해야 합니다.
-- 파일, 타입의 이름은 자유롭게 수정해도 됩니다. 다음 예시에서는 이해를 돕기 위해 단순한 이름을 사용했습니다.
-- AppDependency -> AppRouterGroup -> AppDelegate -> AppMain 순서로 설명합니다.
+- To install LinkNavigator in your SwiftUI project, you need to implement 4 files.
+- You can freely edit the type names. In the following examples, simple names are used for clarity.
+- Described in the order AppDependency -> AppRouterGroup -> AppDelegate -> AppMain
 
   ```swift
   // AppDependency.swift
-  // 외부 의존성을 관리하는 타입입니다.
+  // A type that manages external dependencies.
   
   import LinkNavigator
 
@@ -131,14 +133,14 @@
 
   ```swift
   // AppRouterGroup.swift
-  // LinkNavigator 를 통해 이동하고 싶은 화면들을 관리하는 타입입니다.
+  // A type that manages the pages you want to go with LinkNavigator.
 
   import LinkNavigator
 
   struct AppRouterGroup {
     var routers: [RouteBuilder] {
       [
-        HomeRouteBuilder(), // Step 3 에서 구현
+        HomeRouteBuilder(), // to be implemented in Step 3
         Page1RouteBuilder(),
         Page2RouteBuilder(),
         Page3RouteBuilder(),
@@ -149,7 +151,7 @@
 
   ```swift
   // AppDelegate.swift
-  // 외부 의존성과 화면을 주입받은 navigator 를 관리하는 타입입니다.
+  // A type that manages the navigator injected with external dependencies and pages.
 
   import SwiftUI
   import LinkNavigator
@@ -169,7 +171,7 @@
 
   ```swift
   // AppMain.swift
-  // Application 의 시작 화면을 설정하는 타입입니다.
+  // A type that sets the starting page of the Application.
 
   import SwiftUI
   import LinkNavigator
@@ -193,9 +195,9 @@
 
 ### Step 2
 
-- 화면에 해당하는 구조체 내부에 `navigator` 프로퍼티를 추가하여, 이니셜라이징 될 때 주입되도록 합니다.
-- Architecture 특징에 따라, navigator 프로퍼티의 위치를 자유롭게 변경해서 사용하세요.
-예를 들어, `ViewModel` 또는 `Environment` 에 넣어서 사용해도 좋습니다.
+- Add a `navigator` property inside the page struct type, so that it is injected when initialized.
+- Depending on the characteristics of the architecture, freely change the position of the navigator property and use it.
+For example, you can put it in `ViewModel` or `Environment`.
 
   ```swift
   struct HomePage: View {
@@ -209,8 +211,8 @@
 
 ### Step 3
 
-- 모든 화면에 각각에 대해 `RouteBuilder` 프로토콜을 채택한 구조체를 만듭니다.
-- 이렇게 만든 RouteBuilder 구조체들은 AppRouterGroup 타입에서 모아두고 관리합니다.
+- Create a struct type adopting the `RouteBuilder` protocol for every page.
+- RouteBuilder structs created in this way are collected and managed in the AppRouterGroup type.
 
   ```swift
   import LinkNavigator
@@ -233,11 +235,11 @@
 
 ## - Installation
 
-LinkNavigator 는 [Swift Package Manager](https://www.swift.org/package-manager/) 를 지원합니다.
+LinkNavigator supports [Swift Package Manager](https://www.swift.org/package-manager/).
 
-- Xcode 상단의 `File` 메뉴 -> `Add Packages...` 를 선택합니다.
-- Package URL 입력창에 "https://github.com/interactord/LinkNavigator.git" 를 입력해서 설치합니다.
-- 혹은 `Package.swift` 파일에 아래와 같이 입력합니다.
+- `File` menu at the top of Xcode -> Select `Add Packages...`.
+- Enter "https://github.com/interactord/LinkNavigator.git" in the Package URL field to install it.
+- or, add the following in the `Package.swift`.
 
 ```swift
 let package = Package(
