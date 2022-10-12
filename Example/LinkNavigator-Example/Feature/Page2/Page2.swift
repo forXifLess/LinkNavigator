@@ -29,7 +29,7 @@ extension Page2: View {
 
       Button(action: { intent.send(action: .onTapRootPage3)}) {
         VStack {
-          Text("*root* next")
+          Text("**root** next")
           Text("navigator.rootNext(paths: [\"page3\"], items: [:], isAnimated: true)")
             .font(.caption)
             .foregroundColor(.secondary)

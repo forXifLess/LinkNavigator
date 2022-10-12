@@ -38,7 +38,7 @@ extension Page1: View {
 
       Button(action: { intent.send(action: .onTapRootRandomBackOrNext)}) {
         VStack {
-          Text("*root* backOrNext")
+          Text("**root** backOrNext")
           Text("navigator.rootBackOrNext(path: Bool.random() ? \"home\" : \"page2\", items: [:], isAnimated: true)")
             .font(.caption)
             .foregroundColor(.secondary)

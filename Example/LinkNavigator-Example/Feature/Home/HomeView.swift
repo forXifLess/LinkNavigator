@@ -39,7 +39,7 @@ extension HomeView: View {
       Button(action: { intent.send(action: .onTapSheet)}) {
         VStack {
           Text("open Page 2 as Sheet")
-            .foregroundColor(.green)
+            .foregroundColor(.purple)
           Text("navigator.sheet(paths: [\"page1\", \"page2\"], items: [:], isAnimated: true)")
             .font(.caption)
             .foregroundColor(.secondary)
@@ -49,7 +49,7 @@ extension HomeView: View {
       Button(action: { intent.send(action: .onTapFullSheet)}) {
         VStack {
           Text("open Page 2 as Full Screen Sheet")
-            .foregroundColor(.green)
+            .foregroundColor(.purple)
           Text("navigator.fullSheet(paths: [\"page1\", \"page2\"], items: [:], isAnimated: true)")
             .font(.caption)
             .foregroundColor(.secondary)
