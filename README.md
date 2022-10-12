@@ -15,7 +15,17 @@
 - LinkNavigator provides an intuitive syntax for navigating pages via URL path-like expressions.
 - You can easily go to any page with the deep-link processing style.
 - You can inject parameters with page transition.
-- LinkNavigator is designed for use in Uni-directional Architecture such as MVI design pattern or [The Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture) from pointfreeco, but it is good to use in other architectures as well.
+- LinkNavigator is designed for use in Uni-directional Architecture such as MVI design pattern or [The Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture) from pointfreeco, but it can be used in other architectures as well.
+
+<br>
+
+## - Translations
+
+The following translations of this README have been contributed by members of the community:
+
+- 한국어(Korean)
+
+If you'd like to contribute a translation, please [open a PR](https://github.com/interactord/LinkNavigator/pulls) with a link to a [Gist](https://gist.github.com/)!
 
 <br>
 
@@ -120,7 +130,7 @@ You can test the functions of LinkNavigator in [Example App](https://github.com/
 
 - To install LinkNavigator in your SwiftUI project, you need to implement 4 files.
 - You can freely edit the type names. In the following examples, simple names are used for clarity.
-- Described in the order AppDependency -> AppRouterGroup -> AppDelegate -> AppMain
+- Describe in order: AppDependency -> AppRouterGroup -> AppDelegate -> AppMain
 
   ```swift
   // AppDependency.swift
