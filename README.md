@@ -23,9 +23,9 @@
 
 The following translations of this README have been contributed by members of the community:
 
-- 한국어(Korean)
+- [한국어(Korean)](https://gist.github.com/jaeho-flitto/03ef1019e62bceec07359ec0168d75ab)
 
-If you'd like to contribute a translation, please [open a PR](https://github.com/interactord/LinkNavigator/pulls) with a link to a [Gist](https://gist.github.com/)!
+If you'd like to contribute a translation, please [open a PR](https://github.com/interactord/LinkNavigator/edit/main/README.md) with a link to a [Gist](https://gist.github.com/)!
 
 <br>
 
@@ -48,6 +48,10 @@ If you'd like to contribute a translation, please [open a PR](https://github.com
   ```swift
   navigator.back(isAnimated: true)
   ```
+
+- go to the page you want.
+  - if that page is already within navigation stack, go back to that page.
+  - else if that page is not within stack, push new one.
 
 - go to the page you want, regardless the page is in navigation stack or not.
 
@@ -260,7 +264,7 @@ let package = Package(
       targets: ["MyPackage"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/interactord/LinkNavigator.git", .upToNextMajor(from: "0.2.3"))
+    .package(url: "https://github.com/interactord/LinkNavigator.git", .upToNextMajor(from: "0.2.8"))
   ],
   targets: [
     .target(
@@ -273,4 +277,5 @@ let package = Package(
 <br>
 
 ## - License
+
 This library is released under the MIT license. See [LICENSE](https://github.com/interactord/LinkNavigator/blob/main/LICENSE.md) for details.
