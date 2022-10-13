@@ -1,4 +1,4 @@
-# 🚤 LinkNavigator
+<p align="center"><img src="https://user-images.githubusercontent.com/107832509/195552226-d07368d3-4968-44f5-b9d6-70f61c2814c0.png" width="100%"></p> 
 
 [![Swift Version][swift-image]][swift-url]
 [![License][license-image]][license-url]
