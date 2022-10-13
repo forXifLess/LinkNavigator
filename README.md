@@ -49,11 +49,7 @@ If you'd like to contribute a translation, please [open a PR](https://github.com
   navigator.back(isAnimated: true)
   ```
 
-- go to the page you want.
-  - if that page is already within navigation stack, go back to that page.
-  - else if that page is not within stack, push new one.
-
-- go to the page you want, regardless the page is in navigation stack or not.
+- go to the page you want. If that page is already within navigation stack, go back to that page. Else if that page is not within stack, push new one.
 
   ```swift
   navigator.backOrNext(path: "targetPage", items: [:], isAnimated: true)
