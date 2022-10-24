@@ -8,6 +8,9 @@ public protocol LinkNavigatorType {
   /// Modal 이 올라와 있는 상황에서, Root Navigation 스택을 배열 형태로 반환합니다.
   var rootCurrentPaths: [String] { get }
 
+  /// Modal 이 올라와 있는 상황에서, Sub Navigation 스택을 배열 형태로 반환합니다.
+  var subCurrentPaths: [String] { get }
+
   /// 특정 화면으로 이동합니다. 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
   func next(paths: [String], items: [String: String], isAnimated: Bool)
 
@@ -101,6 +104,13 @@ extension LinkNavigator: LinkNavigatorType {
 
   public var currentPaths: [String] {
     currentActivityNavigationController
+      .viewControllers
+      .compactMap { $0 as? WrappingController }
+      .map(\.matchingKey)
+  }
+
+  public var subCurrentPaths: [String] {
+    subNavigationController
       .viewControllers
       .compactMap { $0 as? WrappingController }
       .map(\.matchingKey)
