@@ -17,10 +17,9 @@ extension Page3View: View {
       Text("Page 3")
         .font(.largeTitle)
 
-      NavigationStackViewer(paths: viewStore.rootPath)
-      NavigationStackViewer(paths: viewStore.subPath)
+      NavigationStackViewer(paths: viewStore.paths)
 
-      Button(action: { viewStore.send(.onTapBackOrNext)}) {
+      Button(action: { viewStore.send(.onTapBackToHome)}) {
         VStack {
           Text("back to Home")
           Text("navigator.backOrNext(path: \"home\", items: [:], isAnimated: true)")
@@ -29,7 +28,7 @@ extension Page3View: View {
         }
       }
 
-      Button(action: { viewStore.send(.onRemovePage1and2) }) {
+      Button(action: { viewStore.send(.onRemovePage1And2) }) {
         VStack {
           Text("remove Page 1 and 2")
             .foregroundColor(.red)
@@ -71,8 +70,7 @@ extension Page3View: View {
     .padding(.horizontal)
     .navigationTitle("Page 3")
     .onAppear {
-      viewStore.send(.getSubPath)
-      viewStore.send(.getRootPath)
+      viewStore.send(.getPaths)
     }
   }
 }

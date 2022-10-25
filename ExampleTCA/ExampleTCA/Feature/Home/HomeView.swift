@@ -18,10 +18,10 @@ extension HomeView: View {
         .font(.largeTitle)
 
       let _ = print(viewStore.state)
-      NavigationStackViewer(paths: viewStore.rootPath)
-      NavigationStackViewer(paths: viewStore.subPath)
 
-      Button(action: { viewStore.send(.onTapPage1) }) {
+      NavigationStackViewer(paths: viewStore.paths)
+
+      Button(action: { viewStore.send(.onTapNext) }) {
         VStack {
           Text("go to next Page")
           Text("navigator.next(paths: [\"page1\"], items: [:], isAnimated: true)")
@@ -30,7 +30,7 @@ extension HomeView: View {
         }
       }
 
-      Button(action: { viewStore.send(.onTapPage3) }) {
+      Button(action: { viewStore.send(.onTapLast) }) {
         VStack {
           Text("go to last Page")
           Text("navigator.next(paths: [\"page1\", \"page2\", \"page3\"], items: [:], isAnimated: true)")
@@ -62,8 +62,7 @@ extension HomeView: View {
     .padding(.horizontal)
     .navigationTitle("Home")
     .onAppear {
-      viewStore.send(.getSubPath)
-      viewStore.send(.getRootPath)
+      viewStore.send(.getPaths)
     }
   }
 }

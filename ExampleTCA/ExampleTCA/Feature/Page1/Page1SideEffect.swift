@@ -2,8 +2,7 @@ import LinkNavigator
 
 public protocol Page1SideEffect {
 
-  var getRootPath: () -> [String] { get }
-  var getSubPath: () -> [String] { get }
+  var getPaths: () -> [String] { get }
   var routeToPage2: () -> Void { get }
   var routeToRandomBackOrNext: () -> Void { get }
   var routeToRootRandomBackOrNext: () -> Void { get }
@@ -19,15 +18,10 @@ public struct Page1SideEffectLive {
 }
 
 extension Page1SideEffectLive: Page1SideEffect {
-  public var getRootPath: () -> [String] {
+  
+  public var getPaths: () -> [String] {
     {
-      navigator.rootCurrentPaths
-    }
-  }
-
-  public var getSubPath: () -> [String] {
-    {
-      navigator.subCurrentPaths
+      navigator.currentPaths
     }
   }
 

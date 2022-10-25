@@ -2,8 +2,7 @@ import LinkNavigator
 
 public protocol HomeSideEffect {
 
-  var getRootPaths: () -> [String] { get }
-  var getSubPaths: () -> [String] { get }
+  var getPaths: () -> [String] { get }
   var routeToPage1: () -> Void { get }
   var routeToPage2: () -> Void { get }
   var routeToPage3: () -> Void { get }
@@ -19,18 +18,11 @@ public struct HomeSideEffectLive {
   }
 }
 
-
 extension HomeSideEffectLive: HomeSideEffect {
 
-  public var getRootPaths: () -> [String] {
+  public var getPaths: () -> [String] {
     {
-      navigator.rootCurrentPaths
-    }
-  }
-
-  public var getSubPaths: () -> [String] {
-    {
-      navigator.subCurrentPaths
+      navigator.currentPaths
     }
   }
 

@@ -14,16 +14,15 @@ public struct Page2View {
 extension Page2View: View {
   public var body: some View {
     VStack(spacing: 40) {
-      Text("Page 1")
+      Text("Page 2")
         .font(.largeTitle)
 
-      NavigationStackViewer(paths: viewStore.rootPath)
-      NavigationStackViewer(paths: viewStore.subPath)
+      NavigationStackViewer(paths: viewStore.paths)
 
-      Button(action: { viewStore.send(.onTapPage3) }) {
+      Button(action: { viewStore.send(.onTapNext) }) {
         VStack {
           Text("go to next Page")
-          Text("navigator.next(paths: [\"page2\"], items: [:], isAnimated: true)")
+          Text("navigator.next(paths: [\"page3\"], items: [:], isAnimated: true)")
             .font(.caption)
             .foregroundColor(.secondary)
         }
@@ -31,8 +30,8 @@ extension Page2View: View {
 
       Button(action: { viewStore.send(.onTapRootPage3) }) {
         VStack {
-          Text("backOrNext")
-          Text("navigator.backOrNext(path: Bool.random() ? \"home\" : \"page2\", items: [:], isAnimated: true)")
+          Text("**root** next")
+          Text("navigator.rootNext(paths: [\"page3\"], items: [:], isAnimated: true)")
             .font(.caption)
             .foregroundColor(.secondary)
         }
@@ -40,8 +39,9 @@ extension Page2View: View {
 
       Button(action: { viewStore.send(.onRemovePage1) }) {
         VStack {
-          Text("**root** backOrNext")
-          Text("navigator.rootBackOrNext(path: Bool.random() ? \"home\" : \"page2\", items: [:], isAnimated: true)")
+          Text("remove Page 1")
+            .foregroundColor(.red)
+          Text("navigator.remove(paths: [\"page1\"])")
             .font(.caption)
             .foregroundColor(.secondary)
         }
@@ -57,10 +57,9 @@ extension Page2View: View {
       }
     }
     .padding(.horizontal)
-    .navigationTitle("Page 1")
+    .navigationTitle("Page 2")
     .onAppear {
-      viewStore.send(.getSubPath)
-      viewStore.send(.getRootPath)
+      viewStore.send(.getPaths)
     }
   }
 }

@@ -4,14 +4,12 @@ import Dependencies
 public struct Page1: ReducerProtocol {
 
   public struct State: Equatable {
-    var rootPath: [String] = []
-    var subPath: [String] = []
+    var paths: [String] = []
   }
 
   public enum Action: Equatable {
-    case getRootPath
-    case getSubPath
-    case onTapPage2
+    case getPaths
+    case onTapNext
     case onTapRandomBackOrNext
     case onTapRootRandomBackOrNext
     case onTapBack
@@ -23,15 +21,11 @@ public struct Page1: ReducerProtocol {
 
   public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
     switch action {
-    case .getRootPath:
-      state.rootPath = sideEffect.getRootPath()
+    case .getPaths:
+      state.paths = sideEffect.getPaths()
       return .none
 
-    case .getSubPath:
-      state.subPath = sideEffect.getSubPath()
-      return .none
-
-    case .onTapPage2:
+    case .onTapNext:
       sideEffect.routeToPage2()
       return .none
 
@@ -41,7 +35,7 @@ public struct Page1: ReducerProtocol {
 
     case .onTapRootRandomBackOrNext:
       sideEffect.routeToRootRandomBackOrNext()
-      return .none
+      return Effect(value: .getPaths)
 
     case .onTapBack:
       sideEffect.routeToBack()

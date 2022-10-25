@@ -17,10 +17,9 @@ extension Page1View: View {
       Text("Page 1")
         .font(.largeTitle)
 
-      NavigationStackViewer(paths: viewStore.rootPath)
-      NavigationStackViewer(paths: viewStore.subPath)
+      NavigationStackViewer(paths: viewStore.paths)
 
-      Button(action: { viewStore.send(.onTapPage2) }) {
+      Button(action: { viewStore.send(.onTapNext) }) {
         VStack {
           Text("go to next Page")
           Text("navigator.next(paths: [\"page2\"], items: [:], isAnimated: true)")
@@ -59,8 +58,7 @@ extension Page1View: View {
     .padding(.horizontal)
     .navigationTitle("Page 1")
     .onAppear {
-      viewStore.send(.getSubPath)
-      viewStore.send(.getRootPath)
+      viewStore.send(.getPaths)
     }
   }
 }

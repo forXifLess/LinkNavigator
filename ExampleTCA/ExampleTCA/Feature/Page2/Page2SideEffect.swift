@@ -2,11 +2,10 @@ import LinkNavigator
 
 public protocol Page2SideEffect {
 
-  var getRootPath: () -> [String] { get }
-  var getSubPath: () -> [String] { get }
+  var getPaths: () -> [String] { get }
   var routeToPage3: () -> Void { get }
   var routeToRootPage3: () -> Void { get }
-  var removeToPage1: () -> Void { get }
+  var removePage1: () -> Void { get }
   var routeToBack: () -> Void { get }
 }
 
@@ -19,15 +18,10 @@ public struct Page2SideEffectLive {
 }
 
 extension Page2SideEffectLive: Page2SideEffect {
-  public var getRootPath: () -> [String] {
-    {
-      navigator.rootCurrentPaths
-    }
-  }
 
-  public var getSubPath: () -> [String] {
+  public var getPaths: () -> [String] {
     {
-      navigator.subCurrentPaths
+      navigator.currentPaths
     }
   }
 
@@ -43,7 +37,7 @@ extension Page2SideEffectLive: Page2SideEffect {
     }
   }
 
-  public var removeToPage1: () -> Void {
+  public var removePage1: () -> Void {
     {
       navigator.remove(paths: ["page1"])
     }
@@ -54,6 +48,5 @@ extension Page2SideEffectLive: Page2SideEffect {
       navigator.back(isAnimated: true)
     }
   }
-
 
 }

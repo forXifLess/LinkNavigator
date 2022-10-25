@@ -2,10 +2,9 @@ import LinkNavigator
 
 public protocol Page3SideEffect {
 
-  var getRootPath: () -> [String] { get }
-  var getSubPath: () -> [String] { get }
+  var getPaths: () -> [String] { get }
   var routeToHome: () -> Void { get }
-  var deleteToPage1And2: () -> Void { get }
+  var removePage1And2: () -> Void { get }
   var routeToBack: () -> Void { get }
   var routeToClose: () -> Void { get }
   var routeToReset: () -> Void { get }
@@ -21,15 +20,9 @@ public struct Page3SideEffectLive {
 
 extension Page3SideEffectLive: Page3SideEffect {
 
-  public var getRootPath: () -> [String] {
+  public var getPaths: () -> [String] {
     {
-      navigator.rootCurrentPaths
-    }
-  }
-
-  public var getSubPath: () -> [String] {
-    {
-      navigator.subCurrentPaths
+      navigator.currentPaths
     }
   }
 
@@ -39,15 +32,24 @@ extension Page3SideEffectLive: Page3SideEffect {
     }
   }
 
-  public var deleteToPage1And2: () -> Void {
+  public var removePage1And2: () -> Void {
     {
       navigator.remove(paths: ["page1", "page2"])
     }
   }
 
+  public var routeToBack: () -> Void {
+    {
+      navigator.back(isAnimated: true)
+    }
+  }
+
   public var routeToClose: () -> Void {
     {
-      navigator.close(isAnimated: true) { print("modal dismissed!") }
+      navigator.close(isAnimated: true) {
+        print("modal dismissed!")
+        navigator.rootReloadLast(isAnimated: false, items: [:])
+      }
     }
   }
 
@@ -57,9 +59,4 @@ extension Page3SideEffectLive: Page3SideEffect {
     }
   }
 
-  public var routeToBack: () -> Void {
-    {
-      navigator.back(isAnimated: true)
-    }
-  }
 }
