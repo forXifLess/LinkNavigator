@@ -3,11 +3,10 @@ import LinkNavigator
 public protocol Page3SideEffect {
 
   var getPaths: () -> [String] { get }
-  var routeToHome: () -> Void { get }
+  var routeToPage4: (String) -> Void { get }
   var removePage1And2: () -> Void { get }
   var routeToBack: () -> Void { get }
   var routeToClose: () -> Void { get }
-  var routeToReset: () -> Void { get }
 }
 
 public struct Page3SideEffectLive {
@@ -26,9 +25,9 @@ extension Page3SideEffectLive: Page3SideEffect {
     }
   }
 
-  public var routeToHome: () -> Void {
+  public var routeToPage4: (String) -> Void {
     {
-      navigator.backOrNext(path: "home", items: [:], isAnimated: true)
+      navigator.next(paths: ["page4"], items: ["message": $0], isAnimated: true)
     }
   }
 
@@ -50,12 +49,6 @@ extension Page3SideEffectLive: Page3SideEffect {
         print("modal dismissed!")
         navigator.rootReloadLast(isAnimated: false, items: [:])
       }
-    }
-  }
-
-  public var routeToReset: () -> Void {
-    {
-      navigator.replace(paths: ["home"], items: [:], isAnimated: true)
     }
   }
 

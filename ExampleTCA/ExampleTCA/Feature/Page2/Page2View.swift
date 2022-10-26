@@ -14,8 +14,8 @@ public struct Page2View {
 extension Page2View: View {
   public var body: some View {
     VStack(spacing: 40) {
-      Text("Page 2")
-        .font(.largeTitle)
+      Text("2")
+        .font(.system(size: 70, weight: .thin))
 
       NavigationStackViewer(paths: viewStore.paths)
 
@@ -55,6 +55,8 @@ extension Page2View: View {
             .foregroundColor(.secondary)
         }
       }
+
+      Spacer()
     }
     .padding(.horizontal)
     .navigationTitle("Page 2")

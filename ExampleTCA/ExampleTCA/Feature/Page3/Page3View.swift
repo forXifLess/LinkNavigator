@@ -14,15 +14,15 @@ public struct Page3View {
 extension Page3View: View {
   public var body: some View {
     VStack(spacing: 40) {
-      Text("Page 3")
-        .font(.largeTitle)
+      Text("3")
+        .font(.system(size: 70, weight: .thin))
 
       NavigationStackViewer(paths: viewStore.paths)
 
-      Button(action: { viewStore.send(.onTapBackToHome)}) {
+      Button(action: { viewStore.send(.onTapNextWithMessage) }) {
         VStack {
-          Text("back to Home")
-          Text("navigator.backOrNext(path: \"home\", items: [:], isAnimated: true)")
+          Text("go to next Page with Message")
+          Text("navigator.next(paths: [\"page4\"], items: [\"message\": $0], isAnimated: true)")
             .font(.caption)
             .foregroundColor(.secondary)
         }
@@ -57,15 +57,7 @@ extension Page3View: View {
         }
       }
 
-      Button(action: { viewStore.send(.onTapReset) }) {
-        VStack {
-          Text("reset")
-            .foregroundColor(.red)
-          Text("navigator.replace(paths: [\"home\"], items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
-        }
-      }
+      Spacer()
     }
     .padding(.horizontal)
     .navigationTitle("Page 3")

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A8EE57029090E38003AC39E /* Page4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8EE56F29090E38003AC39E /* Page4View.swift */; };
+		7A8EE57229090E80003AC39E /* Page4Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8EE57129090E80003AC39E /* Page4Core.swift */; };
+		7A8EE57429090EDD003AC39E /* Page4SideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8EE57329090EDD003AC39E /* Page4SideEffect.swift */; };
+		7A8EE57629090F28003AC39E /* Page4RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8EE57529090F28003AC39E /* Page4RouteBuilder.swift */; };
 		D22751E2290634A600E98D2C /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22751E1290634A600E98D2C /* AppMain.swift */; };
 		D22751E4290634A600E98D2C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22751E3290634A600E98D2C /* ContentView.swift */; };
 		D22751E6290634A700E98D2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22751E5290634A700E98D2C /* Assets.xcassets */; };
@@ -36,6 +40,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A8EE56F29090E38003AC39E /* Page4View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page4View.swift; sourceTree = "<group>"; };
+		7A8EE57129090E80003AC39E /* Page4Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page4Core.swift; sourceTree = "<group>"; };
+		7A8EE57329090EDD003AC39E /* Page4SideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page4SideEffect.swift; sourceTree = "<group>"; };
+		7A8EE57529090F28003AC39E /* Page4RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page4RouteBuilder.swift; sourceTree = "<group>"; };
 		D22751DE290634A600E98D2C /* ExampleTCA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleTCA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22751E1290634A600E98D2C /* AppMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
 		D22751E3290634A600E98D2C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -78,6 +86,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A8EE56E29090E26003AC39E /* Page4 */ = {
+			isa = PBXGroup;
+			children = (
+				7A8EE56F29090E38003AC39E /* Page4View.swift */,
+				7A8EE57129090E80003AC39E /* Page4Core.swift */,
+				7A8EE57529090F28003AC39E /* Page4RouteBuilder.swift */,
+				7A8EE57329090EDD003AC39E /* Page4SideEffect.swift */,
+			);
+			path = Page4;
+			sourceTree = "<group>";
+		};
 		D22751D5290634A600E98D2C = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				D2A6C0A12906436D00545BD9 /* Common */,
+				7A8EE56E29090E26003AC39E /* Page4 */,
 				D2A6C09C2906435600545BD9 /* Page3 */,
 				D2A6C0972906434200545BD9 /* Page2 */,
 				D2A6C0922906432500545BD9 /* Page1 */,
@@ -287,6 +307,8 @@
 				D25E88A729068E5100E5BDCF /* Page3SideEffect.swift in Sources */,
 				D25E8897290674E700E5BDCF /* Page1RouteBuilder.swift in Sources */,
 				D2A6C0A9290654FD00545BD9 /* HomeRouteBuilder.swift in Sources */,
+				7A8EE57429090EDD003AC39E /* Page4SideEffect.swift in Sources */,
+				7A8EE57629090F28003AC39E /* Page4RouteBuilder.swift in Sources */,
 				D2A6C0A02906436100545BD9 /* Page3Core.swift in Sources */,
 				D2A6C0962906433600545BD9 /* Page1Core.swift in Sources */,
 				D2A6C09B2906435100545BD9 /* Page2Core.swift in Sources */,
@@ -294,7 +316,9 @@
 				D25E88A3290687D300E5BDCF /* Page1SideEffect.swift in Sources */,
 				D2A6C0992906434900545BD9 /* Page2View.swift in Sources */,
 				D22751E4290634A600E98D2C /* ContentView.swift in Sources */,
+				7A8EE57029090E38003AC39E /* Page4View.swift in Sources */,
 				D25E88A12906878600E5BDCF /* AppSideEffect.swift in Sources */,
+				7A8EE57229090E80003AC39E /* Page4Core.swift in Sources */,
 				D22751E2290634A600E98D2C /* AppMain.swift in Sources */,
 				D25E8899290674EE00E5BDCF /* Page2RouteBuilder.swift in Sources */,
 			);

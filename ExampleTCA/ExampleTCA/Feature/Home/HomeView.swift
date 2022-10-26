@@ -15,7 +15,7 @@ extension HomeView: View {
   public var body: some View {
     VStack(spacing: 40) {
       Text("Home")
-        .font(.largeTitle)
+        .font(.system(size: 60, weight: .thin))
 
       let _ = print(viewStore.state)
 
@@ -58,6 +58,8 @@ extension HomeView: View {
             .foregroundColor(.secondary)
         }
       }
+
+      Spacer()
     }
     .padding(.horizontal)
     .navigationTitle("Home")

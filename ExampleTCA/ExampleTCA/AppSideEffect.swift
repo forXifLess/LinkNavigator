@@ -16,6 +16,7 @@ public struct AppSideEffect: DependencyKey {
   let page1: Page1SideEffect
   let page2: Page2SideEffect
   let page3: Page3SideEffect
+  let page4: Page4SideEffect
 
   public static var liveValue: AppSideEffect {
     return .init(
@@ -23,7 +24,8 @@ public struct AppSideEffect: DependencyKey {
       home: HomeSideEffectLive(navigator: navigator),
       page1: Page1SideEffectLive(navigator: navigator),
       page2: Page2SideEffectLive(navigator: navigator),
-      page3: Page3SideEffectLive(navigator: navigator))
+      page3: Page3SideEffectLive(navigator: navigator),
+      page4: Page4SideEffectLive(navigator: navigator))
   }
 }
 

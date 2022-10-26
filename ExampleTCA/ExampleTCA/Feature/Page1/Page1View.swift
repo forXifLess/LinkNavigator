@@ -14,8 +14,8 @@ public struct Page1View {
 extension Page1View: View {
   public var body: some View {
     VStack(spacing: 40) {
-      Text("Page 1")
-        .font(.largeTitle)
+      Text("1")
+        .font(.system(size: 70, weight: .thin))
 
       NavigationStackViewer(paths: viewStore.paths)
 
@@ -54,6 +54,8 @@ extension Page1View: View {
             .foregroundColor(.secondary)
         }
       }
+
+      Spacer()
     }
     .padding(.horizontal)
     .navigationTitle("Page 1")
