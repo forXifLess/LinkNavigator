@@ -176,7 +176,7 @@ extension LinkNavigator: LinkNavigatorType {
     let new = paths.compactMap { path in
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }
-    currentActivityNavigationController.setViewControllers(new, animated: isAnimated)
+    rootNavigationController.setViewControllers(new, animated: isAnimated)
   }
 
   public func backOrNext(path: String, items: [String: String], isAnimated: Bool) {
