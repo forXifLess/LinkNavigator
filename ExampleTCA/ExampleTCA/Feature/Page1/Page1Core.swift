@@ -19,27 +19,29 @@ public struct Page1: ReducerProtocol {
 
   @Dependency(\.sideEffect.page1) var sideEffect
 
-  public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
-    switch action {
-    case .getPaths:
-      state.paths = sideEffect.getPaths()
-      return .none
+  public var body: some ReducerProtocol<State, Action> {
+    Reduce { state, action in
+      switch action {
+      case .getPaths:
+        state.paths = sideEffect.getPaths()
+        return .none
 
-    case .onTapNext:
-      sideEffect.routeToPage2()
-      return .none
+      case .onTapNext:
+        sideEffect.routeToPage2()
+        return .none
 
-    case .onTapRandomBackOrNext:
-      sideEffect.routeToRandomBackOrNext()
-      return .none
+      case .onTapRandomBackOrNext:
+        sideEffect.routeToRandomBackOrNext()
+        return .none
 
-    case .onTapRootRandomBackOrNext:
-      sideEffect.routeToRootRandomBackOrNext()
-      return Effect(value: .getPaths)
+      case .onTapRootRandomBackOrNext:
+        sideEffect.routeToRootRandomBackOrNext()
+        return Effect(value: .getPaths)
 
-    case .onTapBack:
-      sideEffect.routeToBack()
-      return .none
+      case .onTapBack:
+        sideEffect.routeToBack()
+        return .none
+      }
     }
   }
 }

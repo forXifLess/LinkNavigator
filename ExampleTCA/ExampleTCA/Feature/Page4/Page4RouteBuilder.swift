@@ -17,7 +17,7 @@ struct Page4RouteBuilder: RouteBuilder {
 }
 
 extension Dictionary where Key == String, Value == String {
-  func getValue(key: String) -> String? {
+  fileprivate func getValue(key: String) -> String? {
     first(where: { $0.key == key })?.value as? String
   }
 }

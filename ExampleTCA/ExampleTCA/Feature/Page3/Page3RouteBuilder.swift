@@ -9,9 +9,16 @@ struct Page3RouteBuilder: RouteBuilder {
       WrappingController(matchingKey: matchPath) {
         AnyView(Page3View(
           store: .init(
-            initialState: Page3.State(),
+            initialState: Page3.State(message: items.getValue(key: "message") ?? ""),
             reducer: Page3())))
       }
     }
   }
 }
+
+extension Dictionary where Key == String, Value == String {
+  fileprivate func getValue(key: String) -> String? {
+    first(where: { $0.key == key })?.value as? String
+  }
+}
+
