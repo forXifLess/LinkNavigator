@@ -19,6 +19,19 @@ extension Page4View: View {
 
       NavigationStackViewer(paths: viewStore.paths)
 
+      GroupBox {
+        VStack(spacing: 10) {
+          HStack {
+            Image(systemName: "envelope")
+            Text("Received Message")
+          }
+          .font(.footnote)
+          .foregroundColor(.secondary)
+
+          Text(viewStore.message.isEmpty ? "-" : viewStore.message)
+        }
+      }
+
       Button(action: { viewStore.send(.onTapBackToHome)}) {
         VStack {
           Text("back to Home")

@@ -9,9 +9,15 @@ struct Page4RouteBuilder: RouteBuilder {
       WrappingController(matchingKey: matchPath) {
         AnyView(Page4View(
           store: .init(
-            initialState: Page4.State(),
+            initialState: Page4.State(message: items.getValue(key: "message") ?? ""),
             reducer: Page4())))
       }
     }
+  }
+}
+
+extension Dictionary where Key == String, Value == String {
+  func getValue(key: String) -> String? {
+    first(where: { $0.key == key })?.value as? String
   }
 }

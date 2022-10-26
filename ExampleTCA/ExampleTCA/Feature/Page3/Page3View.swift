@@ -19,6 +19,9 @@ extension Page3View: View {
 
       NavigationStackViewer(paths: viewStore.paths)
 
+      TextField("Type message here", text: viewStore.binding(\.$message))
+        .textFieldStyle(.roundedBorder)
+
       Button(action: { viewStore.send(.onTapNextWithMessage) }) {
         VStack {
           Text("go to next Page with Message")

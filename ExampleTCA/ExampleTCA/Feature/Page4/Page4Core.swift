@@ -4,6 +4,7 @@ import Dependencies
 public struct Page4: ReducerProtocol {
   public struct State: Equatable {
     var paths: [String] = []
+    var message = ""
   }
 
   public enum Action: Equatable {

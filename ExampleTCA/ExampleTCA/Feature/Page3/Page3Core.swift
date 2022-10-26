@@ -4,10 +4,13 @@ import Dependencies
 public struct Page3: ReducerProtocol {
   public struct State: Equatable {
     var paths: [String] = []
+
+    @BindableState var message = ""
   }
 
-  public enum Action: Equatable {
+  public enum Action: Equatable, BindableAction {
     case getPaths
+    case binding(BindingAction<State>)
     case onTapNextWithMessage
     case onRemovePage1And2
     case onTapBack
@@ -24,9 +27,11 @@ public struct Page3: ReducerProtocol {
       state.paths = sideEffect.getPaths()
       return .none
 
+    case .binding:
+      return .none
+
     case .onTapNextWithMessage:
-      // TODO: 파라미터 보내기?
-      sideEffect.routeToPage4("파라미터 보내기?")
+      sideEffect.routeToPage4(state.message)
       return .none
 
     case .onRemovePage1And2:
