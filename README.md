@@ -118,9 +118,12 @@ If you'd like to contribute a translation, please [open a PR](https://github.com
 
 ## - Example
 
-You can test the functions of LinkNavigator in [Example App](https://github.com/interactord/LinkNavigator/tree/main/Example).
+LinkNavigator provides 2 Example Apps.
 
-<p align="leading"><img src="https://user-images.githubusercontent.com/107832509/195277796-c56916f4-98fd-4008-8602-8cc394b8b3de.gif" width="25%"></p> 
+- [`MVI` based example](https://github.com/interactord/LinkNavigator/tree/main/Example)
+- [`TCA` based example](https://github.com/interactord/LinkNavigator/tree/main/ExampleTCA)
+
+<p align="leading"><img src="https://user-images.githubusercontent.com/107832509/198525187-7d524e7f-7ad6-48c0-886a-805ad3a4e6a2.gif" width="25%"></p> 
 
 <br>
 
@@ -154,6 +157,7 @@ You can test the functions of LinkNavigator in [Example App](https://github.com/
         Page1RouteBuilder(),
         Page2RouteBuilder(),
         Page3RouteBuilder(),
+        Page4RouteBuilder(),
       ]
     }
   }
@@ -198,6 +202,10 @@ You can test the functions of LinkNavigator in [Example App](https://github.com/
       WindowGroup {
         navigator
           .launch(paths: ["home"], items: [:]) // the argument of 'paths' becomes starting pages.
+          .onOpenURL { url in
+          // in case you need deep link navigation,
+          // deep links should be processed here.
+          }
       }
     }
   }
