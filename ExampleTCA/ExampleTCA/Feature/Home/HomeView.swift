@@ -25,8 +25,7 @@ extension HomeView: View {
         VStack {
           Text("go to next Page")
           Text("navigator.next(paths: [\"page1\"], items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -34,8 +33,7 @@ extension HomeView: View {
         VStack {
           Text("go to last Page")
           Text("navigator.next(paths: [\"page1\", \"page2\", \"page3\"], items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -44,8 +42,7 @@ extension HomeView: View {
           Text("open Page 2 as Sheet")
             .foregroundColor(.purple)
           Text("navigator.sheet(paths: [\"page1\", \"page2\"], items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -54,8 +51,7 @@ extension HomeView: View {
           Text("open Page 2 as Full Screen Sheet")
             .foregroundColor(.purple)
           Text("navigator.fullSheet(paths: [\"page1\", \"page2\"], items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 

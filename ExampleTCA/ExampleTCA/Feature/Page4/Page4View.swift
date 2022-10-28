@@ -17,18 +17,29 @@ extension Page4View: View {
       Text("4")
         .font(.system(size: 70, weight: .thin))
 
-      NavigationStackViewer(paths: viewStore.paths)
+      VStack {
+        NavigationStackViewer(paths: viewStore.paths)
 
-      GroupBox {
-        VStack(spacing: 10) {
-          HStack {
-            Image(systemName: "envelope")
-            Text("Received Message")
+        GroupBox {
+          VStack(spacing: 10) {
+            HStack {
+              Image(systemName: "envelope")
+              Text("Received Message")
+            }
+            .font(.footnote)
+            .foregroundColor(.secondary)
+
+            Text(viewStore.message.isEmpty ? "-" : viewStore.message)
           }
-          .font(.footnote)
-          .foregroundColor(.secondary)
+        }
+      }
 
-          Text(viewStore.message.isEmpty ? "-" : viewStore.message)
+      Button(action: { viewStore.send(.onTapDeepLink) }) {
+        VStack {
+          Text("copy deep link")
+            .foregroundColor(.teal)
+          Text("URL → ex-tca://home/page1/page2/page3/page4?message=message_from_deep_link")
+            .code()
         }
       }
 
@@ -36,8 +47,7 @@ extension Page4View: View {
         VStack {
           Text("back to Home")
           Text("navigator.backOrNext(path: \"home\", items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -45,8 +55,7 @@ extension Page4View: View {
         VStack {
           Text("back")
           Text("navigator.back(isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -55,8 +64,7 @@ extension Page4View: View {
           Text("reset")
             .foregroundColor(.red)
           Text("navigator.replace(paths: [\"home\"], items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 

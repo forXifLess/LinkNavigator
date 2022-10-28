@@ -23,8 +23,7 @@ extension Page2View: View {
         VStack {
           Text("go to next Page")
           Text("navigator.next(paths: [\"page3\"], items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -32,8 +31,7 @@ extension Page2View: View {
         VStack {
           Text("**root** next")
           Text("navigator.rootNext(paths: [\"page3\"], items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -42,8 +40,7 @@ extension Page2View: View {
           Text("remove Page 1")
             .foregroundColor(.red)
           Text("navigator.remove(paths: [\"page1\"])")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -51,8 +48,7 @@ extension Page2View: View {
         VStack {
           Text("back")
           Text("navigator.back(isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 

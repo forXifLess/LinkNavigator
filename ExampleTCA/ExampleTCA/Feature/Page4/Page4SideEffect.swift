@@ -1,4 +1,5 @@
 import LinkNavigator
+import UIKit
 
 public protocol Page4SideEffect {
 
@@ -6,6 +7,7 @@ public protocol Page4SideEffect {
   var routeToHome: () -> Void { get }
   var routeToBack: () -> Void { get }
   var routeToReset: () -> Void { get }
+  var openSafari: (String) -> Void { get }
 }
 
 public struct Page4SideEffectLive {
@@ -39,6 +41,13 @@ extension Page4SideEffectLive: Page4SideEffect {
   public var routeToReset: () -> Void {
     {
       navigator.replace(paths: ["home"], items: [:], isAnimated: true)
+    }
+  }
+
+  public var openSafari: (String) -> Void {
+    {
+      guard let url = URL(string: $0), UIApplication.shared.canOpenURL(url) else { return }
+      UIApplication.shared.open(url, options: [:], completionHandler: .none)
     }
   }
 

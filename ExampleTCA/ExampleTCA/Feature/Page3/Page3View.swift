@@ -21,13 +21,13 @@ extension Page3View: View {
 
       TextField("Type message here", text: viewStore.binding(\.$message))
         .textFieldStyle(.roundedBorder)
+        .padding(.horizontal)
 
       Button(action: { viewStore.send(.onTapNextWithMessage) }) {
         VStack {
           Text("go to next Page with Message")
           Text("navigator.next(paths: [\"page4\"], items: [\"message\": $0], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -36,8 +36,7 @@ extension Page3View: View {
           Text("remove Page 1 and 2")
             .foregroundColor(.red)
           Text("navigator.remove(paths: [\"page1\", \"page2\"])")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -45,8 +44,7 @@ extension Page3View: View {
         VStack {
           Text("back")
           Text("navigator.back(isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -55,8 +53,7 @@ extension Page3View: View {
           Text("close (only available in modal)")
             .foregroundColor(.red)
           Text("navigator.close { print(\"modal dismissed!\") }")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 

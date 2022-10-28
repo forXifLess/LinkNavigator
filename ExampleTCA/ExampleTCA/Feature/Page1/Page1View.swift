@@ -23,8 +23,7 @@ extension Page1View: View {
         VStack {
           Text("go to next Page")
           Text("navigator.next(paths: [\"page2\"], items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -32,8 +31,7 @@ extension Page1View: View {
         VStack {
           Text("backOrNext")
           Text("navigator.backOrNext(path: Bool.random() ? \"home\" : \"page2\", items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -41,8 +39,7 @@ extension Page1View: View {
         VStack {
           Text("**root** backOrNext")
           Text("navigator.rootBackOrNext(path: Bool.random() ? \"home\" : \"page2\", items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -50,8 +47,7 @@ extension Page1View: View {
         VStack {
           Text("back")
           Text("navigator.back(isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 

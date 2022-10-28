@@ -1,4 +1,5 @@
 import ComposableArchitecture
+import UIKit
 import Dependencies
 
 public struct Page4: ReducerProtocol {
@@ -9,6 +10,7 @@ public struct Page4: ReducerProtocol {
 
   public enum Action: Equatable {
     case getPaths
+    case onTapDeepLink
     case onTapBackToHome
     case onTapBack
     case onTapReset
@@ -23,6 +25,11 @@ public struct Page4: ReducerProtocol {
       switch action {
       case .getPaths:
         state.paths = sideEffect.getPaths()
+        return .none
+
+      case .onTapDeepLink:
+        UIPasteboard.general.string = "ex-tca://home/page1/page2/page3/page4?message=message_from_deep_link" // copy deep link
+        sideEffect.openSafari("https://www.google.co.kr/")
         return .none
 
       case .onTapBackToHome:
