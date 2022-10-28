@@ -37,7 +37,7 @@ extension Page4View: View {
         VStack {
           Text("copy deep link")
             .foregroundColor(.teal)
-          Text("URL → link-navigator-ex://home/page1/page2/page3/page4?message=message_from_deep_link")
+          Text("URL → link-navigator-ex://host/home/page1/page2/page3/page4?message=message_from_deep_link")
             .code()
         }
       }

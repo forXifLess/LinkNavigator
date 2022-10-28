@@ -38,7 +38,7 @@ extension Page4View: View {
         VStack {
           Text("copy deep link")
             .foregroundColor(.teal)
-          Text("URL → ex-tca://home/page1/page2/page3/page4?message=message_from_deep_link")
+          Text("URL → ex-tca://host/home/page1/page2/page3/page4?message=message_from_deep_link")
             .code()
         }
       }

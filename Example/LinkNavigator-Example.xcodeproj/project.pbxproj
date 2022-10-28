@@ -27,6 +27,7 @@
 		7A2DCD32290B7D62004AE328 /* Page4Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DCD31290B7D62004AE328 /* Page4Model.swift */; };
 		7A2DCD34290B7DD5004AE328 /* Page4Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DCD33290B7DD5004AE328 /* Page4Intent.swift */; };
 		7A2DCD36290B7EF6004AE328 /* Page4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DCD35290B7EF6004AE328 /* Page4View.swift */; };
+		7A2DCD38290B8A19004AE328 /* DeepLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DCD37290B8A19004AE328 /* DeepLinkParser.swift */; };
 		7A34DE6028BF2A4B0079C6A6 /* Page2RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A34DE5F28BF2A4B0079C6A6 /* Page2RouteBuilder.swift */; };
 		7A34DE6328BF38B00079C6A6 /* Page3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A34DE6228BF38B00079C6A6 /* Page3View.swift */; };
 		7A34DE6528BF39780079C6A6 /* Page3Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A34DE6428BF39780079C6A6 /* Page3Intent.swift */; };
@@ -63,6 +64,7 @@
 		7A2DCD31290B7D62004AE328 /* Page4Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page4Model.swift; sourceTree = "<group>"; };
 		7A2DCD33290B7DD5004AE328 /* Page4Intent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page4Intent.swift; sourceTree = "<group>"; };
 		7A2DCD35290B7EF6004AE328 /* Page4View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page4View.swift; sourceTree = "<group>"; };
+		7A2DCD37290B8A19004AE328 /* DeepLinkParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepLinkParser.swift; sourceTree = "<group>"; };
 		7A34DE5F28BF2A4B0079C6A6 /* Page2RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page2RouteBuilder.swift; sourceTree = "<group>"; };
 		7A34DE6228BF38B00079C6A6 /* Page3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page3View.swift; sourceTree = "<group>"; };
 		7A34DE6428BF39780079C6A6 /* Page3Intent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page3Intent.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				290C8E3227C74D6F0073B327 /* AppDelegate.swift */,
 				D2C601CC28AC80BA001CA0A6 /* AppRouterGroup.swift */,
 				290C8E3427C74D9F0073B327 /* AppMain.swift */,
+				7A2DCD37290B8A19004AE328 /* DeepLinkParser.swift */,
 				D2E7AE0228ACB7A200157DA7 /* AppDependency.swift */,
 				2991BBC327C74C8C00768787 /* Assets.xcassets */,
 				29AFC4BC27C895BF0095BB8A /* Feature */,
@@ -329,6 +332,7 @@
 			files = (
 				7A2DCD34290B7DD5004AE328 /* Page4Intent.swift in Sources */,
 				294A9A6827CF7283002279C0 /* Page2Model.swift in Sources */,
+				7A2DCD38290B8A19004AE328 /* DeepLinkParser.swift in Sources */,
 				7A2DCD32290B7D62004AE328 /* Page4Model.swift in Sources */,
 				29AFC4C327C895F20095BB8A /* HomeIntent.swift in Sources */,
 				7A34DE6528BF39780079C6A6 /* Page3Intent.swift in Sources */,

@@ -28,7 +28,7 @@ public struct Page4: ReducerProtocol {
         return .none
 
       case .onTapDeepLink:
-        UIPasteboard.general.string = "ex-tca://home/page1/page2/page3/page4?message=message_from_deep_link" // copy deep link
+        UIPasteboard.general.string = "ex-tca://host/home/page1/page2/page3/page4?message=message_from_deep_link" // copy deep link
         sideEffect.openSafari("https://www.google.co.kr/")
         return .none
 
