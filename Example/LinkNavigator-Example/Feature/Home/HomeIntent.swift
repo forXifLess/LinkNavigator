@@ -35,16 +35,13 @@ final class HomeIntent: ObservableObject {
 // MARK: IntentType, HomeIntentType
 
 extension HomeIntent: IntentType, HomeIntentType {
-  func receiveCallback(item: String) {
-    print(item)
-  }
 
   func mutate(action: HomeModel.ViewAction, viewEffect: (() -> Void)?) {
     switch action {
     case .getPaths:
       state.paths = navigator.currentPaths
 
-    case .onTapPage1:
+    case .onTapNext:
       navigator.next(paths: ["page1"], items: [:], isAnimated: true)
 
     case .onTapPage3:

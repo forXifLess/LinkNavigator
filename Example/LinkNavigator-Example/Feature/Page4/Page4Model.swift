@@ -1,15 +1,16 @@
-import Foundation
+import SwiftUI
 
-enum Page2Model {
+enum Page4Model {
   struct State: Equatable {
     var paths: [String] = []
+    var message: String = ""
   }
 
   enum ViewAction: Equatable {
     case getPaths
-    case onTapNext
-    case onTapRootPage3
-    case onRemovePage1
+    case onTapDeepLink
+    case onTapBackToHome
     case onTapBack
+    case onTapReset
   }
 }

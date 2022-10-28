@@ -13,7 +13,7 @@ struct NavigationStackViewer: View {
         .font(.footnote)
         .foregroundColor(.secondary)
 
-        Text(paths.joined(separator: " → "))
+        Text(paths.map { $0.replacingOccurrences(of: "page", with: "") }.joined(separator: " → "))
       }
     }
     .padding(.horizontal)

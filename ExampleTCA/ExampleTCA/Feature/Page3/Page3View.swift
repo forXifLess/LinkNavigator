@@ -26,7 +26,7 @@ extension Page3View: View {
       Button(action: { viewStore.send(.onTapNextWithMessage) }) {
         VStack {
           Text("go to next Page with Message")
-          Text("navigator.next(paths: [\"page4\"], items: [\"message\": $0], isAnimated: true)")
+          Text("navigator.next(paths: [\"page4\"], items: [\"message\": messageYouTyped], isAnimated: true)")
             .code()
         }
       }

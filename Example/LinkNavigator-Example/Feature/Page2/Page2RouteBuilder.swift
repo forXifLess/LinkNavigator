@@ -7,8 +7,8 @@ struct Page2RouteBuilder: RouteBuilder {
   var build: (LinkNavigatorType, [String: String], DependencyType) -> UIViewController? {
     { navigator, items, dep in
       WrappingController(matchingKey: matchPath) {
-        AnyView(Page2.build(
-          intent: .init(initialState: .init(), navigator: navigator)))
+        AnyView(Page2View.build(
+          intent: Page2Intent(initialState: .init(), navigator: navigator)))
       }
     }
   }

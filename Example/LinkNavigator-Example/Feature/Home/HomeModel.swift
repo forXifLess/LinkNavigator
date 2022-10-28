@@ -7,7 +7,7 @@ enum HomeModel {
 
   enum ViewAction: Equatable {
     case getPaths
-    case onTapPage1
+    case onTapNext
     case onTapPage3
     case onTapSheet
     case onTapFullSheet

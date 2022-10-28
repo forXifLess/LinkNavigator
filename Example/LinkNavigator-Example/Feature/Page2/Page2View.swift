@@ -2,7 +2,7 @@ import SwiftUI
 
 // MARK: - Page2
 
-struct Page2: IntentBindingType {
+struct Page2View: IntentBindingType {
   @StateObject var container: Container<Page2IntentType, Page2Model.State>
   var intent: Page2IntentType { container.intent }
   var state: Page2Model.State { intent.state }
@@ -10,20 +10,20 @@ struct Page2: IntentBindingType {
 
 // MARK: View
 
-extension Page2: View {
+extension Page2View: View {
+  
   var body: some View {
     VStack(spacing: 40) {
-      Text("Page 2")
-        .font(.largeTitle)
+      Text("2")
+        .font(.system(size: 70, weight: .thin))
 
       NavigationStackViewer(paths: state.paths)
       
-      Button(action: { intent.send(action: .onTapPage3) }) {
+      Button(action: { intent.send(action: .onTapNext) }) {
         VStack {
           Text("go to next Page")
           Text("navigator.next(paths: [\"page3\"], items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -31,8 +31,7 @@ extension Page2: View {
         VStack {
           Text("**root** next")
           Text("navigator.rootNext(paths: [\"page3\"], items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -41,8 +40,7 @@ extension Page2: View {
           Text("remove Page 1")
             .foregroundColor(.red)
           Text("navigator.remove(paths: [\"page1\"])")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -50,10 +48,11 @@ extension Page2: View {
         VStack {
           Text("back")
           Text("navigator.back(isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
+
+      Spacer()
     }
     .padding(.horizontal)
     .navigationTitle("Page 2")
@@ -63,9 +62,9 @@ extension Page2: View {
   }
 }
 
-extension Page2 {
+extension Page2View {
   static func build(intent: Page2Intent) -> some View {
-    Page2(container: .init(
+    Page2View(container: .init(
       intent: intent as Page2IntentType,
       state: intent.state,
       modelChangePublisher: intent.objectWillChange))

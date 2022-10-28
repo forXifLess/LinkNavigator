@@ -8,7 +8,7 @@ struct HomeRouteBuilder: RouteBuilder {
     { navigator, items, dep in
       WrappingController(matchingKey: matchPath) {
         AnyView(HomeView.build(
-          intent: .init(initialState: .init(), navigator: navigator)))
+          intent: HomeIntent(initialState: .init(), navigator: navigator)))
       }
     }
   }

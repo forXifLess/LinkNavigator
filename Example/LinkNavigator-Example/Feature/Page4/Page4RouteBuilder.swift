@@ -1,15 +1,15 @@
 import LinkNavigator
 import SwiftUI
 
-struct Page3RouteBuilder: RouteBuilder {
-  var matchPath: String { "page3" }
+struct Page4RouteBuilder: RouteBuilder {
+  var matchPath: String { "page4" }
 
   var build: (LinkNavigatorType, [String: String], DependencyType) -> UIViewController? {
     { navigator, items, dep in
       WrappingController(matchingKey: matchPath) {
-        AnyView(Page3View.build(
-          intent: Page3Intent(
-            initialState: .init(message: items.getValue(key: "inputMessage") ?? ""),
+        AnyView(Page4View.build(
+          intent: Page4Intent(
+            initialState: .init(message: items.getValue(key: "message") ?? ""),
             navigator: navigator)))
       }
     }

@@ -8,7 +8,7 @@ public struct Home: ReducerProtocol {
   public enum Action: Equatable {
     case getPaths
     case onTapNext
-    case onTapLast
+    case onTapPage3
     case onTapSheet
     case onTapFullSheet
   }
@@ -26,7 +26,7 @@ public struct Home: ReducerProtocol {
         sideEffect.routeToPage1()
         return .none
 
-      case .onTapLast:
+      case .onTapPage3:
         sideEffect.routeToPage3()
         return .none
 

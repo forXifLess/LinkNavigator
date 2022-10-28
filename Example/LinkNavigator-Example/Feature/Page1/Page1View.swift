@@ -2,7 +2,7 @@ import SwiftUI
 
 // MARK: - Page1
 
-struct Page1: IntentBindingType {
+struct Page1View: IntentBindingType {
   @StateObject var container: Container<Page1IntentType, Page1Model.State>
   var intent: Page1IntentType { container.intent }
   var state: Page1Model.State { intent.state }
@@ -10,20 +10,20 @@ struct Page1: IntentBindingType {
 
 // MARK: View
 
-extension Page1: View {
+extension Page1View: View {
+  
   var body: some View {
     VStack(spacing: 40) {
-      Text("Page 1")
-        .font(.largeTitle)
+      Text("1")
+        .font(.system(size: 70, weight: .thin))
 
       NavigationStackViewer(paths: state.paths)
 
-      Button(action: { intent.send(action: .onTapPage2)}) {
+      Button(action: { intent.send(action: .onTapNext)}) {
         VStack {
           Text("go to next Page")
           Text("navigator.next(paths: [\"page2\"], items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -31,8 +31,7 @@ extension Page1: View {
         VStack {
           Text("backOrNext")
           Text("navigator.backOrNext(path: Bool.random() ? \"home\" : \"page2\", items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
 
@@ -40,8 +39,7 @@ extension Page1: View {
         VStack {
           Text("**root** backOrNext")
           Text("navigator.rootBackOrNext(path: Bool.random() ? \"home\" : \"page2\", items: [:], isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
       
@@ -49,10 +47,11 @@ extension Page1: View {
         VStack {
           Text("back")
           Text("navigator.back(isAnimated: true)")
-            .font(.caption)
-            .foregroundColor(.secondary)
+            .code()
         }
       }
+
+      Spacer()
     }
     .padding(.horizontal)
     .navigationTitle("Page 1")
@@ -62,9 +61,9 @@ extension Page1: View {
   }
 }
 
-extension Page1 {
+extension Page1View {
   static func build(intent: Page1Intent) -> some View {
-    Page1(container: .init(
+    Page1View(container: .init(
       intent: intent as Page1IntentType,
       state: intent.state,
       modelChangePublisher: intent.objectWillChange))

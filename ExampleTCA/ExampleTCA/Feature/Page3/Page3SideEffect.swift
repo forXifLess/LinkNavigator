@@ -26,8 +26,8 @@ extension Page3SideEffectLive: Page3SideEffect {
   }
 
   public var routeToPage4: (String) -> Void {
-    {
-      navigator.next(paths: ["page4"], items: ["message": $0], isAnimated: true)
+    { messageYouTyped in
+      navigator.next(paths: ["page4"], items: ["message": messageYouTyped], isAnimated: true)
     }
   }
 

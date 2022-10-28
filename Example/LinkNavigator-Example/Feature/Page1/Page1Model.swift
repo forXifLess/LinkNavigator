@@ -7,7 +7,7 @@ enum Page1Model {
 
   enum ViewAction: Equatable {
     case getPaths
-    case onTapPage2
+    case onTapNext
     case onTapRandomBackOrNext
     case onTapRootRandomBackOrNext
     case onTapBack

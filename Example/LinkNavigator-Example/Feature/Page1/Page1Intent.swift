@@ -39,7 +39,7 @@ extension Page1Intent: IntentType, Page1IntentType {
     case .getPaths:
       state.paths = navigator.currentPaths
 
-    case .onTapPage2:
+    case .onTapNext:
       navigator.next(paths: ["page2"], items: [:], isAnimated: true)
 
     case .onTapRandomBackOrNext:

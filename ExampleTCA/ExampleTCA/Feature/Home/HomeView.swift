@@ -29,9 +29,9 @@ extension HomeView: View {
         }
       }
 
-      Button(action: { viewStore.send(.onTapLast) }) {
+      Button(action: { viewStore.send(.onTapPage3) }) {
         VStack {
-          Text("go to last Page")
+          Text("go to Page 3")
           Text("navigator.next(paths: [\"page1\", \"page2\", \"page3\"], items: [:], isAnimated: true)")
             .code()
         }

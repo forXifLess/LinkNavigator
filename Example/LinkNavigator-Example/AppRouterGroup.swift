@@ -7,6 +7,7 @@ struct AppRouterGroup {
       Page1RouteBuilder(),
       Page2RouteBuilder(),
       Page3RouteBuilder(),
+      Page4RouteBuilder(),
     ]
   }
 }

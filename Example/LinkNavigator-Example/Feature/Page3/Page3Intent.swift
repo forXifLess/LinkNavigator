@@ -26,7 +26,8 @@ final class Page3Intent: ObservableObject {
   typealias State = Page3Model.State
   typealias ViewAction = Page3Model.ViewAction
 
-  @Published var state: State = .init()
+  @Published var state = State(message: "")
+
   let navigator: LinkNavigatorType
   var cancellable: Set<AnyCancellable> = []
 }
@@ -39,8 +40,9 @@ extension Page3Intent: IntentType, Page3IntentType {
     case .getPaths:
       state.paths = navigator.currentPaths
 
-    case .onTapBackOrNext:
-      navigator.backOrNext(path: "home", items: [:], isAnimated: true)
+    case .onTapNextWithMessage:
+      let messageYouTyped = state.message
+      navigator.next(paths: ["page4"], items: ["message": messageYouTyped], isAnimated: true)
 
     case .onRemovePage1and2:
       navigator.remove(paths: ["page1", "page2"])
@@ -50,10 +52,10 @@ extension Page3Intent: IntentType, Page3IntentType {
       navigator.back(isAnimated: true)
 
     case .onTapClose:
-      navigator.close(isAnimated: true) { print("modal dismissed!") }
-
-    case .onTapReset:
-      navigator.replace(paths: ["home"], items: [:], isAnimated: true)
+      navigator.close(isAnimated: true) {
+        print("modal dismissed!")
+        self.navigator.rootReloadLast(isAnimated: false, items: [:])
+      }
     }
   }
 }
