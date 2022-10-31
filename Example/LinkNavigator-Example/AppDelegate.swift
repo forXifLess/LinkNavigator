@@ -4,9 +4,7 @@ import LinkNavigator
 // MARK: - AppDelegate
 
 final class AppDelegate: NSObject {
-  var navigator: LinkNavigator {
-    LinkNavigator(dependency: AppDependency(), builders: AppRouterGroup().routers)
-  }
+  let navigator = LinkNavigator(dependency: AppDependency(), builders: AppRouterGroup().routers)
 }
 
 // MARK: UIApplicationDelegate
