@@ -13,51 +13,53 @@ struct Page2View: IntentBindingType {
 extension Page2View: View {
   
   var body: some View {
-    VStack(spacing: 40) {
-      Text("2")
-        .font(.system(size: 70, weight: .thin))
+    ScrollView {
+      VStack(spacing: 40) {
+        Text("2")
+          .font(.system(size: 70, weight: .thin))
 
-      NavigationStackViewer(paths: state.paths)
-      
-      Button(action: { intent.send(action: .onTapNext) }) {
-        VStack {
-          Text("go to next Page")
-          Text("navigator.next(paths: [\"page3\"], items: [:], isAnimated: true)")
-            .code()
+        NavigationStackViewer(paths: state.paths)
+
+        Button(action: { intent.send(action: .onTapNext) }) {
+          VStack {
+            Text("go to next Page")
+            Text("navigator.next(paths: [\"page3\"], items: [:], isAnimated: true)")
+              .code()
+          }
         }
-      }
 
-      Button(action: { intent.send(action: .onTapRootPage3)}) {
-        VStack {
-          Text("**root** next")
-          Text("navigator.rootNext(paths: [\"page3\"], items: [:], isAnimated: true)")
-            .code()
+        Button(action: { intent.send(action: .onTapRootPage3)}) {
+          VStack {
+            Text("**root** next")
+            Text("navigator.rootNext(paths: [\"page3\"], items: [:], isAnimated: true)")
+              .code()
+          }
         }
-      }
 
-      Button(action: { intent.send(action: .onRemovePage1) }) {
-        VStack {
-          Text("remove Page 1")
-            .foregroundColor(.red)
-          Text("navigator.remove(paths: [\"page1\"])")
-            .code()
+        Button(action: { intent.send(action: .onRemovePage1) }) {
+          VStack {
+            Text("remove Page 1")
+              .foregroundColor(.red)
+            Text("navigator.remove(paths: [\"page1\"])")
+              .code()
+          }
         }
-      }
 
-      Button(action: { intent.send(action: .onTapBack) }) {
-        VStack {
-          Text("back")
-          Text("navigator.back(isAnimated: true)")
-            .code()
+        Button(action: { intent.send(action: .onTapBack) }) {
+          VStack {
+            Text("back")
+            Text("navigator.back(isAnimated: true)")
+              .code()
+          }
         }
-      }
 
-      Spacer()
-    }
-    .padding(.horizontal)
-    .navigationTitle("Page 2")
-    .onAppear {
-      intent.send(action: .getPaths)
+        Spacer()
+      }
+      .padding(.horizontal)
+      .navigationTitle("Page 2")
+      .onAppear {
+        intent.send(action: .getPaths)
+      }
     }
   }
 }

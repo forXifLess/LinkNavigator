@@ -12,52 +12,54 @@ struct HomeView: IntentBindingType {
 
 extension HomeView: View {
   var body: some View {
-    VStack(spacing: 40) {
-      Text("Home")
-        .font(.system(size: 60, weight: .thin))
+    ScrollView {
+      VStack(spacing: 40) {
+        Text("Home")
+          .font(.system(size: 60, weight: .thin))
 
-      NavigationStackViewer(paths: state.paths)
+        NavigationStackViewer(paths: state.paths)
 
-      Button(action: { intent.send(action: .onTapNext) }) {
-        VStack {
-          Text("go to next Page")
-          Text("navigator.next(paths: [\"page1\"], items: [:], isAnimated: true)")
-            .code()
+        Button(action: { intent.send(action: .onTapNext) }) {
+          VStack {
+            Text("go to next Page")
+            Text("navigator.next(paths: [\"page1\"], items: [:], isAnimated: true)")
+              .code()
+          }
         }
-      }
 
-      Button(action: { intent.send(action: .onTapPage3)}) {
-        VStack {
-          Text("go to last Page")
-          Text("navigator.next(paths: [\"page1\", \"page2\", \"page3\"], items: [:], isAnimated: true)")
-            .code()
+        Button(action: { intent.send(action: .onTapPage3)}) {
+          VStack {
+            Text("go to last Page")
+            Text("navigator.next(paths: [\"page1\", \"page2\", \"page3\"], items: [:], isAnimated: true)")
+              .code()
+          }
         }
-      }
-      
-      Button(action: { intent.send(action: .onTapSheet)}) {
-        VStack {
-          Text("open Page 2 as Sheet")
-            .foregroundColor(.purple)
-          Text("navigator.sheet(paths: [\"page1\", \"page2\"], items: [:], isAnimated: true)")
-            .code()
-        }
-      }
 
-      Button(action: { intent.send(action: .onTapFullSheet)}) {
-        VStack {
-          Text("open Page 2 as Full Screen Sheet")
-            .foregroundColor(.purple)
-          Text("navigator.fullSheet(paths: [\"page1\", \"page2\"], items: [:], isAnimated: true)")
-            .code()
+        Button(action: { intent.send(action: .onTapSheet)}) {
+          VStack {
+            Text("open Page 2 as Sheet")
+              .foregroundColor(.purple)
+            Text("navigator.sheet(paths: [\"page1\", \"page2\"], items: [:], isAnimated: true)")
+              .code()
+          }
         }
-      }
 
-      Spacer()
-    }
-    .padding(.horizontal)
-    .navigationTitle("Home")
-    .onAppear {
-      intent.send(action: .getPaths)
+        Button(action: { intent.send(action: .onTapFullSheet)}) {
+          VStack {
+            Text("open Page 2 as Full Screen Sheet")
+              .foregroundColor(.purple)
+            Text("navigator.fullSheet(paths: [\"page1\", \"page2\"], items: [:], isAnimated: true)")
+              .code()
+          }
+        }
+
+        Spacer()
+      }
+      .padding(.horizontal)
+      .navigationTitle("Home")
+      .onAppear {
+        intent.send(action: .getPaths)
+      }
     }
   }
 }
