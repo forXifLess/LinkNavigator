@@ -42,7 +42,7 @@ extension Page4Intent: IntentType, Page4IntentType {
 
     case .onTapDeepLink:
       guard let url = URL(string: "https://www.google.co.kr/"), UIApplication.shared.canOpenURL(url) else { return }
-      UIPasteboard.general.string = "link-navigator-ex://host/home/page1/page2/page3/page4?message=message_from_deep_link" // copy deep link
+      UIPasteboard.general.string = "link-navigator-ex://host/home/page1/page2/page3/page4?page3-message=world&page4-message=hello" // copy deep link
       UIApplication.shared.open(url, options: [:], completionHandler: .none)
 
     case .onTapBackToHome:

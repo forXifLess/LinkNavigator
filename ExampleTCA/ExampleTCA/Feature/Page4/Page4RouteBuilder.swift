@@ -9,7 +9,7 @@ struct Page4RouteBuilder: RouteBuilder {
       WrappingController(matchingKey: matchPath) {
         AnyView(Page4View(
           store: .init(
-            initialState: Page4.State(message: items.getValue(key: "message") ?? ""),
+            initialState: Page4.State(message: items.getValue(key: "page4-message") ?? ""),
             reducer: Page4())))
       }
     }

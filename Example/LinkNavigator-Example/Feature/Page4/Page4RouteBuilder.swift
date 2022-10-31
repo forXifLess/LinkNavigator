@@ -9,7 +9,7 @@ struct Page4RouteBuilder: RouteBuilder {
       WrappingController(matchingKey: matchPath) {
         AnyView(Page4View.build(
           intent: Page4Intent(
-            initialState: .init(message: items.getValue(key: "message") ?? ""),
+            initialState: .init(message: items.getValue(key: "page4-message") ?? ""),
             navigator: navigator)))
       }
     }

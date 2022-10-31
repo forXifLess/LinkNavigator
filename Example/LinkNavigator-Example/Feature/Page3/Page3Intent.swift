@@ -44,7 +44,7 @@ extension Page3Intent: IntentType, Page3IntentType {
       state.message = message
 
     case .onTapNextWithMessage:
-      navigator.next(paths: ["page4"], items: ["message": state.message], isAnimated: true)
+      navigator.next(paths: ["page4"], items: ["page4-message": state.message], isAnimated: true)
 
     case .onRemovePage1and2:
       navigator.remove(paths: ["page1", "page2"])
