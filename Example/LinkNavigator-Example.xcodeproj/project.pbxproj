@@ -41,6 +41,16 @@
 		D2E7AE0328ACB7A200157DA7 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E7AE0228ACB7A200157DA7 /* AppDependency.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D20A4ACA290F7D99004544C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D20A4AC6290F7D99004544C2 /* ExampleTCA.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D22751DE290634A600E98D2C;
+			remoteInfo = ExampleTCA;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		290C8E3227C74D6F0073B327 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		290C8E3427C74D9F0073B327 /* AppMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
@@ -71,6 +81,7 @@
 		7A34DE6628BF39970079C6A6 /* Page3Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page3Model.swift; sourceTree = "<group>"; };
 		7A34DE6828BF39AB0079C6A6 /* Page3RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page3RouteBuilder.swift; sourceTree = "<group>"; };
 		7ABFED4728BF66FD00395641 /* NavigationStackViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationStackViewer.swift; sourceTree = "<group>"; };
+		D20A4AC6290F7D99004544C2 /* ExampleTCA.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ExampleTCA.xcodeproj; path = ../ExampleTCA/ExampleTCA.xcodeproj; sourceTree = "<group>"; };
 		D25AA93A28B862B900F374E2 /* Page1RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page1RouteBuilder.swift; sourceTree = "<group>"; };
 		D2B36191280531FD00D4B429 /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ..; sourceTree = "<group>"; };
 		D2C601CC28AC80BA001CA0A6 /* AppRouterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterGroup.swift; sourceTree = "<group>"; };
@@ -115,6 +126,7 @@
 		2991BBB327C74C8B00768787 = {
 			isa = PBXGroup;
 			children = (
+				D20A4AC6290F7D99004544C2 /* ExampleTCA.xcodeproj */,
 				D2B36190280531FD00D4B429 /* Packages */,
 				2991BBBE27C74C8B00768787 /* LinkNavigator-Example */,
 				2991BBBD27C74C8B00768787 /* Products */,
@@ -219,6 +231,14 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		D20A4AC7290F7D99004544C2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D20A4ACB290F7D99004544C2 /* ExampleTCA.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D2B36190280531FD00D4B429 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,12 +306,28 @@
 			);
 			productRefGroup = 2991BBBD27C74C8B00768787 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D20A4AC7290F7D99004544C2 /* Products */;
+					ProjectRef = D20A4AC6290F7D99004544C2 /* ExampleTCA.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				2991BBBB27C74C8B00768787 /* LinkNavigator-Example */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D20A4ACB290F7D99004544C2 /* ExampleTCA.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ExampleTCA.app;
+			remoteRef = D20A4ACA290F7D99004544C2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2991BBBA27C74C8B00768787 /* Resources */ = {
