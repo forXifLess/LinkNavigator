@@ -26,7 +26,7 @@ final class Page3Intent: ObservableObject {
   typealias State = Page3Model.State
   typealias ViewAction = Page3Model.ViewAction
 
-  @Published var state = State()
+  @Published var state = State(message: "")
 
   let navigator: LinkNavigatorType
   var cancellable: Set<AnyCancellable> = []
@@ -40,8 +40,11 @@ extension Page3Intent: IntentType, Page3IntentType {
     case .getPaths:
       state.paths = navigator.currentPaths
 
-    case .onTapNextWithMessage(let messageYouTyped):
-      navigator.next(paths: ["page4"], items: ["message": messageYouTyped], isAnimated: true)
+    case .onChangeMessage(let message):
+      state.message = message
+
+    case .onTapNextWithMessage:
+      navigator.next(paths: ["page4"], items: ["message": state.message], isAnimated: true)
 
     case .onRemovePage1and2:
       navigator.remove(paths: ["page1", "page2"])

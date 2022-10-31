@@ -27,9 +27,10 @@ extension AppMain: App {
           /// Note: link-navigator-ex://host/home/page1/page2/page3/page4?inputMessage=hello&message=%ED%95%9C%EA%B8%80
           DeepLinkParser.parse(url: url, completeAction: { linkInfo in
             guard let linkInfo else { return }
-            navigator.currentPaths.count > 1
-              ? navigator.next(paths: [linkInfo.pathList.last ?? ""], items: linkInfo.items, isAnimated: true)
-              : navigator.replace(paths: linkInfo.pathList, items: linkInfo.items, isAnimated: true)
+            navigator.replace(paths: linkInfo.pathList, items: linkInfo.items, isAnimated: true)
+//            navigator.currentPaths.count > 1
+//              ? navigator.next(paths: [linkInfo.pathList.last ?? ""], items: linkInfo.items, isAnimated: true)
+//              : navigator.replace(paths: linkInfo.pathList, items: linkInfo.items, isAnimated: true)
           })
         }
     }

@@ -6,8 +6,12 @@ struct Page3View: IntentBindingType {
   @StateObject var container: Container<Page3IntentType, Page3Model.State>
   var intent: Page3IntentType { container.intent }
   var state: Page3Model.State { intent.state }
+}
 
-  @SwiftUI.State private var message: String = ""
+extension Page3View {
+  var messageBinding: Binding<String> {
+    .init(get: { state.message }, set: { intent.send(action: .onChangeMessage($0)) })
+  }
 }
 
 // MARK: View
@@ -20,11 +24,11 @@ extension Page3View: View {
       
       NavigationStackViewer(paths: state.paths)
 
-      TextField("Type message here", text: $message)
+      TextField("Type message here", text: messageBinding)
         .textFieldStyle(.roundedBorder)
         .padding(.horizontal)
 
-      Button(action: { intent.send(action: .onTapNextWithMessage(message)) }) {
+      Button(action: { intent.send(action: .onTapNextWithMessage) }) {
         VStack {
           Text("go to next Page with Message")
           Text("navigator.next(paths: [\"page4\"], items: [\"message\": messageYouTyped], isAnimated: true)")
