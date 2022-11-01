@@ -120,8 +120,8 @@ If you'd like to contribute a translation, please [open a PR](https://github.com
 
 LinkNavigator provides 2 Example Apps.
 
-- [`MVI` based example](https://github.com/interactord/LinkNavigator/tree/main/Example)
-- [`TCA` based example](https://github.com/interactord/LinkNavigator/tree/main/ExampleTCA)
+- [`MVI` based example](https://github.com/interactord/LinkNavigator/tree/main/Examples/MVI-Example)
+- [`TCA` based example](https://github.com/interactord/LinkNavigator/tree/main/Examples/TCA-Example) - with [0.44.1 release](https://github.com/pointfreeco/swift-composable-architecture/releases/tag/0.44.1)
 
 <p align="leading"><img src="https://user-images.githubusercontent.com/107832509/198525187-7d524e7f-7ad6-48c0-886a-805ad3a4e6a2.gif" width="25%"></p> 
 
@@ -268,7 +268,7 @@ let package = Package(
       targets: ["MyPackage"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/interactord/LinkNavigator.git", .upToNextMajor(from: "0.2.8"))
+    .package(url: "https://github.com/interactord/LinkNavigator.git", .upToNextMajor(from: "0.3.0"))
   ],
   targets: [
     .target(
