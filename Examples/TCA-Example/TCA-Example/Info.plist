@@ -11,7 +11,7 @@
 			<string>DeepLink</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>ex-tca</string>
+				<string>tca-ex</string>
 			</array>
 		</dict>
 	</array>

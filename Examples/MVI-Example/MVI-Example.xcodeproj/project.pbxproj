@@ -133,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				2983781527D0B47700FD761C /* Info.plist */,
+				29AFC4BC27C895BF0095BB8A /* Feature */,
 				29AFC4C427C896160095BB8A /* ArchetectureKit */,
 				290C8E3227C74D6F0073B327 /* AppDelegate.swift */,
 				D2C601CC28AC80BA001CA0A6 /* AppRouterGroup.swift */,
@@ -140,7 +141,6 @@
 				7A2DCD37290B8A19004AE328 /* DeepLinkParser.swift */,
 				D2E7AE0228ACB7A200157DA7 /* AppDependency.swift */,
 				2991BBC327C74C8C00768787 /* Assets.xcassets */,
-				29AFC4BC27C895BF0095BB8A /* Feature */,
 				2991BBC527C74C8C00768787 /* Preview Content */,
 			);
 			path = "MVI-Example";

@@ -11,7 +11,7 @@
 			<string>DeepLink</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>link-navigator-ex</string>
+				<string>mvi-ex</string>
 			</array>
 		</dict>
 	</array>
