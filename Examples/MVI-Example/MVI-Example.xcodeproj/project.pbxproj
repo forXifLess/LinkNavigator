@@ -41,16 +41,6 @@
 		D2E7AE0328ACB7A200157DA7 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E7AE0228ACB7A200157DA7 /* AppDependency.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		D20A4ACA290F7D99004544C2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D20A4AC6290F7D99004544C2 /* ExampleTCA.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D22751DE290634A600E98D2C;
-			remoteInfo = ExampleTCA;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		290C8E3227C74D6F0073B327 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		290C8E3427C74D9F0073B327 /* AppMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
@@ -61,7 +51,7 @@
 		294A9A6727CF7283002279C0 /* Page2Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page2Model.swift; sourceTree = "<group>"; };
 		294A9A6927CF7286002279C0 /* Page2Intent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page2Intent.swift; sourceTree = "<group>"; };
 		2983781527D0B47700FD761C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		2991BBBC27C74C8B00768787 /* LinkNavigator-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LinkNavigator-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2991BBBC27C74C8B00768787 /* MVI-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MVI-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2991BBC327C74C8C00768787 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2991BBC627C74C8C00768787 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		29AFC4BE27C895E80095BB8A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -81,11 +71,10 @@
 		7A34DE6628BF39970079C6A6 /* Page3Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page3Model.swift; sourceTree = "<group>"; };
 		7A34DE6828BF39AB0079C6A6 /* Page3RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page3RouteBuilder.swift; sourceTree = "<group>"; };
 		7ABFED4728BF66FD00395641 /* NavigationStackViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationStackViewer.swift; sourceTree = "<group>"; };
-		D20A4AC6290F7D99004544C2 /* ExampleTCA.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ExampleTCA.xcodeproj; path = ../ExampleTCA/ExampleTCA.xcodeproj; sourceTree = "<group>"; };
 		D25AA93A28B862B900F374E2 /* Page1RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page1RouteBuilder.swift; sourceTree = "<group>"; };
-		D2B36191280531FD00D4B429 /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ..; sourceTree = "<group>"; };
 		D2C601CC28AC80BA001CA0A6 /* AppRouterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterGroup.swift; sourceTree = "<group>"; };
 		D2C601D028AC821E001CA0A6 /* HomeRouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouteBuilder.swift; sourceTree = "<group>"; };
+		D2E1FDF9290FF6530049F6E1 /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ../..; sourceTree = "<group>"; };
 		D2E7AE0228ACB7A200157DA7 /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,23 +115,21 @@
 		2991BBB327C74C8B00768787 = {
 			isa = PBXGroup;
 			children = (
-				D20A4AC6290F7D99004544C2 /* ExampleTCA.xcodeproj */,
-				D2B36190280531FD00D4B429 /* Packages */,
-				2991BBBE27C74C8B00768787 /* LinkNavigator-Example */,
+				D2E1FDF9290FF6530049F6E1 /* LinkNavigator */,
+				2991BBBE27C74C8B00768787 /* MVI-Example */,
 				2991BBBD27C74C8B00768787 /* Products */,
-				D2B361922805323000D4B429 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		2991BBBD27C74C8B00768787 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2991BBBC27C74C8B00768787 /* LinkNavigator-Example.app */,
+				2991BBBC27C74C8B00768787 /* MVI-Example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2991BBBE27C74C8B00768787 /* LinkNavigator-Example */ = {
+		2991BBBE27C74C8B00768787 /* MVI-Example */ = {
 			isa = PBXGroup;
 			children = (
 				2983781527D0B47700FD761C /* Info.plist */,
@@ -156,7 +143,7 @@
 				29AFC4BC27C895BF0095BB8A /* Feature */,
 				2991BBC527C74C8C00768787 /* Preview Content */,
 			);
-			path = "LinkNavigator-Example";
+			path = "MVI-Example";
 			sourceTree = "<group>";
 		};
 		2991BBC527C74C8C00768787 /* Preview Content */ = {
@@ -231,35 +218,12 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		D20A4AC7290F7D99004544C2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D20A4ACB290F7D99004544C2 /* ExampleTCA.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		D2B36190280531FD00D4B429 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				D2B36191280531FD00D4B429 /* LinkNavigator */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
-		D2B361922805323000D4B429 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2991BBBB27C74C8B00768787 /* LinkNavigator-Example */ = {
+		2991BBBB27C74C8B00768787 /* MVI-Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2991BBCA27C74C8C00768787 /* Build configuration list for PBXNativeTarget "LinkNavigator-Example" */;
+			buildConfigurationList = 2991BBCA27C74C8C00768787 /* Build configuration list for PBXNativeTarget "MVI-Example" */;
 			buildPhases = (
 				2991BBB827C74C8B00768787 /* Sources */,
 				2991BBB927C74C8B00768787 /* Frameworks */,
@@ -270,12 +234,12 @@
 			);
 			dependencies = (
 			);
-			name = "LinkNavigator-Example";
+			name = "MVI-Example";
 			packageProductDependencies = (
 				D2B361932805323000D4B429 /* LinkNavigator */,
 			);
 			productName = "LinkNavigator-Example";
-			productReference = 2991BBBC27C74C8B00768787 /* LinkNavigator-Example.app */;
+			productReference = 2991BBBC27C74C8B00768787 /* MVI-Example.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -293,7 +257,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2991BBB727C74C8B00768787 /* Build configuration list for PBXProject "LinkNavigator-Example" */;
+			buildConfigurationList = 2991BBB727C74C8B00768787 /* Build configuration list for PBXProject "MVI-Example" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -306,28 +270,12 @@
 			);
 			productRefGroup = 2991BBBD27C74C8B00768787 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = D20A4AC7290F7D99004544C2 /* Products */;
-					ProjectRef = D20A4AC6290F7D99004544C2 /* ExampleTCA.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
-				2991BBBB27C74C8B00768787 /* LinkNavigator-Example */,
+				2991BBBB27C74C8B00768787 /* MVI-Example */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		D20A4ACB290F7D99004544C2 /* ExampleTCA.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = ExampleTCA.app;
-			remoteRef = D20A4ACA290F7D99004544C2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2991BBBA27C74C8B00768787 /* Resources */ = {
@@ -452,7 +400,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -507,7 +454,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -524,24 +470,27 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"LinkNavigator-Example/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MVI-Example/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "LinkNavigator-Example/Info.plist";
+				INFOPLIST_FILE = "MVI-Example/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "io.interactord.LinkNavigator-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.interactord.MVI-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -555,24 +504,27 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"LinkNavigator-Example/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MVI-Example/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "LinkNavigator-Example/Info.plist";
+				INFOPLIST_FILE = "MVI-Example/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "io.interactord.LinkNavigator-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.interactord.MVI-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -582,7 +534,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2991BBB727C74C8B00768787 /* Build configuration list for PBXProject "LinkNavigator-Example" */ = {
+		2991BBB727C74C8B00768787 /* Build configuration list for PBXProject "MVI-Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2991BBC827C74C8C00768787 /* Debug */,
@@ -591,7 +543,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2991BBCA27C74C8C00768787 /* Build configuration list for PBXNativeTarget "LinkNavigator-Example" */ = {
+		2991BBCA27C74C8C00768787 /* Build configuration list for PBXNativeTarget "MVI-Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2991BBCB27C74C8C00768787 /* Debug */,

@@ -37,7 +37,7 @@ extension Page4View: View {
         Button(action: { intent.send(action: .onTapDeepLink) }) {
           VStack {
             Text("copy deep link")
-              .foregroundColor(.teal)
+              .foregroundColor(.green)
             Text("URL → link-navigator-ex://host/home/page1/page2/page3/page4?page3-message=world&page4-message=hello")
               .code()
           }

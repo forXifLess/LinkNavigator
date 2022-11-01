@@ -4,23 +4,23 @@
 import PackageDescription
 
 let package = Package(
-    name: "LinkNavigator",
-    platforms: [
-        .iOS(.v14),
-    ],
-    products: [
-        .library(
-            name: "LinkNavigator",
-            targets: ["LinkNavigator"]),
-    ],
-    dependencies: [
-    ],
-    targets: [
-        .target(
-            name: "LinkNavigator",
-            dependencies: []),
-        .testTarget(
-            name: "LinkNavigatorTests",
-            dependencies: ["LinkNavigator"]),
-    ]
+  name: "LinkNavigator",
+  platforms: [
+    .iOS(.v14),
+  ],
+  products: [
+    .library(
+      name: "LinkNavigator",
+      targets: ["LinkNavigator"]),
+  ],
+  dependencies: [
+  ],
+  targets: [
+    .target(
+      name: "LinkNavigator",
+      dependencies: []),
+    .testTarget(
+      name: "LinkNavigatorTests",
+      dependencies: ["LinkNavigator"]),
+  ]
 )

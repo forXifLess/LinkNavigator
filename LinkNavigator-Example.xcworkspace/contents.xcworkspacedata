@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Example/LinkNavigator-Example.xcodeproj">
+      location = "group:Examples/MVI-Example/MVI-Example.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:ExampleTCA/ExampleTCA.xcodeproj">
+      location = "group:Examples/MVI-Example/../TCA-Example/TCA-Example.xcodeproj">
    </FileRef>
 </Workspace>

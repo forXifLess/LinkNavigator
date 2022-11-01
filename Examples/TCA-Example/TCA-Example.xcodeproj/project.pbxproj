@@ -47,11 +47,11 @@
 		7A8EE57129090E80003AC39E /* Page4Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page4Core.swift; sourceTree = "<group>"; };
 		7A8EE57329090EDD003AC39E /* Page4SideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page4SideEffect.swift; sourceTree = "<group>"; };
 		7A8EE57529090F28003AC39E /* Page4RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page4RouteBuilder.swift; sourceTree = "<group>"; };
-		D22751DE290634A600E98D2C /* ExampleTCA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleTCA.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D22751DE290634A600E98D2C /* TCA-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TCA-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22751E1290634A600E98D2C /* AppMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
 		D22751E3290634A600E98D2C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D22751E5290634A700E98D2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D22751E7290634A700E98D2C /* ExampleTCA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ExampleTCA.entitlements; sourceTree = "<group>"; };
+		D22751E7290634A700E98D2C /* TCA-Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TCA-Example.entitlements"; sourceTree = "<group>"; };
 		D22751E9290634A700E98D2C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D23BD4CF2909219D00B674EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D23BD4D02909220F00B674EE /* DeepLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkParser.swift; sourceTree = "<group>"; };
@@ -63,7 +63,6 @@
 		D25E88A2290687D300E5BDCF /* Page1SideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page1SideEffect.swift; sourceTree = "<group>"; };
 		D25E88A429068CF400E5BDCF /* Page2SideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page2SideEffect.swift; sourceTree = "<group>"; };
 		D25E88A629068E5100E5BDCF /* Page3SideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page3SideEffect.swift; sourceTree = "<group>"; };
-		D2A6C0892906358400545BD9 /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ..; sourceTree = "<group>"; };
 		D2A6C08E2906427D00545BD9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		D2A6C0902906428600545BD9 /* HomeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCore.swift; sourceTree = "<group>"; };
 		D2A6C0932906432F00545BD9 /* Page1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page1View.swift; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		D2A6C0A22906437A00545BD9 /* NavigationStackViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationStackViewer.swift; sourceTree = "<group>"; };
 		D2A6C0A6290654F000545BD9 /* AppRouterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterGroup.swift; sourceTree = "<group>"; };
 		D2A6C0A8290654FD00545BD9 /* HomeRouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouteBuilder.swift; sourceTree = "<group>"; };
+		D2E1FDFC290FF6780049F6E1 /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,22 +105,21 @@
 		D22751D5290634A600E98D2C = {
 			isa = PBXGroup;
 			children = (
-				D2A6C0882906358400545BD9 /* Packages */,
-				D22751E0290634A600E98D2C /* ExampleTCA */,
+				D2E1FDFC290FF6780049F6E1 /* LinkNavigator */,
+				D22751E0290634A600E98D2C /* TCA-Example */,
 				D22751DF290634A600E98D2C /* Products */,
-				D2A6C0AA2906569D00545BD9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		D22751DF290634A600E98D2C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D22751DE290634A600E98D2C /* ExampleTCA.app */,
+				D22751DE290634A600E98D2C /* TCA-Example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D22751E0290634A600E98D2C /* ExampleTCA */ = {
+		D22751E0290634A600E98D2C /* TCA-Example */ = {
 			isa = PBXGroup;
 			children = (
 				D23BD4CF2909219D00B674EE /* Info.plist */,
@@ -131,10 +130,10 @@
 				D22751E3290634A600E98D2C /* ContentView.swift */,
 				D23BD4D02909220F00B674EE /* DeepLinkParser.swift */,
 				D22751E5290634A700E98D2C /* Assets.xcassets */,
-				D22751E7290634A700E98D2C /* ExampleTCA.entitlements */,
+				D22751E7290634A700E98D2C /* TCA-Example.entitlements */,
 				D22751E8290634A700E98D2C /* Preview Content */,
 			);
-			path = ExampleTCA;
+			path = "TCA-Example";
 			sourceTree = "<group>";
 		};
 		D22751E8290634A700E98D2C /* Preview Content */ = {
@@ -143,14 +142,6 @@
 				D22751E9290634A700E98D2C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		D2A6C0882906358400545BD9 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				D2A6C0892906358400545BD9 /* LinkNavigator */,
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 		D2A6C08C2906426300545BD9 /* Feature */ = {
@@ -219,19 +210,12 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		D2A6C0AA2906569D00545BD9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D22751DD290634A600E98D2C /* ExampleTCA */ = {
+		D22751DD290634A600E98D2C /* TCA-Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D22751ED290634A700E98D2C /* Build configuration list for PBXNativeTarget "ExampleTCA" */;
+			buildConfigurationList = D22751ED290634A700E98D2C /* Build configuration list for PBXNativeTarget "TCA-Example" */;
 			buildPhases = (
 				D22751DA290634A600E98D2C /* Sources */,
 				D22751DB290634A600E98D2C /* Frameworks */,
@@ -241,14 +225,14 @@
 			);
 			dependencies = (
 			);
-			name = ExampleTCA;
+			name = "TCA-Example";
 			packageProductDependencies = (
 				D2A6C0842906357100545BD9 /* ComposableArchitecture */,
 				D2A6C0862906357100545BD9 /* Dependencies */,
 				D2A6C0AB2906569D00545BD9 /* LinkNavigator */,
 			);
 			productName = ExampleTCA;
-			productReference = D22751DE290634A600E98D2C /* ExampleTCA.app */;
+			productReference = D22751DE290634A600E98D2C /* TCA-Example.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -266,7 +250,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D22751D9290634A600E98D2C /* Build configuration list for PBXProject "ExampleTCA" */;
+			buildConfigurationList = D22751D9290634A600E98D2C /* Build configuration list for PBXProject "TCA-Example" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -282,7 +266,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D22751DD290634A600E98D2C /* ExampleTCA */,
+				D22751DD290634A600E98D2C /* TCA-Example */,
 			);
 		};
 /* End PBXProject section */
@@ -451,14 +435,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ExampleTCA/ExampleTCA.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "TCA-Example/TCA-Example.entitlements";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ExampleTCA/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"TCA-Example/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ExampleTCA/Info.plist;
+				INFOPLIST_FILE = "TCA-Example/Info.plist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -469,16 +453,18 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.interactord.ExampleTCA;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.interactord.TCA-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -490,14 +476,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ExampleTCA/ExampleTCA.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "TCA-Example/TCA-Example.entitlements";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ExampleTCA/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"TCA-Example/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ExampleTCA/Info.plist;
+				INFOPLIST_FILE = "TCA-Example/Info.plist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -508,16 +494,18 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.interactord.ExampleTCA;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.interactord.TCA-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -527,7 +515,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D22751D9290634A600E98D2C /* Build configuration list for PBXProject "ExampleTCA" */ = {
+		D22751D9290634A600E98D2C /* Build configuration list for PBXProject "TCA-Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D22751EB290634A700E98D2C /* Debug */,
@@ -536,7 +524,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D22751ED290634A700E98D2C /* Build configuration list for PBXNativeTarget "ExampleTCA" */ = {
+		D22751ED290634A700E98D2C /* Build configuration list for PBXNativeTarget "TCA-Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D22751EE290634A700E98D2C /* Debug */,
