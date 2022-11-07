@@ -75,6 +75,17 @@ If you'd like to contribute a translation, please [open a PR](https://github.com
   navigator.close(isAnimated: true) { print("modal dismissed!") }
   ```
 
+- show a system alert.
+
+  ```swift
+  let alertModel = Alert(
+    title: "Title",
+    message: "message",
+    buttons: [.init(title: "OK", style: .default, action: { print("OK tapped") })],
+    flagType: .default)
+  navigator.alert(target: .default, model: alertModel)
+  ```
+
 <br>
 
 ## - Advanced Usage
