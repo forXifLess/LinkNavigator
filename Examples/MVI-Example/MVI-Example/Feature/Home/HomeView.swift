@@ -35,6 +35,15 @@ extension HomeView: View {
           }
         }
 
+        Button(action: { intent.send(action: .onTapAlert) }) {
+          VStack {
+            Text("show alert")
+              .foregroundColor(.orange)
+            Text("navigator.alert(target: .default, model: alertModel)")
+              .code()
+          }
+        }
+
         Button(action: { intent.send(action: .onTapSheet)}) {
           VStack {
             Text("open Page 2 as Sheet")

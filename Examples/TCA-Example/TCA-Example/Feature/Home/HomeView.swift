@@ -38,6 +38,15 @@ extension HomeView: View {
           }
         }
 
+        Button(action: { viewStore.send(.onTapAlert) }) {
+          VStack {
+            Text("show alert")
+              .foregroundColor(.orange)
+            Text("navigator.alert(target: .default, model: alertModel)")
+              .code()
+          }
+        }
+
         Button(action: { viewStore.send(.onTapSheet) }) {
           VStack {
             Text("open Page 2 as Sheet")

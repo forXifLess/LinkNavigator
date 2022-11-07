@@ -9,6 +9,7 @@ public struct Home: ReducerProtocol {
     case getPaths
     case onTapNext
     case onTapPage3
+    case onTapAlert
     case onTapSheet
     case onTapFullSheet
   }
@@ -28,6 +29,10 @@ public struct Home: ReducerProtocol {
 
       case .onTapPage3:
         sideEffect.routeToPage3()
+        return .none
+
+      case .onTapAlert:
+        sideEffect.showAlert()
         return .none
 
       case .onTapSheet:

@@ -46,6 +46,14 @@ extension HomeIntent: IntentType, HomeIntentType {
 
     case .onTapPage3:
       navigator.next(paths: ["page1", "page2", "page3"], items: [:], isAnimated: true)
+
+    case .onTapAlert:
+      let alertModel = Alert(
+        title: "Title",
+        message: "message",
+        buttons: [.init(title: "OK", style: .default, action: { print("OK tapped") })],
+        flagType: .default)
+      navigator.alert(target: .default, model: alertModel)
       
     case .onTapSheet:
       navigator.sheet(paths: ["page1", "page2"], items: [:], isAnimated: true)

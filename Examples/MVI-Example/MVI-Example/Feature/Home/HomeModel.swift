@@ -9,6 +9,7 @@ enum HomeModel {
     case getPaths
     case onTapNext
     case onTapPage3
+    case onTapAlert
     case onTapSheet
     case onTapFullSheet
   }

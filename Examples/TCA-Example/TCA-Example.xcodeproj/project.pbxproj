@@ -96,8 +96,8 @@
 			children = (
 				7A8EE56F29090E38003AC39E /* Page4View.swift */,
 				7A8EE57129090E80003AC39E /* Page4Core.swift */,
-				7A8EE57529090F28003AC39E /* Page4RouteBuilder.swift */,
 				7A8EE57329090EDD003AC39E /* Page4SideEffect.swift */,
+				7A8EE57529090F28003AC39E /* Page4RouteBuilder.swift */,
 			);
 			path = Page4;
 			sourceTree = "<group>";
@@ -162,8 +162,8 @@
 			children = (
 				D2A6C08E2906427D00545BD9 /* HomeView.swift */,
 				D2A6C0902906428600545BD9 /* HomeCore.swift */,
-				D2A6C0A8290654FD00545BD9 /* HomeRouteBuilder.swift */,
 				D25E889C290676BD00E5BDCF /* HomeSideEffect.swift */,
+				D2A6C0A8290654FD00545BD9 /* HomeRouteBuilder.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -173,8 +173,8 @@
 			children = (
 				D2A6C0932906432F00545BD9 /* Page1View.swift */,
 				D2A6C0952906433600545BD9 /* Page1Core.swift */,
-				D25E8896290674E700E5BDCF /* Page1RouteBuilder.swift */,
 				D25E88A2290687D300E5BDCF /* Page1SideEffect.swift */,
+				D25E8896290674E700E5BDCF /* Page1RouteBuilder.swift */,
 			);
 			path = Page1;
 			sourceTree = "<group>";
@@ -184,8 +184,8 @@
 			children = (
 				D2A6C0982906434900545BD9 /* Page2View.swift */,
 				D2A6C09A2906435100545BD9 /* Page2Core.swift */,
-				D25E8898290674EE00E5BDCF /* Page2RouteBuilder.swift */,
 				D25E88A429068CF400E5BDCF /* Page2SideEffect.swift */,
+				D25E8898290674EE00E5BDCF /* Page2RouteBuilder.swift */,
 			);
 			path = Page2;
 			sourceTree = "<group>";
@@ -195,8 +195,8 @@
 			children = (
 				D2A6C09D2906435C00545BD9 /* Page3View.swift */,
 				D2A6C09F2906436100545BD9 /* Page3Core.swift */,
-				D25E889A290674F800E5BDCF /* Page3RouteBuilder.swift */,
 				D25E88A629068E5100E5BDCF /* Page3SideEffect.swift */,
+				D25E889A290674F800E5BDCF /* Page3RouteBuilder.swift */,
 			);
 			path = Page3;
 			sourceTree = "<group>";

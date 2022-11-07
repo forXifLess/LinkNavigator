@@ -1,5 +1,11 @@
 import UIKit
 
+public enum NavigationTarget {
+  case `default`
+  case root
+  case sub
+}
+
 public protocol LinkNavigatorType {
 
   /// 현재의 Navigation 스택을 배열 형태로 반환합니다.
@@ -66,6 +72,11 @@ public protocol LinkNavigatorType {
 
   /// Modal 이 올라와 있는 상황에서, 뒤에 있는 마지막 화면을 다시 로딩시킵니다.
   func rootReloadLast(isAnimated: Bool, items: [String: String])
+
+  /// 시스템 Alert 를 보여줍니다.
+  /// target 파라미터를 default 로 설정하면 Modal 이 올라와 있는 것과 무관하게 Alert 를 사용자에게 보여줍니다.
+  /// 또는 Alert 를 보여줄 타겟 컨트롤러를 root, sub 중에서 선택할 수 있습니다.
+  func alert(target: NavigationTarget, model: Alert)
 }
 
 public final class LinkNavigator {
@@ -247,6 +258,17 @@ extension LinkNavigator: LinkNavigatorType {
     guard let new = builders.first(where: { $0.matchPath == lastPath })?.build(self, items, dependency) else { return }
     let joinedViewControllers = Array(rootNavigationController.viewControllers.dropLast()) + [new]
     rootNavigationController.setViewControllers(joinedViewControllers, animated: isAnimated)
+  }
+
+  public func alert(target: NavigationTarget, model: Alert) {
+    switch target {
+    case .default:
+      alert(target: isSubNavigationControllerPresented ? .sub : .root, model: model)
+    case .root:
+      rootNavigationController.present(model.build(), animated: true, completion: .none)
+    case .sub:
+      subNavigationController.present(model.build(), animated: true, completion: .none)
+    }
   }
 }
 
