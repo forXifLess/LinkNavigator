@@ -1,25 +1,65 @@
 import UIKit
 
-public enum NavigationTarget {
-  case `default`
-  case root
-  case sub
-}
-
 public protocol LinkNavigatorType {
 
-  /// 현재의 Navigation 스택을 배열 형태로 반환합니다.
+  /// Returns the current navigation stack.
+  ///
+  /// - Note: if the modal is active, ``currentPaths`` will return
+  ///   the `subNavigationController`'s current navigation stack,
+  ///   even when you call ``currentPaths`` on root page.
+  ///
+  /// - Returns: Current navigation stack as an array.
   var currentPaths: [String] { get }
 
-  /// Modal 이 올라와 있는 상황에서, Root Navigation 스택을 배열 형태로 반환합니다.
+  /// Returns the `rootNavigationController`'s current navigation stack.
+  ///
+  /// - Returns: `rootNavigationController`'s current navigation stack as an array.
   var rootCurrentPaths: [String] { get }
 
-  /// 특정 화면으로 이동합니다. 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
+  /// Pushes one or many pages.
+  ///
+  /// You can append one or many pages in sequence on the current navigation stack.
+  /// If you want to pass some values to the next page, use `items` parameter.
+  ///
+  /// ```swift
+  /// case .onTapNextWithMessage:
+  ///   navigator.next(
+  ///     paths: ["page4"],
+  ///     items: ["page4-message": state.messageYouTyped], // passes values here.
+  ///     isAnimated: true)
+  ///
+  /// // RouteBuilder catches `items`'s arguments using exact key.
+  /// struct Page4RouteBuilder: RouteBuilder {
+  ///   var matchPath: String { "page4" }
+  ///
+  ///   var build: (LinkNavigatorType, [String: String], DependencyType) -> UIViewController? {
+  ///     { navigator, items, dep in
+  ///       WrappingController(matchingKey: matchPath) {
+  ///         AnyView(Page4View(
+  ///           store: .init(
+  ///             initialState: Page4.State(message: items["page4-message"] ?? ""), // catches here.
+  ///             reducer: Page4())))
+  ///       }
+  ///     }
+  ///   }
+  /// }
+  /// ```
+  ///
+  /// - Parameters:
+  ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - items: A dictionary of `String` type key-value pairs.
+  ///   - isAnimated: makes the transition to be animated.
   func next(paths: [String], items: [String: String], isAnimated: Bool)
 
-  /// Modal 이 올라와 있는 상황에서, 뒤에 있는 화면이 특정 화면으로 이동합니다.
-  /// Modal 이 없는 상황에서는 next(path:items:isAnimated) 메서드와 동일하게 동작합니다.
-  /// 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
+  /// Pushes one or many pages on the `rootNavigationController`'s current
+  /// navigation stack, especially when the modal is active.
+  ///
+  /// - Note: If the modal is inactive, this method does same thing as ``next(paths:items:isAnimated:)``.
+  ///
+  /// - Parameters:
+  ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - items: A dictionary of `String` type key-value pairs.
+  ///   - isAnimated: makes the transition to be animated.
   func rootNext(paths: [String], items: [String: String], isAnimated: Bool)
 
   /// 특정 화면을 Sheet Modal 형태로 올립니다.
@@ -95,6 +135,12 @@ public final class LinkNavigator {
 		self.dependency = dependency
 		self.builders = builders
 	}
+}
+
+public enum NavigationTarget {
+  case `default`
+  case root
+  case sub
 }
 
 extension LinkNavigator {
