@@ -1,31 +1,38 @@
 import Combine
 import Foundation
 
-final class Container<Intent, State>: ObservableObject {
+// MARK: - IntentType
 
-  // MARK: Lifecycle
+protocol IntentType: AnyObject {
+  associatedtype ViewAction
+  associatedtype State
 
-  init(
-    intent: Intent,
-    state: State,
-    modelChangePublisher: ObjectWillChangePublisher)
-  {
-    self.intent = intent
-    self.state = state
+  var state: State { get set }
+  var cancellable: Set<AnyCancellable> { get set }
 
-    modelChangePublisher
-      .receive(on: RunLoop.main)
-      .sink(receiveValue: objectWillChange.send)
-      .store(in: &cacncellable)
+  func send(action: ViewAction)
+  func send(action: ViewAction, viewEffect: (() -> Void)?)
+  func mutate(action: ViewAction, viewEffect: (() -> Void)?)
+}
+
+extension IntentType {
+
+  func send(action: ViewAction) {
+    mutate(action: action, viewEffect: .none)
   }
 
-  // MARK: Internal
+  func send(action: ViewAction, viewEffect: (() -> Void)?) {
+    mutate(action: action, viewEffect: viewEffect)
+  }
+}
 
-  let intent: Intent
-  let state: State
+// MARK: - IntentBindingType
 
-  // MARK: Private
+protocol IntentBindingType {
+  associatedtype IntentType
+  associatedtype State
 
-  private var cacncellable: Set<AnyCancellable> = []
-
+  var container: Container<IntentType, State> { get }
+  var intent: IntentType { get }
+  var state: State { get }
 }
