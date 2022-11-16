@@ -2,7 +2,17 @@ import UIKit
 
 public protocol LinkNavigatorType {
 
-  /// Returns the current navigation stack.
+  /// Returns an array of ``RouteBuilder/matchPath`` of the current navigation stack.
+  ///
+  /// The ``currentPaths`` will return current navigation stack
+  /// an array of  ``RouteBuilder/matchPath``, which is `String` type.
+  ///
+  /// Let's Suppose that your current stack is `Home/Page1/Page2`.
+  ///
+  /// ```swift
+  /// var currentStack = navigator.currentPaths
+  /// print(currentStack) // Prints "["home", "page1", "page2"]"
+  /// ```
   ///
   /// - Note: if the modal is active, ``currentPaths`` will return
   ///   the `subNavigationController`'s current navigation stack,
@@ -11,7 +21,15 @@ public protocol LinkNavigatorType {
   /// - Returns: Current navigation stack as an array.
   var currentPaths: [String] { get }
 
-  /// Returns the `rootNavigationController`'s current navigation stack.
+  /// Returns an array of ``RouteBuilder/matchPath`` of the `rootNavigationController`'s current navigation stack.
+  ///
+  /// ```swift
+  /// // current `root` navigation stack == ["dashboard", "signIn"]
+  /// // current `sub` navigation stack == ["signUp"]
+  ///
+  /// var rootStack = navigator.rootCurrentPaths
+  /// print(rootStack) // Prints "["dashboard", "signIn"]"
+  /// ```
   ///
   /// - Returns: `rootNavigationController`'s current navigation stack as an array.
   var rootCurrentPaths: [String] { get }
@@ -62,17 +80,49 @@ public protocol LinkNavigatorType {
   ///   - isAnimated: makes the transition to be animated.
   func rootNext(paths: [String], items: [String: String], isAnimated: Bool)
 
-  /// 특정 화면을 Sheet Modal 형태로 올립니다.
-  /// 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
+  /// Presents a sheet that has its own navigation stack.
+  ///
+  /// - Note: If there's an active modal in `rootNavigationController`, then
+  ///   ``sheet(paths:items:isAnimated:)`` will dismiss that modal and present a new one.
+  ///
+  /// - Parameters:
+  ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - items: A dictionary of `String` type key-value pairs.
+  ///   - isAnimated: makes the transition to be animated.
   func sheet(paths: [String], items: [String: String], isAnimated: Bool)
 
-  /// 특정 화면을 Full Sheet Modal 형태로 올립니다.
-  /// 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
+  /// Presents a full screen sheet that has its own navigation stack.
+  ///
+  /// - Note: If there's an active modal in `rootNavigationController`, then
+  ///   ``fullSheet(paths:items:isAnimated:)`` will dismiss that modal and present a new one.
+  ///
+  /// - Parameters:
+  ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - items: A dictionary of `String` type key-value pairs.
+  ///   - isAnimated: makes the transition to be animated.
   func fullSheet(paths: [String], items: [String: String], isAnimated: Bool)
 
-  /// 특정 화면을 Sheet Modal 형태로 올립니다.
-  /// 여러 개의 경로를 순서대로 입력해서 Navigation 스택을 쌓을 수 있습니다.
-  /// iOS 와 iPad 각각에서 어떤 Modal Presentation Style 을 사용할 것인지 분기처리할 수 있습니다.
+  /// Presents a custom sheet that has its own navigation stack.
+  ///
+  /// You can choose modal presentation styles for iPhone and iPad respectively.
+  ///
+  /// ```swift
+  /// navigator.customSheet(
+  ///   paths: ["signIn"],
+  ///   items: [:],
+  ///   isAnimated: true,
+  ///   iPhonePresentationStyle: .fullScreen,
+  ///   iPadPresentationStyle: .automatic)
+  /// ```
+  ///
+  /// - Note: If there's an active modal in `rootNavigationController`, then
+  ///   ``customSheet(paths:items:isAnimated:iPhonePresentationStyle:iPadPresentationStyle:)``
+  ///   will dismiss that modal and present a new one.
+  ///
+  /// - Parameters:
+  ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - items: A dictionary of `String` type key-value pairs.
+  ///   - isAnimated: makes the transition to be animated.
   func customSheet(
     paths: [String],
     items: [String: String],
@@ -80,42 +130,200 @@ public protocol LinkNavigatorType {
     iPhonePresentationStyle: UIModalPresentationStyle,
     iPadPresentationStyle: UIModalPresentationStyle)
 
-  /// Navigation 스택을 교체합니다. 다른 맥락의 스택으로 이동하거나, 복잡하게 쌓인 스택을 청소할 때 사용합니다.
+  /// Replaces current navigation stack managed by `rootNavigationController` with the new one.
+  ///
+  /// Let's suppose that you only know the `dashboard` page is in the current navigation stack.
+  /// You want to keep the pages up to the `dashboard` and append some new pages after that.
+  /// In order to figure out unknown pages up to a specific page, you need to use ``range(path:)`` method.
+  ///
+  /// ```swift
+  /// // current navigation stack == [..., "dashboard", ...]
+  /// // you want to make a new stack like this, [..., "dashboard", "step1", "step2"].
+  ///
+  /// var new = navigator.range(path: "dashboard") + ["step1", "step2"]
+  /// navigator.replace(paths: new, items: [:], isAnimated: true)
+  /// ```
+  ///
+  /// - Parameters:
+  ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - items: A dictionary of `String` type key-value pairs.
+  ///   - isAnimated: makes the transition to be animated.
   func replace(paths: [String], items: [String: String], isAnimated: Bool)
 
-  /// 하나의 특정 화면으로 이동합니다. 만약 그 경로가 이미 Navigation 스택에 있다면, 그 화면으로 돌아갑니다.
-  /// 스택에 존재하지 않는 경로라면, 그 화면으로 이동하면서 Navigation 스택을 쌓습니다.
+  /// Pushes or Rewinds a specific page.
+  ///
+  /// If the page you want is already contained in the current navigation stack,
+  /// `navigator` rewinds to that page.
+  /// Else If the page is *not* contained in the stack,
+  /// `navigator` pushes that page same as ``next(paths:items:isAnimated:)`` method.
+  ///
+  /// ```swift
+  /// // Rewinding
+  /// // current navigation stack == [..., "dashboard", ..., "setting"]
+  ///
+  /// navigator.backOrNext(path: "dashboard", items: [:], isAnimated: true)
+  /// // then, you will have this stack, [..., "dashboard"]
+  ///
+  /// // Pushing
+  /// // current navigation stack == [..., "setting"]
+  ///
+  /// navigator.backOrNext(path: "alarm", items: [:], isAnimated: true)
+  /// // then, you will have this stack, [..., "setting", "alarm"]
+  /// ```
+  ///
+  /// - Parameters:
+  ///   - path: A string of ``RouteBuilder/matchPath`` for a specific page.
+  ///   - items: A dictionary of `String` type key-value pairs.
+  ///   - isAnimated: makes the transition to be animated.
   func backOrNext(path: String, items: [String: String], isAnimated: Bool)
 
-  /// Modal 이 올라와 있는 상황에서, 뒤에 있는 화면이 하나의 특정 화면으로 이동합니다.
-  /// 만약 그 경로가 이미 Navigation 스택에 있다면, 그 화면으로 돌아갑니다.
-  /// 스택에 존재하지 않는 경로라면, 그 화면으로 이동하면서 Navigation 스택을 쌓습니다.
-  /// Modal 이 없는 상황에서는 backOrNext(path:items:isAnimated:) 메서드와 동일하게 동작합니다.
+  /// Pushes or Rewinds a specific page on the `rootNavigationController`'s current
+  /// navigation stack, especially when the modal is active.
+  ///
+  /// If the page you want is already contained in the root navigation stack,
+  /// `navigator` rewinds to that page.
+  /// Else If the page is *not* contained in the stack,
+  /// `navigator` pushes that page same as ``rootNext(paths:items:isAnimated:)`` method.
+  ///
+  /// Let's suppose that you will select a specific clothing on the modal page.
+  /// When you tap some button, `clothingDetail` page will be presented behind the modal
+  /// so that you can see the `clothingDetail` page after dismissing the modal.
+  ///
+  /// ```swift
+  /// // current `root` navigation stack == [..., "dashboard"]
+  /// // current `sub` navigation stack == ["selectClothing"]
+  ///
+  /// navigator.rootBackOrNext(
+  ///   path: "clothingDetail",
+  ///   items: ["clothingID": "123"],
+  ///   isAnimated: false)
+  /// // then, current `root` stack == [..., "dashboard", "clothingDetail"]
+  /// ```
+  ///
+  /// - Note: If the modal is inactive, this method does same thing as ``backOrNext(path:items:isAnimated:)``.
+  ///
+  /// - Parameters:
+  ///   - path: A string of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - items: A dictionary of `String` type key-value pairs.
+  ///   - isAnimated: makes the transition to be animated.
   func rootBackOrNext(path: String, items: [String: String], isAnimated: Bool)
 
-  /// 직전 화면으로 돌아갑니다. Navigation, Modal 모두에서 사용 가능합니다.
+  /// Goes back to previous page.
+  ///
+  /// If you are on the modal that has only one page,
+  /// ``back(isAnimated:)`` will dismiss the modal.
+  ///
+  /// - Parameters:
+  ///   - isAnimated: makes the transition to be animated.
   func back(isAnimated: Bool)
 
-  /// Navigation 스택에서 특정 화면을 선택적으로 제거합니다.
+  /// Removes one or many pages.
+  ///
+  /// ```swift
+  /// // current navigation stack == ["signUpStep1", "signUpStep2", "dashboard"]
+  ///
+  /// navigator.remove(paths: ["signUpStep1", "signUpStep2"])
+  /// // then, you will have this stack, ["dashboard"]
+  /// ```
+  ///
+  /// - Note: Do not use ``remove(paths:)`` for popping the last page.
+  ///   Use ``back(isAnimated:)`` method instead.
+  ///
+  /// - Parameters:
+  ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
   func remove(paths: [String])
 
-  /// Modal 이 올라와 있는 상황에서, Root Navigation 스택에서 특정 화면을 선택적으로 제거합니다.
+  /// Removes one or many pages on the `rootNavigationController`'s current
+  /// navigation stack, especially when the modal is active.
+  ///
+  /// Let's suppose that you will sign up on the modal page.
+  /// When you finish, `signIn` page behind the modal will be removed
+  /// so that you can see the `dashboard` page after dismissing the modal.
+  ///
+  /// ```swift
+  /// // current `root` navigation stack == ["dashboard", "signIn"]
+  /// // current `sub` navigation stack == ["signUp"]
+  ///
+  /// navigator.rootRemove(paths: ["signIn"])
+  /// // then, current `root` stack == ["dashboard"]
+  /// ```
+  ///
+  /// - Note: If the modal is inactive, this method does same thing as ``remove(paths:)``.
+  ///
+  /// - Parameters:
+  ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
   func rootRemove(paths: [String])
 
-  /// Modal 을 dismiss 하고 클로저를 실행합니다.
-  /// 만약 Modal 이 올라와 있는 상황이 아니라면, 이 메서드는 무시됩니다.
+  /// Dismisses the modal and calls completion closure.
+  ///
+  /// - Note: If the modal is inactive, this method will be ignored.
+  ///
+  /// - Parameters:
+  ///   - isAnimated: makes the transition to be animated.
+  ///   - completeAction: The closure to execute after the modal is dismissed.
+  ///     This closure has no return value and takes no parameters.
   func close(isAnimated: Bool, completeAction: @escaping () -> Void)
 
-  /// Navigation 스택에서 특정 화면까지의 경로를 배열 형태로 반환합니다.
-  /// path 인자값으로 들어온 경로가 스택에 없는 경우, 현재의 Navigation 스택을 배열 형태로 반환합니다.
+  /// Returns an array of ``RouteBuilder/matchPath`` up to a specific page from the current navigation stack.
+  ///
+  /// Let's suppose that you want to know pages up to the specific page which is `dashboard`.
+  ///
+  /// ```swift
+  /// // current navigation stack == ["page1", "page2", "dashboard", ...]
+  ///
+  /// var stackUpToDashboard = navigator.range(path: "dashboard")
+  /// print(stackUpToDashboard) // Prints "["page1", "page2", "dashboard"]"
+  /// ```
+  ///
+  /// - Note: If the argument of `path` is not contained in the current navigation stack,
+  ///   this method does same thing as ``currentPaths``.
+  ///
+  /// - Parameters:
+  ///   - path: A string of ``RouteBuilder/matchPath`` for a specific page.
+  ///
+  /// - Returns: An array of  ``RouteBuilder/matchPath`` up to a specific page from the current navigation stack.
   func range(path: String) -> [String]
 
-  /// Modal 이 올라와 있는 상황에서, 뒤에 있는 마지막 화면을 다시 로딩시킵니다.
+  /// Reloads the last page of the `rootNavigationController`'s current navigation stack.
+  ///
+  /// Let's suppose that you will sign in on the modal page.
+  /// When you finish, the `dashboard` page behind the modal should be reloaded
+  /// so that you can see the personalized `dashboard` page after dismissing the modal.
+  ///
+  /// ```swift
+  /// // current `root` navigation stack == ["dashboard"]
+  /// // current `sub` navigation stack == ["signIn"]
+  ///
+  /// case .onTapSignIn:
+  ///   // some signing in process...
+  ///   navigator.rootReloadLast(isAnimated: false, items: [:])
+  ///   navigator.close(isAnimated: true, completeAction: { })
+  /// ```
+  ///
+  /// - Parameters:
+  ///   - isAnimated: makes the transition to be animated.
+  ///   - items: A dictionary of `String` type key-value pairs.
   func rootReloadLast(isAnimated: Bool, items: [String: String])
 
-  /// 시스템 Alert 를 보여줍니다.
-  /// target 파라미터를 default 로 설정하면 Modal 이 올라와 있는 것과 무관하게 Alert 를 사용자에게 보여줍니다.
-  /// 또는 Alert 를 보여줄 타겟 컨트롤러를 root, sub 중에서 선택할 수 있습니다.
+  /// Presents a system Alert.
+  ///
+  /// If the `target` parameter is set to `default`, an Alert is shown regardless of whether the modal is active.
+  /// Also, you can opt-in on which view controller to show an Alert. (`root` or `sub`)
+  ///
+  /// ```swift
+  /// case .onTapAlert:
+  ///   let alertModel = Alert(
+  ///     title: "Title",
+  ///     message: "message",
+  ///     buttons: [.init(title: "OK", style: .default, action: { print("OK tapped") })],
+  ///     flagType: .default)
+  ///
+  ///   navigator.alert(target: .default, model: alertModel)
+  /// ```
+  ///
+  /// - Parameters:
+  ///   - target: The view controller to show an Alert.
+  ///   - model: A custom type for building an Alert.
   func alert(target: NavigationTarget, model: Alert)
 }
 
@@ -318,37 +526,37 @@ extension LinkNavigator: LinkNavigatorType {
   }
 }
 
-extension LinkNavigator {
-  fileprivate var isSubNavigationControllerPresented: Bool {
+fileprivate extension LinkNavigator {
+  var isSubNavigationControllerPresented: Bool {
     rootNavigationController.presentedViewController != .none
   }
 
-  fileprivate var currentActivityNavigationController: UINavigationController {
+  var currentActivityNavigationController: UINavigationController {
     isSubNavigationControllerPresented ? subNavigationController : rootNavigationController
   }
 
-  fileprivate func isCurrentContain(path: String) -> Bool {
+  func isCurrentContain(path: String) -> Bool {
     currentActivityNavigationController
       .viewControllers
       .compactMap { $0 as? WrappingController }
       .first(where: { $0.matchingKey == path }) != .none
   }
 
-  fileprivate func isCurrentContainRootViewController(path: String) -> Bool {
+  func isCurrentContainRootViewController(path: String) -> Bool {
     rootNavigationController
       .viewControllers
       .compactMap { $0 as? WrappingController }
       .first(where: { $0.matchingKey == path }) != .none
   }
 
-  fileprivate func findViewController(path: String) -> UIViewController? {
+  func findViewController(path: String) -> UIViewController? {
     currentActivityNavigationController
       .viewControllers
       .compactMap { $0 as? WrappingController }
       .first(where: { $0.matchingKey == path })
   }
 
-  fileprivate func findViewControllerRootView(path: String) -> UIViewController? {
+  func findViewControllerRootView(path: String) -> UIViewController? {
     rootNavigationController
       .viewControllers
       .compactMap { $0 as? WrappingController }
