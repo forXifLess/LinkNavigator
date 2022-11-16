@@ -279,7 +279,7 @@ let package = Package(
       targets: ["MyPackage"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/interactord/LinkNavigator.git", .upToNextMajor(from: "0.3.0"))
+    .package(url: "https://github.com/interactord/LinkNavigator.git", .upToNextMajor(from: "0.3.2"))
   ],
   targets: [
     .target(
