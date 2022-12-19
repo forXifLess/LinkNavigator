@@ -47,7 +47,7 @@ extension Page3SideEffectLive: Page3SideEffect {
     {
       navigator.close(isAnimated: true) {
         print("modal dismissed!")
-        navigator.rootReloadLast(isAnimated: false, items: [:])
+        navigator.rootReloadLast(items: [:], isAnimated: false)
       }
     }
   }

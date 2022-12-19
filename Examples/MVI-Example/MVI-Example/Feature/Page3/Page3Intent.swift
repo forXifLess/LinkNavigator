@@ -56,7 +56,7 @@ extension Page3Intent: IntentType, Page3IntentType {
     case .onTapClose:
       navigator.close(isAnimated: true) {
         print("modal dismissed!")
-        self.navigator.rootReloadLast(isAnimated: false, items: [:])
+        self.navigator.rootReloadLast(items: [:], isAnimated: true)
       }
     }
   }

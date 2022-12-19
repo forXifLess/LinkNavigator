@@ -296,14 +296,14 @@ public protocol LinkNavigatorType {
   ///
   /// case .onTapSignIn:
   ///   // some signing in process...
-  ///   navigator.rootReloadLast(isAnimated: false, items: [:])
+  ///   navigator.rootReloadLast(items: [:], isAnimated: false)
   ///   navigator.close(isAnimated: true, completeAction: { })
   /// ```
   ///
   /// - Parameters:
-  ///   - isAnimated: makes the transition to be animated.
   ///   - items: A dictionary of `String` type key-value pairs.
-  func rootReloadLast(isAnimated: Bool, items: [String: String])
+  ///   - isAnimated: makes the transition to be animated.
+  func rootReloadLast(items: [String: String], isAnimated: Bool)
 
   /// Presents a system Alert.
   ///
@@ -496,9 +496,7 @@ extension LinkNavigator: LinkNavigatorType {
 
   public func close(isAnimated: Bool, completeAction: @escaping () -> Void) {
     guard isSubNavigationControllerPresented else { return }
-    rootNavigationController.dismiss(animated: isAnimated, completion: {
-      completeAction()
-    })
+    rootNavigationController.dismiss(animated: isAnimated, completion: completeAction)
   }
 
   public func range(path: String) -> [String] {
@@ -507,7 +505,7 @@ extension LinkNavigator: LinkNavigatorType {
     return Array(currentPaths[start...max(start, end)])
   }
 
-  public func rootReloadLast(isAnimated: Bool, items: [String : String]) {
+  public func rootReloadLast(items: [String : String], isAnimated: Bool) {
     guard let lastPath = rootCurrentPaths.last else { return }
     guard let new = builders.first(where: { $0.matchPath == lastPath })?.build(self, items, dependency) else { return }
     let joinedViewControllers = Array(rootNavigationController.viewControllers.dropLast()) + [new]

@@ -122,7 +122,7 @@ If you'd like to contribute a translation, please [open a PR](https://github.com
 - forcely reload the last page behind the modal. This is useful when you need to call the [onAppear(perform:)](https://developer.apple.com/documentation/swiftui/view/onappear(perform:)) again.
 
   ```swift
-  navigator.rootReloadLast(isAnimated: false, items: [:])
+  navigator.rootReloadLast(items: [:], isAnimated: false)
   ```
 
 <br>
