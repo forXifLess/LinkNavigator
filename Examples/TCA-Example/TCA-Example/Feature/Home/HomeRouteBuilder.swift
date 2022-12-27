@@ -7,10 +7,10 @@ struct HomeRouteBuilder: RouteBuilder {
   var build: (LinkNavigatorType, [String: String], DependencyType) -> UIViewController? {
     { navigator, items, dep in
       WrappingController(matchingKey: matchPath) {
-        AnyView(HomeView(
+        HomeView(
           store: .init(
             initialState: Home.State(),
-            reducer: Home())))
+            reducer: Home()))
       }
     }
   }

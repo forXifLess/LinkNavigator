@@ -53,10 +53,10 @@ public protocol LinkNavigatorType {
   ///   var build: (LinkNavigatorType, [String: String], DependencyType) -> UIViewController? {
   ///     { navigator, items, dep in
   ///       WrappingController(matchingKey: matchPath) {
-  ///         AnyView(Page4View(
+  ///         Page4View(
   ///           store: .init(
   ///             initialState: Page4.State(message: items["page4-message"] ?? ""), // catches here.
-  ///             reducer: Page4())))
+  ///             reducer: Page4()))
   ///       }
   ///     }
   ///   }
@@ -367,14 +367,14 @@ extension LinkNavigator: LinkNavigatorType {
   public var currentPaths: [String] {
     currentActivityNavigationController
       .viewControllers
-      .compactMap { $0 as? WrappingController }
+      .compactMap { $0 as? MatchingKeyUsable }
       .map(\.matchingKey)
   }
 
   public var rootCurrentPaths: [String] {
     rootNavigationController
       .viewControllers
-      .compactMap { $0 as? WrappingController }
+      .compactMap { $0 as? MatchingKeyUsable }
       .map(\.matchingKey)
   }
 
@@ -477,7 +477,7 @@ extension LinkNavigator: LinkNavigatorType {
   public func remove(paths: [String]) {
     let new = currentActivityNavigationController
       .viewControllers
-      .compactMap{ $0 as? WrappingController }
+      .compactMap{ $0 as? MatchingKeyUsable & UIViewController }
       .filter{ !paths.contains($0.matchingKey) }
 
     guard new.count != currentActivityNavigationController.viewControllers.count else { return }
@@ -487,7 +487,7 @@ extension LinkNavigator: LinkNavigatorType {
   public func rootRemove(paths: [String]) {
     let new = rootNavigationController
       .viewControllers
-      .compactMap{ $0 as? WrappingController }
+      .compactMap{ $0 as? MatchingKeyUsable & UIViewController }
       .filter{ !paths.contains($0.matchingKey) }
 
     guard new.count != rootNavigationController.viewControllers.count else { return }
@@ -536,28 +536,28 @@ fileprivate extension LinkNavigator {
   func isCurrentContain(path: String) -> Bool {
     currentActivityNavigationController
       .viewControllers
-      .compactMap { $0 as? WrappingController }
-      .first(where: { $0.matchingKey == path }) != .none
+      .compactMap { $0 as? MatchingKeyUsable }
+      .first(where: { $0.matchingKey == path }) != nil
   }
 
   func isCurrentContainRootViewController(path: String) -> Bool {
     rootNavigationController
       .viewControllers
-      .compactMap { $0 as? WrappingController }
-      .first(where: { $0.matchingKey == path }) != .none
+      .compactMap { $0 as? MatchingKeyUsable }
+      .first(where: { $0.matchingKey == path }) != nil
   }
 
   func findViewController(path: String) -> UIViewController? {
     currentActivityNavigationController
       .viewControllers
-      .compactMap { $0 as? WrappingController }
+      .compactMap { $0 as? MatchingKeyUsable & UIViewController }
       .first(where: { $0.matchingKey == path })
   }
 
   func findViewControllerRootView(path: String) -> UIViewController? {
     rootNavigationController
       .viewControllers
-      .compactMap { $0 as? WrappingController }
+      .compactMap { $0 as? MatchingKeyUsable & UIViewController }
       .first(where: { $0.matchingKey == path })
   }
 }

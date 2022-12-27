@@ -1,12 +1,16 @@
 import SwiftUI
 
-public final class WrappingController: UIHostingController<AnyView> {
+protocol MatchingKeyUsable {
+  var matchingKey: String { get }
+}
+
+public final class WrappingController<Content: View>: UIHostingController<Content>, MatchingKeyUsable {
 
 	let matchingKey: String
 
 	public init(
 		matchingKey: String,
-		@ViewBuilder content: @escaping () -> AnyView) {
+    @ViewBuilder content: () -> Content) {
 		self.matchingKey = matchingKey
 		super.init(rootView: content())
 	}

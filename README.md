@@ -253,7 +253,7 @@ For example, you can put it in `ViewModel` or `Environment`.
     var build: (LinkNavigatorType, [String: String], DependencyType) -> UIViewController? {
       { navigator, items, dependency in
         return WrappingController(matchingKey: matchPath) {
-          AnyView(HomePage(navigator: navigator))
+          HomePage(navigator: navigator)
         }
       }
     }

@@ -7,10 +7,10 @@ struct Page4RouteBuilder: RouteBuilder {
   var build: (LinkNavigatorType, [String: String], DependencyType) -> UIViewController? {
     { navigator, items, dep in
       WrappingController(matchingKey: matchPath) {
-        AnyView(Page4View.build(
+        Page4View.build(
           intent: Page4Intent(
             initialState: .init(message: items.getValue(key: "page4-message") ?? ""),
-            navigator: navigator)))
+            navigator: navigator))
       }
     }
   }

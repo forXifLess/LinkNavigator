@@ -7,10 +7,10 @@ struct Page3RouteBuilder: RouteBuilder {
   var build: (LinkNavigatorType, [String: String], DependencyType) -> UIViewController? {
     { navigator, items, dep in
       WrappingController(matchingKey: matchPath) {
-        AnyView(Page3View(
+        Page3View(
           store: .init(
             initialState: Page3.State(message: items.getValue(key: "page3-message") ?? ""),
-            reducer: Page3())))
+            reducer: Page3()))
       }
     }
   }
