@@ -328,21 +328,22 @@ public protocol LinkNavigatorType {
 }
 
 public final class LinkNavigator {
-	let rootNavigationController: UINavigationController
-	let subNavigationController: UINavigationController
-	let dependency: DependencyType
-	let builders: [RouteBuilder]
+  let rootNavigationController: UINavigationController
+  let subNavigationController: UINavigationController
+  let dependency: DependencyType
+  let builders: [RouteBuilder]
 
-	public init(
-		rootNavigationController: UINavigationController = .init(),
-		subNavigationController: UINavigationController = .init(),
-		dependency: DependencyType,
-    builders: [RouteBuilder]) {
-		self.rootNavigationController = rootNavigationController
-		self.subNavigationController = subNavigationController
-		self.dependency = dependency
-		self.builders = builders
-	}
+  public init(
+    rootNavigationController: UINavigationController = .init(),
+    subNavigationController: UINavigationController = .init(),
+    dependency: DependencyType,
+    builders: [RouteBuilder])
+  {
+    self.rootNavigationController = rootNavigationController
+    self.subNavigationController = subNavigationController
+    self.dependency = dependency
+    self.builders = builders
+  }
 }
 
 public enum NavigationTarget {
