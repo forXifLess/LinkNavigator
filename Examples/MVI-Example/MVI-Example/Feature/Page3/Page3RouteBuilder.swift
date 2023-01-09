@@ -4,7 +4,7 @@ import SwiftUI
 struct Page3RouteBuilder: RouteBuilder {
   var matchPath: String { "page3" }
 
-  var build: (LinkNavigatorType, [String: String], DependencyType) -> UIViewController? {
+  var build: (LinkNavigatorType, [String: String], DependencyType) -> MatchingViewController? {
     { navigator, items, dep in
       WrappingController(matchingKey: matchPath) {
         Page3View.build(

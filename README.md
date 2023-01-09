@@ -250,7 +250,7 @@ For example, you can put it in `ViewModel` or `Environment`.
   struct HomeRouteBuilder: RouteBuilder {
     var matchPath: String { "home" }
 
-    var build: (LinkNavigatorType, [String: String], DependencyType) -> UIViewController? {
+    var build: (LinkNavigatorType, [String: String], DependencyType) -> MatchingViewController? {
       { navigator, items, dependency in
         return WrappingController(matchingKey: matchPath) {
           HomePage(navigator: navigator)

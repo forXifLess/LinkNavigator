@@ -1,12 +1,12 @@
 import SwiftUI
 
-protocol MatchingKeyUsable {
+public protocol MatchingKeyUsable {
   var matchingKey: String { get }
 }
 
 public final class WrappingController<Content: View>: UIHostingController<Content>, MatchingKeyUsable {
 
-  let matchingKey: String
+  public let matchingKey: String
 
   public init(
     matchingKey: String,
