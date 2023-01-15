@@ -254,6 +254,36 @@ public protocol LinkNavigatorType {
   ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
   func rootRemove(paths: [String])
 
+
+  /// Remove last page in pages.
+  ///
+  /// ```swift
+  /// // current navigation stack == ["pageA", "pageB", "pageA", "pageC"]
+  ///
+  /// navigator.removeLast(paths: "pageA", isAnimated: true)
+  /// // then, you will have this stack, ["pageA", "pageB"]
+  /// ```
+  ///
+  /// - Parameters:
+  ///   - path: A string of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - isAnimated: makes the transition to be animated.
+  func removeLast(path: String, isAnimated: Bool)
+
+  /// Remove last page in pages.
+  ///
+  /// ```swift
+  /// // current navigation stack == ["pageA", "pageB", "pageA", "pageC"]
+  ///
+  /// navigator.removeLastRoot(paths: "pageA", isAnimated: true)
+  /// // then, you will have this stack, ["pageA", "pageB"]
+  /// ```
+  /// - Note: If the modal is inactive, this method does same thing as ``remove(paths:)``.
+  ///
+  /// - Parameters:
+  ///   - path: A string of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - isAnimated: makes the transition to be animated.
+  func removeLastRoot(path: String, isAnimated: Bool)
+
   /// Dismisses the modal and calls completion closure.
   ///
   /// - Note: If the modal is inactive, this method will be ignored.
@@ -447,7 +477,7 @@ extension LinkNavigator: LinkNavigatorType {
 
   public func backOrNext(path: String, items: [String: String], isAnimated: Bool) {
     if isCurrentContain(path: path) {
-      guard let pick = findViewController(path: path) else { return }
+      guard let pick = findFirstViewController(path: path) else { return }
       currentActivityNavigationController.popToViewController(pick, animated: isAnimated)
       return
     }
@@ -457,7 +487,7 @@ extension LinkNavigator: LinkNavigatorType {
 
   public func rootBackOrNext(path: String, items: [String: String], isAnimated: Bool) {
     if isCurrentContainRootViewController(path: path) {
-      guard let pick = findViewControllerRootView(path: path) else { return }
+      guard let pick = findFirstViewControllerRootView(path: path) else { return }
       rootNavigationController.popToViewController(pick, animated: isAnimated)
       return
     }
@@ -493,6 +523,16 @@ extension LinkNavigator: LinkNavigatorType {
 
     guard new.count != rootNavigationController.viewControllers.count else { return }
     rootNavigationController.setViewControllers(new, animated: false)
+  }
+
+  public func removeLast(path: String, isAnimated: Bool) {
+    guard let pick = findLastViewController(path: path) else { return }
+    currentActivityNavigationController.popToViewController(pick, animated: isAnimated)
+  }
+
+  public func removeLastRoot(path: String, isAnimated: Bool) {
+    guard let pick = findLastViewControllerRootView(path: path) else { return }
+    rootNavigationController.popToViewController(pick, animated: isAnimated)
   }
 
   public func close(isAnimated: Bool, completeAction: @escaping () -> Void) {
@@ -548,17 +588,31 @@ fileprivate extension LinkNavigator {
       .first(where: { $0.matchingKey == path }) != nil
   }
 
-  func findViewController(path: String) -> UIViewController? {
+  func findFirstViewController(path: String) -> UIViewController? {
     currentActivityNavigationController
       .viewControllers
       .compactMap { $0 as? MatchingKeyUsable & UIViewController }
       .first(where: { $0.matchingKey == path })
   }
 
-  func findViewControllerRootView(path: String) -> UIViewController? {
+  func findLastViewController(path: String) -> UIViewController? {
+    currentActivityNavigationController
+      .viewControllers
+      .compactMap { $0 as? MatchingKeyUsable & UIViewController }
+      .last(where: { $0.matchingKey == path })
+  }
+
+  func findFirstViewControllerRootView(path: String) -> UIViewController? {
     rootNavigationController
       .viewControllers
       .compactMap { $0 as? MatchingKeyUsable & UIViewController }
       .first(where: { $0.matchingKey == path })
+  }
+
+  func findLastViewControllerRootView(path: String) -> UIViewController? {
+    rootNavigationController
+      .viewControllers
+      .compactMap { $0 as? MatchingKeyUsable & UIViewController }
+      .last(where: { $0.matchingKey == path })
   }
 }
