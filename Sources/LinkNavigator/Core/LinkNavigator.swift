@@ -64,7 +64,7 @@ public protocol LinkNavigatorType {
   /// ```
   ///
   /// - Parameters:
-  ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - paths: An array of ``RouteBuilder/matchPath`` for some specific pages.
   ///   - items: A dictionary of `String` type key-value pairs.
   ///   - isAnimated: makes the transition to be animated.
   func next(paths: [String], items: [String: String], isAnimated: Bool)
@@ -75,7 +75,7 @@ public protocol LinkNavigatorType {
   /// - Note: If the modal is inactive, this method does same thing as ``next(paths:items:isAnimated:)``.
   ///
   /// - Parameters:
-  ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - paths: An array of ``RouteBuilder/matchPath`` for some specific pages.
   ///   - items: A dictionary of `String` type key-value pairs.
   ///   - isAnimated: makes the transition to be animated.
   func rootNext(paths: [String], items: [String: String], isAnimated: Bool)
@@ -86,7 +86,7 @@ public protocol LinkNavigatorType {
   ///   ``sheet(paths:items:isAnimated:)`` will dismiss that modal and present a new one.
   ///
   /// - Parameters:
-  ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - paths: An array of ``RouteBuilder/matchPath`` for some specific pages.
   ///   - items: A dictionary of `String` type key-value pairs.
   ///   - isAnimated: makes the transition to be animated.
   func sheet(paths: [String], items: [String: String], isAnimated: Bool)
@@ -97,7 +97,7 @@ public protocol LinkNavigatorType {
   ///   ``fullSheet(paths:items:isAnimated:)`` will dismiss that modal and present a new one.
   ///
   /// - Parameters:
-  ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - paths: An array of ``RouteBuilder/matchPath`` for some specific pages.
   ///   - items: A dictionary of `String` type key-value pairs.
   ///   - isAnimated: makes the transition to be animated.
   func fullSheet(paths: [String], items: [String: String], isAnimated: Bool)
@@ -120,7 +120,7 @@ public protocol LinkNavigatorType {
   ///   will dismiss that modal and present a new one.
   ///
   /// - Parameters:
-  ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - paths: An array of ``RouteBuilder/matchPath`` for some specific pages.
   ///   - items: A dictionary of `String` type key-value pairs.
   ///   - isAnimated: makes the transition to be animated.
   func customSheet(
@@ -145,7 +145,7 @@ public protocol LinkNavigatorType {
   /// ```
   ///
   /// - Parameters:
-  ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - paths: An array of ``RouteBuilder/matchPath`` for some specific pages.
   ///   - items: A dictionary of `String` type key-value pairs.
   ///   - isAnimated: makes the transition to be animated.
   func replace(paths: [String], items: [String: String], isAnimated: Bool)
@@ -203,7 +203,7 @@ public protocol LinkNavigatorType {
   /// - Note: If the modal is inactive, this method does same thing as ``backOrNext(path:items:isAnimated:)``.
   ///
   /// - Parameters:
-  ///   - path: A string of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - path: A string of ``RouteBuilder/matchPath`` for a specific page.
   ///   - items: A dictionary of `String` type key-value pairs.
   ///   - isAnimated: makes the transition to be animated.
   func rootBackOrNext(path: String, items: [String: String], isAnimated: Bool)
@@ -230,7 +230,7 @@ public protocol LinkNavigatorType {
   ///   Use ``back(isAnimated:)`` method instead.
   ///
   /// - Parameters:
-  ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - paths: An array of ``RouteBuilder/matchPath`` for some specific pages.
   func remove(paths: [String])
 
   /// Removes one or many pages on the `rootNavigationController`'s current
@@ -251,37 +251,45 @@ public protocol LinkNavigatorType {
   /// - Note: If the modal is inactive, this method does same thing as ``remove(paths:)``.
   ///
   /// - Parameters:
-  ///   - paths: An array of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - paths: An array of ``RouteBuilder/matchPath`` for some specific pages.
   func rootRemove(paths: [String])
 
-  /// Remove last page in pages.
+  /// Rewinds a specific page.
+  ///
+  /// If you have a duplicated pages in the current navigation stack,
+  /// `navigator` rewinds to the last page of stack.
   ///
   /// ```swift
-  /// // current navigation stack == ["pageA", "pageB", "pageA", "pageC"]
+  /// // current navigation stack == ["pageA", "pageA", "pageB", "pageC"]
   ///
-  /// navigator.removeLast(paths: "pageA", isAnimated: true)
-  /// // then, you will have this stack, ["pageA", "pageB"]
+  /// navigator.backToLast(path: "pageA", isAnimated: true)
+  /// // then, you will have this stack, ["pageA", "pageA"]
   /// ```
   ///
   /// - Parameters:
-  ///   - path: A string of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - path: A string of ``RouteBuilder/matchPath`` for a specific page.
   ///   - isAnimated: makes the transition to be animated.
-  func removeLast(path: String, isAnimated: Bool)
+  func backToLast(path: String, isAnimated: Bool)
 
-  /// Remove last page in pages.
+  /// Rewinds a specific page on the `rootNavigationController`'s current
+  /// navigation stack, especially when the modal is active.
+  ///
+  /// If you have a duplicated pages in the root navigation stack,
+  /// `navigator` rewinds to the last page of stack.
   ///
   /// ```swift
-  /// // current navigation stack == ["pageA", "pageB", "pageA", "pageC"]
+  /// // current `root` navigation stack == ["pageA", "pageA", "pageB", "pageC"]
+  /// // current `sub` navigation stack == ["pageD"]
   ///
-  /// navigator.removeLastRoot(paths: "pageA", isAnimated: true)
-  /// // then, you will have this stack, ["pageA", "pageB"]
+  /// navigator.rootBackToLast(path: "pageA", isAnimated: true)
+  /// // then, current `root` stack == ["pageA", "pageA"]
   /// ```
-  /// - Note: If the modal is inactive, this method does same thing as ``remove(paths:)``.
+  /// - Note: If the modal is inactive, this method does same thing as ``backToLast(path:isAnimated:)``.
   ///
   /// - Parameters:
-  ///   - path: A string of ``RouteBuilder/matchPath`` for the specific page.
+  ///   - path: A string of ``RouteBuilder/matchPath`` for a specific page.
   ///   - isAnimated: makes the transition to be animated.
-  func removeLastRoot(path: String, isAnimated: Bool)
+  func rootBackToLast(path: String, isAnimated: Bool)
 
   /// Dismisses the modal and calls completion closure.
   ///
@@ -524,12 +532,12 @@ extension LinkNavigator: LinkNavigatorType {
     rootNavigationController.setViewControllers(new, animated: false)
   }
 
-  public func removeLast(path: String, isAnimated: Bool) {
+  public func backToLast(path: String, isAnimated: Bool) {
     guard let pick = findLastViewController(path: path) else { return }
     currentActivityNavigationController.popToViewController(pick, animated: isAnimated)
   }
 
-  public func removeLastRoot(path: String, isAnimated: Bool) {
+  public func rootBackToLast(path: String, isAnimated: Bool) {
     guard let pick = findLastViewControllerRootView(path: path) else { return }
     rootNavigationController.popToViewController(pick, animated: isAnimated)
   }
