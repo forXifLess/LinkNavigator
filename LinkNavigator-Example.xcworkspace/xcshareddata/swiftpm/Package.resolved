@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/pointfreeco/swift-case-paths",
         "state": {
           "branch": null,
-          "revision": "bb436421f57269fbcfe7360735985321585a86e5",
-          "version": "0.10.1"
+          "revision": "c3a42e8d1a76ff557cf565ed6d8b0aee0e6e75af",
+          "version": "0.11.0"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/pointfreeco/swift-composable-architecture",
         "state": {
           "branch": null,
-          "revision": "c9259b5f74892690cb04a9a8088b4a1789b05a7d",
-          "version": "0.47.2"
+          "revision": "6cf778a7da64de9508596a435aa0a5647885d71a",
+          "version": "0.49.2"
         }
       },
       {
@@ -56,12 +56,21 @@
         }
       },
       {
+        "package": "swift-dependencies",
+        "repositoryURL": "https://github.com/pointfreeco/swift-dependencies",
+        "state": {
+          "branch": null,
+          "revision": "7a094fcc6a4fcb34fbe625ecd3acd81b881a6dfb",
+          "version": "0.1.3"
+        }
+      },
+      {
         "package": "swift-identified-collections",
         "repositoryURL": "https://github.com/pointfreeco/swift-identified-collections",
         "state": {
           "branch": null,
-          "revision": "a08887de589e3829d488e0b4b707b2ca804b1060",
-          "version": "0.5.0"
+          "revision": "fd34c544ad27f3ba6b19142b348005bfa85b6005",
+          "version": "0.6.0"
         }
       },
       {
@@ -69,8 +78,8 @@
         "repositoryURL": "https://github.com/pointfreeco/swiftui-navigation",
         "state": {
           "branch": null,
-          "revision": "46acf5ecc1cabdb28d7fe03289f6c8b13a023f52",
-          "version": "0.4.5"
+          "revision": "ddc01cdcddfd30ef7a966049b2e1d251e224ad93",
+          "version": "0.5.0"
         }
       },
       {
@@ -78,8 +87,8 @@
         "repositoryURL": "https://github.com/pointfreeco/xctest-dynamic-overlay",
         "state": {
           "branch": null,
-          "revision": "df16fe6ffe4d6e2e06761aa67716b808b2c9109e",
-          "version": "0.7.0"
+          "revision": "16b23a295fa322eb957af98037f86791449de60f",
+          "version": "0.8.1"
         }
       }
     ]
