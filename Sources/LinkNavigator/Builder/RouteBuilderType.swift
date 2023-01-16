@@ -1,6 +1,6 @@
 import UIKit
 
-public typealias MatchingViewController = MatchingKeyUsable & UIViewController
+public typealias MatchingViewController = MatchPathUsable & UIViewController
 
 public protocol RouteBuilder {
 	var matchPath: String { get }

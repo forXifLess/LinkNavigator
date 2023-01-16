@@ -1,18 +1,18 @@
 import SwiftUI
 
-public protocol MatchingKeyUsable {
-  var matchingKey: String { get }
+public protocol MatchPathUsable {
+  var matchPath: String { get }
 }
 
-public final class WrappingController<Content: View>: UIHostingController<Content>, MatchingKeyUsable {
+public final class WrappingController<Content: View>: UIHostingController<Content>, MatchPathUsable {
 
-  public let matchingKey: String
+  public let matchPath: String
 
   public init(
-    matchingKey: String,
+    matchPath: String,
     @ViewBuilder content: () -> Content)
   {
-    self.matchingKey = matchingKey
+    self.matchPath = matchPath
     super.init(rootView: content())
   }
 

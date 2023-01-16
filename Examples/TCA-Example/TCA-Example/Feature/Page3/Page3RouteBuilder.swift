@@ -6,7 +6,7 @@ struct Page3RouteBuilder: RouteBuilder {
 
   var build: (LinkNavigatorType, [String: String], DependencyType) -> MatchingViewController? {
     { navigator, items, dep in
-      WrappingController(matchingKey: matchPath) {
+      WrappingController(matchPath: matchPath) {
         Page3View(
           store: .init(
             initialState: Page3.State(message: items.getValue(key: "page3-message") ?? ""),

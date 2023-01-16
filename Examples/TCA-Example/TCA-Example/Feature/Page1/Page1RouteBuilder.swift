@@ -6,7 +6,7 @@ struct Page1RouteBuilder: RouteBuilder {
 
   var build: (LinkNavigatorType, [String: String], DependencyType) -> MatchingViewController? {
     { navigator, items, dep in
-      WrappingController(matchingKey: matchPath) {
+      WrappingController(matchPath: matchPath) {
         Page1View(
           store: .init(
             initialState: Page1.State(),
