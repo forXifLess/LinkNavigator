@@ -30,11 +30,11 @@ public struct Page2: ReducerProtocol {
 
       case .onTapRootPage3:
         sideEffect.routeToRootPage3()
-        return Effect(value: .getPaths)
+        return EffectTask(value: .getPaths)
 
       case .onRemovePage1:
         sideEffect.removePage1()
-        return Effect(value: .getPaths)
+        return EffectTask(value: .getPaths)
 
       case .onTapBack:
         sideEffect.routeToBack()

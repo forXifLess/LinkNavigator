@@ -9,7 +9,7 @@ public struct Page3: ReducerProtocol {
       self.message = message
     }
 
-    @BindableState var message: String
+    @BindingState var message: String
   }
 
   public enum Action: Equatable, BindableAction {
@@ -42,7 +42,7 @@ public struct Page3: ReducerProtocol {
 
       case .onRemovePage1And2:
         sideEffect.removePage1And2()
-        return Effect(value: .getPaths)
+        return EffectTask(value: .getPaths)
 
       case .onTapBack:
         sideEffect.routeToBack()

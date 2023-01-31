@@ -36,7 +36,7 @@ public struct Page1: ReducerProtocol {
 
       case .onTapRootRandomBackOrNext:
         sideEffect.routeToRootRandomBackOrNext()
-        return Effect(value: .getPaths)
+        return EffectTask(value: .getPaths)
 
       case .onTapBack:
         sideEffect.routeToBack()
