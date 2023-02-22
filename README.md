@@ -23,7 +23,7 @@
 
 The following translations of this README have been contributed by members of the community:
 
-- [한국어(Korean)](https://gist.github.com/jaeho-flitto/03ef1019e62bceec07359ec0168d75ab)
+- [한국어(Korean)](https://gist.github.com/Jager-yoo/572c1735cf2560299a22c6f6065914b5)
 
 If you'd like to contribute a translation, please [open a PR](https://github.com/interactord/LinkNavigator/edit/main/README.md) with a link to a [Gist](https://gist.github.com/)!
 
