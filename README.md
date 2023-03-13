@@ -66,7 +66,7 @@ If you'd like to contribute a translation, please [open a PR](https://github.com
   ```swift
   navigator.sheet(paths: ["sheetPage"], items: [:], isAnimated: true)
 
-  navigator.fullSheet(paths: ["page1", "page2"], items: [:], isAnimated: true)
+  navigator.fullSheet(paths: ["page1", "page2"], items: [:], isAnimated: true, prefersLargeTitles: false)
   ```
 
 - close a modal and call completion closure.
@@ -116,7 +116,8 @@ If you'd like to contribute a translation, please [open a PR](https://github.com
     items: [:],
     isAnimated: true,
     iPhonePresentationStyle: .fullScreen,
-    iPadPresentationStyle: .pageSheet)
+    iPadPresentationStyle: .pageSheet,
+    prefersLargeTitles: .none)
   ```
   
 - forcely reload the last page behind the modal. This is useful when you need to call the [onAppear(perform:)](https://developer.apple.com/documentation/swiftui/view/onappear(perform:)) again.
@@ -290,6 +291,33 @@ let package = Package(
 ```
 
 <br>
+
+## - Extra
+
+- Q: **How can I use large titles in SwiftUI?**
+```swift
+  /// in AppMain.swift (MVI)
+  /// To use for route navigation, set the prefersLargeTitles parameter to true in the launch method.
+  
+  navigator
+    .launch(paths: ["home"], items: [:], prefersLargeTitles: true)
+    
+    
+  /// in HomeView.swift (MVI)
+  /// To specify the display mode of the navigation bar title, use the navigationBarTitleDisplayMode (.line, .large, .automatic) in the SwiftUI screen of each screen.
+  ScrollView {
+    ....
+  }
+  .navigationBarTitleDisplayMode(.large)
+  .navigationTitle("Home")
+  
+  
+  ///  If you want to use it in fullSheet or customSheet,
+  /// Home.intent (MVI)
+  /// To enable large titles, set the prefersLargeTitles variable to true. To maintain the current settings, use .none.
+  navigator.fullSheet(paths: ["page1", "page2"], items: [:], isAnimated: true, prefersLargeTitles: true)
+```
+
 
 ## - License
 
