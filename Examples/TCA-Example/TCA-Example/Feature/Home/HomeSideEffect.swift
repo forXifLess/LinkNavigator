@@ -57,7 +57,7 @@ extension HomeSideEffectLive: HomeSideEffect {
 
   public var routeToFullSheet: () -> Void {
     {
-      navigator.fullSheet(paths: ["page1", "page2"], items: [:], isAnimated: true)
+      navigator.fullSheet(paths: ["page1", "page2"], items: [:], isAnimated: true, prefersLargeTitles: true)
     }
   }
 }

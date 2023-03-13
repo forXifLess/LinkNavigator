@@ -23,7 +23,7 @@ extension AppMain: App {
   var body: some Scene {
     WindowGroup {
       navigator
-        .launch(paths: ["home"], items: [:])
+        .launch(paths: ["home"], items: [:], prefersLargeTitles: false)
         .onOpenURL { url in
           print(url.absoluteString)
           // !!!: tca-ex://host/home/page1/page2/page3/page4?page3-message=hello&page4-message=%ED%95%9C%EA%B8%80

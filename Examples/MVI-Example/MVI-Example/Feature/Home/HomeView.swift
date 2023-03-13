@@ -14,9 +14,6 @@ extension HomeView: View {
   var body: some View {
     ScrollView {
       VStack(spacing: 40) {
-        Text("Home")
-          .font(.system(size: 60, weight: .thin))
-
         NavigationStackViewer(paths: state.paths)
 
         Button(action: { intent.send(action: .onTapNext) }) {
@@ -65,6 +62,7 @@ extension HomeView: View {
         Spacer()
       }
       .padding(.horizontal)
+      .navigationBarTitleDisplayMode(.large)
       .navigationTitle("Home")
       .onAppear {
         intent.send(action: .getPaths)

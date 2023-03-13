@@ -100,7 +100,12 @@ public protocol LinkNavigatorType {
   ///   - paths: An array of ``RouteBuilder/matchPath`` for some specific pages.
   ///   - items: A dictionary of `String` type key-value pairs.
   ///   - isAnimated: makes the transition to be animated.
-  func fullSheet(paths: [String], items: [String: String], isAnimated: Bool)
+  ///   - prefersLargeTitles:
+  ///         The SubNavigationViewController has a Boolean value that determines whether to display the title in a large format.
+  ///         ``If the value is null or .none, the previously set value will be maintained.``
+  ///         You can set it to true to use a large title in the modal or control it dynamically.
+  ///
+  func fullSheet(paths: [String], items: [String: String], isAnimated: Bool, prefersLargeTitles: Bool?)
 
   /// Presents a custom sheet that has its own navigation stack.
   ///
@@ -112,7 +117,8 @@ public protocol LinkNavigatorType {
   ///   items: [:],
   ///   isAnimated: true,
   ///   iPhonePresentationStyle: .fullScreen,
-  ///   iPadPresentationStyle: .automatic)
+  ///   iPadPresentationStyle: .automatic,
+  ///   prefersLargeTitles: .none)
   /// ```
   ///
   /// - Note: If there's an active modal in `rootNavigationController`, then
@@ -123,12 +129,17 @@ public protocol LinkNavigatorType {
   ///   - paths: An array of ``RouteBuilder/matchPath`` for some specific pages.
   ///   - items: A dictionary of `String` type key-value pairs.
   ///   - isAnimated: makes the transition to be animated.
+  ///   - prefersLargeTitles:
+  ///         The SubNavigationViewController has a Boolean value that determines whether to display the title in a large format.
+  ///         ``If the value is null or .none, the previously set value will be maintained.``
+  ///         You can set it to true to use a large title in the modal or control it dynamically.
   func customSheet(
     paths: [String],
     items: [String: String],
     isAnimated: Bool,
     iPhonePresentationStyle: UIModalPresentationStyle,
-    iPadPresentationStyle: UIModalPresentationStyle)
+    iPadPresentationStyle: UIModalPresentationStyle,
+    prefersLargeTitles: Bool?)
 
   /// Replaces current navigation stack managed by `rootNavigationController` with the new one.
   ///
@@ -390,11 +401,13 @@ public enum NavigationTarget {
 }
 
 extension LinkNavigator {
-  public func launch(paths: [String], items: [String: String]) -> RootNavigator {
+
+  public func launch(paths: [String], items: [String: String], prefersLargeTitles: Bool = false) -> RootNavigator {
     let viewControllers = paths.compactMap { path in
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }
     rootNavigationController.setViewControllers(viewControllers, animated: false)
+    rootNavigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
 
     return RootNavigator(viewController: rootNavigationController)
   }
@@ -443,13 +456,18 @@ extension LinkNavigator: LinkNavigatorType {
     rootNavigationController.present(subNavigationController, animated: isAnimated)
   }
 
-  public func fullSheet(paths: [String], items: [String: String], isAnimated: Bool) {
+  public func fullSheet(paths: [String], items: [String: String], isAnimated: Bool, prefersLargeTitles: Bool?) {
     rootNavigationController.dismiss(animated: true)
 
     subNavigationController.modalPresentationStyle = .fullScreen
     let new = paths.compactMap { path in
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }
+
+    if let prefersLargeTitles {
+      subNavigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
+    }
+
     subNavigationController.setViewControllers(new, animated: false)
     rootNavigationController.present(subNavigationController, animated: isAnimated)
   }
@@ -459,7 +477,8 @@ extension LinkNavigator: LinkNavigatorType {
     items: [String: String],
     isAnimated: Bool,
     iPhonePresentationStyle: UIModalPresentationStyle,
-    iPadPresentationStyle: UIModalPresentationStyle)
+    iPadPresentationStyle: UIModalPresentationStyle,
+    prefersLargeTitles: Bool?)
   {
     rootNavigationController.dismiss(animated: true)
 
@@ -470,6 +489,11 @@ extension LinkNavigator: LinkNavigatorType {
     let new = paths.compactMap { path in
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }
+
+    if let prefersLargeTitles {
+      subNavigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
+    }
+    
     subNavigationController.setViewControllers(new, animated: false)
     rootNavigationController.present(subNavigationController, animated: isAnimated)
   }
