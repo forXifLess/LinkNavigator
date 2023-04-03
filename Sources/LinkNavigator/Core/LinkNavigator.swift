@@ -381,6 +381,8 @@ public final class LinkNavigator {
   let dependency: DependencyType
   let builders: [RouteBuilder]
 
+  private var coordinate: Coordinate = .init(sheetDidDismiss: { })
+
   public init(
     rootNavigationController: UINavigationController = .init(),
     subNavigationController: UINavigationController = .init(),
@@ -391,6 +393,11 @@ public final class LinkNavigator {
     self.subNavigationController = subNavigationController
     self.dependency = dependency
     self.builders = builders
+
+    self.coordinate = .init(sheetDidDismiss: { [weak self] in
+      self?.subNavigationController.setViewControllers([], animated: false)
+      self?.subNavigationController.presentationController?.delegate = .none
+    })
   }
 }
 
@@ -453,6 +460,7 @@ extension LinkNavigator: LinkNavigatorType {
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }
     subNavigationController.setViewControllers(new, animated: false)
+    subNavigationController.presentationController?.delegate = coordinate
     rootNavigationController.present(subNavigationController, animated: isAnimated)
   }
 
@@ -469,6 +477,7 @@ extension LinkNavigator: LinkNavigatorType {
     }
 
     subNavigationController.setViewControllers(new, animated: false)
+    subNavigationController.presentationController?.delegate = coordinate
     rootNavigationController.present(subNavigationController, animated: isAnimated)
   }
 
@@ -495,11 +504,16 @@ extension LinkNavigator: LinkNavigatorType {
     }
     
     subNavigationController.setViewControllers(new, animated: false)
+    subNavigationController.presentationController?.delegate = coordinate
     rootNavigationController.present(subNavigationController, animated: isAnimated)
   }
 
   public func replace(paths: [String], items: [String: String], isAnimated: Bool) {
-    subNavigationController.dismiss(animated: isAnimated)
+    rootNavigationController.dismiss(animated: isAnimated, completion: {
+      self.subNavigationController.setViewControllers([], animated: isAnimated)
+      self.subNavigationController.presentationController?.delegate = .none
+    })
+
     let new = paths.compactMap { path in
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }
@@ -533,7 +547,10 @@ extension LinkNavigator: LinkNavigatorType {
     }
 
     guard isSubNavigationControllerPresented else { return }
-    currentActivityNavigationController.dismiss(animated: isAnimated)
+    currentActivityNavigationController.dismiss(animated: isAnimated, completion: {
+      self.subNavigationController.setViewControllers([], animated: isAnimated)
+      self.subNavigationController.presentationController?.delegate = .none
+    })
   }
 
   public func remove(paths: [String]) {
@@ -568,7 +585,11 @@ extension LinkNavigator: LinkNavigatorType {
 
   public func close(isAnimated: Bool, completeAction: @escaping () -> Void) {
     guard isSubNavigationControllerPresented else { return }
-    rootNavigationController.dismiss(animated: isAnimated, completion: completeAction)
+    rootNavigationController.dismiss(animated: isAnimated, completion: {
+      completeAction()
+      self.subNavigationController.setViewControllers([], animated: isAnimated)
+      self.subNavigationController.presentationController?.delegate = .none
+    })
   }
 
   public func range(path: String) -> [String] {
@@ -645,5 +666,19 @@ fileprivate extension LinkNavigator {
       .viewControllers
       .compactMap { $0 as? MatchPathUsable & UIViewController }
       .last(where: { $0.matchPath == path })
+  }
+}
+
+extension LinkNavigator {
+  fileprivate class Coordinate: NSObject, UIAdaptivePresentationControllerDelegate {
+    init(sheetDidDismiss: @escaping () -> Void) {
+      self.sheetDidDismiss = sheetDidDismiss
+    }
+
+    var sheetDidDismiss: () -> Void
+
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+      sheetDidDismiss()
+    }
   }
 }
