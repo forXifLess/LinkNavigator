@@ -54,7 +54,7 @@ extension HomeView: View {
           VStack {
             Text("open Page 2 as Full Screen Sheet")
               .foregroundColor(.purple)
-            Text("navigator.fullSheet(paths: [\"page1\", \"page2\"], items: [:], isAnimated: true)")
+            Text("navigator.fullSheet(paths: [\"page1\", \"page2\"], items: [:], isAnimated: true, prefersLargeTitles: true)")
               .code()
           }
         }
