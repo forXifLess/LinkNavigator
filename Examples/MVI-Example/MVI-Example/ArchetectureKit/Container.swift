@@ -16,7 +16,7 @@ final class Container<Intent, State>: ObservableObject {
     modelChangePublisher
       .receive(on: RunLoop.main)
       .sink(receiveValue: objectWillChange.send)
-      .store(in: &cacncellable)
+      .store(in: &cancellable)
   }
 
   // MARK: Internal
@@ -26,6 +26,6 @@ final class Container<Intent, State>: ObservableObject {
 
   // MARK: Private
 
-  private var cacncellable: Set<AnyCancellable> = []
+  private var cancellable: Set<AnyCancellable> = []
 
 }

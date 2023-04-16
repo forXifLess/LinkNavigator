@@ -32,7 +32,7 @@ extension Page3View: View {
         Button(action: { intent.send(action: .onTapNextWithMessage) }) {
           VStack {
             Text("go to next Page with Message")
-            Text("navigator.next(paths: [\"page4\"], items: [\"message\": messageYouTyped], isAnimated: true)")
+            Text("navigator.next(paths: [\"page4\"], items: [\"page4-message\": messageYouTyped], isAnimated: true)")
               .code()
           }
         }
