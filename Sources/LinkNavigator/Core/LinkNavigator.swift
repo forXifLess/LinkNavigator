@@ -499,7 +499,7 @@ extension LinkNavigator: LinkNavigatorType {
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }
 
-    if let prefersLargeTitles {
+    if let prefersLargeTitles = prefersLargeTitles {
       subNavigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
     }
     
