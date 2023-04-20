@@ -377,7 +377,7 @@ public protocol LinkNavigatorType {
 
 public final class LinkNavigator {
   let rootNavigationController: UINavigationController
-  let subNavigationController: UINavigationController
+  var subNavigationController: UINavigationController
   let dependency: DependencyType
   let builders: [RouteBuilder]
 
@@ -455,30 +455,42 @@ extension LinkNavigator: LinkNavigatorType {
   public func sheet(paths:[String], items: [String: String], isAnimated: Bool) {
     rootNavigationController.dismiss(animated: true)
 
-    subNavigationController.modalPresentationStyle = .automatic
+    let newSubNavigationController = UINavigationController()
+    newSubNavigationController.modalPresentationStyle = .automatic
+
     let new = paths.compactMap { path in
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }
-    subNavigationController.setViewControllers(new, animated: false)
-    subNavigationController.presentationController?.delegate = coordinate
-    rootNavigationController.present(subNavigationController, animated: isAnimated)
+
+    newSubNavigationController.setViewControllers(new, animated: false)
+
+    newSubNavigationController.setViewControllers(new, animated: false)
+    newSubNavigationController.presentationController?.delegate = coordinate
+    rootNavigationController.present(newSubNavigationController, animated: isAnimated)
+
+    subNavigationController = newSubNavigationController
   }
 
   public func fullSheet(paths: [String], items: [String: String], isAnimated: Bool, prefersLargeTitles: Bool?) {
     rootNavigationController.dismiss(animated: true)
 
-    subNavigationController.modalPresentationStyle = .fullScreen
+    let newSubNavigationController = UINavigationController()
+    newSubNavigationController.modalPresentationStyle = .fullScreen
+
     let new = paths.compactMap { path in
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }
 
     if let prefersLargeTitles {
-      subNavigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
+      newSubNavigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
     }
 
-    subNavigationController.setViewControllers(new, animated: false)
-    subNavigationController.presentationController?.delegate = coordinate
-    rootNavigationController.present(subNavigationController, animated: isAnimated)
+    newSubNavigationController.setViewControllers(new, animated: false)
+    newSubNavigationController.presentationController?.delegate = coordinate
+
+    rootNavigationController.present(newSubNavigationController, animated: isAnimated)
+
+    subNavigationController = newSubNavigationController
   }
 
   public func customSheet(
@@ -549,7 +561,6 @@ extension LinkNavigator: LinkNavigatorType {
     guard isSubNavigationControllerPresented else { return }
     currentActivityNavigationController.dismiss(animated: isAnimated, completion: {
       self.subNavigationController.setViewControllers([], animated: isAnimated)
-      self.subNavigationController.presentationController?.delegate = .none
     })
   }
 
