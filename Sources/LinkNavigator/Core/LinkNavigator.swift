@@ -376,21 +376,17 @@ public protocol LinkNavigatorType {
 }
 
 public final class LinkNavigator {
-  let rootNavigationController: UINavigationController
-  var subNavigationController: UINavigationController
+  let rootNavigationController: UINavigationController = .init()
+  var subNavigationController: UINavigationController = .init()
   let dependency: DependencyType
   let builders: [RouteBuilder]
 
   private var coordinate: Coordinate = .init(sheetDidDismiss: { })
 
   public init(
-    rootNavigationController: UINavigationController = .init(),
-    subNavigationController: UINavigationController = .init(),
     dependency: DependencyType,
     builders: [RouteBuilder])
   {
-    self.rootNavigationController = rootNavigationController
-    self.subNavigationController = subNavigationController
     self.dependency = dependency
     self.builders = builders
 
@@ -503,7 +499,9 @@ extension LinkNavigator: LinkNavigatorType {
   {
     rootNavigationController.dismiss(animated: true)
 
-    subNavigationController.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone
+    let newSubNavigationController = UINavigationController()
+
+    newSubNavigationController.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone
       ? iPhonePresentationStyle
       : iPadPresentationStyle
 
@@ -512,12 +510,14 @@ extension LinkNavigator: LinkNavigatorType {
     }
 
     if let prefersLargeTitles = prefersLargeTitles {
-      subNavigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
+      newSubNavigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
     }
     
-    subNavigationController.setViewControllers(new, animated: false)
-    subNavigationController.presentationController?.delegate = coordinate
-    rootNavigationController.present(subNavigationController, animated: isAnimated)
+    newSubNavigationController.setViewControllers(new, animated: false)
+    newSubNavigationController.presentationController?.delegate = coordinate
+    rootNavigationController.present(newSubNavigationController, animated: isAnimated)
+
+    subNavigationController = newSubNavigationController
   }
 
   public func replace(paths: [String], items: [String: String], isAnimated: Bool) {
