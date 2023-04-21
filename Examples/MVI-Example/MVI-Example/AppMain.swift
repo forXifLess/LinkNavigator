@@ -32,6 +32,10 @@ extension AppMain: App {
               : navigator.replace(paths: linkInfo.pathList, items: linkInfo.items, isAnimated: true)
           })
         }
+        /// - Note:
+        ///   If you are using the ignoresSafeArea property to ignore the safe area on an internal screen,
+        ///   please add the corresponding code to the part where you first execute the LinkNavigator.
+        .ignoresSafeArea()
     }
   }
 }
