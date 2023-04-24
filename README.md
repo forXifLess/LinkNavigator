@@ -318,6 +318,20 @@ let package = Package(
   navigator.fullSheet(paths: ["page1", "page2"], items: [:], isAnimated: true, prefersLargeTitles: true)
 ```
 
+- Q: I'm wondering how to apply **IgnoringSafeArea** to a specific part or the entire screen if I want to?
+
+  1. Add the following code to the screen where LinkNavigator is first started (example: AppMain.swift).
+  2. Then, add the following example code. (Refer to the AppMain.swift example.)
+```swift
+
+ navigator
+    .launch(paths: ["home"], items: [:], prefersLargeTitles: true)
+    /// - Note:
+    ///   If you are using the ignoresSafeArea property to ignore the safe area on an internal screen,
+    ///   please add the corresponding code to the part where you first execute the LinkNavigator.
+    .ignoresSafeArea()
+
+```
 
 ## - License
 
