@@ -604,9 +604,10 @@ extension LinkNavigator: LinkNavigatorType {
   }
 
   public func range(path: String) -> [String] {
-    let start = currentPaths.startIndex
-    let end = currentPaths.enumerated().first(where: { $0.element == path})?.offset ?? currentPaths.endIndex - 1
-    return Array(currentPaths[start...max(start, end)])
+    currentPaths.reduce([String]()) { current, next in
+      guard current.contains(path) else { return current + [next] }
+      return current
+    }
   }
 
   public func rootReloadLast(items: [String : String], isAnimated: Bool) {
