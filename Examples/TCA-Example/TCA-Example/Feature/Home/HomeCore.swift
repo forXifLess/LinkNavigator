@@ -1,6 +1,6 @@
 import ComposableArchitecture
 
-public struct Home: ReducerProtocol {
+public struct Home: Reducer {
   public struct State: Equatable {
     var paths: [String] = []
   }
@@ -16,7 +16,7 @@ public struct Home: ReducerProtocol {
 
   @Dependency(\.sideEffect.home) var sideEffect
 
-  public var body: some ReducerProtocol<State, Action> {
+  public var body: some ReducerOf<Self> {
     Reduce { state, action in
       switch action {
       case .getPaths:

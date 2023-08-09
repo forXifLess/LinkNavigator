@@ -2,7 +2,7 @@ import ComposableArchitecture
 import UIKit
 import Dependencies
 
-public struct Page4: ReducerProtocol {
+public struct Page4: Reducer {
   public struct State: Equatable {
     var paths: [String] = []
     var message = ""
@@ -20,7 +20,7 @@ public struct Page4: ReducerProtocol {
 
   @Dependency(\.sideEffect.page4) var sideEffect
 
-  public var body: some ReducerProtocol<State, Action> {
+  public var body: some ReducerOf<Self> {
     Reduce { state, action in
       switch action {
       case .getPaths:

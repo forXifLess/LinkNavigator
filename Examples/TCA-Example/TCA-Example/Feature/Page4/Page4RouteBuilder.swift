@@ -10,7 +10,9 @@ struct Page4RouteBuilder: RouteBuilder {
         Page4View(
           store: .init(
             initialState: Page4.State(message: items.getValue(key: "page4-message") ?? ""),
-            reducer: Page4()))
+            reducer: {
+              Page4()
+            }))
       }
     }
   }

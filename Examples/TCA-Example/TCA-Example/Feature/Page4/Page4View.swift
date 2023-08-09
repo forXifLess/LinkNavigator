@@ -7,7 +7,7 @@ public struct Page4View {
 
   public init(store: StoreOf<Page4>) {
     self.store = store
-    viewStore = ViewStore(store)
+    viewStore = ViewStore(store, observe: { $0 })
   }
 }
 

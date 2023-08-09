@@ -1,6 +1,6 @@
 import ComposableArchitecture
 
-public struct Page2: ReducerProtocol {
+public struct Page2: Reducer {
   public struct State: Equatable {
     var paths: [String] = []
   }
@@ -17,7 +17,7 @@ public struct Page2: ReducerProtocol {
 
   @Dependency(\.sideEffect.page2) var sideEffect
 
-  public var body: some ReducerProtocol<State, Action> {
+  public var body: some ReducerOf<Self> {
     Reduce { state, action in
       switch action {
       case .getPaths:
@@ -30,11 +30,11 @@ public struct Page2: ReducerProtocol {
 
       case .onTapRootPage3:
         sideEffect.routeToRootPage3()
-        return EffectTask(value: .getPaths)
+        return .run { await $0(.getPaths) }
 
       case .onRemovePage1:
         sideEffect.removePage1()
-        return EffectTask(value: .getPaths)
+        return .run { await $0(.getPaths) }
 
       case .onTapBack:
         sideEffect.routeToBack()

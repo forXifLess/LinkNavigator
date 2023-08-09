@@ -10,7 +10,9 @@ struct Page1RouteBuilder: RouteBuilder {
         Page1View(
           store: .init(
             initialState: Page1.State(),
-            reducer: Page1()))
+            reducer: {
+              Page1()
+            }))
       }
     }
   }

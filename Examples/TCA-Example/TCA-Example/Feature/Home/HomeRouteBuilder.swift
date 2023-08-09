@@ -10,7 +10,9 @@ struct HomeRouteBuilder: RouteBuilder {
         HomeView(
           store: .init(
             initialState: Home.State(),
-            reducer: Home()))
+            reducer: {
+              Home()
+            }))
       }
     }
   }

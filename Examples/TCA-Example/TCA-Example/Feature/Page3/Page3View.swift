@@ -7,7 +7,7 @@ public struct Page3View {
 
   public init(store: StoreOf<Page3>) {
     self.store = store
-    viewStore = ViewStore(store)
+    viewStore = ViewStore(store, observe: { $0 })
   }
 }
 
@@ -20,7 +20,7 @@ extension Page3View: View {
 
         NavigationStackViewer(paths: viewStore.paths)
 
-        TextField("Type message here", text: viewStore.binding(\.$message))
+        TextField("Type message here", text: viewStore.$message)
           .textFieldStyle(.roundedBorder)
           .padding(.horizontal)
 
