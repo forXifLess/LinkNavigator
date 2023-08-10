@@ -405,14 +405,14 @@ public enum NavigationTarget {
 
 extension LinkNavigator {
 
-  public func launch(paths: [String], items: [String: String], prefersLargeTitles: Bool = false) -> RootNavigator {
+  public func launch(paths: [String], items: [String: String], prefersLargeTitles: Bool = false) -> BaseNavigator {
     let viewControllers = paths.compactMap { path in
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }
     rootNavigationController.setViewControllers(viewControllers, animated: false)
     rootNavigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
 
-    return RootNavigator(viewController: rootNavigationController)
+    return BaseNavigator(viewController: rootNavigationController)
   }
 }
 

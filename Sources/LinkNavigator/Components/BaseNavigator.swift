@@ -1,12 +1,12 @@
 import SwiftUI
 
-public struct RootNavigator {
+public struct BaseNavigator {
 	let viewController: UINavigationController
 }
 
-extension RootNavigator: UIViewControllerRepresentable {
+extension BaseNavigator: UIViewControllerRepresentable {
 	public func makeUIViewController(context: Context) -> UINavigationController {
-		viewController
+    return viewController
 	}
 
 	public func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {

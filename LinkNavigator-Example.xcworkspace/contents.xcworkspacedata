@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Examples/MultiTab-Example/MultiTab-Example.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Examples/MVI-Example/MVI-Example.xcodeproj">
    </FileRef>
    <FileRef

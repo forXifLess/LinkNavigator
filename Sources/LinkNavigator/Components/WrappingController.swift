@@ -14,6 +14,7 @@ public final class WrappingController<Content: View>: UIHostingController<Conten
   {
     self.matchPath = matchPath
     super.init(rootView: content())
+    self.title = matchPath
   }
 
   required init?(coder aDecoder: NSCoder) {
