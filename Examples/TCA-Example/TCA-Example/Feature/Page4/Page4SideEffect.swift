@@ -1,6 +1,8 @@
 import LinkNavigator
 import UIKit
 
+// MARK: - Page4SideEffect
+
 public protocol Page4SideEffect {
 
   var getPaths: () -> [String] { get }
@@ -10,6 +12,8 @@ public protocol Page4SideEffect {
   var openSafari: (String) -> Void { get }
 }
 
+// MARK: - Page4SideEffectLive
+
 public struct Page4SideEffectLive {
   let navigator: LinkNavigatorType
 
@@ -17,6 +21,8 @@ public struct Page4SideEffectLive {
     self.navigator = navigator
   }
 }
+
+// MARK: Page4SideEffect
 
 extension Page4SideEffectLive: Page4SideEffect {
 

@@ -1,5 +1,5 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
 
 // MARK: - AppMain
 
@@ -15,6 +15,8 @@ extension AppMain {
     appDelegate.navigator
   }
 }
+
+// MARK: App
 
 extension AppMain: App {
 

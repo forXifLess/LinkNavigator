@@ -1,6 +1,8 @@
 import ComposableArchitecture
 import SwiftUI
 
+// MARK: - HomeView
+
 public struct HomeView {
   private let store: StoreOf<Home>
   @ObservedObject var viewStore: ViewStoreOf<Home>
@@ -10,6 +12,8 @@ public struct HomeView {
     viewStore = ViewStore(store, observe: { $0 })
   }
 }
+
+// MARK: View
 
 extension HomeView: View {
   public var body: some View {

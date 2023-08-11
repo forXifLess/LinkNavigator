@@ -1,6 +1,6 @@
 import Combine
-import UIKit
 import LinkNavigator
+import UIKit
 
 // MARK: - Page4IntentType
 

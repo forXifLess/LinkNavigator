@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - Page1
+// MARK: - Page1View
 
 struct Page1View: IntentBindingType {
   @StateObject var container: Container<Page1IntentType, Page1Model.State>
@@ -11,7 +11,7 @@ struct Page1View: IntentBindingType {
 // MARK: View
 
 extension Page1View: View {
-  
+
   var body: some View {
     ScrollView {
       VStack(spacing: 40) {
@@ -20,7 +20,7 @@ extension Page1View: View {
 
         NavigationStackViewer(paths: state.paths)
 
-        Button(action: { intent.send(action: .onTapNext)}) {
+        Button(action: { intent.send(action: .onTapNext) }) {
           VStack {
             Text("go to next Page")
             Text("navigator.next(paths: [\"page2\"], items: [:], isAnimated: true)")
@@ -36,7 +36,7 @@ extension Page1View: View {
           }
         }
 
-        Button(action: { intent.send(action: .onTapRootRandomBackOrNext)}) {
+        Button(action: { intent.send(action: .onTapRootRandomBackOrNext) }) {
           VStack {
             Text("**root** backOrNext")
             Text("navigator.rootBackOrNext(path: Bool.random() ? \"home\" : \"page2\", items: [:], isAnimated: true)")

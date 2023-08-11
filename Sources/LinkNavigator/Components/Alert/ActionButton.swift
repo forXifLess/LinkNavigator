@@ -14,7 +14,7 @@ public struct ActionButton: Equatable {
     self.action = action
   }
 
-  // MARK: Internal
+  // MARK: Public
 
   public enum ActionStyle {
     case `default`
@@ -30,13 +30,15 @@ public struct ActionButton: Equatable {
     }
   }
 
-  let title: String
-  let style: ActionStyle
-  let action: () -> Void
-
   public static func == (lhs: Self, rhs: Self) -> Bool {
     lhs.title == rhs.title
   }
+
+  // MARK: Internal
+
+  let title: String
+  let style: ActionStyle
+  let action: () -> Void
 
   func buildAlertButton() -> UIAlertAction {
     .init(title: title, style: style.uiRawValue) { _ in action() }

@@ -1,5 +1,7 @@
 import LinkNavigator
 
+// MARK: - HomeSideEffect
+
 public protocol HomeSideEffect {
 
   var getPaths: () -> [String] { get }
@@ -10,6 +12,8 @@ public protocol HomeSideEffect {
   var routeToFullSheet: () -> Void { get }
 }
 
+// MARK: - HomeSideEffectLive
+
 public struct HomeSideEffectLive {
   let navigator: LinkNavigatorType
 
@@ -17,6 +21,8 @@ public struct HomeSideEffectLive {
     self.navigator = navigator
   }
 }
+
+// MARK: HomeSideEffect
 
 extension HomeSideEffectLive: HomeSideEffect {
 

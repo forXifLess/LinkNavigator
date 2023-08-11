@@ -1,5 +1,7 @@
 import LinkNavigator
 
+// MARK: - Page2SideEffect
+
 public protocol Page2SideEffect {
 
   var getPaths: () -> [String] { get }
@@ -9,6 +11,8 @@ public protocol Page2SideEffect {
   var routeToBack: () -> Void { get }
 }
 
+// MARK: - Page2SideEffectLive
+
 public struct Page2SideEffectLive {
   let navigator: LinkNavigatorType
 
@@ -16,6 +20,8 @@ public struct Page2SideEffectLive {
     self.navigator = navigator
   }
 }
+
+// MARK: Page2SideEffect
 
 extension Page2SideEffectLive: Page2SideEffect {
 

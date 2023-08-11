@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - Page2
+// MARK: - Page2View
 
 struct Page2View: IntentBindingType {
   @StateObject var container: Container<Page2IntentType, Page2Model.State>
@@ -11,7 +11,7 @@ struct Page2View: IntentBindingType {
 // MARK: View
 
 extension Page2View: View {
-  
+
   var body: some View {
     ScrollView {
       VStack(spacing: 40) {
@@ -28,7 +28,7 @@ extension Page2View: View {
           }
         }
 
-        Button(action: { intent.send(action: .onTapRootPage3)}) {
+        Button(action: { intent.send(action: .onTapRootPage3) }) {
           VStack {
             Text("**root** next")
             Text("navigator.rootNext(paths: [\"page3\"], items: [:], isAnimated: true)")

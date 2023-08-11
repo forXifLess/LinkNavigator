@@ -1,6 +1,9 @@
 import ComposableArchitecture
 
 public struct Home: Reducer {
+
+  // MARK: Public
+
   public struct State: Equatable {
     var paths: [String] = []
   }
@@ -13,8 +16,6 @@ public struct Home: Reducer {
     case onTapSheet
     case onTapFullSheet
   }
-
-  @Dependency(\.sideEffect.home) var sideEffect
 
   public var body: some ReducerOf<Self> {
     Reduce { state, action in
@@ -45,4 +46,9 @@ public struct Home: Reducer {
       }
     }
   }
+
+  // MARK: Internal
+
+  @Dependency(\.sideEffect.home) var sideEffect
+
 }

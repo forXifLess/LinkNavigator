@@ -3,6 +3,12 @@ import Dependencies
 
 public struct Page1: Reducer {
 
+  // MARK: Lifecycle
+
+  public init() {}
+
+  // MARK: Public
+
   public struct State: Equatable {
     var paths: [String] = []
   }
@@ -14,10 +20,6 @@ public struct Page1: Reducer {
     case onTapRootRandomBackOrNext
     case onTapBack
   }
-
-  public init() {}
-
-  @Dependency(\.sideEffect.page1) var sideEffect
 
   public var body: some ReducerOf<Self> {
     Reduce { state, action in
@@ -44,4 +46,9 @@ public struct Page1: Reducer {
       }
     }
   }
+
+  // MARK: Internal
+
+  @Dependency(\.sideEffect.page1) var sideEffect
+
 }

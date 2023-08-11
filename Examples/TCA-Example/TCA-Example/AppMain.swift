@@ -1,6 +1,6 @@
-import SwiftUI
 import Dependencies
 import LinkNavigator
+import SwiftUI
 
 // MARK: - AppMain
 
@@ -17,6 +17,8 @@ extension AppMain {
     sideEffect.linkNavigator as! LinkNavigator
   }
 }
+
+// MARK: App
 
 extension AppMain: App {
 

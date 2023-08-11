@@ -1,15 +1,19 @@
 import ComposableArchitecture
 import SwiftUI
 
+// MARK: - Page2View
+
 public struct Page2View {
   private let store: StoreOf<Page2>
   @ObservedObject var viewStore: ViewStoreOf<Page2>
-  
+
   public init(store: StoreOf<Page2>) {
     self.store = store
     viewStore = ViewStore(store, observe: { $0 })
   }
 }
+
+// MARK: View
 
 extension Page2View: View {
   public var body: some View {
@@ -17,9 +21,9 @@ extension Page2View: View {
       VStack(spacing: 40) {
         Text("2")
           .font(.system(size: 70, weight: .thin))
-        
+
         NavigationStackViewer(paths: viewStore.paths)
-        
+
         Button(action: { viewStore.send(.onTapNext) }) {
           VStack {
             Text("go to next Page")
@@ -27,7 +31,7 @@ extension Page2View: View {
               .code()
           }
         }
-        
+
         Button(action: { viewStore.send(.onTapRootPage3) }) {
           VStack {
             Text("**root** next")
@@ -35,7 +39,7 @@ extension Page2View: View {
               .code()
           }
         }
-        
+
         Button(action: { viewStore.send(.onRemovePage1) }) {
           VStack {
             Text("remove Page 1")
@@ -44,7 +48,7 @@ extension Page2View: View {
               .code()
           }
         }
-        
+
         Button(action: { viewStore.send(.onTapBack) }) {
           VStack {
             Text("back")
@@ -52,7 +56,7 @@ extension Page2View: View {
               .code()
           }
         }
-        
+
         Spacer()
       }
       .padding(.horizontal)

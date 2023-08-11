@@ -1,6 +1,13 @@
 import ComposableArchitecture
 
 public struct Page2: Reducer {
+
+  // MARK: Lifecycle
+
+  public init() {}
+
+  // MARK: Public
+
   public struct State: Equatable {
     var paths: [String] = []
   }
@@ -12,10 +19,6 @@ public struct Page2: Reducer {
     case onRemovePage1
     case onTapBack
   }
-
-  public init() {}
-
-  @Dependency(\.sideEffect.page2) var sideEffect
 
   public var body: some ReducerOf<Self> {
     Reduce { state, action in
@@ -42,4 +45,9 @@ public struct Page2: Reducer {
       }
     }
   }
+
+  // MARK: Internal
+
+  @Dependency(\.sideEffect.page2) var sideEffect
+
 }

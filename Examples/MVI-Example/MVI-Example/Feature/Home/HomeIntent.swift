@@ -54,7 +54,7 @@ extension HomeIntent: IntentType, HomeIntentType {
         buttons: [.init(title: "OK", style: .default, action: { print("OK tapped") })],
         flagType: .default)
       navigator.alert(target: .default, model: alertModel)
-      
+
     case .onTapSheet:
       navigator.sheet(paths: ["page1", "page2"], items: [:], isAnimated: true)
 

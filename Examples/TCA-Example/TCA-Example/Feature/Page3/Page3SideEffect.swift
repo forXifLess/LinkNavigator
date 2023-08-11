@@ -1,5 +1,7 @@
 import LinkNavigator
 
+// MARK: - Page3SideEffect
+
 public protocol Page3SideEffect {
 
   var getPaths: () -> [String] { get }
@@ -9,6 +11,8 @@ public protocol Page3SideEffect {
   var routeToClose: () -> Void { get }
 }
 
+// MARK: - Page3SideEffectLive
+
 public struct Page3SideEffectLive {
   let navigator: LinkNavigatorType
 
@@ -16,6 +20,8 @@ public struct Page3SideEffectLive {
     self.navigator = navigator
   }
 }
+
+// MARK: Page3SideEffect
 
 extension Page3SideEffectLive: Page3SideEffect {
 

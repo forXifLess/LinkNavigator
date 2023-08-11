@@ -47,7 +47,7 @@ extension Page1Intent: IntentType, Page1IntentType {
 
     case .onTapRootRandomBackOrNext:
       navigator.rootBackOrNext(path: Bool.random() ? "home" : "page2", items: [:], isAnimated: true)
-      
+
     case .onTapBack:
       navigator.back(isAnimated: true)
     }

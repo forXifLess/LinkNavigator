@@ -1,11 +1,13 @@
 import LinkNavigator
 import SwiftUI
 
+// MARK: - Page4RouteBuilder
+
 struct Page4RouteBuilder: RouteBuilder {
   var matchPath: String { "page4" }
 
   var build: (LinkNavigatorType, [String: String], DependencyType) -> MatchingViewController? {
-    { navigator, items, dep in
+    { navigator, items, _ in
       WrappingController(matchPath: matchPath) {
         Page4View.build(
           intent: Page4Intent(

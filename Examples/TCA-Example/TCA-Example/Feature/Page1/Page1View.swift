@@ -1,6 +1,8 @@
 import ComposableArchitecture
 import SwiftUI
 
+// MARK: - Page1View
+
 public struct Page1View {
   private let store: StoreOf<Page1>
   @ObservedObject var viewStore: ViewStoreOf<Page1>
@@ -10,6 +12,8 @@ public struct Page1View {
     viewStore = ViewStore(store, observe: { $0 })
   }
 }
+
+// MARK: View
 
 extension Page1View: View {
   public var body: some View {
@@ -36,7 +40,7 @@ extension Page1View: View {
           }
         }
 
-        Button(action: { viewStore.send(.onTapRootRandomBackOrNext)} ) {
+        Button(action: { viewStore.send(.onTapRootRandomBackOrNext) } ) {
           VStack {
             Text("**root** backOrNext")
             Text("navigator.rootBackOrNext(path: Bool.random() ? \"home\" : \"page2\", items: [:], isAnimated: true)")
@@ -44,7 +48,7 @@ extension Page1View: View {
           }
         }
 
-        Button(action: { viewStore.send(.onTapBack)}) {
+        Button(action: { viewStore.send(.onTapBack) }) {
           VStack {
             Text("back")
             Text("navigator.back(isAnimated: true)")

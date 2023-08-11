@@ -1,9 +1,11 @@
-import UIKit
 import SwiftUI
+import UIKit
 
-public final class Navigator {
+// MARK: - Navigator
 
-  public typealias ViewControllerType = UIViewController & MatchPathUsable
+public struct Navigator {
+
+  public typealias MatchedViewController = UIViewController & MatchPathUsable
 
   let initialLinkItem: LinkItem
   let controller: UINavigationController
@@ -18,13 +20,23 @@ public final class Navigator {
 }
 
 extension Navigator {
-  var viewControllers: [ViewControllerType] {
-    controller.viewControllers.compactMap { $0 as? ViewControllerType }
+  var viewControllers: [MatchedViewController] {
+    controller.viewControllers.compactMap { $0 as? MatchedViewController }
+  }
+
+  var currentPath: [String] {
+    controller.viewControllers.compactMap{ $0 as? MatchedViewController }.map(\.matchPath)
   }
 }
 
 extension Navigator {
-  func replace<Navigator>(rootNavigator: Navigator, item: LinkItem, isAnimated: Bool, routeBuilderList: [RouteBuilderOf<Navigator>], dependency: DependencyType) {
+  func replace<Root>(
+    rootNavigator: Root,
+    item: LinkItem,
+    isAnimated: Bool,
+    routeBuilderList: [RouteBuilderOf<Root>],
+    dependency: DependencyType)
+  {
     let newItemList = item.paths.compactMap { path in
       routeBuilderList.first(where: { $0.matchPath == path })?.routeBuild(rootNavigator, item.items, dependency)
     }
@@ -32,7 +44,13 @@ extension Navigator {
     controller.setViewControllers(newItemList, animated: isAnimated)
   }
 
-  func push<Navigator>(rootNavigator: Navigator, item: LinkItem, isAnimated: Bool, routeBuilderList: [RouteBuilderOf<Navigator>], dependency: DependencyType) {
+  func push<Root>(
+    rootNavigator: Root,
+    item: LinkItem,
+    isAnimated: Bool,
+    routeBuilderList: [RouteBuilderOf<Root>],
+    dependency: DependencyType)
+  {
     let newItemList = item.paths.compactMap { path in
       routeBuilderList.first(where: { $0.matchPath == path })?.routeBuild(rootNavigator, item.items, dependency)
     }
@@ -45,7 +63,13 @@ extension Navigator {
     controller.popViewController(animated: isAnimated)
   }
 
-  func backOrNext(rootNavigator: Navigator, item: LinkItem, isAnimated: Bool, routeBuilderList: [RouteBuilderOf<Navigator>], dependency: DependencyType) {
+  func backOrNext<Root>(
+    rootNavigator: Root,
+    item: LinkItem,
+    isAnimated: Bool,
+    routeBuilderList: [RouteBuilderOf<Root>],
+    dependency: DependencyType)
+  {
     if let pick = find(path: item.paths.first ?? "") {
       controller.popToViewController(pick, animated: isAnimated)
       return
@@ -53,9 +77,33 @@ extension Navigator {
     push(rootNavigator: rootNavigator, item: item, isAnimated: isAnimated, routeBuilderList: routeBuilderList, dependency: dependency)
   }
 
+  func remove(item: LinkItem) {
+    let new = viewControllers.filter{ item.paths.contains($0.matchPath) }
+    guard new.count != viewControllers.count else { return }
+    controller.setViewControllers(new, animated: false)
+  }
+
+  func backToLast(item: LinkItem, isAnimated: Bool) {
+    guard let path = item.paths.first else { return }
+    guard let pick = viewControllers.last(where: { $0.matchPath == path }) else { return }
+    controller.popToViewController(pick, animated: isAnimated)
+  }
+
   func find(path: String) -> MatchingViewController? {
     controller.viewControllers
       .compactMap { $0 as? MatchingViewController }
-      .first(where: { $0.matchPath  == path })
+      .first(where: { $0.matchPath == path })
+  }
+
+  func reset(isAnimated: Bool = false) {
+    controller.setViewControllers([], animated: isAnimated)
+  }
+}
+
+// MARK: Equatable
+
+extension Navigator: Equatable {
+  public static func == (lhs: Navigator, rhs: Navigator) -> Bool {
+    lhs.controller === rhs.controller
   }
 }

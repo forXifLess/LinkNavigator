@@ -1,6 +1,8 @@
 import ComposableArchitecture
 import SwiftUI
 
+// MARK: - Page3View
+
 public struct Page3View {
   private let store: StoreOf<Page3>
   @ObservedObject var viewStore: ViewStoreOf<Page3>
@@ -10,6 +12,8 @@ public struct Page3View {
     viewStore = ViewStore(store, observe: { $0 })
   }
 }
+
+// MARK: View
 
 extension Page3View: View {
   public var body: some View {

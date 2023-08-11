@@ -24,7 +24,7 @@ extension HomeView: View {
           }
         }
 
-        Button(action: { intent.send(action: .onTapPage3)}) {
+        Button(action: { intent.send(action: .onTapPage3) }) {
           VStack {
             Text("go to last Page")
             Text("navigator.next(paths: [\"page1\", \"page2\", \"page3\"], items: [:], isAnimated: true)")
@@ -41,7 +41,7 @@ extension HomeView: View {
           }
         }
 
-        Button(action: { intent.send(action: .onTapSheet)}) {
+        Button(action: { intent.send(action: .onTapSheet) }) {
           VStack {
             Text("open Page 2 as Sheet")
               .foregroundColor(.purple)
@@ -50,7 +50,7 @@ extension HomeView: View {
           }
         }
 
-        Button(action: { intent.send(action: .onTapFullSheet)}) {
+        Button(action: { intent.send(action: .onTapFullSheet) }) {
           VStack {
             Text("open Page 2 as Full Screen Sheet")
               .foregroundColor(.purple)

@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - Page3
+// MARK: - Page3View
 
 struct Page3View: IntentBindingType {
   @StateObject var container: Container<Page3IntentType, Page3Model.State>

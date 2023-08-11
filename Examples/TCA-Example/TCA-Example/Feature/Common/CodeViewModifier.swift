@@ -1,5 +1,7 @@
 import SwiftUI
 
+// MARK: - CodeViewModifier
+
 struct CodeViewModifier: ViewModifier {
 
   func body(content: Content) -> some View {
@@ -14,6 +16,8 @@ extension View {
     modifier(CodeViewModifier())
   }
 }
+
+// MARK: - CodeViewModifier_Previews
 
 struct CodeViewModifier_Previews: PreviewProvider {
   static var previews: some View {

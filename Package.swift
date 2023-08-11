@@ -22,5 +22,4 @@ let package = Package(
     .testTarget(
       name: "LinkNavigatorTests",
       dependencies: ["LinkNavigator"]),
-  ]
-)
+  ])

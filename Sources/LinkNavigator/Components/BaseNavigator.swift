@@ -1,14 +1,18 @@
 import SwiftUI
 
+// MARK: - BaseNavigator
+
 public struct BaseNavigator {
-	let viewController: UINavigationController
+  let viewController: UINavigationController
 }
 
-extension BaseNavigator: UIViewControllerRepresentable {
-	public func makeUIViewController(context: Context) -> UINavigationController {
-    return viewController
-	}
+// MARK: UIViewControllerRepresentable
 
-	public func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
-	}
+extension BaseNavigator: UIViewControllerRepresentable {
+  public func makeUIViewController(context: Context) -> UINavigationController {
+    viewController
+  }
+
+  public func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
+  }
 }

@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - Page4
+// MARK: - Page4View
 
 struct Page4View: IntentBindingType {
   @StateObject var container: Container<Page4IntentType, Page4Model.State>
@@ -43,7 +43,7 @@ extension Page4View: View {
           }
         }
 
-        Button(action: { intent.send(action: .onTapBackToHome)}) {
+        Button(action: { intent.send(action: .onTapBackToHome) }) {
           VStack {
             Text("back to Home")
             Text("navigator.backOrNext(path: \"home\", items: [:], isAnimated: true)")

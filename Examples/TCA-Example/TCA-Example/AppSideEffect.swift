@@ -2,12 +2,16 @@ import Dependencies
 import Foundation
 import LinkNavigator
 
+// MARK: - EmptyDependency
+
 public struct EmptyDependency: DependencyType {
 }
 
 fileprivate var navigator: LinkNavigatorType = LinkNavigator(
   dependency: EmptyDependency(),
   builders: AppRouterGroup().routers)
+
+// MARK: - AppSideEffect
 
 public struct AppSideEffect: DependencyKey {
 
@@ -19,7 +23,7 @@ public struct AppSideEffect: DependencyKey {
   let page4: Page4SideEffect
 
   public static var liveValue: AppSideEffect {
-    return .init(
+    .init(
       linkNavigator: navigator,
       home: HomeSideEffectLive(navigator: navigator),
       page1: Page1SideEffectLive(navigator: navigator),

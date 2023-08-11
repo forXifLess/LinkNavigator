@@ -1,9 +1,13 @@
 import Foundation
 
+// MARK: - LinkInfo
+
 struct LinkInfo: Equatable {
   let pathList: [String]
   let items: [String: String]
 }
+
+// MARK: - DeepLinkParser
 
 struct DeepLinkParser {
   static func parse(url: URL, completeAction: @escaping (LinkInfo?) -> Void) {

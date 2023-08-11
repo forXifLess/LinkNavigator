@@ -1,11 +1,13 @@
 import LinkNavigator
 import SwiftUI
 
+// MARK: - Page3RouteBuilder
+
 struct Page3RouteBuilder: RouteBuilder {
   var matchPath: String { "page3" }
 
   var build: (LinkNavigatorType, [String: String], DependencyType) -> MatchingViewController? {
-    { navigator, items, dep in
+    { navigator, items, _ in
       WrappingController(matchPath: matchPath) {
         Page3View.build(
           intent: Page3Intent(

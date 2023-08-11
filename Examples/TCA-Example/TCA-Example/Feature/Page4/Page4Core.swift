@@ -1,8 +1,15 @@
 import ComposableArchitecture
-import UIKit
 import Dependencies
+import UIKit
 
 public struct Page4: Reducer {
+
+  // MARK: Lifecycle
+
+  public init() {}
+
+  // MARK: Public
+
   public struct State: Equatable {
     var paths: [String] = []
     var message = ""
@@ -15,10 +22,6 @@ public struct Page4: Reducer {
     case onTapBack
     case onTapReset
   }
-
-  public init() {}
-
-  @Dependency(\.sideEffect.page4) var sideEffect
 
   public var body: some ReducerOf<Self> {
     Reduce { state, action in
@@ -46,4 +49,9 @@ public struct Page4: Reducer {
       }
     }
   }
+
+  // MARK: Internal
+
+  @Dependency(\.sideEffect.page4) var sideEffect
+
 }
