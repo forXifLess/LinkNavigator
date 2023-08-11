@@ -216,60 +216,10 @@ let single = SingleLinkNavigator(
   routeBuilderItemList: [
     .init(
       matchPath: "tabbar",
-      routeBuild: { navigator, items, _ in
-        WrappingController(matchPath: "tabbar") {
-          TabView {
-            ScrollView {
-              VStack {
-                Text("Tab1")
-                Button(action: { navigator.backOrNext(path: "page1", items: [:], isAnimated: true) }) {
-                  Text("go to page1")
-                }
-                Spacer()
-                Button(action: { navigator.backOrNext(path: "page2", items: [:], isAnimated: true) }) {
-                  Text("go to page2")
-                }
-                Text("End")
-              }
-              .frame(maxWidth: .infinity)
-              .frame(height: 3000)
-            }
-            .tabItem {
-              Image(systemName: "1.square.fill")
-              Text("First")
-            }
-            VStack {
-              Spacer()
-              Text("Tab2")
-              Button(action: { navigator.backOrNext(path: "page1", items: [:], isAnimated: true) }) {
-                Text("go to page1")
-              }
-              Button(action: {
-                navigator.sheet(paths: ["page3"], items: [:], isAnimated: true)
-              }) {
-                Text("sheet page3")
-              }
-              Spacer()
-            }
-            .tabItem {
-              Image(systemName: "2.square.fill")
-              Text("Second")
-            }
-            VStack {
-              Spacer()
-              Text("Tab3")
-              Button(action: { navigator.backOrNext(path: "page1", items: [:], isAnimated: true) }) {
-                Text("go to page1")
-              }
-              Spacer()
-            }
-            .tabItem {
-              Image(systemName: "3.square.fill")
-              Text("Third")
-            }
-            .badge(10)
-          }
-          .font(.headline)
+      routeBuild: { navigator, items, env in
+        guard let appEnv = env as? AppDependency else { return .none }
+        return WrappingController(matchPath: "tabbar") {
+          TabBarPage(navigator: navigator, items: items, eventObserver: appEnv.eventObserver)
 
         }
       }),
@@ -350,3 +300,79 @@ let single = SingleLinkNavigator(
       }),
   ],
   dependency: AppDependency())
+
+
+struct TabBarPage: View {
+  let navigator: LinkNavigatorType
+  let items: [String: String]
+  @ObservedObject var eventObserver: EventObserver<EventState>
+
+  var body: some View {
+    TabView(selection: .init(
+      get: { eventObserver.state.currentTabID },
+      set: { eventObserver.state.currentTabID = $0 }) )
+    {
+      ScrollView {
+        VStack {
+          Text("Tab1")
+          Button(action: { navigator.backOrNext(path: "page1", items: [:], isAnimated: true) }) {
+            Text("go to page1")
+          }
+          Spacer()
+          Button(action: { navigator.backOrNext(path: "page2", items: [:], isAnimated: true) }) {
+            Text("go to page2")
+          }
+          Text("End")
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 3000)
+      }
+      .tabItem {
+        Image(systemName: "1.square.fill")
+        Text("First")
+      }
+      .tag(EventState.TapID.tab1)
+
+      VStack {
+        Spacer()
+        Text("Tab2")
+        Button(action: { navigator.backOrNext(path: "page1", items: [:], isAnimated: true) }) {
+          Text("go to page1")
+        }
+        Button(action: {
+          eventObserver.state.currentTabID = .tab3
+        }) {
+          Text("move tab3")
+        }
+        Button(action: {
+          navigator.sheet(paths: ["page3"], items: [:], isAnimated: true)
+        }) {
+          Text("sheet page3")
+        }
+        Spacer()
+      }
+      .tabItem {
+        Image(systemName: "2.square.fill")
+        Text("Second")
+      }
+      .tag(EventState.TapID.tab2)
+
+      VStack {
+        Spacer()
+        Text("Tab3")
+        Button(action: { navigator.backOrNext(path: "page1", items: [:], isAnimated: true) }) {
+          Text("go to page1")
+        }
+        Spacer()
+      }
+      .tabItem {
+        Image(systemName: "3.square.fill")
+        Text("Third")
+      }
+      .badge(10)
+      .tag(EventState.TapID.tab3)
+    }
+    .font(.headline)
+
+  }
+}
