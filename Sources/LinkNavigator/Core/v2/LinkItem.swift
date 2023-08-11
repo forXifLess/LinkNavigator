@@ -8,4 +8,9 @@ public struct LinkItem: Equatable {
     self.paths = paths
     self.items = items
   }
+
+  public init(path: String, items: [String: String] = [:]) {
+    self.paths = [path]
+    self.items = items
+  }
 }
