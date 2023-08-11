@@ -38,22 +38,22 @@ let tab = TabLinkNavigator(
   linkPath: "tabHome",
   tabItemList: [
     .init(
-      navigator: .init(initialLinkItem: .init(paths: [ "tab1-home" ])),
+      navigator: .init(initialLinkItem: .init(path: "tab1-home")),
       image: .init(systemName: "figure.american.football"),
       title: "Tab#1",
       tagMatchPath: "#Tab1"),
     .init(
-      navigator: .init(initialLinkItem: .init(paths: [ "tab2-home" ])),
+      navigator: .init(initialLinkItem: .init(path: "tab2-home")),
       image: .init(systemName: "figure.basketball"),
       title: "Tab#2",
       tagMatchPath: "#Tab2"),
     .init(
-      navigator: .init(initialLinkItem: .init(paths: [ "tab3-home" ])),
+      navigator: .init(initialLinkItem: .init(path: "tab3-home")),
       image: .init(systemName: "figure.climbing"),
       title: "Tab#3",
       tagMatchPath: "#Tab3"),
     .init(
-      navigator: .init(initialLinkItem: .init(paths: [ "tab4-home" ])),
+      navigator: .init(initialLinkItem: .init(path: "tab4-home")),
       image: .init(systemName: "figure.skiing.crosscountry"),
       title: "Tab#4",
       tagMatchPath: "#Tab4"),
@@ -80,13 +80,13 @@ let tab = TabLinkNavigator(
       }),
     .init(
       matchPath: "page1",
-      routeBuild: { navigator, items, _ in
+      routeBuild: { navigator, _, _ in
         WrappingController(matchPath: "page1") {
           VStack {
             Spacer()
             Text("page1")
             Button(action: {
-              navigator.sheet(paths: ["page3"], items: [:], isAnimated: true)
+              navigator.sheet(linkItem: .init(path: "page3"), isAnimated: true)
             }) {
               Text("sheet page3")
             }
@@ -122,7 +122,7 @@ let tab = TabLinkNavigator(
       }),
     .init(
       matchPath: "page3",
-      routeBuild: { navigator, items, _ in
+      routeBuild: { navigator, _, _ in
         WrappingController(matchPath: "page3") {
           VStack {
             Spacer()
@@ -133,7 +133,7 @@ let tab = TabLinkNavigator(
               Text("Move Tab 3")
             }
             Button(action: {
-              navigator.backOrNext(path: "tab1-home", items: [:], isAnimated: true)
+              navigator.backOrNext(linkItem: .init(path: "tab1-home"), isAnimated: true)
             }) {
               Text("back")
             }
@@ -143,19 +143,19 @@ let tab = TabLinkNavigator(
       }),
     .init(
       matchPath: "tab1-home",
-      routeBuild: { navigator, items, _ in
+      routeBuild: { navigator, _, _ in
         WrappingController(matchPath: "tab1-home") {
           VStack {
             Spacer()
             Text("tab1-home")
             Button(action: {
-              navigator.next(paths: ["page1"], items: [:], isAnimated: true)
+              navigator.next(linkItem: .init(path: "page1"), isAnimated: true)
             }) {
               Text("next page1")
             }
 
             Button(action: {
-              navigator.next(paths: ["page3"], items: [:], isAnimated: true)
+              navigator.next(linkItem: .init(path: "page3"), isAnimated: true)
             }) {
               Text("next page3")
             }
@@ -182,13 +182,13 @@ let tab = TabLinkNavigator(
       }),
     .init(
       matchPath: "tab3-home",
-      routeBuild: { navigator, items, _ in
+      routeBuild: { navigator, _, _ in
         WrappingController(matchPath: "tab3-home") {
           VStack {
             Spacer()
             Text("tab3-home")
             Button(action: {
-              navigator.next(paths: ["page1"], items: [:], isAnimated: true)
+              navigator.next(linkItem: .init(path: "page1"), isAnimated: true)
             }) {
               Text("next page1")
             }
@@ -212,7 +212,7 @@ let tab = TabLinkNavigator(
   defaultTagPath: "#Tab1")
 
 let single = SingleLinkNavigator(
-  rootNavigator: .init(initialLinkItem: .init(paths: ["tabbar"])),
+  rootNavigator: .init(initialLinkItem: .init(path: "tabbar")),
   routeBuilderItemList: [
     .init(
       matchPath: "tabbar",
@@ -220,7 +220,6 @@ let single = SingleLinkNavigator(
         guard let appEnv = env as? AppDependency else { return .none }
         return WrappingController(matchPath: "tabbar") {
           TabBarPage(navigator: navigator, items: items, eventObserver: appEnv.eventObserver)
-
         }
       }),
     .init(
@@ -244,17 +243,19 @@ let single = SingleLinkNavigator(
       }),
     .init(
       matchPath: "page1",
-      routeBuild: { navigator, items, _ in
+      routeBuild: { navigator, _, _ in
         WrappingController(matchPath: "page1") {
           VStack {
             Spacer()
             Text("page1")
             Button(action: {
-              navigator.sheet(paths: ["page3"], items: [:], isAnimated: true)
+              navigator.sheet(linkItem: .init(path: "page3"), isAnimated: true)
             }) {
               Text("sheet page3")
             }
-            Button(action: { navigator.backOrNext(path: "tabbar", items: [:], isAnimated: true) }) {
+            Button(action: {
+              navigator.backOrNext(linkItem: .init(path: "tabbar"), isAnimated: true)
+            }) {
               Text("go to tabbar")
             }
             Button(action: {
@@ -301,9 +302,10 @@ let single = SingleLinkNavigator(
   ],
   dependency: AppDependency())
 
+// MARK: - TabBarPage
 
 struct TabBarPage: View {
-  let navigator: LinkNavigatorType
+  let navigator: LinkNavigatorProtocol
   let items: [String: String]
   @ObservedObject var eventObserver: EventObserver<EventState>
 
@@ -315,11 +317,15 @@ struct TabBarPage: View {
       ScrollView {
         VStack {
           Text("Tab1")
-          Button(action: { navigator.backOrNext(path: "page1", items: [:], isAnimated: true) }) {
+          Button(action: {
+            navigator.backOrNext(linkItem: .init(path: "page1"), isAnimated: true)
+          }) {
             Text("go to page1")
           }
           Spacer()
-          Button(action: { navigator.backOrNext(path: "page2", items: [:], isAnimated: true) }) {
+          Button(action: {
+            navigator.backOrNext(linkItem: .init(path: "page2"), isAnimated: true)
+          }) {
             Text("go to page2")
           }
           Text("End")
@@ -336,7 +342,9 @@ struct TabBarPage: View {
       VStack {
         Spacer()
         Text("Tab2")
-        Button(action: { navigator.backOrNext(path: "page1", items: [:], isAnimated: true) }) {
+        Button(action: {
+          navigator.backOrNext(linkItem: .init(path: "page1"), isAnimated: true)
+        }) {
           Text("go to page1")
         }
         Button(action: {
@@ -345,7 +353,7 @@ struct TabBarPage: View {
           Text("move tab3")
         }
         Button(action: {
-          navigator.sheet(paths: ["page3"], items: [:], isAnimated: true)
+          navigator.sheet(linkItem: .init(path: "page3"), isAnimated: true)
         }) {
           Text("sheet page3")
         }
@@ -360,7 +368,9 @@ struct TabBarPage: View {
       VStack {
         Spacer()
         Text("Tab3")
-        Button(action: { navigator.backOrNext(path: "page1", items: [:], isAnimated: true) }) {
+        Button(action: {
+          navigator.backOrNext(linkItem: .init(path: "page1"), isAnimated: true)
+        }) {
           Text("go to page1")
         }
         Spacer()

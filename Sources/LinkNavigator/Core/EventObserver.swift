@@ -1,7 +1,6 @@
 import Foundation
 import SwiftUI
 
-
 /// If you need to update an event between each page, please use the corresponding class.
 ///
 /// -Example:

@@ -37,7 +37,7 @@ extension Navigator {
     routeBuilderList: [RouteBuilderOf<Root>],
     dependency: DependencyType)
   {
-    let newItemList = item.paths.compactMap { path in
+    let newItemList = item.pathList.compactMap { path in
       routeBuilderList.first(where: { $0.matchPath == path })?.routeBuild(rootNavigator, item.items, dependency)
     }
 
@@ -51,7 +51,7 @@ extension Navigator {
     routeBuilderList: [RouteBuilderOf<Root>],
     dependency: DependencyType)
   {
-    let newItemList = item.paths.compactMap { path in
+    let newItemList = item.pathList.compactMap { path in
       routeBuilderList.first(where: { $0.matchPath == path })?.routeBuild(rootNavigator, item.items, dependency)
     }
 
@@ -70,7 +70,7 @@ extension Navigator {
     routeBuilderList: [RouteBuilderOf<Root>],
     dependency: DependencyType)
   {
-    if let pick = find(path: item.paths.first ?? "") {
+    if let pick = find(path: item.pathList.first ?? "") {
       controller.popToViewController(pick, animated: isAnimated)
       return
     }
@@ -78,13 +78,13 @@ extension Navigator {
   }
 
   func remove(item: LinkItem) {
-    let new = viewControllers.filter{ item.paths.contains($0.matchPath) }
+    let new = viewControllers.filter{ item.pathList.contains($0.matchPath) }
     guard new.count != viewControllers.count else { return }
     controller.setViewControllers(new, animated: false)
   }
 
   func backToLast(item: LinkItem, isAnimated: Bool) {
-    guard let path = item.paths.first else { return }
+    guard let path = item.pathList.first else { return }
     guard let pick = viewControllers.last(where: { $0.matchPath == path }) else { return }
     controller.popToViewController(pick, animated: isAnimated)
   }
