@@ -78,7 +78,7 @@ extension Navigator {
   }
 
   func remove(item: LinkItem) {
-    let new = viewControllers.filter{ item.pathList.contains($0.matchPath) }
+    let new = viewControllers.filter{ !item.pathList.contains($0.matchPath) }
     guard new.count != viewControllers.count else { return }
     controller.setViewControllers(new, animated: false)
   }
