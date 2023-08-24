@@ -207,7 +207,7 @@ extension TabLinkNavigator: LinkNavigatorProtocol {
     }
   }
 
-  public func rootReloadLast(items: [String: String], isAnimated: Bool) {
+  public func rootReloadLast(items: String, isAnimated: Bool) {
     guard let focusNavigatorTabItem else { return }
     guard let lastPath = currentPaths.last else { return }
     guard let new = routeBuilderItemList.first(where: { $0.matchPath == lastPath })?.routeBuild(self, items, dependency)

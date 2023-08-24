@@ -192,7 +192,7 @@ extension SingleLinkNavigator: LinkNavigatorProtocol {
     }
   }
 
-  public func rootReloadLast(items: [String: String], isAnimated: Bool) {
+  public func rootReloadLast(items: String, isAnimated: Bool) {
     guard let lastPath = rootCurrentPaths.last else { return }
     guard let new = routeBuilderItemList.first(where: { $0.matchPath == lastPath })?.routeBuild(self, items, dependency)
     else { return }

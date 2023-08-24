@@ -306,7 +306,7 @@ let single = SingleLinkNavigator(
 
 struct TabBarPage: View {
   let navigator: LinkNavigatorProtocol
-  let items: [String: String]
+  let items: String
   @ObservedObject var eventObserver: EventObserver<EventState>
 
   var body: some View {

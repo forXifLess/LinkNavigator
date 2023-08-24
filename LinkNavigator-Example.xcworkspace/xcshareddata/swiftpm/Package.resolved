@@ -92,6 +92,15 @@
         }
       },
       {
+        "package": "URLEncodedForm",
+        "repositoryURL": "https://github.com/interactord/URLEncodedForm",
+        "state": {
+          "branch": null,
+          "revision": "643c3e3752464b8f5bd44b79a5d1216b632959bb",
+          "version": "1.0.0"
+        }
+      },
+      {
         "package": "xctest-dynamic-overlay",
         "repositoryURL": "https://github.com/pointfreeco/xctest-dynamic-overlay",
         "state": {

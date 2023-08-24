@@ -110,9 +110,9 @@ public protocol LinkNavigatorProtocol {
 
   /// Reloads the last root item with the specified items.
   /// - Parameters:
-  ///   - items: A dictionary of key-value pairs for the items to reload.
+  ///   - items: raw QueryString for the items to reload.
   ///   - isAnimated: A Boolean value that determines whether the reload is animated.
-  func rootReloadLast(items: [String: String], isAnimated: Bool)
+  func rootReloadLast(items: String, isAnimated: Bool)
 
   /// Presents an alert for the specified target and model.
   /// - Parameters:

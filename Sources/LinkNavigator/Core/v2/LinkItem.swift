@@ -11,7 +11,7 @@ public struct LinkItem: Equatable {
   /// - Parameters:
   ///   - pathList: An array of strings representing the path list.
   ///   - items: A dictionary containing key-value pairs representing the items. Defaults to an empty dictionary.
-  public init(pathList: [String], items: [String: String] = [:]) {
+  public init(pathList: [String], items: String = "") {
     self.pathList = pathList
     self.items = items
   }
@@ -21,7 +21,7 @@ public struct LinkItem: Equatable {
   /// - Parameters:
   ///   - path: A string representing the path.
   ///   - items: A dictionary containing key-value pairs representing the items. Defaults to an empty dictionary.
-  public init(path: String, items: [String: String] = [:]) {
+  public init(path: String, items: String = "") {
     pathList = [path]
     self.items = items
   }
@@ -32,6 +32,6 @@ public struct LinkItem: Equatable {
   let pathList: [String]
 
   /// A dictionary containing key-value pairs representing the items.
-  let items: [String: String]
+  let items: String
 
 }
