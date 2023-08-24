@@ -89,9 +89,9 @@ extension Navigator {
     controller.popToViewController(pick, animated: isAnimated)
   }
 
-  func find(path: String) -> MatchingViewController? {
+  func find(path: String) -> MatchedViewController? {
     controller.viewControllers
-      .compactMap { $0 as? MatchingViewController }
+      .compactMap { $0 as? MatchedViewController }
       .first(where: { $0.matchPath == path })
   }
 

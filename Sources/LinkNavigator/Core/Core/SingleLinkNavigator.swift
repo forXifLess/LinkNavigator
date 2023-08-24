@@ -1,35 +1,28 @@
 import UIKit
 
-// MARK: - TabLinkNavigator
+// MARK: - SingleLinkNavigator
 
-public final class TabLinkNavigator {
+public final class SingleLinkNavigator {
 
   // MARK: Lifecycle
 
   public init(
-    linkPath: String,
-    tabController: UITabBarController = .init(),
-    tabItemList: [TabBarNavigator],
-    routeBuilderItemList: [RouteBuilderOf<TabLinkNavigator>],
+    rootNavigator: Navigator,
+    routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator>],
     dependency: DependencyType,
-    defaultTagPath: String)
+    subNavigator: Navigator? = nil)
   {
-    self.linkPath = linkPath
-    self.tabController = tabController
-    self.tabItemList = tabItemList
+    self.rootNavigator = rootNavigator
     self.routeBuilderItemList = routeBuilderItemList
     self.dependency = dependency
-    self.defaultTagPath = defaultTagPath
+    self.subNavigator = subNavigator
   }
 
   // MARK: Public
 
-  public let linkPath: String
-  public let tabItemList: [TabBarNavigator]
-  public let routeBuilderItemList: [RouteBuilderOf<TabLinkNavigator>]
+  public let rootNavigator: Navigator
+  public let routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator>]
   public let dependency: DependencyType
-  public let defaultTagPath: String
-  public let tabController: UITabBarController
 
   public var subNavigator: Navigator?
 
@@ -39,33 +32,26 @@ public final class TabLinkNavigator {
 
 }
 
-extension TabLinkNavigator {
+extension SingleLinkNavigator {
 
-  public func launch(isTabBarHidden: Bool = false) -> BaseViewController {
-    defer { tabController.tabBar.isHidden = isTabBarHidden }
-    let newItemList = tabItemList.map { [weak self] item -> Navigator? in
-      guard let self else { return .none }
-      item.navigator.replace(
-        rootNavigator: self,
-        item: item.navigator.initialLinkItem,
-        isAnimated: false,
-        routeBuilderList: routeBuilderItemList,
-        dependency: dependency)
-      item.navigator.controller.tabBarItem = item.tabBarItem
-      return item.navigator
-    }.compactMap { $0 }
+  public func launch(item: LinkItem? = .none, prefersLargeTitles: Bool = false) -> BaseNavigator {
+    rootNavigator.replace(
+      rootNavigator: self,
+      item: item ?? rootNavigator.initialLinkItem,
+      isAnimated: false,
+      routeBuilderList: routeBuilderItemList,
+      dependency: dependency)
+    rootNavigator.controller.navigationBar.prefersLargeTitles = prefersLargeTitles
 
-    tabController.setViewControllers(newItemList.map(\.controller), animated: false)
-    moveToTab(tagPath: defaultTagPath)
-    return .init(viewController: tabController)
+    return .init(viewController: rootNavigator.controller)
   }
 }
 
 // MARK: LinkNavigatorProtocol
 
-extension TabLinkNavigator: LinkNavigatorProtocol {
-  public var rootNavigator: Navigator {
-    focusNavigatorTabItem ?? .init(initialLinkItem: .init(path: ""))
+extension SingleLinkNavigator: LinkNavigatorProtocol {
+  public var activeNavigator: Navigator? {
+    isSubNavigatorActive ? subNavigator : rootNavigator
   }
 
   public var currentPaths: [String] {
@@ -73,7 +59,7 @@ extension TabLinkNavigator: LinkNavigatorProtocol {
   }
 
   public var rootCurrentPaths: [String] {
-    focusItemCurrentPath
+    rootNavigator.viewControllers.map(\.matchPath)
   }
 
   public func next(linkItem: LinkItem, isAnimated: Bool) {
@@ -86,7 +72,7 @@ extension TabLinkNavigator: LinkNavigatorProtocol {
   }
 
   public func rootNext(linkItem: LinkItem, isAnimated: Bool) {
-    focusNavigatorTabItem?.push(
+    rootNavigator.push(
       rootNavigator: self,
       item: linkItem,
       isAnimated: isAnimated,
@@ -133,12 +119,12 @@ extension TabLinkNavigator: LinkNavigatorProtocol {
   }
 
   public func replace(linkItem: LinkItem, isAnimated: Bool) {
-    tabController.dismiss(animated: isAnimated) { [weak self] in
+    rootNavigator.controller.dismiss(animated: isAnimated) { [weak self] in
       guard let self else { return }
       subNavigator?.reset(isAnimated: isAnimated)
       subNavigator?.controller.presentationController?.delegate = .none
     }
-    focusNavigatorTabItem?.replace(
+    rootNavigator.replace(
       rootNavigator: self,
       item: linkItem,
       isAnimated: isAnimated,
@@ -151,13 +137,14 @@ extension TabLinkNavigator: LinkNavigatorProtocol {
       rootNavigator: self,
       item: linkItem,
       isAnimated: isAnimated,
-      routeBuilderList: routeBuilderItemList, dependency: dependency)
+      routeBuilderList: routeBuilderItemList,
+      dependency: dependency)
   }
 
   public func rootBackOrNext(linkItem: LinkItem, isAnimated: Bool) {
     guard let path = linkItem.pathList.first else { return }
-    guard let pick = focusNavigatorTabItem?.viewControllers.first(where: { $0.matchPath == path }) else {
-      focusNavigatorTabItem?.push(
+    guard let pick = rootNavigator.viewControllers.first(where: { $0.matchPath == path }) else {
+      rootNavigator.push(
         rootNavigator: self,
         item: .init(path: path, items: linkItem.items),
         isAnimated: isAnimated,
@@ -165,13 +152,13 @@ extension TabLinkNavigator: LinkNavigatorProtocol {
         dependency: dependency)
       return
     }
-    focusNavigatorTabItem?.controller.popToViewController(pick, animated: isAnimated)
+    rootNavigator.controller.popToViewController(pick, animated: isAnimated)
   }
 
   public func back(isAnimated: Bool) {
     isSubNavigatorActive
       ? sheetBack(isAnimated: isAnimated)
-      : focusNavigatorTabItem?.back(isAnimated: isAnimated)
+      : rootNavigator.back(isAnimated: isAnimated)
   }
 
   public func remove(pathList: [String]) {
@@ -179,7 +166,7 @@ extension TabLinkNavigator: LinkNavigatorProtocol {
   }
 
   public func rootRemove(pathList: [String]) {
-    focusNavigatorTabItem?.remove(item: .init(pathList: pathList))
+    rootNavigator.remove(item: .init(pathList: pathList))
   }
 
   public func backToLast(path: String, isAnimated: Bool) {
@@ -187,13 +174,12 @@ extension TabLinkNavigator: LinkNavigatorProtocol {
   }
 
   public func rootBackToLast(path: String, isAnimated: Bool) {
-    focusNavigatorTabItem?.backToLast(item: .init(path: path), isAnimated: isAnimated)
+    rootNavigator.backToLast(item: .init(path: path), isAnimated: isAnimated)
   }
 
   public func close(isAnimated: Bool, completeAction: @escaping () -> Void) {
     guard activeNavigator == subNavigator else { return }
-    guard let focusNavigatorTabItem else { return }
-    focusNavigatorTabItem.controller.dismiss(animated: isAnimated) { [weak self] in
+    rootNavigator.controller.dismiss(animated: isAnimated) { [weak self] in
       completeAction()
       self?.subNavigator?.reset()
       self?.subNavigator?.controller.presentationController?.delegate = .none
@@ -208,52 +194,35 @@ extension TabLinkNavigator: LinkNavigatorProtocol {
   }
 
   public func rootReloadLast(items: String, isAnimated: Bool) {
-    guard let focusNavigatorTabItem else { return }
-    guard let lastPath = currentPaths.last else { return }
+    guard let lastPath = rootCurrentPaths.last else { return }
     guard let new = routeBuilderItemList.first(where: { $0.matchPath == lastPath })?.routeBuild(self, items, dependency)
     else { return }
 
-    let newList = Array(focusNavigatorTabItem.controller.viewControllers.dropLast()) + [new]
-    focusNavigatorTabItem.controller.setViewControllers(newList, animated: isAnimated)
+    let newList = Array(rootNavigator.controller.viewControllers.dropLast()) + [new]
+    rootNavigator.controller.setViewControllers(newList, animated: isAnimated)
   }
 
   public func alert(target: NavigationTarget, model: Alert) {
-    guard let focusNavigatorTabItem else { return }
     switch target {
     case .default:
       alert(target: isSubNavigatorActive ? .sub : .root, model: model)
     case .root:
-      focusNavigatorTabItem.controller.present(model.build(), animated: true)
+      rootNavigator.controller.present(model.build(), animated: true)
     case .sub:
       subNavigator?.controller.present(model.build(), animated: true)
     }
   }
 }
 
-// MARK: TabNavigatorType
-
-extension TabLinkNavigator: TabNavigatorType {
-  public func moveToTab(tagPath: String) {
-    guard let pick = tabController.viewControllers?.first(where: { $0.tabBarItem.tag == tagPath.hashValue }) else { return }
-    tabController.selectedViewController = pick
-  }
-}
-
-extension TabLinkNavigator {
-
+/// MARK: - Main
+extension SingleLinkNavigator {
   public var isSubNavigatorActive: Bool {
-    tabController.presentedViewController != .none
-  }
-
-  public var activeNavigator: Navigator? {
-    guard let subNavigator else { return focusNavigatorTabItem }
-    return isSubNavigatorActive ? subNavigator : focusNavigatorTabItem
+    rootNavigator.controller.presentedViewController != .none
   }
 }
 
-/// MARK: SubNavigator
-
-extension TabLinkNavigator {
+/// MARK: - Sub
+extension SingleLinkNavigator {
 
   // MARK: Public
 
@@ -264,7 +233,7 @@ extension TabLinkNavigator {
     presentWillAction: @escaping (UINavigationController) -> Void = { _ in },
     presentDidAction: @escaping (UINavigationController) -> Void = { _ in })
   {
-    tabController.dismiss(animated: true)
+    rootNavigator.controller.dismiss(animated: true)
 
     let new = Navigator(initialLinkItem: item)
     if let prefersLargeTitles { new.controller.navigationBar.prefersLargeTitles = prefersLargeTitles }
@@ -276,7 +245,7 @@ extension TabLinkNavigator {
       isAnimated: false,
       routeBuilderList: routeBuilderItemList,
       dependency: dependency)
-    focusNavigatorTabItem?.controller.present(new.controller, animated: isAnimated)
+    rootNavigator.controller.present(new.controller, animated: isAnimated)
     presentDidAction(new.controller)
 
     subNavigator = new
@@ -291,7 +260,7 @@ extension TabLinkNavigator {
   private func sheetBack(isAnimated: Bool) {
     guard let subNavigator else { return }
     guard subNavigator.viewControllers.count > 1 else {
-      tabController.dismiss(animated: true)
+      rootNavigator.controller.dismiss(animated: true)
       self.subNavigator = .none
       return
     }
@@ -299,23 +268,9 @@ extension TabLinkNavigator {
   }
 }
 
-/// MARK: MainNavigator
+// MARK: SingleLinkNavigator.Coordinate
 
-extension TabLinkNavigator {
-
-  private var focusNavigatorTabItem: Navigator? {
-    guard let select = tabController.selectedViewController else { return .none }
-    return tabItemList.first(where: { $0.navigator.controller == select })?.navigator
-  }
-
-  private var focusItemCurrentPath: [String] {
-    focusNavigatorTabItem?.currentPath ?? []
-  }
-}
-
-// MARK: TabLinkNavigator.Coordinate
-
-extension TabLinkNavigator {
+extension SingleLinkNavigator {
   fileprivate class Coordinate: NSObject, UIAdaptivePresentationControllerDelegate {
 
     // MARK: Lifecycle
