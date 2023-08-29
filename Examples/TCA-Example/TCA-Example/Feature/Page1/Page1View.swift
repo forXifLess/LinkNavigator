@@ -40,7 +40,7 @@ extension Page1View: View {
           }
         }
 
-        Button(action: { viewStore.send(.onTapRootRandomBackOrNext) } ) {
+        Button(action: { viewStore.send(.onTapRootRandomBackOrNext) }) {
           VStack {
             Text("**root** backOrNext")
             Text("navigator.rootBackOrNext(path: Bool.random() ? \"home\" : \"page2\", items: [:], isAnimated: true)")

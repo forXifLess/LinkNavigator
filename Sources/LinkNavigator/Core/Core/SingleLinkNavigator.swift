@@ -92,7 +92,7 @@ extension SingleLinkNavigator: LinkNavigatorProtocol {
       presentWillAction: {
         $0.modalPresentationStyle = .fullScreen
       },
-      presentDidAction: {[weak self] in
+      presentDidAction: { [weak self] in
         $0.presentationController?.delegate = self?.coordinate
       })
   }
@@ -113,7 +113,7 @@ extension SingleLinkNavigator: LinkNavigatorProtocol {
           ? iPhonePresentationStyle
           : iPadPresentationStyle
       },
-      presentDidAction: {[weak self] in
+      presentDidAction: { [weak self] in
         $0.presentationController?.delegate = self?.coordinate
       })
   }
@@ -283,7 +283,7 @@ extension SingleLinkNavigator {
 
     var sheetDidDismiss: () -> Void
 
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+    func presentationControllerDidDismiss(_: UIPresentationController) {
       sheetDidDismiss()
     }
   }

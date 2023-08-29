@@ -15,14 +15,14 @@ let package = Package(
   ],
   dependencies: [
     .package(
-      url: "https://github.com/interactord/URLEncodedForm", 
+      url: "https://github.com/interactord/URLEncodedForm",
       .upToNextMajor(from: "1.0.0")),
   ],
   targets: [
     .target(
       name: "LinkNavigator",
       dependencies: [
-        "URLEncodedForm"
+        "URLEncodedForm",
       ]),
     .testTarget(
       name: "LinkNavigatorTests",

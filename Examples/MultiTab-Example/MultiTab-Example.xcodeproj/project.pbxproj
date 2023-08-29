@@ -39,9 +39,9 @@
 		D24198BA2A84B1A200BE960F = {
 			isa = PBXGroup;
 			children = (
+				D24198D42A84B20500BE960F /* Frameworks */,
 				D24198C52A84B1A200BE960F /* MultiTab-Example */,
 				D24198C42A84B1A200BE960F /* Products */,
-				D24198D42A84B20500BE960F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -275,7 +275,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MultiTab-Example/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -303,7 +303,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MultiTab-Example/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

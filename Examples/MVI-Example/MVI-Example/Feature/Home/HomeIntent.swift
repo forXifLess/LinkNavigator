@@ -36,7 +36,7 @@ final class HomeIntent: ObservableObject {
 
 extension HomeIntent: IntentType, HomeIntentType {
 
-  func mutate(action: HomeModel.ViewAction, viewEffect: (() -> Void)?) {
+  func mutate(action: HomeModel.ViewAction, viewEffect _: (() -> Void)?) {
     switch action {
     case .getPaths:
       state.paths = navigator.currentPaths

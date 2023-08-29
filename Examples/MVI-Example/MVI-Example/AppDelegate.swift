@@ -10,7 +10,7 @@ final class AppDelegate: NSObject {
 // MARK: UIApplicationDelegate
 
 extension AppDelegate: UIApplicationDelegate {
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+  func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
     true
   }
 }

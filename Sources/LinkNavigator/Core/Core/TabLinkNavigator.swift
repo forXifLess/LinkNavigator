@@ -43,7 +43,8 @@ extension TabLinkNavigator {
 
   public func launch(
     prefersLargeTitles: Bool = false,
-    isTabBarHidden: Bool = false) -> BaseViewController
+    isTabBarHidden: Bool = false)
+    -> BaseViewController
   {
     defer { tabController.tabBar.isHidden = isTabBarHidden }
     let newItemList = tabItemList.map { [weak self] current -> Navigator? in
@@ -110,7 +111,7 @@ extension TabLinkNavigator: LinkNavigatorProtocol {
       presentWillAction: {
         $0.modalPresentationStyle = .fullScreen
       },
-      presentDidAction: {[weak self] in
+      presentDidAction: { [weak self] in
         $0.presentationController?.delegate = self?.coordinate
       })
   }
@@ -131,7 +132,7 @@ extension TabLinkNavigator: LinkNavigatorProtocol {
           ? iPhonePresentationStyle
           : iPadPresentationStyle
       },
-      presentDidAction: {[weak self] in
+      presentDidAction: { [weak self] in
         $0.presentationController?.delegate = self?.coordinate
       })
   }
@@ -332,7 +333,7 @@ extension TabLinkNavigator {
 
     var sheetDidDismiss: () -> Void
 
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+    func presentationControllerDidDismiss(_: UIPresentationController) {
       sheetDidDismiss()
     }
   }

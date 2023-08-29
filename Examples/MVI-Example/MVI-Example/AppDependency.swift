@@ -1,4 +1,3 @@
 import LinkNavigator
 
-struct AppDependency: DependencyType {
-}
+struct AppDependency: DependencyType { }

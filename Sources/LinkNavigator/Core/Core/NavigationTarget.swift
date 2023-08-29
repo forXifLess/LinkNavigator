@@ -7,4 +7,3 @@ public enum NavigationTarget {
   case root
   case sub
 }
-

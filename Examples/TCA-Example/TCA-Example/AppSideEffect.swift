@@ -4,10 +4,9 @@ import LinkNavigator
 
 // MARK: - EmptyDependency
 
-public struct EmptyDependency: DependencyType {
-}
+public struct EmptyDependency: DependencyType { }
 
-fileprivate var navigator: LinkNavigatorType = LinkNavigator(
+private var navigator: LinkNavigatorType = LinkNavigator(
   dependency: EmptyDependency(),
   builders: AppRouterGroup().routers)
 

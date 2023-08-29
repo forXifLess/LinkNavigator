@@ -6,7 +6,7 @@ public struct Page4: Reducer {
 
   // MARK: Lifecycle
 
-  public init() {}
+  public init() { }
 
   // MARK: Public
 
@@ -31,7 +31,8 @@ public struct Page4: Reducer {
         return .none
 
       case .onTapDeepLink:
-        UIPasteboard.general.string = "tca-ex://host/home/page1/page2/page3/page4?page3-message=world&page4-message=hello" // copy deep link
+        UIPasteboard.general
+          .string = "tca-ex://host/home/page1/page2/page3/page4?page3-message=world&page4-message=hello" // copy deep link
         sideEffect.openSafari("https://www.google.co.kr/")
         return .none
 

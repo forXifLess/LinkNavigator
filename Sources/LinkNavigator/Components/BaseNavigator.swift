@@ -9,10 +9,9 @@ public struct BaseNavigator {
 // MARK: UIViewControllerRepresentable
 
 extension BaseNavigator: UIViewControllerRepresentable {
-  public func makeUIViewController(context: Context) -> UINavigationController {
+  public func makeUIViewController(context _: Context) -> UINavigationController {
     viewController
   }
 
-  public func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
-  }
+  public func updateUIViewController(_: UINavigationController, context _: Context) { }
 }

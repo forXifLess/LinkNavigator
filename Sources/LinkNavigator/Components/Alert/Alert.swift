@@ -29,8 +29,8 @@ public struct Alert: Equatable {
 
   func build() -> UIAlertController {
     let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    buttons.forEach {
-      controller.addAction($0.buildAlertButton())
+    for button in buttons {
+      controller.addAction(button.buildAlertButton())
     }
     return controller
   }

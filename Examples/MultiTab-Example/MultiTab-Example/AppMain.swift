@@ -312,7 +312,7 @@ struct TabBarPage: View {
   var body: some View {
     TabView(selection: .init(
       get: { eventObserver.state.currentTabID },
-      set: { eventObserver.state.currentTabID = $0 }) )
+      set: { eventObserver.state.currentTabID = $0 }))
     {
       ScrollView {
         VStack {
@@ -383,6 +383,5 @@ struct TabBarPage: View {
       .tag(EventState.TapID.tab3)
     }
     .font(.headline)
-
   }
 }

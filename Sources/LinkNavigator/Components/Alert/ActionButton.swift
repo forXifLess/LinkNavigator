@@ -8,7 +8,7 @@ public struct ActionButton: Equatable {
 
   // MARK: Lifecycle
 
-  public init(title: String? = .none, style: ActionStyle, action: @escaping () -> Void = {}) {
+  public init(title: String? = .none, style: ActionStyle, action: @escaping () -> Void = { }) {
     self.title = title ?? "title"
     self.style = style
     self.action = action

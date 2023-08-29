@@ -9,10 +9,9 @@ public struct BaseViewController {
 // MARK: UIViewControllerRepresentable
 
 extension BaseViewController: UIViewControllerRepresentable {
-  public func makeUIViewController(context: Context) -> UIViewController {
+  public func makeUIViewController(context _: Context) -> UIViewController {
     viewController
   }
 
-  public func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-  }
+  public func updateUIViewController(_: UIViewController, context _: Context) { }
 }

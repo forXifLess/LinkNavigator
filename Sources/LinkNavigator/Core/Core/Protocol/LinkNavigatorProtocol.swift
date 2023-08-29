@@ -53,7 +53,12 @@ public protocol LinkNavigatorProtocol {
   ///   - iPhonePresentationStyle: The presentation style for iPhone.
   ///   - iPadPresentationStyle: The presentation style for iPad.
   ///   - prefersLargeTitles: An optional Boolean value that determines whether the navigation bar should display large titles.
-  func customSheet(linkItem: LinkItem, isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle, prefersLargeTitles: Bool?)
+  func customSheet(
+    linkItem: LinkItem,
+    isAnimated: Bool,
+    iPhonePresentationStyle: UIModalPresentationStyle,
+    iPadPresentationStyle: UIModalPresentationStyle,
+    prefersLargeTitles: Bool?)
 
   /// Replaces the current link item.
   /// - Parameters:

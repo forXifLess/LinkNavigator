@@ -21,7 +21,7 @@ public final class WrappingController<Content: View>: UIHostingController<Conten
     title = matchPath
   }
 
-  required init?(coder aDecoder: NSCoder) {
+  required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 

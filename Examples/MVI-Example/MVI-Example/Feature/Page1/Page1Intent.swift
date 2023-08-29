@@ -34,7 +34,7 @@ final class Page1Intent: ObservableObject {
 // MARK: IntentType, Page1IntentType
 
 extension Page1Intent: IntentType, Page1IntentType {
-  func mutate(action: Page1Model.ViewAction, viewEffect: (() -> Void)?) {
+  func mutate(action: Page1Model.ViewAction, viewEffect _: (() -> Void)?) {
     switch action {
     case .getPaths:
       state.paths = navigator.currentPaths

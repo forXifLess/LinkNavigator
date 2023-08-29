@@ -35,14 +35,15 @@ final class Page4Intent: ObservableObject {
 // MARK: IntentType, Page4IntentType
 
 extension Page4Intent: IntentType, Page4IntentType {
-  func mutate(action: Page4Model.ViewAction, viewEffect: (() -> Void)?) {
+  func mutate(action: Page4Model.ViewAction, viewEffect _: (() -> Void)?) {
     switch action {
     case .getPaths:
       state.paths = navigator.currentPaths
 
     case .onTapDeepLink:
       guard let url = URL(string: "https://www.google.co.kr/"), UIApplication.shared.canOpenURL(url) else { return }
-      UIPasteboard.general.string = "mvi-ex://host/home/page1/page2/page3/page4?page3-message=world&page4-message=hello" // copy deep link
+      UIPasteboard.general
+        .string = "mvi-ex://host/home/page1/page2/page3/page4?page3-message=world&page4-message=hello" // copy deep link
       UIApplication.shared.open(url, options: [:], completionHandler: .none)
 
     case .onTapBackToHome:

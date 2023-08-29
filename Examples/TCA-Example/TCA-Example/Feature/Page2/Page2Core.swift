@@ -4,7 +4,7 @@ public struct Page2: Reducer {
 
   // MARK: Lifecycle
 
-  public init() {}
+  public init() { }
 
   // MARK: Public
 

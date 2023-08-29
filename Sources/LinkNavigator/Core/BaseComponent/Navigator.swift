@@ -5,7 +5,7 @@ import UIKit
 
 public struct Navigator {
 
-  public typealias MatchedViewController = UIViewController & MatchPathUsable
+  public typealias MatchedViewController = MatchPathUsable & UIViewController
 
   let initialLinkItem: LinkItem
   let controller: UINavigationController
@@ -25,7 +25,7 @@ extension Navigator {
   }
 
   var currentPath: [String] {
-    controller.viewControllers.compactMap{ $0 as? MatchedViewController }.map(\.matchPath)
+    controller.viewControllers.compactMap { $0 as? MatchedViewController }.map(\.matchPath)
   }
 }
 
@@ -74,11 +74,16 @@ extension Navigator {
       controller.popToViewController(pick, animated: isAnimated)
       return
     }
-    push(rootNavigator: rootNavigator, item: item, isAnimated: isAnimated, routeBuilderList: routeBuilderList, dependency: dependency)
+    push(
+      rootNavigator: rootNavigator,
+      item: item,
+      isAnimated: isAnimated,
+      routeBuilderList: routeBuilderList,
+      dependency: dependency)
   }
 
   func remove(item: LinkItem) {
-    let new = viewControllers.filter{ !item.pathList.contains($0.matchPath) }
+    let new = viewControllers.filter { !item.pathList.contains($0.matchPath) }
     guard new.count != viewControllers.count else { return }
     controller.setViewControllers(new, animated: false)
   }

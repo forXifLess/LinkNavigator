@@ -2,12 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Examples/MultiTab-Example/MultiTab-Example.xcodeproj">
+      location = "group:Examples/TCA-Example/TCA-Example.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Examples/MVI-Example/MVI-Example.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Examples/MVI-Example/../TCA-Example/TCA-Example.xcodeproj">
+      location = "group:Examples/MultiTab-Example/MultiTab-Example.xcodeproj">
    </FileRef>
 </Workspace>

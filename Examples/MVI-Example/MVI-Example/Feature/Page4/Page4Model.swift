@@ -3,7 +3,7 @@ import SwiftUI
 enum Page4Model {
   struct State: Equatable {
     var paths: [String] = []
-    var message: String = ""
+    var message = ""
   }
 
   enum ViewAction: Equatable {

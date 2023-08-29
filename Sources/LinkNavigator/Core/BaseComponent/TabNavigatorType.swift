@@ -10,19 +10,19 @@ public protocol TabNavigatorType {
   /// - Note:
   ///   Do not confuse it with LinkPath. This path is the unique path that the tab has.
   ///
-  ///```swift
-  ///case .onTapMoveTabPage4:
+  /// ```swift
+  /// case .onTapMoveTabPage4:
   ///  navigator.moveToTab(tagPath: "#Tab4")
   ///
   ////// RouteTabItem adding
   ///
-  ///TabBarNavigator(
+  /// TabBarNavigator(
   ///  navigator: .init(initialLinkItem: .init(paths: [ "tab4-home" ])),
   ///  image: .init(systemName: "figure.american.football"),
   ///  title: "Tab4",
   ///  tagMatchPath: "#Tab4")
   ///
-  ///```
+  /// ```
   ///
   func moveToTab(tagPath: String)
 }

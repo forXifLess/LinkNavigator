@@ -9,7 +9,7 @@ struct LinkInfo: Equatable {
 
 // MARK: - DeepLinkParser
 
-struct DeepLinkParser {
+enum DeepLinkParser {
   static func parse(url: URL, completeAction: @escaping (LinkInfo?) -> Void) {
     guard let component = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
       completeAction(.none)
