@@ -2,15 +2,15 @@ import UIKit
 
 // MARK: - SingleLinkNavigator
 
-public final class SingleLinkNavigator {
+public final class SingleLinkNavigator<ItemValue: EmptyValueType> {
 
   // MARK: Lifecycle
 
   public init(
-    rootNavigator: Navigator,
-    routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator>],
+    rootNavigator: Navigator<ItemValue>,
+    routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator, ItemValue>],
     dependency: DependencyType,
-    subNavigator: Navigator? = nil)
+    subNavigator: Navigator<ItemValue>? = nil)
   {
     self.rootNavigator = rootNavigator
     self.routeBuilderItemList = routeBuilderItemList
@@ -20,11 +20,11 @@ public final class SingleLinkNavigator {
 
   // MARK: Public
 
-  public let rootNavigator: Navigator
-  public let routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator>]
+  public let rootNavigator: Navigator<ItemValue>
+  public let routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator, ItemValue>]
   public let dependency: DependencyType
 
-  public var subNavigator: Navigator?
+  public var subNavigator: Navigator<ItemValue>?
 
   // MARK: Private
 
@@ -34,7 +34,7 @@ public final class SingleLinkNavigator {
 
 extension SingleLinkNavigator {
 
-  public func launch(item: LinkItem? = .none, prefersLargeTitles: Bool = false) -> BaseNavigator {
+  public func launch(item: LinkItem<ItemValue>? = .none, prefersLargeTitles: Bool = false) -> BaseNavigator {
     rootNavigator.replace(
       rootNavigator: self,
       item: item ?? rootNavigator.initialLinkItem,
@@ -45,24 +45,29 @@ extension SingleLinkNavigator {
 
     return .init(viewController: rootNavigator.controller)
   }
+
+  public var activeNavigator: Navigator<ItemValue>? {
+    isSubNavigatorActive ? subNavigator : rootNavigator
+  }
 }
 
 // MARK: LinkNavigatorProtocol
 
-extension SingleLinkNavigator: LinkNavigatorProtocol {
-  public var activeNavigator: Navigator? {
-    isSubNavigatorActive ? subNavigator : rootNavigator
+extension SingleLinkNavigator: LinkNavigatorFindLocationUsable {
+
+  public func getCurrentPaths() -> [String] {
+    isSubNavigatorActive ? subNavigatorCurrentPaths : getRootCurrentPaths()
   }
 
-  public var currentPaths: [String] {
-    isSubNavigatorActive ? subNavigatorCurrentPaths : rootCurrentPaths
-  }
-
-  public var rootCurrentPaths: [String] {
+  public func getRootCurrentPaths() -> [String] {
     rootNavigator.viewControllers.map(\.matchPath)
   }
 
-  public func next(linkItem: LinkItem, isAnimated: Bool) {
+}
+
+extension SingleLinkNavigator {
+
+  private func _next(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     activeNavigator?.push(
       rootNavigator: self,
       item: linkItem,
@@ -71,7 +76,7 @@ extension SingleLinkNavigator: LinkNavigatorProtocol {
       dependency: dependency)
   }
 
-  public func rootNext(linkItem: LinkItem, isAnimated: Bool) {
+  private func _rootNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     rootNavigator.push(
       rootNavigator: self,
       item: linkItem,
@@ -80,11 +85,11 @@ extension SingleLinkNavigator: LinkNavigatorProtocol {
       dependency: dependency)
   }
 
-  public func sheet(linkItem: LinkItem, isAnimated: Bool) {
+  private func _sheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     sheetOpen(item: linkItem, isAnimated: isAnimated)
   }
 
-  public func fullSheet(linkItem: LinkItem, isAnimated: Bool, prefersLargeTitles: Bool?) {
+  private func _fullSheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool, prefersLargeTitles: Bool?) {
     sheetOpen(
       item: linkItem,
       isAnimated: isAnimated,
@@ -97,8 +102,8 @@ extension SingleLinkNavigator: LinkNavigatorProtocol {
       })
   }
 
-  public func customSheet(
-    linkItem: LinkItem,
+  private func _customSheet(
+    linkItem: LinkItem<ItemValue>,
     isAnimated: Bool,
     iPhonePresentationStyle: UIModalPresentationStyle,
     iPadPresentationStyle: UIModalPresentationStyle,
@@ -118,7 +123,7 @@ extension SingleLinkNavigator: LinkNavigatorProtocol {
       })
   }
 
-  public func replace(linkItem: LinkItem, isAnimated: Bool) {
+  private func _replace(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     rootNavigator.controller.dismiss(animated: isAnimated) { [weak self] in
       guard let self else { return }
       subNavigator?.reset(isAnimated: isAnimated)
@@ -132,7 +137,7 @@ extension SingleLinkNavigator: LinkNavigatorProtocol {
       dependency: dependency)
   }
 
-  public func backOrNext(linkItem: LinkItem, isAnimated: Bool) {
+  private func _backOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     activeNavigator?.backOrNext(
       rootNavigator: self,
       item: linkItem,
@@ -141,7 +146,7 @@ extension SingleLinkNavigator: LinkNavigatorProtocol {
       dependency: dependency)
   }
 
-  public func rootBackOrNext(linkItem: LinkItem, isAnimated: Bool) {
+  private func _rootBackOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     guard let path = linkItem.pathList.first else { return }
     guard let pick = rootNavigator.viewControllers.first(where: { $0.matchPath == path }) else {
       rootNavigator.push(
@@ -155,29 +160,29 @@ extension SingleLinkNavigator: LinkNavigatorProtocol {
     rootNavigator.controller.popToViewController(pick, animated: isAnimated)
   }
 
-  public func back(isAnimated: Bool) {
+  private func _back(isAnimated: Bool) {
     isSubNavigatorActive
       ? sheetBack(isAnimated: isAnimated)
       : rootNavigator.back(isAnimated: isAnimated)
   }
 
-  public func remove(pathList: [String]) {
-    activeNavigator?.remove(item: .init(pathList: pathList))
+  private func _remove(pathList: [String]) {
+    activeNavigator?.remove(item: .init(pathList: pathList, items: .empty))
   }
 
-  public func rootRemove(pathList: [String]) {
-    rootNavigator.remove(item: .init(pathList: pathList))
+  private func _rootRemove(pathList: [String]) {
+    rootNavigator.remove(item: .init(pathList: pathList, items: .empty))
   }
 
-  public func backToLast(path: String, isAnimated: Bool) {
-    activeNavigator?.backToLast(item: .init(path: path), isAnimated: isAnimated)
+  private func _backToLast(path: String, isAnimated: Bool) {
+    activeNavigator?.backToLast(item: .init(path: path, items: .empty), isAnimated: isAnimated)
   }
 
-  public func rootBackToLast(path: String, isAnimated: Bool) {
-    rootNavigator.backToLast(item: .init(path: path), isAnimated: isAnimated)
+  private func _rootBackToLast(path: String, isAnimated: Bool) {
+    rootNavigator.backToLast(item: .init(path: path, items: .empty), isAnimated: isAnimated)
   }
 
-  public func close(isAnimated: Bool, completeAction: @escaping () -> Void) {
+  private func _close(isAnimated: Bool, completeAction: @escaping () -> Void) {
     guard activeNavigator == subNavigator else { return }
     rootNavigator.controller.dismiss(animated: isAnimated) { [weak self] in
       completeAction()
@@ -186,15 +191,15 @@ extension SingleLinkNavigator: LinkNavigatorProtocol {
     }
   }
 
-  public func range(path: String) -> [String] {
-    currentPaths.reduce([String]()) { current, next in
+  private func _range(path: String) -> [String] {
+    getRootCurrentPaths().reduce([String]()) { current, next in
       guard current.contains(path) else { return current + [next] }
       return current
     }
   }
 
-  public func rootReloadLast(items: String, isAnimated: Bool) {
-    guard let lastPath = rootCurrentPaths.last else { return }
+  private func _rootReloadLast(items: ItemValue, isAnimated: Bool) {
+    guard let lastPath = getRootCurrentPaths().last else { return }
     guard let new = routeBuilderItemList.first(where: { $0.matchPath == lastPath })?.routeBuild(self, items, dependency)
     else { return }
 
@@ -202,10 +207,10 @@ extension SingleLinkNavigator: LinkNavigatorProtocol {
     rootNavigator.controller.setViewControllers(newList, animated: isAnimated)
   }
 
-  public func alert(target: NavigationTarget, model: Alert) {
+  private func _alert(target: NavigationTarget, model: Alert) {
     switch target {
     case .default:
-      alert(target: isSubNavigatorActive ? .sub : .root, model: model)
+      _alert(target: isSubNavigatorActive ? .sub : .root, model: model)
     case .root:
       rootNavigator.controller.present(model.build(), animated: true)
     case .sub:
@@ -227,7 +232,7 @@ extension SingleLinkNavigator {
   // MARK: Public
 
   public func sheetOpen(
-    item: LinkItem,
+    item: LinkItem<ItemValue>,
     isAnimated: Bool,
     prefersLargeTitles: Bool? = .none,
     presentWillAction: @escaping (UINavigationController) -> Void = { _ in },
@@ -266,6 +271,159 @@ extension SingleLinkNavigator {
     }
     subNavigator.back(isAnimated: isAnimated)
   }
+}
+
+extension SingleLinkNavigator: LinkNavigatorURLEncodedItemProtocol where ItemValue == String {
+  public func next(linkItem: LinkItem<ItemType>, isAnimated: Bool) {
+    _next(linkItem: linkItem, isAnimated: isAnimated)
+  }
+
+  public func rootNext(linkItem: LinkItem<ItemType>, isAnimated: Bool) {
+    _rootNext(linkItem: linkItem, isAnimated: isAnimated)
+  }
+
+  public func sheet(linkItem: LinkItem<ItemType>, isAnimated: Bool) {
+    _sheet(linkItem: linkItem, isAnimated: isAnimated)
+  }
+
+  public func fullSheet(linkItem: LinkItem<ItemType>, isAnimated: Bool, prefersLargeTitles: Bool?) {
+    _fullSheet(linkItem: linkItem, isAnimated: isAnimated, prefersLargeTitles: prefersLargeTitles)
+  }
+
+  public func customSheet(linkItem: LinkItem<ItemType>, isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle, prefersLargeTitles: Bool?) {
+    _customSheet(
+      linkItem: linkItem,
+      isAnimated: isAnimated,
+      iPhonePresentationStyle: iPhonePresentationStyle,
+      iPadPresentationStyle: iPadPresentationStyle,
+      prefersLargeTitles: prefersLargeTitles)
+  }
+
+  public func replace(linkItem: LinkItem<ItemType>, isAnimated: Bool) {
+    _replace(linkItem: linkItem, isAnimated: isAnimated)
+  }
+
+  public func backOrNext(linkItem: LinkItem<ItemType>, isAnimated: Bool) {
+    _backOrNext(linkItem: linkItem, isAnimated: isAnimated)
+  }
+
+  public func rootBackOrNext(linkItem: LinkItem<ItemType>, isAnimated: Bool) {
+    _rootBackOrNext(linkItem: linkItem, isAnimated: isAnimated)
+  }
+
+  public func back(isAnimated: Bool) {
+    _back(isAnimated: isAnimated)
+  }
+
+  public func remove(pathList: [String]) {
+    _remove(pathList: pathList)
+  }
+
+  public func rootRemove(pathList: [String]) {
+    _rootRemove(pathList: pathList)
+  }
+
+  public func backToLast(path: String, isAnimated: Bool) {
+    _backToLast(path: path, isAnimated: isAnimated)
+  }
+
+  public func rootBackToLast(path: String, isAnimated: Bool) {
+    _rootBackToLast(path: path, isAnimated: isAnimated)
+  }
+
+  public func close(isAnimated: Bool, completeAction: @escaping () -> Void) {
+    _close(isAnimated: isAnimated, completeAction: completeAction)
+  }
+
+  public func range(path: String) -> [String] {
+    _range(path: path)
+  }
+
+  public func rootReloadLast(items: ItemType, isAnimated: Bool) {
+    _rootReloadLast(items: items, isAnimated: isAnimated)
+  }
+
+  public func alert(target: NavigationTarget, model: Alert) {
+    _alert(target: target, model: model)
+  }
+
+}
+
+extension SingleLinkNavigator: LinkNavigatorDictionaryItemProtocol where ItemValue == [String: String] {
+  public func next(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+    _next(linkItem: linkItem, isAnimated: isAnimated)
+  }
+
+  public func rootNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+    _rootNext(linkItem: linkItem, isAnimated: isAnimated)
+  }
+
+  public func sheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+    _sheet(linkItem: linkItem, isAnimated: isAnimated)
+  }
+
+  public func fullSheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool, prefersLargeTitles: Bool?) {
+    _fullSheet(linkItem: linkItem, isAnimated: isAnimated, prefersLargeTitles: prefersLargeTitles)
+  }
+
+  public func customSheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle, prefersLargeTitles: Bool?) {
+    _customSheet(
+      linkItem: linkItem,
+      isAnimated: isAnimated,
+      iPhonePresentationStyle: iPhonePresentationStyle,
+      iPadPresentationStyle: iPadPresentationStyle,
+      prefersLargeTitles: prefersLargeTitles)
+  }
+
+  public func replace(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+    _replace(linkItem: linkItem, isAnimated: isAnimated)
+  }
+
+  public func backOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+    _backOrNext(linkItem: linkItem, isAnimated: isAnimated)
+  }
+
+  public func rootBackOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+    _rootBackOrNext(linkItem: linkItem, isAnimated: isAnimated)
+  }
+
+  public func back(isAnimated: Bool) {
+    _back(isAnimated: isAnimated)
+  }
+
+  public func remove(pathList: [String]) {
+    _remove(pathList: pathList)
+  }
+
+  public func rootRemove(pathList: [String]) {
+    _rootRemove(pathList: pathList)
+  }
+
+  public func backToLast(path: String, isAnimated: Bool) {
+    _backToLast(path: path, isAnimated: isAnimated)
+  }
+
+  public func rootBackToLast(path: String, isAnimated: Bool) {
+    _rootBackToLast(path: path, isAnimated: isAnimated)
+  }
+
+  public func close(isAnimated: Bool, completeAction: @escaping () -> Void) {
+    _close(isAnimated: isAnimated, completeAction: completeAction)
+  }
+
+  public func range(path: String) -> [String] {
+    _range(path: path)
+  }
+
+  public func rootReloadLast(items: ItemValue, isAnimated: Bool) {
+    _rootReloadLast(items: items, isAnimated: isAnimated)
+  }
+
+  public func alert(target: NavigationTarget, model: Alert) {
+    _alert(target: target, model: model)
+  }
+
+
 }
 
 // MARK: SingleLinkNavigator.Coordinate

@@ -1,50 +1,46 @@
 import UIKit
 
+public protocol EmptyValueType {
+  static var empty: Self { get }
+}
+
+extension String: EmptyValueType {
+  public static var empty: Self { "" }
+}
+
+extension [String: String]: EmptyValueType {
+  public static var empty: [String: String] { [:] }
+}
+
 /// `LinkNavigatorProtocol` defines the navigation interface for handling various link-related actions within an application.
-public protocol LinkNavigatorProtocol {
+public protocol LinkNavigatorURLEncodedItemProtocol {
 
-  /// The Main navigator.
-  var rootNavigator: Navigator { get }
-
-  /// The sub navigation (Managed the Root present Navigation Stack)
-  var subNavigator: Navigator? { get }
-
-  /// The active navigator.
-  var activeNavigator: Navigator? { get }
-
-  /// A Boolean value indicating whether a sub-navigator is active.
-  var isSubNavigatorActive: Bool { get }
-
-  /// An array containing the current paths.
-  var currentPaths: [String] { get }
-
-  /// An array containing the root current paths.
-  var rootCurrentPaths: [String] { get }
+  typealias ItemType = String
 
   /// Navigates to the next link item.
   /// - Parameters:
   ///   - linkItem: The link item to navigate to.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
-  func next(linkItem: LinkItem, isAnimated: Bool)
-
+  func next(linkItem: LinkItem<ItemType>, isAnimated: Bool)
+//
   /// Navigates to the root next link item.
   /// - Parameters:
   ///   - linkItem: The link item to navigate to.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
-  func rootNext(linkItem: LinkItem, isAnimated: Bool)
+  func rootNext(linkItem: LinkItem<ItemType>, isAnimated: Bool)
 
   /// Presents a sheet with the given link item.
   /// - Parameters:
   ///   - linkItem: The link item to present.
   ///   - isAnimated: A Boolean value that determines whether the presentation is animated.
-  func sheet(linkItem: LinkItem, isAnimated: Bool)
+  func sheet(linkItem: LinkItem<ItemType>, isAnimated: Bool)
 
   /// Presents a full sheet with the given link item.
   /// - Parameters:
   ///   - linkItem: The link item to present.
   ///   - isAnimated: A Boolean value that determines whether the presentation is animated.
   ///   - prefersLargeTitles: An optional Boolean value that determines whether the navigation bar should display large titles.
-  func fullSheet(linkItem: LinkItem, isAnimated: Bool, prefersLargeTitles: Bool?)
+  func fullSheet(linkItem: LinkItem<ItemType>, isAnimated: Bool, prefersLargeTitles: Bool?)
 
   /// Presents a custom sheet with the given link item.
   /// - Parameters:
@@ -54,7 +50,7 @@ public protocol LinkNavigatorProtocol {
   ///   - iPadPresentationStyle: The presentation style for iPad.
   ///   - prefersLargeTitles: An optional Boolean value that determines whether the navigation bar should display large titles.
   func customSheet(
-    linkItem: LinkItem,
+    linkItem: LinkItem<ItemType>,
     isAnimated: Bool,
     iPhonePresentationStyle: UIModalPresentationStyle,
     iPadPresentationStyle: UIModalPresentationStyle,
@@ -64,19 +60,19 @@ public protocol LinkNavigatorProtocol {
   /// - Parameters:
   ///   - linkItem: The new link item.
   ///   - isAnimated: A Boolean value that determines whether the replacement is animated.
-  func replace(linkItem: LinkItem, isAnimated: Bool)
+  func replace(linkItem: LinkItem<ItemType>, isAnimated: Bool)
 
   /// Navigates back or to the next link item.
   /// - Parameters:
   ///   - linkItem: The link item to navigate to.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
-  func backOrNext(linkItem: LinkItem, isAnimated: Bool)
+  func backOrNext(linkItem: LinkItem<ItemType>, isAnimated: Bool)
 
   /// Navigates back or to the root next link item.
   /// - Parameters:
   ///   - linkItem: The link item to navigate to.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
-  func rootBackOrNext(linkItem: LinkItem, isAnimated: Bool)
+  func rootBackOrNext(linkItem: LinkItem<ItemType>, isAnimated: Bool)
 
   /// Navigates back.
   /// - Parameter isAnimated: A Boolean value that determines whether the navigation is animated.
@@ -117,7 +113,7 @@ public protocol LinkNavigatorProtocol {
   /// - Parameters:
   ///   - items: raw QueryString for the items to reload.
   ///   - isAnimated: A Boolean value that determines whether the reload is animated.
-  func rootReloadLast(items: String, isAnimated: Bool)
+  func rootReloadLast(items: ItemType, isAnimated: Bool)
 
   /// Presents an alert for the specified target and model.
   /// - Parameters:

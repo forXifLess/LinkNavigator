@@ -3,15 +3,15 @@ import UIKit
 
 // MARK: - Navigator
 
-public struct Navigator {
+public struct Navigator<ItemValue> {
 
   public typealias MatchedViewController = MatchPathUsable & UIViewController
 
-  let initialLinkItem: LinkItem
+  let initialLinkItem: LinkItem<ItemValue>
   let controller: UINavigationController
 
   public init(
-    initialLinkItem: LinkItem,
+    initialLinkItem: LinkItem<ItemValue>,
     controller: UINavigationController = .init())
   {
     self.initialLinkItem = initialLinkItem
@@ -32,9 +32,9 @@ extension Navigator {
 extension Navigator {
   func replace<Root>(
     rootNavigator: Root,
-    item: LinkItem,
+    item: LinkItem<ItemValue>,
     isAnimated: Bool,
-    routeBuilderList: [RouteBuilderOf<Root>],
+    routeBuilderList: [RouteBuilderOf<Root, ItemValue>],
     dependency: DependencyType)
   {
     let newItemList = item.pathList.compactMap { path in
@@ -46,9 +46,9 @@ extension Navigator {
 
   func push<Root>(
     rootNavigator: Root,
-    item: LinkItem,
+    item: LinkItem<ItemValue>,
     isAnimated: Bool,
-    routeBuilderList: [RouteBuilderOf<Root>],
+    routeBuilderList: [RouteBuilderOf<Root, ItemValue>],
     dependency: DependencyType)
   {
     let newItemList = item.pathList.compactMap { path in
@@ -65,9 +65,9 @@ extension Navigator {
 
   func backOrNext<Root>(
     rootNavigator: Root,
-    item: LinkItem,
+    item: LinkItem<ItemValue>,
     isAnimated: Bool,
-    routeBuilderList: [RouteBuilderOf<Root>],
+    routeBuilderList: [RouteBuilderOf<Root, ItemValue>],
     dependency: DependencyType)
   {
     if let pick = find(path: item.pathList.first ?? "") {
@@ -82,13 +82,13 @@ extension Navigator {
       dependency: dependency)
   }
 
-  func remove(item: LinkItem) {
+  func remove(item: LinkItem<ItemValue>) {
     let new = viewControllers.filter { !item.pathList.contains($0.matchPath) }
     guard new.count != viewControllers.count else { return }
     controller.setViewControllers(new, animated: false)
   }
 
-  func backToLast(item: LinkItem, isAnimated: Bool) {
+  func backToLast(item: LinkItem<ItemValue>, isAnimated: Bool) {
     guard let path = item.pathList.first else { return }
     guard let pick = viewControllers.last(where: { $0.matchPath == path }) else { return }
     controller.popToViewController(pick, animated: isAnimated)

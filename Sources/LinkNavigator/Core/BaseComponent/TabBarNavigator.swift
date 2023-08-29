@@ -2,12 +2,12 @@ import UIKit
 
 // MARK: - TabBarNavigator
 
-public final class TabBarNavigator {
+public final class TabBarNavigator<ItemType> {
 
   // MARK: Lifecycle
 
   public init(
-    navigator: Navigator,
+    navigator: Navigator<ItemType>,
     image: UIImage?,
     title: String?,
     tagMatchPath: String)
@@ -20,7 +20,7 @@ public final class TabBarNavigator {
 
   // MARK: Public
 
-  public let navigator: Navigator
+  public let navigator: Navigator<ItemType>
   public let image: UIImage?
   public let title: String?
   public let tagMatchPath: String

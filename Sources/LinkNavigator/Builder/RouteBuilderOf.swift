@@ -4,14 +4,14 @@ public typealias RouteViewController = MatchPathUsable & UIViewController
 
 // MARK: - RouteBuilderOf
 
-public struct RouteBuilderOf<RootNavigatorType> {
+public struct RouteBuilderOf<RootNavigatorType, ItemValueType> {
 
   let matchPath: String
-  let routeBuild: (RootNavigatorType, String, DependencyType) -> RouteViewController?
+  let routeBuild: (RootNavigatorType, ItemValueType, DependencyType) -> RouteViewController?
 
   public init(
     matchPath: String,
-    routeBuild: @escaping (RootNavigatorType, String, DependencyType) -> RouteViewController?)
+    routeBuild: @escaping (RootNavigatorType, ItemValueType, DependencyType) -> RouteViewController?)
   {
     self.matchPath = matchPath
     self.routeBuild = routeBuild

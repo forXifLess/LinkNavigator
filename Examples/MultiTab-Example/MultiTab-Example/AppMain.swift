@@ -11,11 +11,11 @@ struct AppMain {
 // MARK: App
 
 extension AppMain {
-  var tabNavigator: TabLinkNavigator {
+  var tabNavigator: TabLinkNavigator<String> {
     tab
   }
 
-  var singleNavigator: SingleLinkNavigator {
+  var singleNavigator: SingleLinkNavigator<String> {
     single
   }
 }
@@ -26,15 +26,15 @@ extension AppMain: App {
 
   var body: some Scene {
     WindowGroup {
-//      tabNavigator
-//        .launch()
-      singleNavigator
+      tabNavigator
         .launch()
+//      singleNavigator
+//        .launch()
     }
   }
 }
 
-let tab = TabLinkNavigator(
+let tab = TabLinkNavigator<String>(
   linkPath: "tabHome",
   tabItemList: [
     .init(
@@ -211,7 +211,7 @@ let tab = TabLinkNavigator(
   dependency: AppDependency(),
   defaultTagPath: "#Tab1")
 
-let single = SingleLinkNavigator(
+let single = SingleLinkNavigator<String>(
   rootNavigator: .init(initialLinkItem: .init(path: "tabbar")),
   routeBuilderItemList: [
     .init(
@@ -305,7 +305,7 @@ let single = SingleLinkNavigator(
 // MARK: - TabBarPage
 
 struct TabBarPage: View {
-  let navigator: LinkNavigatorProtocol
+  let navigator: LinkNavigatorURLEncodedItemProtocol
   let items: String
   @ObservedObject var eventObserver: EventObserver<EventState>
 
@@ -318,7 +318,7 @@ struct TabBarPage: View {
         VStack {
           Text("Tab1")
           Button(action: {
-            navigator.backOrNext(linkItem: .init(path: "page1"), isAnimated: true)
+            navigator.backOrNext(linkItem: .init(path: "page1", items: ""), isAnimated: true)
           }) {
             Text("go to page1")
           }

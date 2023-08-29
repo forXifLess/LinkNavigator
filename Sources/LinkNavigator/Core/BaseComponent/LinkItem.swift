@@ -2,7 +2,7 @@ import Foundation
 
 /// Represents a link item that contains paths and associated items.
 /// It is used to manage the links and state values that are injected into a page.
-public struct LinkItem: Equatable {
+public struct LinkItem<ItemType> {
 
   // MARK: Lifecycle
 
@@ -11,7 +11,7 @@ public struct LinkItem: Equatable {
   /// - Parameters:
   ///   - pathList: An array of strings representing the path list.
   ///   - items: A dictionary containing key-value pairs representing the items. Defaults to an empty dictionary.
-  public init(pathList: [String], items: String = "") {
+  public init(pathList: [String], items: ItemType) {
     self.pathList = pathList
     self.items = items
   }
@@ -21,7 +21,7 @@ public struct LinkItem: Equatable {
   /// - Parameters:
   ///   - path: A string representing the path.
   ///   - items: A dictionary containing key-value pairs representing the items. Defaults to an empty dictionary.
-  public init(path: String, items: String = "") {
+  public init(path: String, items: ItemType) {
     pathList = [path]
     self.items = items
   }
@@ -32,6 +32,59 @@ public struct LinkItem: Equatable {
   let pathList: [String]
 
   /// A dictionary containing key-value pairs representing the items.
-  let items: String
+  let items: ItemType
 
+}
+
+extension LinkItem: Equatable {
+  public static func == (lhs: Self, rhs: Self) -> Bool {
+    return lhs.pathList == rhs.pathList
+    && "\(lhs.items)" == "\(rhs.items)"
+  }
+}
+
+
+extension LinkItem where ItemType == String {
+  /// Initializes a LinkItem instance with a given path list and an optional items dictionary.
+  ///
+  /// - Parameters:
+  ///   - pathList: An array of strings representing the path list.
+  ///   - items: Encoded URLEncodedQuery items. Defaults to an empty dictionary.
+  public init(pathList: [String], items: ItemType = "") {
+    self.pathList = pathList
+    self.items = items
+  }
+
+  /// Initializes a LinkItem instance with a given path and an optional items dictionary.
+  ///
+  /// - Parameters:
+  ///   - path: A string representing the path.
+  ///   - items: Encoded URLEncodedQuery items. Defaults to an empty dictionary.
+  public init(path: String, items: ItemType = "") {
+    pathList = [path]
+    self.items = items
+  }
+}
+
+
+extension LinkItem where ItemType == [String: String] {
+  /// Initializes a LinkItem instance with a given path list and an optional items dictionary.
+  ///
+  /// - Parameters:
+  ///   - pathList: An array of strings representing the path list.
+  ///   - items: A dictionary containing key-value pairs representing the items. Defaults to an empty dictionary.
+  public init(pathList: [String], items: ItemType = [:]) {
+    self.pathList = pathList
+    self.items = items
+  }
+
+  /// Initializes a LinkItem instance with a given path and an optional items dictionary.
+  ///
+  /// - Parameters:
+  ///   - path: A string representing the path.
+  ///   - items: A dictionary containing key-value pairs representing the items. Defaults to an empty dictionary.
+  public init(path: String, items: ItemType = [:]) {
+    pathList = [path]
+    self.items = items
+  }
 }
