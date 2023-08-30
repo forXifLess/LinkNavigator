@@ -274,23 +274,23 @@ extension SingleLinkNavigator {
 }
 
 extension SingleLinkNavigator: LinkNavigatorURLEncodedItemProtocol where ItemValue == String {
-  public func next(linkItem: LinkItem<ItemType>, isAnimated: Bool) {
+  public func next(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     _next(linkItem: linkItem, isAnimated: isAnimated)
   }
 
-  public func rootNext(linkItem: LinkItem<ItemType>, isAnimated: Bool) {
+  public func rootNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     _rootNext(linkItem: linkItem, isAnimated: isAnimated)
   }
 
-  public func sheet(linkItem: LinkItem<ItemType>, isAnimated: Bool) {
+  public func sheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     _sheet(linkItem: linkItem, isAnimated: isAnimated)
   }
 
-  public func fullSheet(linkItem: LinkItem<ItemType>, isAnimated: Bool, prefersLargeTitles: Bool?) {
+  public func fullSheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool, prefersLargeTitles: Bool?) {
     _fullSheet(linkItem: linkItem, isAnimated: isAnimated, prefersLargeTitles: prefersLargeTitles)
   }
 
-  public func customSheet(linkItem: LinkItem<ItemType>, isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle, prefersLargeTitles: Bool?) {
+  public func customSheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle, prefersLargeTitles: Bool?) {
     _customSheet(
       linkItem: linkItem,
       isAnimated: isAnimated,
@@ -299,15 +299,15 @@ extension SingleLinkNavigator: LinkNavigatorURLEncodedItemProtocol where ItemVal
       prefersLargeTitles: prefersLargeTitles)
   }
 
-  public func replace(linkItem: LinkItem<ItemType>, isAnimated: Bool) {
+  public func replace(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     _replace(linkItem: linkItem, isAnimated: isAnimated)
   }
 
-  public func backOrNext(linkItem: LinkItem<ItemType>, isAnimated: Bool) {
+  public func backOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     _backOrNext(linkItem: linkItem, isAnimated: isAnimated)
   }
 
-  public func rootBackOrNext(linkItem: LinkItem<ItemType>, isAnimated: Bool) {
+  public func rootBackOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     _rootBackOrNext(linkItem: linkItem, isAnimated: isAnimated)
   }
 
@@ -339,7 +339,7 @@ extension SingleLinkNavigator: LinkNavigatorURLEncodedItemProtocol where ItemVal
     _range(path: path)
   }
 
-  public func rootReloadLast(items: ItemType, isAnimated: Bool) {
+  public func rootReloadLast(items: ItemValue, isAnimated: Bool) {
     _rootReloadLast(items: items, isAnimated: isAnimated)
   }
 

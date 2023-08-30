@@ -15,32 +15,32 @@ extension [String: String]: EmptyValueType {
 /// `LinkNavigatorProtocol` defines the navigation interface for handling various link-related actions within an application.
 public protocol LinkNavigatorURLEncodedItemProtocol {
 
-  typealias ItemType = String
+  typealias ItemValue = String
 
   /// Navigates to the next link item.
   /// - Parameters:
   ///   - linkItem: The link item to navigate to.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
-  func next(linkItem: LinkItem<ItemType>, isAnimated: Bool)
+  func next(linkItem: LinkItem<ItemValue>, isAnimated: Bool)
 //
   /// Navigates to the root next link item.
   /// - Parameters:
   ///   - linkItem: The link item to navigate to.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
-  func rootNext(linkItem: LinkItem<ItemType>, isAnimated: Bool)
+  func rootNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool)
 
   /// Presents a sheet with the given link item.
   /// - Parameters:
   ///   - linkItem: The link item to present.
   ///   - isAnimated: A Boolean value that determines whether the presentation is animated.
-  func sheet(linkItem: LinkItem<ItemType>, isAnimated: Bool)
+  func sheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool)
 
   /// Presents a full sheet with the given link item.
   /// - Parameters:
   ///   - linkItem: The link item to present.
   ///   - isAnimated: A Boolean value that determines whether the presentation is animated.
   ///   - prefersLargeTitles: An optional Boolean value that determines whether the navigation bar should display large titles.
-  func fullSheet(linkItem: LinkItem<ItemType>, isAnimated: Bool, prefersLargeTitles: Bool?)
+  func fullSheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool, prefersLargeTitles: Bool?)
 
   /// Presents a custom sheet with the given link item.
   /// - Parameters:
@@ -50,7 +50,7 @@ public protocol LinkNavigatorURLEncodedItemProtocol {
   ///   - iPadPresentationStyle: The presentation style for iPad.
   ///   - prefersLargeTitles: An optional Boolean value that determines whether the navigation bar should display large titles.
   func customSheet(
-    linkItem: LinkItem<ItemType>,
+    linkItem: LinkItem<ItemValue>,
     isAnimated: Bool,
     iPhonePresentationStyle: UIModalPresentationStyle,
     iPadPresentationStyle: UIModalPresentationStyle,
@@ -60,19 +60,19 @@ public protocol LinkNavigatorURLEncodedItemProtocol {
   /// - Parameters:
   ///   - linkItem: The new link item.
   ///   - isAnimated: A Boolean value that determines whether the replacement is animated.
-  func replace(linkItem: LinkItem<ItemType>, isAnimated: Bool)
+  func replace(linkItem: LinkItem<ItemValue>, isAnimated: Bool)
 
   /// Navigates back or to the next link item.
   /// - Parameters:
   ///   - linkItem: The link item to navigate to.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
-  func backOrNext(linkItem: LinkItem<ItemType>, isAnimated: Bool)
+  func backOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool)
 
   /// Navigates back or to the root next link item.
   /// - Parameters:
   ///   - linkItem: The link item to navigate to.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
-  func rootBackOrNext(linkItem: LinkItem<ItemType>, isAnimated: Bool)
+  func rootBackOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool)
 
   /// Navigates back.
   /// - Parameter isAnimated: A Boolean value that determines whether the navigation is animated.
@@ -113,7 +113,7 @@ public protocol LinkNavigatorURLEncodedItemProtocol {
   /// - Parameters:
   ///   - items: raw QueryString for the items to reload.
   ///   - isAnimated: A Boolean value that determines whether the reload is animated.
-  func rootReloadLast(items: ItemType, isAnimated: Bool)
+  func rootReloadLast(items: ItemValue, isAnimated: Bool)
 
   /// Presents an alert for the specified target and model.
   /// - Parameters:

@@ -1,8 +1,6 @@
 import Foundation
 
-// MARK: - NavigationTarget
-
-public enum NavigationTarget {
+public enum NavigationTarget: Equatable {
   case `default`
   case root
   case sub
