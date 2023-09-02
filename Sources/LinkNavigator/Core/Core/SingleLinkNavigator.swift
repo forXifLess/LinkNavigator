@@ -20,34 +20,40 @@ public final class SingleLinkNavigator<ItemValue: EmptyValueType> {
 
   // MARK: Public
 
-  public let rootNavigator: Navigator<ItemValue>
+
   public let routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator, ItemValue>]
   public let dependency: DependencyType
 
-  public var subNavigator: Navigator<ItemValue>?
+
 
   // MARK: Private
 
   private var coordinate: Coordinate = .init(sheetDidDismiss: { })
 
+  public weak var rootController: UINavigationController?
+  public var subController: UINavigationController?
+
+  private let rootNavigator: Navigator<ItemValue>
+  private var subNavigator: Navigator<ItemValue>?
+
 }
 
 extension SingleLinkNavigator {
 
-  public func launch(item: LinkItem<ItemValue>? = .none, prefersLargeTitles: Bool = false) -> BaseNavigator {
-    rootNavigator.replace(
+  public func launch(item: LinkItem<ItemValue>? = .none, prefersLargeTitles: Bool = false) -> [UIViewController] {
+    return rootNavigator.build(
       rootNavigator: self,
       item: item ?? rootNavigator.initialLinkItem,
-      isAnimated: false,
       routeBuilderList: routeBuilderItemList,
       dependency: dependency)
-    rootNavigator.controller.navigationBar.prefersLargeTitles = prefersLargeTitles
-
-    return .init(viewController: rootNavigator.controller)
   }
 
-  public var activeNavigator: Navigator<ItemValue>? {
+  private var activeNavigator: Navigator<ItemValue>? {
     isSubNavigatorActive ? subNavigator : rootNavigator
+  }
+
+  private var activeController: UINavigationController? {
+    isSubNavigatorActive ? subController : rootController
   }
 }
 
@@ -56,11 +62,12 @@ extension SingleLinkNavigator {
 extension SingleLinkNavigator: LinkNavigatorFindLocationUsable {
 
   public func getCurrentPaths() -> [String] {
-    isSubNavigatorActive ? subNavigatorCurrentPaths : getRootCurrentPaths()
+    isSubNavigatorActive ? subNavigatorCurrentPaths() : getRootCurrentPaths()
   }
 
   public func getRootCurrentPaths() -> [String] {
-    rootNavigator.viewControllers.map(\.matchPath)
+    guard let controller = rootController else { return [] }
+    return controller.currentItemList()
   }
 
 }
@@ -68,21 +75,22 @@ extension SingleLinkNavigator: LinkNavigatorFindLocationUsable {
 extension SingleLinkNavigator {
 
   private func _next(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
-    activeNavigator?.push(
-      rootNavigator: self,
-      item: linkItem,
-      isAnimated: isAnimated,
-      routeBuilderList: routeBuilderItemList,
-      dependency: dependency)
+    guard let activeController, let activeNavigator else { return }
+    guard let pick = activeNavigator.firstPick(controller: activeController, item: linkItem) else { return }
+
+    activeController.pushViewController(pick, animated: isAnimated)
   }
 
   private func _rootNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
-    rootNavigator.push(
-      rootNavigator: self,
-      item: linkItem,
-      isAnimated: isAnimated,
-      routeBuilderList: routeBuilderItemList,
-      dependency: dependency)
+    guard let rootController else { return }
+
+    rootController.merge(
+      new: rootNavigator.build(
+        rootNavigator: self,
+        item: linkItem,
+        routeBuilderList: routeBuilderItemList,
+        dependency: dependency),
+      isAnimated: isAnimated)
   }
 
   private func _sheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
@@ -124,70 +132,99 @@ extension SingleLinkNavigator {
   }
 
   private func _replace(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
-    rootNavigator.controller.dismiss(animated: isAnimated) { [weak self] in
+    guard let rootController else { return }
+
+    rootController.dismiss(animated: isAnimated) { [weak self] in
       guard let self else { return }
-      subNavigator?.reset(isAnimated: isAnimated)
-      subNavigator?.controller.presentationController?.delegate = .none
+      subController?.clear(isAnimated: isAnimated)
+      subController?.presentationController?.delegate = .none
     }
-    rootNavigator.replace(
-      rootNavigator: self,
-      item: linkItem,
-      isAnimated: isAnimated,
-      routeBuilderList: routeBuilderItemList,
-      dependency: dependency)
+
+    rootController.replace(
+      viewController: rootNavigator.build(rootNavigator: self, item: linkItem, routeBuilderList: routeBuilderItemList, dependency: dependency),
+      isAnimated: isAnimated)
   }
 
   private func _backOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
-    activeNavigator?.backOrNext(
-      rootNavigator: self,
-      item: linkItem,
-      isAnimated: isAnimated,
-      routeBuilderList: routeBuilderItemList,
-      dependency: dependency)
+    guard let activeNavigator, let activeController else { return }
+
+    guard let pick = activeNavigator.firstPick(controller: activeController, item: linkItem) else {
+      activeController.push(
+        viewController: rootNavigator.pickBuild(
+          rootNavigator: self,
+          item: linkItem,
+          routeBuilderList: routeBuilderItemList,
+          dependency: dependency),
+        isAnimated: isAnimated)
+      return
+    }
+
+    activeController.popToViewController(pick, animated: isAnimated)
   }
 
   private func _rootBackOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
-    guard let path = linkItem.pathList.first else { return }
-    guard let pick = rootNavigator.viewControllers.first(where: { $0.matchPath == path }) else {
-      rootNavigator.push(
-        rootNavigator: self,
-        item: .init(path: path, items: linkItem.items),
-        isAnimated: isAnimated,
-        routeBuilderList: routeBuilderItemList,
-        dependency: dependency)
+    guard let rootController else { return }
+
+    guard let pick = rootNavigator.firstPick(controller: rootController, item: linkItem) else {
+      rootController.push(
+        viewController: rootNavigator.pickBuild(
+          rootNavigator: self,
+          item: linkItem,
+          routeBuilderList: routeBuilderItemList,
+          dependency: dependency),
+        isAnimated: isAnimated)
       return
     }
-    rootNavigator.controller.popToViewController(pick, animated: isAnimated)
+
+    rootController.popToViewController(pick, animated: isAnimated)
   }
 
   private func _back(isAnimated: Bool) {
     isSubNavigatorActive
       ? sheetBack(isAnimated: isAnimated)
-      : rootNavigator.back(isAnimated: isAnimated)
+      : rootController?.back(isAnimated: isAnimated)
   }
 
   private func _remove(pathList: [String]) {
-    activeNavigator?.remove(item: .init(pathList: pathList, items: .empty))
+    guard let activeNavigator, let activeController else { return }
+    activeController.setViewControllers(
+      activeNavigator.exceptFilter(
+        controller: activeController,
+        item: .init(pathList: pathList, items: .empty)),
+      animated: false)
   }
 
   private func _rootRemove(pathList: [String]) {
-    rootNavigator.remove(item: .init(pathList: pathList, items: .empty))
+    guard let rootController else { return }
+    rootController.setViewControllers(
+      rootNavigator.exceptFilter(
+        controller: activeController,
+        item: .init(pathList: pathList, items: .empty)),
+      animated: false)
   }
 
   private func _backToLast(path: String, isAnimated: Bool) {
-    activeNavigator?.backToLast(item: .init(path: path, items: .empty), isAnimated: isAnimated)
+    activeController?.popTo(
+      viewController: activeNavigator?.lastPick(
+        controller: activeController,
+        item: .init(path: path, items: .empty)),
+      isAnimated: isAnimated)
   }
 
   private func _rootBackToLast(path: String, isAnimated: Bool) {
-    rootNavigator.backToLast(item: .init(path: path, items: .empty), isAnimated: isAnimated)
+    rootController?.popTo(
+      viewController: rootNavigator.lastPick(
+        controller: activeController,
+        item: .init(path: path, items: .empty)),
+      isAnimated: isAnimated)
   }
 
   private func _close(isAnimated: Bool, completeAction: @escaping () -> Void) {
-    guard activeNavigator == subNavigator else { return }
-    rootNavigator.controller.dismiss(animated: isAnimated) { [weak self] in
+    guard activeController == subController else { return }
+    rootController?.dismiss(animated: isAnimated) { [weak self] in
       completeAction()
-      self?.subNavigator?.reset()
-      self?.subNavigator?.controller.presentationController?.delegate = .none
+      self?.subController?.clear(isAnimated: false)
+      self?.subController?.presentationController?.delegate = .none
     }
   }
 
@@ -200,11 +237,12 @@ extension SingleLinkNavigator {
 
   private func _rootReloadLast(items: ItemValue, isAnimated: Bool) {
     guard let lastPath = getRootCurrentPaths().last else { return }
+    guard let rootController else { return }
     guard let new = routeBuilderItemList.first(where: { $0.matchPath == lastPath })?.routeBuild(self, items, dependency)
     else { return }
 
-    let newList = Array(rootNavigator.controller.viewControllers.dropLast()) + [new]
-    rootNavigator.controller.setViewControllers(newList, animated: isAnimated)
+    let newList = rootController.dropLast() + [new]
+    rootController.replace(viewController: newList, isAnimated: false)
   }
 
   private func _alert(target: NavigationTarget, model: Alert) {
@@ -212,9 +250,9 @@ extension SingleLinkNavigator {
     case .default:
       _alert(target: isSubNavigatorActive ? .sub : .root, model: model)
     case .root:
-      rootNavigator.controller.present(model.build(), animated: true)
+      rootController?.present(model.build(), animated: true)
     case .sub:
-      subNavigator?.controller.present(model.build(), animated: true)
+      subController?.present(model.build(), animated: true)
     }
   }
 }
@@ -222,7 +260,8 @@ extension SingleLinkNavigator {
 /// MARK: - Main
 extension SingleLinkNavigator {
   public var isSubNavigatorActive: Bool {
-    rootNavigator.controller.presentedViewController != .none
+    guard let controller = rootController else { return false }
+    return controller.presentedViewController != .none
   }
 }
 
@@ -238,38 +277,47 @@ extension SingleLinkNavigator {
     presentWillAction: @escaping (UINavigationController) -> Void = { _ in },
     presentDidAction: @escaping (UINavigationController) -> Void = { _ in })
   {
-    rootNavigator.controller.dismiss(animated: true)
+    guard let rootController else { return }
 
-    let new = Navigator(initialLinkItem: item)
-    if let prefersLargeTitles { new.controller.navigationBar.prefersLargeTitles = prefersLargeTitles }
-    presentWillAction(new.controller)
+    rootController.dismiss(animated: true)
 
-    new.replace(
-      rootNavigator: self,
-      item: item,
-      isAnimated: false,
-      routeBuilderList: routeBuilderItemList,
-      dependency: dependency)
-    rootNavigator.controller.present(new.controller, animated: isAnimated)
-    presentDidAction(new.controller)
+    let newNavigator = Navigator(initialLinkItem: item)
+    let newController = UINavigationController()
+    if let prefersLargeTitles { rootController.navigationBar.prefersLargeTitles = prefersLargeTitles }
 
-    subNavigator = new
+    presentWillAction(newController)
+
+    newController.setViewControllers(
+      newNavigator
+      .build(
+        rootNavigator: self,
+        item: item,
+        routeBuilderList: routeBuilderItemList,
+        dependency: dependency),
+      animated: false)
+
+    rootController.present(newController, animated: isAnimated)
+    presentDidAction(newController)
+
+    subController = newController
   }
 
   // MARK: Private
 
-  private var subNavigatorCurrentPaths: [String] {
-    subNavigator?.currentPath ?? []
+  private func subNavigatorCurrentPaths() -> [String] {
+    subController?.currentItemList() ?? []
   }
 
   private func sheetBack(isAnimated: Bool) {
-    guard let subNavigator else { return }
-    guard subNavigator.viewControllers.count > 1 else {
-      rootNavigator.controller.dismiss(animated: true)
-      self.subNavigator = .none
+    guard let rootController, let subController else { return }
+
+    guard subController.viewControllers.count > 1 else {
+      rootController.dismiss(animated: isAnimated) { [weak self] in
+        self?.subController = .none
+      }
       return
     }
-    subNavigator.back(isAnimated: isAnimated)
+    subController.back(isAnimated: isAnimated)
   }
 }
 
@@ -444,5 +492,42 @@ extension SingleLinkNavigator {
     func presentationControllerDidDismiss(_: UIPresentationController) {
       sheetDidDismiss()
     }
+  }
+}
+
+
+extension UINavigationController {
+  fileprivate func currentItemList() -> [String] {
+    viewControllers.compactMap { $0 as? MatchPathUsable }.map(\.matchPath)
+  }
+
+  fileprivate func merge(new: [UIViewController], isAnimated: Bool) {
+    setViewControllers(viewControllers + new, animated: isAnimated)
+  }
+
+  fileprivate func back(isAnimated: Bool) {
+    popViewController(animated: isAnimated)
+  }
+
+  fileprivate func clear(isAnimated: Bool) {
+    setViewControllers([], animated: isAnimated)
+  }
+
+  fileprivate func push(viewController: UIViewController?, isAnimated: Bool) {
+    guard let viewController else { return }
+    pushViewController(viewController, animated: isAnimated)
+  }
+
+  fileprivate func replace(viewController: [UIViewController], isAnimated: Bool) {
+    setViewControllers(viewController, animated: isAnimated)
+  }
+
+  fileprivate func popTo(viewController: UIViewController?, isAnimated: Bool) {
+    guard let viewController else { return }
+    popToViewController(viewController, animated: isAnimated)
+  }
+
+  fileprivate func dropLast() -> [UIViewController] {
+    Array(viewControllers.dropLast())
   }
 }
