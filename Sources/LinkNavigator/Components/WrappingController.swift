@@ -4,6 +4,7 @@ import SwiftUI
 
 public protocol MatchPathUsable {
   var matchPath: String { get }
+  var eventSubscriber: LinkNavigatorSubscriberType? { get }
 }
 
 // MARK: - WrappingController
@@ -14,9 +15,11 @@ public final class WrappingController<Content: View>: UIHostingController<Conten
 
   public init(
     matchPath: String,
+    eventSubscriber: LinkNavigatorSubscriberType? = .none,
     @ViewBuilder content: () -> Content)
   {
     self.matchPath = matchPath
+    self.eventSubscriber = eventSubscriber
     super.init(rootView: content())
     super.title = matchPath
   }
@@ -38,5 +41,6 @@ public final class WrappingController<Content: View>: UIHostingController<Conten
   // MARK: Public
 
   public let matchPath: String
+  public let eventSubscriber: LinkNavigatorSubscriberType?
 
 }

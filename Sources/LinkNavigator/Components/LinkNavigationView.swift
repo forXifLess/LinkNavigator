@@ -1,16 +1,13 @@
 import Foundation
 import SwiftUI
 
-// MARK: - BaseNavigator
+// MARK: - LinkNavigationView
 
 public struct LinkNavigationView<ItemValue: EmptyValueType> {
   let linkNavigator: SingleLinkNavigator<ItemValue>
   let item: LinkItem<ItemValue>?
 
-  public init(
-    linkNavigator: SingleLinkNavigator<ItemValue>,
-    item: LinkItem<ItemValue>? = .none)
-  {
+  public init(linkNavigator: SingleLinkNavigator<ItemValue>, item: LinkItem<ItemValue>? = .none) {
     self.linkNavigator = linkNavigator
     self.item = item
   }
@@ -25,7 +22,8 @@ extension LinkNavigationView: UIViewControllerRepresentable {
     return vc
   }
 
-  public func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
+  public func updateUIViewController(_ uiViewController: UINavigationController, context _: Context) {
     linkNavigator.rootController = uiViewController
   }
+
 }

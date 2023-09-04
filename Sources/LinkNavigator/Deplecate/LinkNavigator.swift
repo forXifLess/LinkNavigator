@@ -34,18 +34,18 @@ public final class LinkNavigator {
 
 extension LinkNavigator {
 
-  public func launch(paths: [String], items: [String: String], prefersLargeTitles: Bool = false) -> BaseViewController {
+  public func launch(paths: [String], items: [String: String], prefersLargeTitles: Bool = false) -> BaseNavigator {
     let viewControllers = paths.compactMap { path in
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }
     rootNavigationController.setViewControllers(viewControllers, animated: false)
     rootNavigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
 
-    return BaseViewController(viewController: rootNavigationController)
+    return BaseNavigator(viewController: rootNavigationController)
   }
 }
 
-// MARK: - LinkNavigator + LinkNavigatorType
+// MARK: LinkNavigatorType
 
 extension LinkNavigator: LinkNavigatorType {
 
@@ -138,7 +138,7 @@ extension LinkNavigator: LinkNavigatorType {
       builders.first(where: { $0.matchPath == path })?.build(self, items, dependency)
     }
 
-    if let prefersLargeTitles = prefersLargeTitles {
+    if let prefersLargeTitles {
       newSubNavigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
     }
 
@@ -196,8 +196,8 @@ extension LinkNavigator: LinkNavigatorType {
   public func remove(paths: [String]) {
     let new = currentActivityNavigationController
       .viewControllers
-      .compactMap{ $0 as? MatchPathUsable & UIViewController }
-      .filter{ !paths.contains($0.matchPath) }
+      .compactMap { $0 as? MatchPathUsable & UIViewController }
+      .filter { !paths.contains($0.matchPath) }
 
     guard new.count != currentActivityNavigationController.viewControllers.count else { return }
     currentActivityNavigationController.setViewControllers(new, animated: false)
@@ -206,8 +206,8 @@ extension LinkNavigator: LinkNavigatorType {
   public func rootRemove(paths: [String]) {
     let new = rootNavigationController
       .viewControllers
-      .compactMap{ $0 as? MatchPathUsable & UIViewController }
-      .filter{ !paths.contains($0.matchPath) }
+      .compactMap { $0 as? MatchPathUsable & UIViewController }
+      .filter { !paths.contains($0.matchPath) }
 
     guard new.count != rootNavigationController.viewControllers.count else { return }
     rootNavigationController.setViewControllers(new, animated: false)
@@ -259,50 +259,50 @@ extension LinkNavigator: LinkNavigatorType {
 }
 
 extension LinkNavigator {
-  fileprivate var isSubNavigationControllerPresented: Bool {
+  private var isSubNavigationControllerPresented: Bool {
     rootNavigationController.presentedViewController != .none
   }
 
-  fileprivate var currentActivityNavigationController: UINavigationController {
+  private var currentActivityNavigationController: UINavigationController {
     isSubNavigationControllerPresented ? subNavigationController : rootNavigationController
   }
 
-  fileprivate func isCurrentContain(path: String) -> Bool {
+  private func isCurrentContain(path: String) -> Bool {
     currentActivityNavigationController
       .viewControllers
       .compactMap { $0 as? MatchPathUsable }
       .first(where: { $0.matchPath == path }) != nil
   }
 
-  fileprivate func isCurrentContainRootViewController(path: String) -> Bool {
+  private func isCurrentContainRootViewController(path: String) -> Bool {
     rootNavigationController
       .viewControllers
       .compactMap { $0 as? MatchPathUsable }
       .first(where: { $0.matchPath == path }) != nil
   }
 
-  fileprivate func findFirstViewController(path: String) -> UIViewController? {
+  private func findFirstViewController(path: String) -> UIViewController? {
     currentActivityNavigationController
       .viewControllers
       .compactMap { $0 as? MatchPathUsable & UIViewController }
       .first(where: { $0.matchPath == path })
   }
 
-  fileprivate func findLastViewController(path: String) -> UIViewController? {
+  private func findLastViewController(path: String) -> UIViewController? {
     currentActivityNavigationController
       .viewControllers
       .compactMap { $0 as? MatchPathUsable & UIViewController }
       .last(where: { $0.matchPath == path })
   }
 
-  fileprivate func findFirstViewControllerRootView(path: String) -> UIViewController? {
+  private func findFirstViewControllerRootView(path: String) -> UIViewController? {
     rootNavigationController
       .viewControllers
       .compactMap { $0 as? MatchPathUsable & UIViewController }
       .first(where: { $0.matchPath == path })
   }
 
-  fileprivate func findLastViewControllerRootView(path: String) -> UIViewController? {
+  private func findLastViewControllerRootView(path: String) -> UIViewController? {
     rootNavigationController
       .viewControllers
       .compactMap { $0 as? MatchPathUsable & UIViewController }
@@ -310,7 +310,7 @@ extension LinkNavigator {
   }
 }
 
-// MARK: - LinkNavigator.Coordinate
+// MARK: LinkNavigator.Coordinate
 
 extension LinkNavigator {
   fileprivate class Coordinate: NSObject, UIAdaptivePresentationControllerDelegate {
@@ -325,7 +325,7 @@ extension LinkNavigator {
 
     var sheetDidDismiss: () -> Void
 
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+    func presentationControllerDidDismiss(_: UIPresentationController) {
       sheetDidDismiss()
     }
   }
