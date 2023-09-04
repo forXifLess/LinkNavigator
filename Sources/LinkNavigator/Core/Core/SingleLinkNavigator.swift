@@ -1,3 +1,4 @@
+import Foundation
 import UIKit
 
 // MARK: - SingleLinkNavigator
@@ -20,18 +21,16 @@ public final class SingleLinkNavigator<ItemValue: EmptyValueType> {
 
   // MARK: Public
 
-
   public let routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator, ItemValue>]
   public let dependency: DependencyType
 
-
+  public weak var rootController: UINavigationController?
+  public var owner: LinkNavigatorSubscriberType? = .none
+  public var subController: UINavigationController?
 
   // MARK: Private
 
   private var coordinate: Coordinate = .init(sheetDidDismiss: { })
-
-  public weak var rootController: UINavigationController?
-  public var subController: UINavigationController?
 
   private let rootNavigator: Navigator<ItemValue>
   private var subNavigator: Navigator<ItemValue>?
@@ -40,13 +39,17 @@ public final class SingleLinkNavigator<ItemValue: EmptyValueType> {
 
 extension SingleLinkNavigator {
 
-  public func launch(item: LinkItem<ItemValue>? = .none, prefersLargeTitles: Bool = false) -> [UIViewController] {
-    return rootNavigator.build(
+  // MARK: Public
+
+  public func launch(item: LinkItem<ItemValue>? = .none, prefersLargeTitles _: Bool = false) -> [UIViewController] {
+    rootNavigator.build(
       rootNavigator: self,
       item: item ?? rootNavigator.initialLinkItem,
       routeBuilderList: routeBuilderItemList,
       dependency: dependency)
   }
+
+  // MARK: Private
 
   private var activeNavigator: Navigator<ItemValue>? {
     isSubNavigatorActive ? subNavigator : rootNavigator
@@ -57,7 +60,7 @@ extension SingleLinkNavigator {
   }
 }
 
-// MARK: LinkNavigatorProtocol
+// MARK: LinkNavigatorFindLocationUsable
 
 extension SingleLinkNavigator: LinkNavigatorFindLocationUsable {
 
@@ -141,7 +144,11 @@ extension SingleLinkNavigator {
     }
 
     rootController.replace(
-      viewController: rootNavigator.build(rootNavigator: self, item: linkItem, routeBuilderList: routeBuilderItemList, dependency: dependency),
+      viewController: rootNavigator.build(
+        rootNavigator: self,
+        item: linkItem,
+        routeBuilderList: routeBuilderItemList,
+        dependency: dependency),
       isAnimated: isAnimated)
   }
 
@@ -235,7 +242,7 @@ extension SingleLinkNavigator {
     }
   }
 
-  private func _rootReloadLast(items: ItemValue, isAnimated: Bool) {
+  private func _rootReloadLast(items: ItemValue, isAnimated _: Bool) {
     guard let lastPath = getRootCurrentPaths().last else { return }
     guard let rootController else { return }
     guard let new = routeBuilderItemList.first(where: { $0.matchPath == lastPath })?.routeBuild(self, items, dependency)
@@ -289,11 +296,11 @@ extension SingleLinkNavigator {
 
     newController.setViewControllers(
       newNavigator
-      .build(
-        rootNavigator: self,
-        item: item,
-        routeBuilderList: routeBuilderItemList,
-        dependency: dependency),
+        .build(
+          rootNavigator: self,
+          item: item,
+          routeBuilderList: routeBuilderItemList,
+          dependency: dependency),
       animated: false)
 
     rootController.present(newController, animated: isAnimated)
@@ -321,6 +328,8 @@ extension SingleLinkNavigator {
   }
 }
 
+// MARK: LinkNavigatorURLEncodedItemProtocol
+
 extension SingleLinkNavigator: LinkNavigatorURLEncodedItemProtocol where ItemValue == String {
   public func next(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     _next(linkItem: linkItem, isAnimated: isAnimated)
@@ -338,7 +347,13 @@ extension SingleLinkNavigator: LinkNavigatorURLEncodedItemProtocol where ItemVal
     _fullSheet(linkItem: linkItem, isAnimated: isAnimated, prefersLargeTitles: prefersLargeTitles)
   }
 
-  public func customSheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle, prefersLargeTitles: Bool?) {
+  public func customSheet(
+    linkItem: LinkItem<ItemValue>,
+    isAnimated: Bool,
+    iPhonePresentationStyle: UIModalPresentationStyle,
+    iPadPresentationStyle: UIModalPresentationStyle,
+    prefersLargeTitles: Bool?)
+  {
     _customSheet(
       linkItem: linkItem,
       isAnimated: isAnimated,
@@ -395,7 +410,61 @@ extension SingleLinkNavigator: LinkNavigatorURLEncodedItemProtocol where ItemVal
     _alert(target: target, model: model)
   }
 
+  public func send(item: LinkItem<ItemValue>) {
+    activeController?.viewControllers.compactMap { $0 as? MatchPathUsable }
+      .filter { item.pathList.contains($0.matchPath) }
+      .forEach {
+        guard case .urlEncoded(let subscriber) = $0.eventSubscriber
+        else { return }
+        subscriber.receive(item: item.items)
+      }
+  }
+
+  public func rootSend(item: LinkItem<ItemValue>) {
+    rootController?.viewControllers.compactMap { $0 as? MatchPathUsable }
+      .filter { item.pathList.contains($0.matchPath) }
+      .forEach {
+        guard case .urlEncoded(let subscriber) = $0.eventSubscriber
+        else { return }
+        DispatchQueue.main.async {
+          subscriber.receive(item: item.items)
+        }
+      }
+  }
+
+  public func mainSend(item: ItemValue) {
+    guard let owner else { return }
+    guard case .urlEncoded(let subscriber) = owner else { return }
+    DispatchQueue.main.async {
+      subscriber.receive(item: item)
+    }
+  }
+
+  public func allSend(item: ItemValue) {
+    activeController?.viewControllers.compactMap { $0 as? MatchPathUsable }
+      .forEach {
+        guard case .urlEncoded(let subscriber) = $0.eventSubscriber
+        else { return }
+        DispatchQueue.main.async {
+          subscriber.receive(item: item)
+        }
+      }
+  }
+
+  public func allRootSend(item: ItemValue) {
+    rootController?.viewControllers.compactMap { $0 as? MatchPathUsable }
+      .forEach {
+        guard case .urlEncoded(let subscriber) = $0.eventSubscriber
+        else { return }
+        DispatchQueue.main.async {
+          subscriber.receive(item: item)
+        }
+      }
+  }
+
 }
+
+// MARK: LinkNavigatorDictionaryItemProtocol
 
 extension SingleLinkNavigator: LinkNavigatorDictionaryItemProtocol where ItemValue == [String: String] {
   public func next(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
@@ -414,7 +483,13 @@ extension SingleLinkNavigator: LinkNavigatorDictionaryItemProtocol where ItemVal
     _fullSheet(linkItem: linkItem, isAnimated: isAnimated, prefersLargeTitles: prefersLargeTitles)
   }
 
-  public func customSheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle, prefersLargeTitles: Bool?) {
+  public func customSheet(
+    linkItem: LinkItem<ItemValue>,
+    isAnimated: Bool,
+    iPhonePresentationStyle: UIModalPresentationStyle,
+    iPadPresentationStyle: UIModalPresentationStyle,
+    prefersLargeTitles: Bool?)
+  {
     _customSheet(
       linkItem: linkItem,
       isAnimated: isAnimated,
@@ -471,7 +546,57 @@ extension SingleLinkNavigator: LinkNavigatorDictionaryItemProtocol where ItemVal
     _alert(target: target, model: model)
   }
 
+  public func send(item: LinkItem<ItemValue>) {
+    activeController?.viewControllers.compactMap { $0 as? MatchPathUsable }
+      .filter { item.pathList.contains($0.matchPath) }
+      .forEach {
+        guard case .dictionary(let subscriber) = $0.eventSubscriber
+        else { return }
+        subscriber.receive(item: item.items)
+      }
+  }
 
+  public func rootSend(item: LinkItem<ItemValue>) {
+    rootController?.viewControllers.compactMap { $0 as? MatchPathUsable }
+      .filter { item.pathList.contains($0.matchPath) }
+      .forEach {
+        guard case .dictionary(let subscriber) = $0.eventSubscriber
+        else { return }
+        DispatchQueue.main.async {
+          subscriber.receive(item: item.items)
+        }
+      }
+  }
+
+  public func mainSend(item: ItemValue) {
+    guard let owner else { return }
+    guard case .dictionary(let subscriber) = owner else { return }
+    DispatchQueue.main.async {
+      subscriber.receive(item: item)
+    }
+  }
+
+  public func allSend(item: ItemValue) {
+    activeController?.viewControllers.compactMap { $0 as? MatchPathUsable }
+      .forEach {
+        guard case .dictionary(let subscriber) = $0.eventSubscriber
+        else { return }
+        DispatchQueue.main.async {
+          subscriber.receive(item: item)
+        }
+      }
+  }
+
+  public func allRootSend(item: ItemValue) {
+    rootController?.viewControllers.compactMap { $0 as? MatchPathUsable }
+      .forEach {
+        guard case .dictionary(let subscriber) = $0.eventSubscriber
+        else { return }
+        DispatchQueue.main.async {
+          subscriber.receive(item: item)
+        }
+      }
+  }
 }
 
 // MARK: SingleLinkNavigator.Coordinate
@@ -494,7 +619,6 @@ extension SingleLinkNavigator {
     }
   }
 }
-
 
 extension UINavigationController {
   fileprivate func currentItemList() -> [String] {

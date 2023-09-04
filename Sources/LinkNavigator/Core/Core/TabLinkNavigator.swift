@@ -1,8 +1,8 @@
-//import UIKit
+// import UIKit
 //
 //// MARK: - TabLinkNavigator
 //
-//public final class TabLinkNavigator<ItemValue: EmptyValueType> {
+// public final class TabLinkNavigator<ItemValue: EmptyValueType> {
 //
 //  // MARK: Lifecycle
 //
@@ -37,9 +37,9 @@
 //
 //  private var coordinate: Coordinate = .init(sheetDidDismiss: { })
 //
-//}
+// }
 //
-//extension TabLinkNavigator {
+// extension TabLinkNavigator {
 //
 //  public func launch(
 //    prefersLargeTitles: Bool = false,
@@ -76,9 +76,9 @@
 //  public var rootCurrentPaths: [String] {
 //    focusItemCurrentPath
 //  }
-//}
+// }
 //
-//extension TabLinkNavigator {
+// extension TabLinkNavigator {
 //
 //  private func _next(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
 //    activeNavigator?.push(
@@ -236,18 +236,18 @@
 //      subNavigator?.controller.present(model.build(), animated: true)
 //    }
 //  }
-//}
+// }
 //
 //// MARK: TabNavigatorType
 //
-//extension TabLinkNavigator: TabNavigatorType {
+// extension TabLinkNavigator: TabNavigatorType {
 //  public func moveToTab(tagPath: String) {
 //    guard let pick = tabController.viewControllers?.first(where: { $0.tabBarItem.tag == tagPath.hashValue }) else { return }
 //    tabController.selectedViewController = pick
 //  }
-//}
+// }
 //
-//extension TabLinkNavigator {
+// extension TabLinkNavigator {
 //
 //  public var isSubNavigatorActive: Bool {
 //    tabController.presentedViewController != .none
@@ -257,11 +257,11 @@
 //    guard let subNavigator else { return focusNavigatorTabItem }
 //    return isSubNavigatorActive ? subNavigator : focusNavigatorTabItem
 //  }
-//}
+// }
 //
 ///// MARK: SubNavigator
 //
-//extension TabLinkNavigator {
+// extension TabLinkNavigator {
 //
 //  // MARK: Public
 //
@@ -305,9 +305,9 @@
 //    }
 //    subNavigator.back(isAnimated: isAnimated)
 //  }
-//}
+// }
 //
-//extension TabLinkNavigator: LinkNavigatorFindLocationUsable {
+// extension TabLinkNavigator: LinkNavigatorFindLocationUsable {
 //  public func getCurrentPaths() -> [String] {
 //    isSubNavigatorActive ? subNavigatorCurrentPaths : getRootCurrentPaths()
 //  }
@@ -315,9 +315,9 @@
 //  public func getRootCurrentPaths() -> [String] {
 //    rootNavigator.viewControllers.map(\.matchPath)
 //  }
-//}
+// }
 //
-//extension TabLinkNavigator: LinkNavigatorURLEncodedItemProtocol where ItemValue == String {
+// extension TabLinkNavigator: LinkNavigatorURLEncodedItemProtocol where ItemValue == String {
 //  public func next(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
 //    _next(linkItem: linkItem, isAnimated: isAnimated)
 //  }
@@ -392,9 +392,9 @@
 //  }
 //
 //
-//}
+// }
 //
-//extension TabLinkNavigator: LinkNavigatorDictionaryItemProtocol where ItemValue == [String: String] {
+// extension TabLinkNavigator: LinkNavigatorDictionaryItemProtocol where ItemValue == [String: String] {
 //
 //  public func apply(isRTL: Bool) {
 //  }
@@ -473,11 +473,11 @@
 //  }
 //
 //
-//}
+// }
 //
 ///// MARK: MainNavigator
 //
-//extension TabLinkNavigator {
+// extension TabLinkNavigator {
 //
 //  private var focusNavigatorTabItem: Navigator<ItemValue>? {
 //    guard let select = tabController.selectedViewController else { return .none }
@@ -487,11 +487,11 @@
 //  private var focusItemCurrentPath: [String] {
 //    focusNavigatorTabItem?.currentPath ?? []
 //  }
-//}
+// }
 //
 //// MARK: TabLinkNavigator.Coordinate
 //
-//extension TabLinkNavigator {
+// extension TabLinkNavigator {
 //  fileprivate class Coordinate: NSObject, UIAdaptivePresentationControllerDelegate {
 //
 //    // MARK: Lifecycle
@@ -508,4 +508,4 @@
 //      sheetDidDismiss()
 //    }
 //  }
-//}
+// }

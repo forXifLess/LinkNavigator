@@ -1,16 +1,24 @@
 import UIKit
 
+// MARK: - EmptyValueType
+
 public protocol EmptyValueType {
   static var empty: Self { get }
 }
+
+// MARK: - String + EmptyValueType
 
 extension String: EmptyValueType {
   public static var empty: Self { "" }
 }
 
+// MARK: - EmptyValueType + EmptyValueType
+
 extension [String: String]: EmptyValueType {
   public static var empty: [String: String] { [:] }
 }
+
+// MARK: - LinkNavigatorURLEncodedItemProtocol
 
 /// `LinkNavigatorProtocol` defines the navigation interface for handling various link-related actions within an application.
 public protocol LinkNavigatorURLEncodedItemProtocol {
@@ -22,7 +30,7 @@ public protocol LinkNavigatorURLEncodedItemProtocol {
   ///   - linkItem: The link item to navigate to.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
   func next(linkItem: LinkItem<ItemValue>, isAnimated: Bool)
-//
+
   /// Navigates to the root next link item.
   /// - Parameters:
   ///   - linkItem: The link item to navigate to.
@@ -121,4 +129,13 @@ public protocol LinkNavigatorURLEncodedItemProtocol {
   ///   - model: The model for the alert.
   func alert(target: NavigationTarget, model: Alert)
 
+  func send(item: LinkItem<ItemValue>)
+
+  func rootSend(item: LinkItem<ItemValue>)
+
+  func mainSend(item: ItemValue)
+
+  func allSend(item: ItemValue)
+
+  func allRootSend(item: ItemValue)
 }

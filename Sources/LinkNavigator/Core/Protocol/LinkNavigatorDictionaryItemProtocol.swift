@@ -1,6 +1,8 @@
 import Foundation
 import UIKit
 
+// MARK: - LinkNavigatorFindLocationUsable
+
 public protocol LinkNavigatorFindLocationUsable {
   /// An array containing the current paths.
   func getCurrentPaths() -> [String]
@@ -8,6 +10,8 @@ public protocol LinkNavigatorFindLocationUsable {
   /// An array containing the root current paths.
   func getRootCurrentPaths() -> [String]
 }
+
+// MARK: - LinkNavigatorDictionaryItemProtocol
 
 public protocol LinkNavigatorDictionaryItemProtocol {
 
@@ -117,5 +121,13 @@ public protocol LinkNavigatorDictionaryItemProtocol {
   ///   - model: The model for the alert.
   func alert(target: NavigationTarget, model: Alert)
 
-}
+  func send(item: LinkItem<ItemValue>)
 
+  func rootSend(item: LinkItem<ItemValue>)
+
+  func mainSend(item: ItemValue)
+
+  func allSend(item: ItemValue)
+
+  func allRootSend(item: ItemValue)
+}

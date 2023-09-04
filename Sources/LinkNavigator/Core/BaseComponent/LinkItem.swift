@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - LinkItem
+
 /// Represents a link item that contains paths and associated items.
 /// It is used to manage the links and state values that are injected into a page.
 public struct LinkItem<ItemType> {
@@ -36,13 +38,14 @@ public struct LinkItem<ItemType> {
 
 }
 
+// MARK: Equatable
+
 extension LinkItem: Equatable {
   public static func == (lhs: Self, rhs: Self) -> Bool {
-    return lhs.pathList == rhs.pathList
-    && "\(lhs.items)" == "\(rhs.items)"
+    lhs.pathList == rhs.pathList
+      && "\(lhs.items)" == "\(rhs.items)"
   }
 }
-
 
 extension LinkItem where ItemType == String {
   /// Initializes a LinkItem instance with a given path list and an optional items dictionary.
@@ -65,7 +68,6 @@ extension LinkItem where ItemType == String {
     self.items = items
   }
 }
-
 
 extension LinkItem where ItemType == [String: String] {
   /// Initializes a LinkItem instance with a given path list and an optional items dictionary.
