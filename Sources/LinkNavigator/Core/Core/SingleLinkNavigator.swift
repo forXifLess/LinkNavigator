@@ -307,6 +307,7 @@ extension SingleLinkNavigator {
     presentDidAction(newController)
 
     subController = newController
+    subNavigator = newNavigator
   }
 
   // MARK: Private
