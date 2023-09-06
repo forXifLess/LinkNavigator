@@ -16,6 +16,7 @@ public struct LinkNavigationView<ItemValue: EmptyValueType> {
 // MARK: UIViewControllerRepresentable
 
 extension LinkNavigationView: UIViewControllerRepresentable {
+  
   public func makeUIViewController(context _: Context) -> UINavigationController {
     let vc = UINavigationController()
     vc.setViewControllers(linkNavigator.launch(item: item), animated: false)

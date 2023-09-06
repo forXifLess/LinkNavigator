@@ -79,9 +79,13 @@ extension SingleLinkNavigator {
 
   private func _next(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     guard let activeController, let activeNavigator else { return }
-    guard let pick = activeNavigator.firstPick(controller: activeController, item: linkItem) else { return }
-
-    activeController.pushViewController(pick, animated: isAnimated)
+    activeController.merge(
+      new: activeNavigator.build(
+        rootNavigator: self,
+        item: linkItem,
+        routeBuilderList: routeBuilderItemList,
+        dependency: dependency),
+      isAnimated: isAnimated)
   }
 
   private func _rootNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
