@@ -8,15 +8,13 @@ public final class SingleLinkNavigator<ItemValue: EmptyValueType> {
   // MARK: Lifecycle
 
   public init(
-    rootNavigator: Navigator<ItemValue>,
+    initialItem: LinkItem<ItemValue>? = .none,
     routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator, ItemValue>],
-    dependency: DependencyType,
-    subNavigator: Navigator<ItemValue>? = nil)
+    dependency: DependencyType)
   {
-    self.rootNavigator = rootNavigator
+    self.initialItem = initialItem ?? .init(path: .empty, items: .empty)
     self.routeBuilderItemList = routeBuilderItemList
     self.dependency = dependency
-    self.subNavigator = subNavigator
   }
 
   // MARK: Public
@@ -31,9 +29,12 @@ public final class SingleLinkNavigator<ItemValue: EmptyValueType> {
   // MARK: Private
 
   private var coordinate: Coordinate = .init(sheetDidDismiss: { })
+  private let initialItem: LinkItem<ItemValue>
 
-  private let rootNavigator: Navigator<ItemValue>
-  private var subNavigator: Navigator<ItemValue>?
+  private lazy var navigationBuilder: NavigationBuilder<SingleLinkNavigator, ItemValue> = .init(
+    rootNavigator: self,
+    routeBuilderList: routeBuilderItemList,
+    dependency: dependency)
 
 }
 
@@ -42,18 +43,10 @@ extension SingleLinkNavigator {
   // MARK: Public
 
   public func launch(item: LinkItem<ItemValue>? = .none, prefersLargeTitles _: Bool = false) -> [UIViewController] {
-    rootNavigator.build(
-      rootNavigator: self,
-      item: item ?? rootNavigator.initialLinkItem,
-      routeBuilderList: routeBuilderItemList,
-      dependency: dependency)
+    navigationBuilder.build(item: item ?? initialItem)
   }
 
   // MARK: Private
-
-  private var activeNavigator: Navigator<ItemValue>? {
-    isSubNavigatorActive ? subNavigator : rootNavigator
-  }
 
   private var activeController: UINavigationController? {
     isSubNavigatorActive ? subController : rootController
@@ -78,13 +71,9 @@ extension SingleLinkNavigator: LinkNavigatorFindLocationUsable {
 extension SingleLinkNavigator {
 
   private func _next(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
-    guard let activeController, let activeNavigator else { return }
+    guard let activeController else { return }
     activeController.merge(
-      new: activeNavigator.build(
-        rootNavigator: self,
-        item: linkItem,
-        routeBuilderList: routeBuilderItemList,
-        dependency: dependency),
+      new: navigationBuilder.build(item: linkItem),
       isAnimated: isAnimated)
   }
 
@@ -92,11 +81,7 @@ extension SingleLinkNavigator {
     guard let rootController else { return }
 
     rootController.merge(
-      new: rootNavigator.build(
-        rootNavigator: self,
-        item: linkItem,
-        routeBuilderList: routeBuilderItemList,
-        dependency: dependency),
+      new: navigationBuilder.build(item: linkItem),
       isAnimated: isAnimated)
   }
 
@@ -148,24 +133,16 @@ extension SingleLinkNavigator {
     }
 
     rootController.replace(
-      viewController: rootNavigator.build(
-        rootNavigator: self,
-        item: linkItem,
-        routeBuilderList: routeBuilderItemList,
-        dependency: dependency),
+      viewController: navigationBuilder.build(item: linkItem),
       isAnimated: isAnimated)
   }
 
   private func _backOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
-    guard let activeNavigator, let activeController else { return }
+    guard let activeController else { return }
 
-    guard let pick = activeNavigator.firstPick(controller: activeController, item: linkItem) else {
+    guard let pick = navigationBuilder.firstPick(controller: activeController, item: linkItem) else {
       activeController.push(
-        viewController: rootNavigator.pickBuild(
-          rootNavigator: self,
-          item: linkItem,
-          routeBuilderList: routeBuilderItemList,
-          dependency: dependency),
+        viewController: navigationBuilder.pickBuild(item: linkItem),
         isAnimated: isAnimated)
       return
     }
@@ -176,13 +153,9 @@ extension SingleLinkNavigator {
   private func _rootBackOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     guard let rootController else { return }
 
-    guard let pick = rootNavigator.firstPick(controller: rootController, item: linkItem) else {
+    guard let pick = navigationBuilder.firstPick(controller: rootController, item: linkItem) else {
       rootController.push(
-        viewController: rootNavigator.pickBuild(
-          rootNavigator: self,
-          item: linkItem,
-          routeBuilderList: routeBuilderItemList,
-          dependency: dependency),
+        viewController: navigationBuilder.pickBuild(item: linkItem),
         isAnimated: isAnimated)
       return
     }
@@ -197,9 +170,9 @@ extension SingleLinkNavigator {
   }
 
   private func _remove(pathList: [String]) {
-    guard let activeNavigator, let activeController else { return }
+    guard let activeController else { return }
     activeController.setViewControllers(
-      activeNavigator.exceptFilter(
+      navigationBuilder.exceptFilter(
         controller: activeController,
         item: .init(pathList: pathList, items: .empty)),
       animated: false)
@@ -208,7 +181,7 @@ extension SingleLinkNavigator {
   private func _rootRemove(pathList: [String]) {
     guard let rootController else { return }
     rootController.setViewControllers(
-      rootNavigator.exceptFilter(
+      navigationBuilder.exceptFilter(
         controller: activeController,
         item: .init(pathList: pathList, items: .empty)),
       animated: false)
@@ -216,7 +189,7 @@ extension SingleLinkNavigator {
 
   private func _backToLast(path: String, isAnimated: Bool) {
     activeController?.popTo(
-      viewController: activeNavigator?.lastPick(
+      viewController: navigationBuilder.lastPick(
         controller: activeController,
         item: .init(path: path, items: .empty)),
       isAnimated: isAnimated)
@@ -224,7 +197,7 @@ extension SingleLinkNavigator {
 
   private func _rootBackToLast(path: String, isAnimated: Bool) {
     rootController?.popTo(
-      viewController: rootNavigator.lastPick(
+      viewController: navigationBuilder.lastPick(
         controller: activeController,
         item: .init(path: path, items: .empty)),
       isAnimated: isAnimated)
@@ -291,27 +264,19 @@ extension SingleLinkNavigator {
     guard let rootController else { return }
 
     rootController.dismiss(animated: true)
-
-    let newNavigator = Navigator(initialLinkItem: item)
     let newController = UINavigationController()
     if let prefersLargeTitles { rootController.navigationBar.prefersLargeTitles = prefersLargeTitles }
 
     presentWillAction(newController)
 
     newController.setViewControllers(
-      newNavigator
-        .build(
-          rootNavigator: self,
-          item: item,
-          routeBuilderList: routeBuilderItemList,
-          dependency: dependency),
+      navigationBuilder.build(item: item),
       animated: false)
 
     rootController.present(newController, animated: isAnimated)
     presentDidAction(newController)
 
     subController = newController
-    subNavigator = newNavigator
   }
 
   // MARK: Private
