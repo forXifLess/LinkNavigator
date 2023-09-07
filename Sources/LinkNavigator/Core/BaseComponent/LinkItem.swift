@@ -8,21 +8,21 @@ public struct LinkItem<ItemType> {
 
   // MARK: Lifecycle
 
-  /// Initializes a LinkItem instance with a given path list and an optional items dictionary.
+  /// Initializes a LinkItem instance with a given path list and an items parameter.
   ///
   /// - Parameters:
   ///   - pathList: An array of strings representing the path list.
-  ///   - items: A dictionary containing key-value pairs representing the items. Defaults to an empty dictionary.
+  ///   - items: The items associated with the pathList.
   public init(pathList: [String], items: ItemType) {
     self.pathList = pathList
     self.items = items
   }
 
-  /// Initializes a LinkItem instance with a given path and an optional items dictionary.
+  /// Initializes a LinkItem instance with a given path and an items parameter.
   ///
   /// - Parameters:
   ///   - path: A string representing the path.
-  ///   - items: A dictionary containing key-value pairs representing the items. Defaults to an empty dictionary.
+  ///   - items: The items associated with the path.
   public init(path: String, items: ItemType) {
     pathList = [path]
     self.items = items
@@ -33,7 +33,7 @@ public struct LinkItem<ItemType> {
   /// An array of strings representing the path list.
   let pathList: [String]
 
-  /// A dictionary containing key-value pairs representing the items.
+  /// A parameter containing the items associated with the path or path list.
   let items: ItemType
 
 }
@@ -48,21 +48,21 @@ extension LinkItem: Equatable {
 }
 
 extension LinkItem where ItemType == String {
-  /// Initializes a LinkItem instance with a given path list and an optional items dictionary.
+  /// Initializes a LinkItem instance with a given path list and an optional items parameter.
   ///
   /// - Parameters:
   ///   - pathList: An array of strings representing the path list.
-  ///   - items: Encoded URLEncodedQuery items. Defaults to an empty dictionary.
+  ///   - items: Encoded URLEncodedQuery items. Defaults to an empty string.
   public init(pathList: [String], items: ItemType = "") {
     self.pathList = pathList
     self.items = items
   }
 
-  /// Initializes a LinkItem instance with a given path and an optional items dictionary.
+  /// Initializes a LinkItem instance with a given path and an optional items parameter.
   ///
   /// - Parameters:
   ///   - path: A string representing the path.
-  ///   - items: Encoded URLEncodedQuery items. Defaults to an empty dictionary.
+  ///   - items: Encoded URLEncodedQuery items. Defaults to an empty string.
   public init(path: String, items: ItemType = "") {
     pathList = [path]
     self.items = items
