@@ -1,8 +1,127 @@
-// import UIKit
-//
+import UIKit
+
+// MARK: - TabLinkNavigator
+
 //// MARK: - TabLinkNavigator
 //
-// public final class TabLinkNavigator<ItemValue: EmptyValueType> {
+public final class TabLinkNavigator<ItemValue: EmptyValueType> {
+
+  // MARK: Lifecycle
+
+  public init(
+    routeBuilderItemList: [RouteBuilderOf<TabPartialNavigator<ItemValue>, ItemValue>],
+    dependency: DependencyType,
+    tabItems: [TabItem<ItemValue>])
+  {
+    self.routeBuilderItemList = routeBuilderItemList
+    self.dependency = dependency
+    self.tabItems = tabItems
+  }
+
+  // MARK: Public
+
+  public let routeBuilderItemList: [RouteBuilderOf<TabPartialNavigator<ItemValue>, ItemValue>]
+  public let dependency: DependencyType
+
+  public var tabPartialNavigators: [TabPartialNavigator<ItemValue>] = []
+
+  public let tabItems: [TabItem<ItemValue>]
+  public var owner: LinkNavigatorSubscriberType? = .none
+
+  public weak var mainController: UITabBarController?
+
+  // MARK: Internal
+
+  var modalController: UINavigationController? = .none
+  var fullSheetController: UINavigationController? = .none
+}
+
+extension TabLinkNavigator {
+  public func launch(tagItemList: [TabItem<ItemValue>]) -> [UINavigationController] {
+    tabPartialNavigators = tagItemList
+      .reduce([TabPartialNavigator<ItemValue>]()) { curr, next in
+        let newNavigatorList = TabPartialNavigator(
+          rootNavigator: self,
+          tabItem: next,
+          routeBuilderItemList: routeBuilderItemList,
+          dependency: dependency)
+        return curr + [newNavigatorList]
+      }
+
+    let navigationList = tabPartialNavigators
+      .map {
+        let nc = UINavigationController()
+        nc.setViewControllers($0.launch(), animated: false)
+        return nc
+      }
+
+    return navigationList
+  }
+}
+
+extension TabLinkNavigator {
+  public func sheetOpen(
+    subViewController: UINavigationController,
+    isAnimated: Bool,
+    type: UIModalPresentationStyle,
+    presentWillAction: @escaping (UINavigationController) -> Void = { _ in },
+    presentDidAction: @escaping (UINavigationController) -> Void = { _ in })
+  {
+    if let fullSheetController {
+      fullSheetController.dismiss(animated: true)
+    } else {
+      mainController?.dismiss(animated: true)
+    }
+
+    presentWillAction(subViewController)
+
+    switch type {
+    case .fullScreen, .overFullScreen:
+      if let fullSheetController {
+        subViewController.modalPresentationStyle = .formSheet
+        fullSheetController.present(subViewController, animated: isAnimated)
+        modalController = subViewController
+      } else {
+        mainController?.present(subViewController, animated: isAnimated)
+        fullSheetController = subViewController
+      }
+
+    default:
+      if let fullSheetController {
+        fullSheetController.present(subViewController, animated: isAnimated)
+      } else {
+        mainController?.present(subViewController, animated: isAnimated)
+      }
+      modalController = subViewController
+    }
+    presentDidAction(subViewController)
+  }
+
+  public func close(isAnimated: Bool) {
+    if let modalController {
+      if let fullSheetController {
+        fullSheetController.dismiss(animated: isAnimated)
+      } else {
+        mainController?.dismiss(animated: isAnimated)
+      }
+      self.modalController = .none
+    } else if let fullSheetController {
+      mainController?.dismiss(animated: isAnimated)
+      self.fullSheetController = .none
+    }
+  }
+
+  public func closeAll(isAnimated: Bool) {
+    mainController?.dismiss(animated: isAnimated)
+    modalController = .none
+    fullSheetController = .none
+  }
+
+  public func moveTab(targetTag: String) {
+    mainController?.selectedViewController = tabPartialNavigators.first(where: { $0.tabItem.tag == targetTag })?.rootController
+  }
+}
+
 //
 //  // MARK: Lifecycle
 //
@@ -509,3 +628,39 @@
 //    }
 //  }
 // }
+
+extension UINavigationController {
+  private func currentItemList() -> [String] {
+    viewControllers.compactMap { $0 as? MatchPathUsable }.map(\.matchPath)
+  }
+
+  private func merge(new: [UIViewController], isAnimated: Bool) {
+    setViewControllers(viewControllers + new, animated: isAnimated)
+  }
+
+  private func back(isAnimated: Bool) {
+    popViewController(animated: isAnimated)
+  }
+
+  private func clear(isAnimated: Bool) {
+    setViewControllers([], animated: isAnimated)
+  }
+
+  private func push(viewController: UIViewController?, isAnimated: Bool) {
+    guard let viewController else { return }
+    pushViewController(viewController, animated: isAnimated)
+  }
+
+  private func replace(viewController: [UIViewController], isAnimated: Bool) {
+    setViewControllers(viewController, animated: isAnimated)
+  }
+
+  private func popTo(viewController: UIViewController?, isAnimated: Bool) {
+    guard let viewController else { return }
+    popToViewController(viewController, animated: isAnimated)
+  }
+
+  private func dropLast() -> [UIViewController] {
+    Array(viewControllers.dropLast())
+  }
+}

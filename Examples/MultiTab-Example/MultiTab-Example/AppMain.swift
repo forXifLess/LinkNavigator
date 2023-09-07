@@ -27,7 +27,9 @@ extension AppMain: App {
 
   var body: some Scene {
     WindowGroup {
-      LinkNavigationView(linkNavigator: single)
+      LinkNavigationView(
+        linkNavigator: single,
+        item: .init(path: "tabbar"))
         .ignoresSafeArea()
 //      tabNavigator
 //        .launch()
