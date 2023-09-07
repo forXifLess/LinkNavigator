@@ -1,12 +1,18 @@
 import Foundation
 import UIKit
 
-// MARK: - SingleLinkNavigator
-
+/// The `SingleLinkNavigator` class manages the navigation within a single link setup.
+/// It coordinates navigation functionalities like adding, removing, and navigating back to pages.
 public final class SingleLinkNavigator<ItemValue: EmptyValueType> {
 
-  // MARK: Lifecycle
+  // MARK: - Lifecycle
 
+  /// Initializes a new instance of `SingleLinkNavigator`.
+  ///
+  /// - Parameters:
+  ///   - initialItem: The initial parameter value when creating a page. This value can be either a `String` or an array of `String` (`[String]`).
+  ///   - routeBuilderItemList: An array of `RouteBuilderOf` objects that are used as builders to create pages. These builders receive necessary parameters such as `ItemValue`, `RootNavigator`, and `Dependency` during the creation of pages.
+  ///   - dependency: A necessary attribute for injecting MVI SideEffects which are used across the project, similar to a UseCase in clean architecture.
   public init(
     initialItem: LinkItem<ItemValue>? = .none,
     routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator, ItemValue>],
@@ -17,16 +23,24 @@ public final class SingleLinkNavigator<ItemValue: EmptyValueType> {
     self.dependency = dependency
   }
 
-  // MARK: Public
+  // MARK: - Public Properties
 
+  /// A collection of `RouteBuilderOf` objects utilized for the creation of new pages.
   public let routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator, ItemValue>]
+  
+  /// A requirement for injecting MVI SideEffects that are utilized across the entire project.
   public let dependency: DependencyType
-
+  
+  /// The central navigation controller that orchestrates the navigation flow.
   public weak var rootController: UINavigationController?
+  
+  /// A subscriber that holds the current link navigator.
   public var owner: LinkNavigatorSubscriberType? = .none
+  
+  /// A navigation controller that oversees the display of subordinate navigation sequences.
   public var subController: UINavigationController?
 
-  // MARK: Private
+  // MARK: - Private Properties
 
   private var coordinate: Coordinate = .init(sheetDidDismiss: { })
   private let initialItem: LinkItem<ItemValue>
@@ -40,27 +54,41 @@ public final class SingleLinkNavigator<ItemValue: EmptyValueType> {
 
 extension SingleLinkNavigator {
 
-  // MARK: Public
+  // MARK: - Public Methods
 
+  /// Starts the navigation process with a specified item as the initial point.
+  ///
+  /// - Parameters:
+  ///   - item: The initial link item used to commence the navigation process. Defaults to `nil`.
+  ///   - prefersLargeTitles: A Boolean flag that indicates if the navigation bar prefers large titles. Defaults to `false`.
+  /// 
+  /// - Returns: A collection of `UIViewController` objects representing the initiated navigation flow.
   public func launch(item: LinkItem<ItemValue>? = .none, prefersLargeTitles _: Bool = false) -> [UIViewController] {
     navigationBuilder.build(item: item ?? initialItem)
   }
 
-  // MARK: Private
+  // MARK: - Private Methods
 
+  /// The operational navigation controller managing the current navigation flow.
   private var activeController: UINavigationController? {
     isSubNavigatorActive ? subController : rootController
   }
 }
 
-// MARK: LinkNavigatorFindLocationUsable
+// MARK: - LinkNavigatorFindLocationUsable
 
 extension SingleLinkNavigator: LinkNavigatorFindLocationUsable {
 
+  /// Obtains the current paths within the navigation flow.
+  ///
+  /// - Returns: A collection of strings denoting the present paths.
   public func getCurrentPaths() -> [String] {
     isSubNavigatorActive ? subNavigatorCurrentPaths() : getRootCurrentPaths()
   }
 
+  /// Retrieves the current paths from the root controller within the navigation sequence.
+  ///
+  /// - Returns: A collection of strings representing the current paths in the root navigation controller.
   public func getRootCurrentPaths() -> [String] {
     guard let controller = rootController else { return [] }
     return controller.currentItemList()
@@ -70,6 +98,11 @@ extension SingleLinkNavigator: LinkNavigatorFindLocationUsable {
 
 extension SingleLinkNavigator {
 
+  /// Initiates navigation to the next link item with the option of animation.
+  /// 
+  /// - Parameters:
+  ///   - linkItem: An object representing the item to navigate to, it accepts either a `String` or a dictionary with `String` keys and values as `ItemValue`.
+  ///   - isAnimated: A boolean to indicate if the navigation transition should be animated.
   private func _next(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     guard let activeController else { return }
     activeController.merge(
@@ -77,6 +110,11 @@ extension SingleLinkNavigator {
       isAnimated: isAnimated)
   }
 
+  /// Initiates navigation to the root link item with a merging transition, with an option for the transition to be animated.
+  ///
+  /// - Parameters:
+  ///   - linkItem: An object representing the root item to navigate to, it can have either a `String` or a dictionary with `String` keys and values as `ItemValue`.
+  ///   - isAnimated: A boolean to indicate if the navigation transition should be animated.
   private func _rootNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     guard let rootController else { return }
 
@@ -85,10 +123,21 @@ extension SingleLinkNavigator {
       isAnimated: isAnimated)
   }
 
+  /// Opens a sheet with the specified link item and an option to animate the presentation.
+  ///
+  /// - Parameters:
+  ///   - linkItem: An object representing the item to be presented in the sheet, can be a `String` or a dictionary with `String` keys and values as `ItemValue`.
+  ///   - isAnimated: A boolean to indicate if the presentation should be animated.
   private func _sheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     sheetOpen(item: linkItem, isAnimated: isAnimated)
   }
 
+  /// Opens a full-screen sheet with options for animation and large titles.
+  ///
+  /// - Parameters:
+  ///   - linkItem: An object to be presented in the sheet, can be either a `String` or a dictionary with `String` keys and values as `ItemValue`.
+  ///   - isAnimated: A boolean indicating whether the presentation should be animated.
+  ///   - prefersLargeTitles: A boolean to indicate if large titles should be preferred in the navigation bar.
   private func _fullSheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool, prefersLargeTitles: Bool?) {
     sheetOpen(
       item: linkItem,
@@ -102,6 +151,14 @@ extension SingleLinkNavigator {
       })
   }
 
+  /// Opens a custom sheet with specific presentation styles for iPhone and iPad, along with options for animation and large titles.
+  ///
+  /// - Parameters:
+  ///   - linkItem: An object representing the item to be presented in the sheet, accepting a `String` or a dictionary with `String` keys and values as `ItemValue`.
+  ///   - isAnimated: A boolean indicating whether the presentation should be animated.
+  ///   - iPhonePresentationStyle: The presentation style for iPhone devices.
+  ///   - iPadPresentationStyle: The presentation style for iPad devices.
+  ///   - prefersLargeTitles: A boolean to specify if large titles should be preferred in the navigation bar.
   private func _customSheet(
     linkItem: LinkItem<ItemValue>,
     isAnimated: Bool,
@@ -123,6 +180,11 @@ extension SingleLinkNavigator {
       })
   }
 
+  /// Replaces the current view controller with a new one built from the specified link item, with an option for the transition to be animated.
+  ///
+  /// - Parameters:
+  ///   - linkItem: An object representing the item to build the new view controller from, accepting a `String` or a dictionary with `String` keys and values as `ItemValue`.
+  ///   - isAnimated: A boolean indicating whether the transition should be animated.
   private func _replace(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     guard let rootController else { return }
 
@@ -137,6 +199,11 @@ extension SingleLinkNavigator {
       isAnimated: isAnimated)
   }
 
+  /// Navigates backwards or forwards based on the first pick obtained from the navigation builder.
+  ///
+  /// - Parameters:
+  ///   - linkItem: The link item containing the `ItemValue` to define the navigation endpoint.
+  ///   - isAnimated: A flag indicating whether the navigation should be animated.
   private func _backOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     guard let activeController else { return }
 
@@ -150,6 +217,11 @@ extension SingleLinkNavigator {
     activeController.popToViewController(pick, animated: isAnimated)
   }
 
+  /// Navigates backwards or forwards from the root controller based on the first pick from the navigation builder.
+  ///
+  /// - Parameters:
+  ///   - linkItem: The link item containing the `ItemValue` to define the navigation endpoint.
+  ///   - isAnimated: A flag indicating whether the navigation should be animated.
   private func _rootBackOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     guard let rootController else { return }
 
@@ -163,12 +235,21 @@ extension SingleLinkNavigator {
     rootController.popToViewController(pick, animated: isAnimated)
   }
 
+// 다시
+  /// Navigates backwards either through the sub navigator or the root controller based on the `isSubNavigatorActive` flag.
+  ///
+  /// - Parameter:
+  ///   - isAnimated: A flag indicating whether the navigation should be animated.
   private func _back(isAnimated: Bool) {
     isSubNavigatorActive
       ? sheetBack(isAnimated: isAnimated)
       : rootController?.back(isAnimated: isAnimated)
   }
 
+  /// Removes view controllers from the navigation stack based on the specified path list.
+  ///
+  /// - Parameter:
+  ///   - pathList: An array of strings representing paths to be removed from the navigation stack.
   private func _remove(pathList: [String]) {
     guard let activeController else { return }
     activeController.setViewControllers(
@@ -178,6 +259,10 @@ extension SingleLinkNavigator {
       animated: false)
   }
 
+  /// Removes view controllers from the root controller's navigation stack based on the specified path list.
+  ///
+  /// - Parameter:
+  ///   - pathList: An array of strings representing paths to be removed from the navigation stack.
   private func _rootRemove(pathList: [String]) {
     guard let rootController else { return }
     rootController.setViewControllers(
@@ -187,6 +272,11 @@ extension SingleLinkNavigator {
       animated: false)
   }
 
+  /// Navigates back to the last occurrence of the specified path.
+  ///
+  /// - Parameters:
+  ///   - path: A string representing the path to navigate back to.
+  ///   - isAnimated: A flag indicating whether the navigation should be animated.
   private func _backToLast(path: String, isAnimated: Bool) {
     activeController?.popTo(
       viewController: navigationBuilder.lastPick(
@@ -195,6 +285,11 @@ extension SingleLinkNavigator {
       isAnimated: isAnimated)
   }
 
+  /// Navigates back to the last occurrence of the specified path in the root controller's navigation stack.
+  ///
+  /// - Parameters:
+  ///   - path: A string representing the path to navigate back to.
+  ///   - isAnimated: A flag indicating whether the navigation should be animated.
   private func _rootBackToLast(path: String, isAnimated: Bool) {
     rootController?.popTo(
       viewController: navigationBuilder.lastPick(
@@ -203,6 +298,11 @@ extension SingleLinkNavigator {
       isAnimated: isAnimated)
   }
 
+  /// Closes the active controller if it is a sub controller and performs the specified completion action.
+  ///
+  /// - Parameters:
+  ///   - isAnimated: A flag indicating whether the closure should be animated.
+  ///   - completeAction: A closure to be executed upon completion of the closure action.
   private func _close(isAnimated: Bool, completeAction: @escaping () -> Void) {
     guard activeController == subController else { return }
     rootController?.dismiss(animated: isAnimated) { [weak self] in
@@ -212,6 +312,11 @@ extension SingleLinkNavigator {
     }
   }
 
+   /// Retrieves a range of paths up to the specified path from the current paths in the root controller.
+  ///
+  /// - Parameter:
+  ///   - path: A string representing the endpoint of the range retrieval.
+  /// - Returns: An array of strings representing the range of paths retrieved.
   private func _range(path: String) -> [String] {
     getRootCurrentPaths().reduce([String]()) { current, next in
       guard current.contains(path) else { return current + [next] }
@@ -219,6 +324,11 @@ extension SingleLinkNavigator {
     }
   }
 
+  /// Reloads the last view controller in the root controller's navigation stack with new items.
+  ///
+  /// - Parameters:
+  ///   - items: The new `ItemValue` to be applied to the last view controller.
+  ///   - isAnimated: A flag indicating whether the reload should be animated.
   private func _rootReloadLast(items: ItemValue, isAnimated _: Bool) {
     guard let lastPath = getRootCurrentPaths().last else { return }
     guard let rootController else { return }
@@ -229,6 +339,11 @@ extension SingleLinkNavigator {
     rootController.replace(viewController: newList, isAnimated: false)
   }
 
+  /// Presents an alert on the specified navigation target.
+  ///
+  /// - Parameters:
+  ///   - target: The navigation target to present the alert on.
+  ///   - model: The alert model defining the alert to be presented.
   private func _alert(target: NavigationTarget, model: Alert) {
     switch target {
     case .default:
