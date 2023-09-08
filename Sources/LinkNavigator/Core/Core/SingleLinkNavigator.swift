@@ -10,15 +10,12 @@ public final class SingleLinkNavigator<ItemValue: EmptyValueType> {
   /// Initializes a new instance of `SingleLinkNavigator`.
   ///
   /// - Parameters:
-  ///   - initialItem: The initial parameter value when creating a page. This value can be either a `String` or an array of `String` (`[String]`).
   ///   - routeBuilderItemList: An array of `RouteBuilderOf` objects that are used as builders to create pages. These builders receive necessary parameters such as `ItemValue`, `RootNavigator`, and `Dependency` during the creation of pages.
   ///   - dependency: A necessary attribute for injecting MVI SideEffects which are used across the project, similar to a UseCase in clean architecture.
   public init(
-    initialItem: LinkItem<ItemValue>? = .none,
     routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator, ItemValue>],
     dependency: DependencyType)
   {
-    self.initialItem = initialItem ?? .init(path: .empty, items: .empty)
     self.routeBuilderItemList = routeBuilderItemList
     self.dependency = dependency
   }
@@ -43,9 +40,8 @@ public final class SingleLinkNavigator<ItemValue: EmptyValueType> {
   // MARK: - Private Properties
 
   private var coordinate: Coordinate = .init(sheetDidDismiss: { })
-  private let initialItem: LinkItem<ItemValue>
 
-  private lazy var navigationBuilder: NavigationBuilder<SingleLinkNavigator, ItemValue> = .init(
+  private lazy var navigationBuilder: SingleNavigationBuilder<SingleLinkNavigator, ItemValue> = .init(
     rootNavigator: self,
     routeBuilderList: routeBuilderItemList,
     dependency: dependency)
@@ -59,12 +55,12 @@ extension SingleLinkNavigator {
   /// Starts the navigation process with a specified item as the initial point.
   ///
   /// - Parameters:
-  ///   - item: The initial link item used to commence the navigation process. Defaults to `nil`.
+  ///   - item: The initial link item used to commence the navigation process.
   ///   - prefersLargeTitles: A Boolean flag that indicates if the navigation bar prefers large titles. Defaults to `false`.
   /// 
   /// - Returns: A collection of `UIViewController` objects representing the initiated navigation flow.
-  public func launch(item: LinkItem<ItemValue>? = .none, prefersLargeTitles _: Bool = false) -> [UIViewController] {
-    navigationBuilder.build(item: item ?? initialItem)
+  public func launch(item: LinkItem<ItemValue>, prefersLargeTitles _: Bool = false) -> [UIViewController] {
+    navigationBuilder.build(item: item)
   }
 
   // MARK: - Private Methods
