@@ -8,7 +8,7 @@ import UIKit
 /// Generics:
 /// - Root: The type representing the root navigator.
 /// - ItemValue: A type that conforms to `EmptyValueType` representing the item values.
-public class NavigationBuilder<Root, ItemValue: EmptyValueType> {
+public class SingleNavigationBuilder<Root, ItemValue: EmptyValueType> {
 
   // MARK: Lifecycle
   
@@ -40,7 +40,7 @@ public class NavigationBuilder<Root, ItemValue: EmptyValueType> {
   let dependency: DependencyType
 }
 
-extension NavigationBuilder {
+extension SingleNavigationBuilder {
   
   /// Builds a list of `RouteViewController` based on the provided `LinkItem`.
   ///
