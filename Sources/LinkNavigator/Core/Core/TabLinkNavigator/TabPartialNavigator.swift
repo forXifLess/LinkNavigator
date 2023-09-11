@@ -3,7 +3,7 @@ import UIKit
 
 // MARK: - TabPartialNavigator
 
-public final class TabPartialNavigator<Root, ItemValue: EmptyValueType> {
+public final class TabPartialNavigator<ItemValue: EmptyValueType> {
 
   // MARK: Lifecycle
 
@@ -35,6 +35,11 @@ public final class TabPartialNavigator<Root, ItemValue: EmptyValueType> {
 
   private weak var rootNavigator: TabLinkNavigator<ItemValue>?
 
+  private lazy var navigationBuilder: TabNavigationBuilder<TabPartialNavigator, ItemValue> = .init(
+    rootNavigator: self,
+    routeBuilderList: routeBuilderItemList,
+    dependency: dependency)
+
   private var currentController: UINavigationController? {
     rootNavigator?.modalController != .none
       ? rootNavigator?.modalController
@@ -65,11 +70,7 @@ extension TabPartialNavigator {
 extension TabPartialNavigator {
 
   public func launch(item: LinkItem<ItemValue>? = .none, prefersLargeTitles _: Bool = false) -> [UIViewController] {
-    let viewControllers = NavigatorBuilder<Root, ItemValue>.build(
-      rootNavigator: self,
-      item: item ?? tabItem.linkItem,
-      routeBuilderList: routeBuilderItemList,
-      dependency: dependency)
+    let viewControllers = navigationBuilder.build(item: item ?? tabItem.linkItem)
 
     rootController.setViewControllers(viewControllers, animated: false)
     return viewControllers
@@ -77,21 +78,13 @@ extension TabPartialNavigator {
 
   public func next(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     currentController?.merge(
-      new: NavigatorBuilder<Root, ItemValue>.build(
-        rootNavigator: self,
-        item: linkItem,
-        routeBuilderList: routeBuilderItemList,
-        dependency: dependency),
+      new: navigationBuilder.build(item: linkItem),
       isAnimated: isAnimated)
   }
 
   public func rootNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     rootController.merge(
-      new: NavigatorBuilder<Root, ItemValue>.build(
-        rootNavigator: self,
-        item: linkItem,
-        routeBuilderList: routeBuilderItemList,
-        dependency: dependency),
+      new: navigationBuilder.build(item: linkItem),
       isAnimated: isAnimated)
   }
 
@@ -105,7 +98,7 @@ extension TabPartialNavigator {
 
   public func backOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     guard
-      let pick = NavigatorBuilder<Root, ItemValue>.firstPick(
+      let pick = navigationBuilder.firstPick(
         controller: currentController,
         item: linkItem)
     else {
@@ -117,7 +110,7 @@ extension TabPartialNavigator {
 
   public func rootBackOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     guard
-      let pick = NavigatorBuilder<Root, ItemValue>.firstPick(
+      let pick = navigationBuilder.firstPick(
         controller: currentController,
         item: linkItem)
     else {
@@ -129,27 +122,19 @@ extension TabPartialNavigator {
 
   public func replace(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     currentController?.replace(
-      viewController: NavigatorBuilder<Root, ItemValue>.build(
-        rootNavigator: self,
-        item: linkItem,
-        routeBuilderList: routeBuilderItemList,
-        dependency: dependency),
+      viewController: navigationBuilder.build(item: linkItem),
       isAnimated: isAnimated)
   }
 
   public func rootReplace(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     rootController.replace(
-      viewController: NavigatorBuilder<Root, ItemValue>.build(
-        rootNavigator: self,
-        item: linkItem,
-        routeBuilderList: routeBuilderItemList,
-        dependency: dependency),
+      viewController: navigationBuilder.build(item: linkItem),
       isAnimated: isAnimated)
   }
 
   public func remove(pathList: [String]) {
     currentController?.setViewControllers(
-      NavigatorBuilder<Root, ItemValue>.exceptFilter(
+      navigationBuilder.exceptFilter(
         controller: currentController,
         item: .init(pathList: pathList, items: ItemValue.empty)),
       animated: false)
@@ -157,7 +142,7 @@ extension TabPartialNavigator {
 
   public func rootRemove(pathList: [String]) {
     rootController.setViewControllers(
-      NavigatorBuilder<Root, ItemValue>.exceptFilter(
+      navigationBuilder.exceptFilter(
         controller: rootController,
         item: .init(pathList: pathList, items: ItemValue.empty)),
       animated: false)
@@ -165,7 +150,7 @@ extension TabPartialNavigator {
 
   public func backToLast(path: String, isAnimated: Bool) {
     currentController?.popTo(
-      viewController: NavigatorBuilder<Root, ItemValue>.lastPick(
+      viewController: navigationBuilder.lastPick(
         controller: currentController,
         item: .init(path: path, items: ItemValue.empty)),
       isAnimated: isAnimated)
@@ -173,7 +158,7 @@ extension TabPartialNavigator {
 
   public func rootBackToLast(path: String, isAnimated: Bool) {
     rootController.popTo(
-      viewController: NavigatorBuilder<Root, ItemValue>.lastPick(
+      viewController: navigationBuilder.lastPick(
         controller: rootController,
         item: .init(path: path, items: ItemValue.empty)),
       isAnimated: isAnimated)
@@ -193,14 +178,7 @@ extension TabPartialNavigator {
   {
     let newController = UINavigationController()
 
-    newController.setViewControllers(
-      NavigatorBuilder<Root, ItemValue>
-        .build(
-          rootNavigator: self,
-          item: item,
-          routeBuilderList: routeBuilderItemList,
-          dependency: dependency),
-      animated: false)
+    newController.setViewControllers(navigationBuilder.build(item: item), animated: false)
 
     rootNavigator?.sheetOpen(
       subViewController: newController,
