@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-public struct NavigatorBuilder {
+public struct NavigatorBuilder<Root, ItemValue> {
 
   // MARK: Lifecycle
 
@@ -21,6 +21,8 @@ public struct NavigatorBuilder {
       routeBuilderList.first(where: { $0.matchPath == path })?.routeBuild(rootNavigator, item.items, dependency)
     }
   }
+
+
 
   public static func pickBuild<Root, ItemValue>(
     rootNavigator: Root,
