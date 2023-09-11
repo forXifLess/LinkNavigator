@@ -3,7 +3,7 @@ import UIKit
 
 // MARK: - TabPartialNavigator
 
-public final class TabPartialNavigator<ItemValue: EmptyValueType> {
+public final class TabPartialNavigator<Root, ItemValue: EmptyValueType> {
 
   // MARK: Lifecycle
 
@@ -65,7 +65,7 @@ extension TabPartialNavigator {
 extension TabPartialNavigator {
 
   public func launch(item: LinkItem<ItemValue>? = .none, prefersLargeTitles _: Bool = false) -> [UIViewController] {
-    let viewControllers = NavigatorBuilder.build(
+    let viewControllers = NavigatorBuilder<Root, ItemValue>.build(
       rootNavigator: self,
       item: item ?? tabItem.linkItem,
       routeBuilderList: routeBuilderItemList,
@@ -77,7 +77,7 @@ extension TabPartialNavigator {
 
   public func next(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     currentController?.merge(
-      new: NavigatorBuilder.build(
+      new: NavigatorBuilder<Root, ItemValue>.build(
         rootNavigator: self,
         item: linkItem,
         routeBuilderList: routeBuilderItemList,
@@ -87,7 +87,7 @@ extension TabPartialNavigator {
 
   public func rootNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     rootController.merge(
-      new: NavigatorBuilder.build(
+      new: NavigatorBuilder<Root, ItemValue>.build(
         rootNavigator: self,
         item: linkItem,
         routeBuilderList: routeBuilderItemList,
@@ -105,7 +105,7 @@ extension TabPartialNavigator {
 
   public func backOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     guard
-      let pick = NavigatorBuilder.firstPick(
+      let pick = NavigatorBuilder<Root, ItemValue>.firstPick(
         controller: currentController,
         item: linkItem)
     else {
@@ -117,7 +117,7 @@ extension TabPartialNavigator {
 
   public func rootBackOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     guard
-      let pick = NavigatorBuilder.firstPick(
+      let pick = NavigatorBuilder<Root, ItemValue>.firstPick(
         controller: currentController,
         item: linkItem)
     else {
@@ -129,7 +129,7 @@ extension TabPartialNavigator {
 
   public func replace(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     currentController?.replace(
-      viewController: NavigatorBuilder.build(
+      viewController: NavigatorBuilder<Root, ItemValue>.build(
         rootNavigator: self,
         item: linkItem,
         routeBuilderList: routeBuilderItemList,
@@ -139,7 +139,7 @@ extension TabPartialNavigator {
 
   public func rootReplace(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
     rootController.replace(
-      viewController: NavigatorBuilder.build(
+      viewController: NavigatorBuilder<Root, ItemValue>.build(
         rootNavigator: self,
         item: linkItem,
         routeBuilderList: routeBuilderItemList,
@@ -149,7 +149,7 @@ extension TabPartialNavigator {
 
   public func remove(pathList: [String]) {
     currentController?.setViewControllers(
-      NavigatorBuilder.exceptFilter(
+      NavigatorBuilder<Root, ItemValue>.exceptFilter(
         controller: currentController,
         item: .init(pathList: pathList, items: ItemValue.empty)),
       animated: false)
@@ -157,7 +157,7 @@ extension TabPartialNavigator {
 
   public func rootRemove(pathList: [String]) {
     rootController.setViewControllers(
-      NavigatorBuilder.exceptFilter(
+      NavigatorBuilder<Root, ItemValue>.exceptFilter(
         controller: rootController,
         item: .init(pathList: pathList, items: ItemValue.empty)),
       animated: false)
@@ -165,7 +165,7 @@ extension TabPartialNavigator {
 
   public func backToLast(path: String, isAnimated: Bool) {
     currentController?.popTo(
-      viewController: NavigatorBuilder.lastPick(
+      viewController: NavigatorBuilder<Root, ItemValue>.lastPick(
         controller: currentController,
         item: .init(path: path, items: ItemValue.empty)),
       isAnimated: isAnimated)
@@ -173,7 +173,7 @@ extension TabPartialNavigator {
 
   public func rootBackToLast(path: String, isAnimated: Bool) {
     rootController.popTo(
-      viewController: NavigatorBuilder.lastPick(
+      viewController: NavigatorBuilder<Root, ItemValue>.lastPick(
         controller: rootController,
         item: .init(path: path, items: ItemValue.empty)),
       isAnimated: isAnimated)
@@ -194,7 +194,7 @@ extension TabPartialNavigator {
     let newController = UINavigationController()
 
     newController.setViewControllers(
-      NavigatorBuilder
+      NavigatorBuilder<Root, ItemValue>
         .build(
           rootNavigator: self,
           item: item,
