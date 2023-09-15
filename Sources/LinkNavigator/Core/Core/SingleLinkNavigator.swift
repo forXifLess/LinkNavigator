@@ -3,7 +3,7 @@ import UIKit
 
 /// The `SingleLinkNavigator` class manages the navigation within a single link setup.
 /// It coordinates navigation functionalities like adding, removing, and navigating back to pages.
-public final class SingleLinkNavigator<ItemValue: EmptyValueType> {
+public final class SingleLinkNavigator {
 
   // MARK: - Lifecycle
 
@@ -13,7 +13,7 @@ public final class SingleLinkNavigator<ItemValue: EmptyValueType> {
   ///   - routeBuilderItemList: An array of `RouteBuilderOf` objects that are used as builders to create pages. These builders receive necessary parameters such as `ItemValue`, `RootNavigator`, and `Dependency` during the creation of pages.
   ///   - dependency: A necessary attribute for injecting MVI SideEffects which are used across the project, similar to a UseCase in clean architecture.
   public init(
-    routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator, ItemValue>],
+    routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator>],
     dependency: DependencyType)
   {
     self.routeBuilderItemList = routeBuilderItemList
@@ -23,7 +23,7 @@ public final class SingleLinkNavigator<ItemValue: EmptyValueType> {
   // MARK: - Public Properties
 
   /// A collection of `RouteBuilderOf` objects utilized for the creation of new pages.
-  public let routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator, ItemValue>]
+  public let routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator>]
   
   /// A requirement for injecting MVI SideEffects that are utilized across the entire project.
   public let dependency: DependencyType
@@ -32,7 +32,7 @@ public final class SingleLinkNavigator<ItemValue: EmptyValueType> {
   public weak var rootController: UINavigationController?
   
   /// A subscriber that holds the current link navigator.
-  public var owner: LinkNavigatorSubscriberType? = .none
+  public var owner: LinkNavigatorItemSubscriberProtocol? = .none
   
   /// A navigation controller that oversees the display of subordinate navigation sequences.
   public var subController: UINavigationController?
@@ -41,7 +41,7 @@ public final class SingleLinkNavigator<ItemValue: EmptyValueType> {
 
   private var coordinate: Coordinate = .init(sheetDidDismiss: { })
 
-  private lazy var navigationBuilder: SingleNavigationBuilder<SingleLinkNavigator, ItemValue> = .init(
+  private lazy var navigationBuilder: SingleNavigationBuilder<SingleLinkNavigator> = .init(
     rootNavigator: self,
     routeBuilderList: routeBuilderItemList,
     dependency: dependency)
@@ -59,7 +59,7 @@ extension SingleLinkNavigator {
   ///   - prefersLargeTitles: A Boolean flag that indicates if the navigation bar prefers large titles. Defaults to `false`.
   /// 
   /// - Returns: A collection of `UIViewController` objects representing the initiated navigation flow.
-  public func launch(item: LinkItem<ItemValue>, prefersLargeTitles _: Bool = false) -> [UIViewController] {
+  public func launch(item: LinkItem, prefersLargeTitles _: Bool = false) -> [UIViewController] {
     navigationBuilder.build(item: item)
   }
 
@@ -89,7 +89,6 @@ extension SingleLinkNavigator: LinkNavigatorFindLocationUsable {
     guard let controller = rootController else { return [] }
     return controller.currentItemList()
   }
-
 }
 
 extension SingleLinkNavigator {
@@ -99,7 +98,7 @@ extension SingleLinkNavigator {
   /// - Parameters:
   ///   - linkItem: An object representing the item to navigate to, it accepts either a `String` or a dictionary with `String` keys and values as `ItemValue`.
   ///   - isAnimated: A boolean to indicate if the navigation transition should be animated.
-  private func _next(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+  private func _next(linkItem: LinkItem, isAnimated: Bool) {
     guard let activeController else { return }
     activeController.merge(
       new: navigationBuilder.build(item: linkItem),
@@ -111,7 +110,7 @@ extension SingleLinkNavigator {
   /// - Parameters:
   ///   - linkItem: An object representing the root item to navigate to, it can have either a `String` or a dictionary with `String` keys and values as `ItemValue`.
   ///   - isAnimated: A boolean to indicate if the navigation transition should be animated.
-  private func _rootNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+  private func _rootNext(linkItem: LinkItem, isAnimated: Bool) {
     guard let rootController else { return }
 
     rootController.merge(
@@ -124,7 +123,7 @@ extension SingleLinkNavigator {
   /// - Parameters:
   ///   - linkItem: An object representing the item to be presented in the sheet, can be a `String` or a dictionary with `String` keys and values as `ItemValue`.
   ///   - isAnimated: A boolean to indicate if the presentation should be animated.
-  private func _sheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+  private func _sheet(linkItem: LinkItem, isAnimated: Bool) {
     sheetOpen(item: linkItem, isAnimated: isAnimated)
   }
 
@@ -134,7 +133,7 @@ extension SingleLinkNavigator {
   ///   - linkItem: An object to be presented in the sheet, can be either a `String` or a dictionary with `String` keys and values as `ItemValue`.
   ///   - isAnimated: A boolean indicating whether the presentation should be animated.
   ///   - prefersLargeTitles: A boolean to indicate if large titles should be preferred in the navigation bar.
-  private func _fullSheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool, prefersLargeTitles: Bool?) {
+  private func _fullSheet(linkItem: LinkItem, isAnimated: Bool, prefersLargeTitles: Bool?) {
     sheetOpen(
       item: linkItem,
       isAnimated: isAnimated,
@@ -156,7 +155,7 @@ extension SingleLinkNavigator {
   ///   - iPadPresentationStyle: The presentation style for iPad devices.
   ///   - prefersLargeTitles: A boolean to specify if large titles should be preferred in the navigation bar.
   private func _customSheet(
-    linkItem: LinkItem<ItemValue>,
+    linkItem: LinkItem,
     isAnimated: Bool,
     iPhonePresentationStyle: UIModalPresentationStyle,
     iPadPresentationStyle: UIModalPresentationStyle,
@@ -181,7 +180,7 @@ extension SingleLinkNavigator {
   /// - Parameters:
   ///   - linkItem: An object representing the item to build the new view controller from, accepting a `String` or a dictionary with `String` keys and values as `ItemValue`.
   ///   - isAnimated: A boolean indicating whether the transition should be animated.
-  private func _replace(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+  private func _replace(linkItem: LinkItem, isAnimated: Bool) {
     guard let rootController else { return }
 
     rootController.dismiss(animated: isAnimated) { [weak self] in
@@ -200,7 +199,7 @@ extension SingleLinkNavigator {
   /// - Parameters:
   ///   - linkItem: The link item containing the `ItemValue` to define the navigation endpoint.
   ///   - isAnimated: A flag indicating whether the navigation should be animated.
-  private func _backOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+  private func _backOrNext(linkItem: LinkItem, isAnimated: Bool) {
     guard let activeController else { return }
 
     guard let pick = navigationBuilder.firstPick(controller: activeController, item: linkItem) else {
@@ -218,7 +217,7 @@ extension SingleLinkNavigator {
   /// - Parameters:
   ///   - linkItem: The link item containing the `ItemValue` to define the navigation endpoint.
   ///   - isAnimated: A flag indicating whether the navigation should be animated.
-  private func _rootBackOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+  private func _rootBackOrNext(linkItem: LinkItem, isAnimated: Bool) {
     guard let rootController else { return }
 
     guard let pick = navigationBuilder.firstPick(controller: rootController, item: linkItem) else {
@@ -251,7 +250,7 @@ extension SingleLinkNavigator {
     activeController.setViewControllers(
       navigationBuilder.exceptFilter(
         controller: activeController,
-        item: .init(pathList: pathList, items: .empty)),
+        item: .init(pathList: pathList)),
       animated: false)
   }
 
@@ -264,7 +263,7 @@ extension SingleLinkNavigator {
     rootController.setViewControllers(
       navigationBuilder.exceptFilter(
         controller: activeController,
-        item: .init(pathList: pathList, items: .empty)),
+        item: .init(pathList: pathList)),
       animated: false)
   }
 
@@ -277,7 +276,7 @@ extension SingleLinkNavigator {
     activeController?.popTo(
       viewController: navigationBuilder.lastPick(
         controller: activeController,
-        item: .init(path: path, items: .empty)),
+        item: .init(path: path)),
       isAnimated: isAnimated)
   }
 
@@ -290,7 +289,7 @@ extension SingleLinkNavigator {
     rootController?.popTo(
       viewController: navigationBuilder.lastPick(
         controller: activeController,
-        item: .init(path: path, items: .empty)),
+        item: .init(path: path)),
       isAnimated: isAnimated)
   }
 
@@ -325,10 +324,10 @@ extension SingleLinkNavigator {
   /// - Parameters:
   ///   - items: The new `ItemValue` to be applied to the last view controller.
   ///   - isAnimated: A flag indicating whether the reload should be animated.
-  private func _rootReloadLast(items: ItemValue, isAnimated _: Bool) {
+  private func _rootReloadLast(item: LinkItem, isAnimated _: Bool) {
     guard let lastPath = getRootCurrentPaths().last else { return }
     guard let rootController else { return }
-    guard let new = routeBuilderItemList.first(where: { $0.matchPath == lastPath })?.routeBuild(self, items, dependency)
+    guard let new = routeBuilderItemList.first(where: { $0.matchPath == lastPath })?.routeBuild(self, item.encodedItemString, dependency)
     else { return }
 
     let newList = rootController.dropLast() + [new]
@@ -366,7 +365,7 @@ extension SingleLinkNavigator {
   // MARK: Public
 
   public func sheetOpen(
-    item: LinkItem<ItemValue>,
+    item: LinkItem,
     isAnimated: Bool,
     prefersLargeTitles: Bool? = .none,
     presentWillAction: @escaping (UINavigationController) -> Void = { _ in },
@@ -411,25 +410,25 @@ extension SingleLinkNavigator {
 
 // MARK: LinkNavigatorURLEncodedItemProtocol
 
-extension SingleLinkNavigator: LinkNavigatorURLEncodedItemProtocol where ItemValue == String {
-  public func next(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+extension SingleLinkNavigator: LinkNavigatorProtocol {
+  public func next(linkItem: LinkItem, isAnimated: Bool) {
     _next(linkItem: linkItem, isAnimated: isAnimated)
   }
 
-  public func rootNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+  public func rootNext(linkItem: LinkItem, isAnimated: Bool) {
     _rootNext(linkItem: linkItem, isAnimated: isAnimated)
   }
 
-  public func sheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+  public func sheet(linkItem: LinkItem, isAnimated: Bool) {
     _sheet(linkItem: linkItem, isAnimated: isAnimated)
   }
 
-  public func fullSheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool, prefersLargeTitles: Bool?) {
+  public func fullSheet(linkItem: LinkItem, isAnimated: Bool, prefersLargeTitles: Bool?) {
     _fullSheet(linkItem: linkItem, isAnimated: isAnimated, prefersLargeTitles: prefersLargeTitles)
   }
 
   public func customSheet(
-    linkItem: LinkItem<ItemValue>,
+    linkItem: LinkItem,
     isAnimated: Bool,
     iPhonePresentationStyle: UIModalPresentationStyle,
     iPadPresentationStyle: UIModalPresentationStyle,
@@ -443,15 +442,15 @@ extension SingleLinkNavigator: LinkNavigatorURLEncodedItemProtocol where ItemVal
       prefersLargeTitles: prefersLargeTitles)
   }
 
-  public func replace(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+  public func replace(linkItem: LinkItem, isAnimated: Bool) {
     _replace(linkItem: linkItem, isAnimated: isAnimated)
   }
 
-  public func backOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+  public func backOrNext(linkItem: LinkItem, isAnimated: Bool) {
     _backOrNext(linkItem: linkItem, isAnimated: isAnimated)
   }
 
-  public func rootBackOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
+  public func rootBackOrNext(linkItem: LinkItem, isAnimated: Bool) {
     _rootBackOrNext(linkItem: linkItem, isAnimated: isAnimated)
   }
 
@@ -483,201 +482,62 @@ extension SingleLinkNavigator: LinkNavigatorURLEncodedItemProtocol where ItemVal
     _range(path: path)
   }
 
-  public func rootReloadLast(items: ItemValue, isAnimated: Bool) {
-    _rootReloadLast(items: items, isAnimated: isAnimated)
+  public func rootReloadLast(items: LinkItem, isAnimated: Bool) {
+    _rootReloadLast(item: items, isAnimated: isAnimated)
   }
 
   public func alert(target: NavigationTarget, model: Alert) {
     _alert(target: target, model: model)
   }
 
-  public func send(item: LinkItem<ItemValue>) {
-    activeController?.viewControllers.compactMap { $0 as? MatchPathUsable }
-      .filter { item.pathList.contains($0.matchPath) }
+  public func send(item: LinkItem) {
+    activeController?.viewControllers
+      .compactMap { $0 as? MatchPathUsable }
+      .filter { matchPathUsable in item.pathList.contains(matchPathUsable.matchPath) }
+      .compactMap { $0 }
       .forEach {
-        guard case .urlEncoded(let subscriber) = $0.eventSubscriber
-        else { return }
-        subscriber.receive(item: item.items)
+        $0.eventSubscriber?.receive(encodedItemString: item.encodedItemString)
       }
   }
 
-  public func rootSend(item: LinkItem<ItemValue>) {
-    rootController?.viewControllers.compactMap { $0 as? MatchPathUsable }
+  public func rootSend(item: LinkItem) {
+    rootController?.viewControllers
+      .compactMap { $0 as? MatchPathUsable }
       .filter { item.pathList.contains($0.matchPath) }
-      .forEach {
-        guard case .urlEncoded(let subscriber) = $0.eventSubscriber
-        else { return }
+      .forEach { subscriber in
         DispatchQueue.main.async {
-          subscriber.receive(item: item.items)
+          subscriber.eventSubscriber?.receive(encodedItemString: item.encodedItemString)
         }
       }
   }
 
-  public func mainSend(item: ItemValue) {
+  public func mainSend(item: LinkItem) {
     guard let owner else { return }
-    guard case .urlEncoded(let subscriber) = owner else { return }
     DispatchQueue.main.async {
-      subscriber.receive(item: item)
+      owner.receive(encodedItemString: item.encodedItemString)
     }
   }
 
-  public func allSend(item: ItemValue) {
-    activeController?.viewControllers.compactMap { $0 as? MatchPathUsable }
-      .forEach {
-        guard case .urlEncoded(let subscriber) = $0.eventSubscriber
-        else { return }
+  public func allSend(item: LinkItem) {
+    activeController?.viewControllers
+      .compactMap { ($0 as? MatchPathUsable)?.eventSubscriber }
+      .forEach { subscriber in
         DispatchQueue.main.async {
-          subscriber.receive(item: item)
+          subscriber.receive(encodedItemString: item.encodedItemString)
         }
       }
   }
 
-  public func allRootSend(item: ItemValue) {
-    rootController?.viewControllers.compactMap { $0 as? MatchPathUsable }
-      .forEach {
-        guard case .urlEncoded(let subscriber) = $0.eventSubscriber
-        else { return }
+  public func allRootSend(item: LinkItem) {
+    rootController?.viewControllers
+      .compactMap { ($0 as? MatchPathUsable)?.eventSubscriber }
+      .forEach { subscriber in
         DispatchQueue.main.async {
-          subscriber.receive(item: item)
+          subscriber.receive(encodedItemString: item.encodedItemString)
         }
       }
   }
 
-}
-
-// MARK: LinkNavigatorDictionaryItemProtocol
-
-extension SingleLinkNavigator: LinkNavigatorDictionaryItemProtocol where ItemValue == [String: String] {
-  public func next(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
-    _next(linkItem: linkItem, isAnimated: isAnimated)
-  }
-
-  public func rootNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
-    _rootNext(linkItem: linkItem, isAnimated: isAnimated)
-  }
-
-  public func sheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
-    _sheet(linkItem: linkItem, isAnimated: isAnimated)
-  }
-
-  public func fullSheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool, prefersLargeTitles: Bool?) {
-    _fullSheet(linkItem: linkItem, isAnimated: isAnimated, prefersLargeTitles: prefersLargeTitles)
-  }
-
-  public func customSheet(
-    linkItem: LinkItem<ItemValue>,
-    isAnimated: Bool,
-    iPhonePresentationStyle: UIModalPresentationStyle,
-    iPadPresentationStyle: UIModalPresentationStyle,
-    prefersLargeTitles: Bool?)
-  {
-    _customSheet(
-      linkItem: linkItem,
-      isAnimated: isAnimated,
-      iPhonePresentationStyle: iPhonePresentationStyle,
-      iPadPresentationStyle: iPadPresentationStyle,
-      prefersLargeTitles: prefersLargeTitles)
-  }
-
-  public func replace(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
-    _replace(linkItem: linkItem, isAnimated: isAnimated)
-  }
-
-  public func backOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
-    _backOrNext(linkItem: linkItem, isAnimated: isAnimated)
-  }
-
-  public func rootBackOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool) {
-    _rootBackOrNext(linkItem: linkItem, isAnimated: isAnimated)
-  }
-
-  public func back(isAnimated: Bool) {
-    _back(isAnimated: isAnimated)
-  }
-
-  public func remove(pathList: [String]) {
-    _remove(pathList: pathList)
-  }
-
-  public func rootRemove(pathList: [String]) {
-    _rootRemove(pathList: pathList)
-  }
-
-  public func backToLast(path: String, isAnimated: Bool) {
-    _backToLast(path: path, isAnimated: isAnimated)
-  }
-
-  public func rootBackToLast(path: String, isAnimated: Bool) {
-    _rootBackToLast(path: path, isAnimated: isAnimated)
-  }
-
-  public func close(isAnimated: Bool, completeAction: @escaping () -> Void) {
-    _close(isAnimated: isAnimated, completeAction: completeAction)
-  }
-
-  public func range(path: String) -> [String] {
-    _range(path: path)
-  }
-
-  public func rootReloadLast(items: ItemValue, isAnimated: Bool) {
-    _rootReloadLast(items: items, isAnimated: isAnimated)
-  }
-
-  public func alert(target: NavigationTarget, model: Alert) {
-    _alert(target: target, model: model)
-  }
-
-  public func send(item: LinkItem<ItemValue>) {
-    activeController?.viewControllers.compactMap { $0 as? MatchPathUsable }
-      .filter { item.pathList.contains($0.matchPath) }
-      .forEach {
-        guard case .dictionary(let subscriber) = $0.eventSubscriber
-        else { return }
-        subscriber.receive(item: item.items)
-      }
-  }
-
-  public func rootSend(item: LinkItem<ItemValue>) {
-    rootController?.viewControllers.compactMap { $0 as? MatchPathUsable }
-      .filter { item.pathList.contains($0.matchPath) }
-      .forEach {
-        guard case .dictionary(let subscriber) = $0.eventSubscriber
-        else { return }
-        DispatchQueue.main.async {
-          subscriber.receive(item: item.items)
-        }
-      }
-  }
-
-  public func mainSend(item: ItemValue) {
-    guard let owner else { return }
-    guard case .dictionary(let subscriber) = owner else { return }
-    DispatchQueue.main.async {
-      subscriber.receive(item: item)
-    }
-  }
-
-  public func allSend(item: ItemValue) {
-    activeController?.viewControllers.compactMap { $0 as? MatchPathUsable }
-      .forEach {
-        guard case .dictionary(let subscriber) = $0.eventSubscriber
-        else { return }
-        DispatchQueue.main.async {
-          subscriber.receive(item: item)
-        }
-      }
-  }
-
-  public func allRootSend(item: ItemValue) {
-    rootController?.viewControllers.compactMap { $0 as? MatchPathUsable }
-      .forEach {
-        guard case .dictionary(let subscriber) = $0.eventSubscriber
-        else { return }
-        DispatchQueue.main.async {
-          subscriber.receive(item: item)
-        }
-      }
-  }
 }
 
 // MARK: SingleLinkNavigator.Coordinate

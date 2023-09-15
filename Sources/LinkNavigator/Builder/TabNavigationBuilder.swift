@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-public struct TabNavigationBuilder<Root, ItemValue: EmptyValueType> {
+public struct TabNavigationBuilder<Root> {
 
   // MARK: Lifecycle
 
@@ -13,7 +13,7 @@ public struct TabNavigationBuilder<Root, ItemValue: EmptyValueType> {
   ///   - dependency: The dependency required for constructing the routes.
   public init(
     rootNavigator: Root,
-    routeBuilderList: [RouteBuilderOf<Root, ItemValue>],
+    routeBuilderList: [RouteBuilderOf<Root>],
     dependency: DependencyType)
   {
     self.rootNavigator = rootNavigator
@@ -27,7 +27,7 @@ public struct TabNavigationBuilder<Root, ItemValue: EmptyValueType> {
   let rootNavigator: Root
 
   /// An array of `RouteBuilderOf` objects used to construct the routes.
-  let routeBuilderList: [RouteBuilderOf<Root, ItemValue>]
+  let routeBuilderList: [RouteBuilderOf<Root>]
 
   /// The dependency required for constructing the routes.
   let dependency: DependencyType
@@ -36,19 +36,19 @@ public struct TabNavigationBuilder<Root, ItemValue: EmptyValueType> {
 }
 
 extension TabNavigationBuilder {
-  public func build(item: LinkItem<ItemValue>) -> [RouteViewController] {
+  public func build(item: LinkItem) -> [RouteViewController] {
     item.pathList.compactMap { path in
-      routeBuilderList.first(where: { $0.matchPath == path })?.routeBuild(rootNavigator, item.items, dependency)
+      routeBuilderList.first(where: { $0.matchPath == path })?.routeBuild(rootNavigator, item.encodedItemString, dependency)
     }
   }
 
-  public func pickBuild(item: LinkItem<ItemValue>) -> RouteViewController? {
+  public func pickBuild(item: LinkItem) -> RouteViewController? {
     routeBuilderList
       .first(where: { $0.matchPath == (item.pathList.first ?? "") })?
-      .routeBuild(rootNavigator, item.items, dependency)
+      .routeBuild(rootNavigator, item.encodedItemString, dependency)
   }
 
-  public func firstPick(controller: UINavigationController?, item: LinkItem<ItemValue>)
+  public func firstPick(controller: UINavigationController?, item: LinkItem)
   -> RouteViewController? {
     guard let controller, let first = item.pathList.first else { return .none }
     return controller.viewControllers
@@ -56,7 +56,7 @@ extension TabNavigationBuilder {
       .first(where: { $0.matchPath == first })
   }
 
-  public func lastPick(controller: UINavigationController?, item: LinkItem<ItemValue>) -> RouteViewController? {
+  public func lastPick(controller: UINavigationController?, item: LinkItem) -> RouteViewController? {
     guard let controller, let first = item.pathList.first else { return .none }
     return controller.viewControllers
       .compactMap { $0 as? RouteViewController }
@@ -65,7 +65,7 @@ extension TabNavigationBuilder {
 
   public func exceptFilter(
     controller: UINavigationController?,
-    item: LinkItem<ItemValue>) -> [RouteViewController]
+    item: LinkItem) -> [RouteViewController]
   {
     (controller?.viewControllers ?? [])
       .compactMap { $0 as? MatchedViewController }
