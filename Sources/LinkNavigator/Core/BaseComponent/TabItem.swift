@@ -5,7 +5,7 @@ import UIKit
 ///
 /// Generics:
 /// - ItemValue: A type that conforms to `EmptyValueType`, representing the value associated with the link item.
-public struct TabItem<ItemValue: EmptyValueType> {
+public struct TabItem {
 
   /// A unique identifier string that is utilized as a tagID in `UITabBarItem`. This tag is essential in `TabLinkNavigator`
   /// to facilitate the addition, modification, and management of `LinkItem` instances in the `UINavigationController`
@@ -23,7 +23,7 @@ public struct TabItem<ItemValue: EmptyValueType> {
   public let icon: UIImage?
 
   /// A `LinkItem` instance encapsulating the associated values and paths for navigation linked with this tab item.
-  public let linkItem: LinkItem<ItemValue>
+  public let linkItem: LinkItem
 
   /// Initializes a new instance of `TabItem`.
   ///
@@ -32,7 +32,7 @@ public struct TabItem<ItemValue: EmptyValueType> {
   ///   - title: An optional string to be used as the title for the corresponding `UITabBarItem` within the base `UINavigationController`. This parameter can be omitted in custom implementations.
   ///   - icon: An optional image to be used as the icon for the corresponding `UITabBarItem` within the base `UINavigationController`. This parameter can be omitted in custom implementations.
   ///   - linkItem: A `LinkItem` instance defining the navigation properties and paths associated with this tab item.
-  public init(tag: String, title: String?, icon: UIImage?, linkItem: LinkItem<ItemValue>) {
+  public init(tag: String, title: String?, icon: UIImage?, linkItem: LinkItem) {
     self.tag = tag
     self.title = title
     self.icon = icon

@@ -4,14 +4,14 @@ import UIKit
 
 //// MARK: - TabLinkNavigator
 //
-public final class TabLinkNavigator<ItemValue: EmptyValueType> {
+public final class TabLinkNavigator {
 
   // MARK: Lifecycle
 
   public init(
-    routeBuilderItemList: [RouteBuilderOf<TabPartialNavigator<ItemValue>, ItemValue>],
+    routeBuilderItemList: [RouteBuilderOf<TabPartialNavigator>],
     dependency: DependencyType,
-    tabItems: [TabItem<ItemValue>])
+    tabItems: [TabItem])
   {
     self.routeBuilderItemList = routeBuilderItemList
     self.dependency = dependency
@@ -20,13 +20,13 @@ public final class TabLinkNavigator<ItemValue: EmptyValueType> {
 
   // MARK: Public
 
-  public let routeBuilderItemList: [RouteBuilderOf<TabPartialNavigator<ItemValue>, ItemValue>]
+  public let routeBuilderItemList: [RouteBuilderOf<TabPartialNavigator>]
   public let dependency: DependencyType
 
-  public var tabPartialNavigators: [TabPartialNavigator<ItemValue>] = []
+  public var tabPartialNavigators: [TabPartialNavigator] = []
 
-  public let tabItems: [TabItem<ItemValue>]
-  public var owner: LinkNavigatorSubscriberType? = .none
+  public let tabItems: [TabItem]
+  public var owner: LinkNavigatorItemSubscriberProtocol? = .none
 
   public weak var mainController: UITabBarController?
 
@@ -37,9 +37,9 @@ public final class TabLinkNavigator<ItemValue: EmptyValueType> {
 }
 
 extension TabLinkNavigator {
-  public func launch(tagItemList: [TabItem<ItemValue>]) -> [UINavigationController] {
+  public func launch(tagItemList: [TabItem]) -> [UINavigationController] {
     tabPartialNavigators = tagItemList
-      .reduce([TabPartialNavigator<ItemValue>]()) { curr, next in
+      .reduce([TabPartialNavigator]()) { curr, next in
         let newNavigatorList = TabPartialNavigator(
           rootNavigator: self,
           tabItem: next,
@@ -513,7 +513,7 @@ extension TabLinkNavigator {
 //
 // }
 //
-// extension TabLinkNavigator: LinkNavigatorDictionaryItemProtocol where ItemValue == [String: String] {
+// extension TabLinkNavigator: LinkNavigatorProtocol where ItemValue == [String: String] {
 //
 //  public func apply(isRTL: Bool) {
 //  }

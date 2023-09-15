@@ -8,20 +8,20 @@ import SwiftUI
 /// The link item holds information about the path of the page to be requested by the navigator and the details of the
 /// item to be injected into the page. The `item` parameter in the initializer represents the `UINavigationController`
 /// stack that will be injected and displayed to the user once the view is rendered.
-public struct LinkNavigationView<ItemValue: EmptyValueType> {
+public struct LinkNavigationView {
 
   /// A `SingleLinkNavigator` instance that handles various navigation actions.
-  let linkNavigator: SingleLinkNavigator<ItemValue>
+  let linkNavigator: SingleLinkNavigator
 
   /// A `LinkItem` instance that contains information about the page to be requested and the item to be injected.
-  let item: LinkItem<ItemValue>
+  let item: LinkItem
 
   /// Initializes a new instance of `LinkNavigationView`.
   ///
   /// - Parameters:
   ///   - linkNavigator: A `SingleLinkNavigator` instance used for navigating between pages.
   ///   - item: A `LinkItem` instance that contains the path and item details for the page to be requested.
-  public init(linkNavigator: SingleLinkNavigator<ItemValue>, item: LinkItem<ItemValue>) {
+  public init(linkNavigator: SingleLinkNavigator, item: LinkItem) {
     self.linkNavigator = linkNavigator
     self.item = item
   }

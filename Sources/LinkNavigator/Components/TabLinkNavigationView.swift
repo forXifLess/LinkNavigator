@@ -7,23 +7,23 @@ import SwiftUI
 /// each of which contains the necessary information (like TagID, tab bar image, tab bar title, and UINavigationController)
 /// to represent an individual tab. These tab items have their own `LinkNavigator` which can further process additional
 /// information using `LinkItem`.
-public struct TabLinkNavigationView<ItemValue: EmptyValueType> {
+public struct TabLinkNavigationView {
 
   /// A `TabLinkNavigator` instance that handles the navigation actions between different tabs.
-  let linkNavigator: TabLinkNavigator<ItemValue>
+  let linkNavigator: TabLinkNavigator
 
   /// A list of `TabItem` instances that define the individual tabs in the tab-based user interface.
   ///
   /// These items hold the necessary information for each tab and define the pages to be displayed when the app is
   /// initially set up via SwiftUI.
-  let tabItemList: [TabItem<ItemValue>]
+  let tabItemList: [TabItem]
 
   /// Initializes a new instance of `TabLinkNavigationView`.
   ///
   /// - Parameters:
   ///   - linkNavigator: A `TabLinkNavigator` instance used to manage the navigational actions between tabs.
   ///   - tabItemList: A list of `TabItem` instances that define the individual tabs and their associated pages.
-  public init(linkNavigator: TabLinkNavigator<ItemValue>, tabItemList: [TabItem<ItemValue>]) {
+  public init(linkNavigator: TabLinkNavigator, tabItemList: [TabItem]) {
     self.linkNavigator = linkNavigator
     self.tabItemList = tabItemList
   }

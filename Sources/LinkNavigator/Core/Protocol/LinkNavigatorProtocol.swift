@@ -3,30 +3,28 @@ import UIKit
 // MARK: - LinkNavigatorURLEncodedItemProtocol
 
 /// `LinkNavigatorURLEncodedItemProtocol` defines the navigation interface for handling various link-related actions within an application.
-public protocol LinkNavigatorURLEncodedItemProtocol {
-
-  typealias ItemValue = String
+public protocol LinkNavigatorProtocol {
 
   /// Navigates to the next link item.
   /// 
   /// - Parameters:
   ///   - linkItem: The link item to navigate to.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
-  func next(linkItem: LinkItem<ItemValue>, isAnimated: Bool)
+  func next(linkItem: LinkItem, isAnimated: Bool)
 
   /// Navigates to the root next link item.
   /// 
   /// - Parameters:
   ///   - linkItem: The link item to navigate to at the root level.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
-  func rootNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool)
+  func rootNext(linkItem: LinkItem, isAnimated: Bool)
 
   /// Presents a sheet with the given link item.
   /// 
   /// - Parameters:
   ///   - linkItem: The link item to present.
   ///   - isAnimated: A Boolean value that determines whether the presentation is animated.
-  func sheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool)
+  func sheet(linkItem: LinkItem, isAnimated: Bool)
 
   /// Presents a full sheet with the given link item.
   /// 
@@ -34,7 +32,7 @@ public protocol LinkNavigatorURLEncodedItemProtocol {
   ///   - linkItem: The link item to present.
   ///   - isAnimated: A Boolean value that determines whether the presentation is animated.
   ///   - prefersLargeTitles: An optional Boolean value that determines whether the navigation bar should display large titles.
-  func fullSheet(linkItem: LinkItem<ItemValue>, isAnimated: Bool, prefersLargeTitles: Bool?)
+  func fullSheet(linkItem: LinkItem, isAnimated: Bool, prefersLargeTitles: Bool?)
 
   /// Presents a custom sheet with the specified characteristics.
   /// 
@@ -45,7 +43,7 @@ public protocol LinkNavigatorURLEncodedItemProtocol {
   ///   - iPadPresentationStyle: The presentation style for iPad.
   ///   - prefersLargeTitles: An optional Boolean value that determines whether the navigation bar should display large titles.
   func customSheet(
-    linkItem: LinkItem<ItemValue>,
+    linkItem: LinkItem,
     isAnimated: Bool,
     iPhonePresentationStyle: UIModalPresentationStyle,
     iPadPresentationStyle: UIModalPresentationStyle,
@@ -56,21 +54,21 @@ public protocol LinkNavigatorURLEncodedItemProtocol {
   /// - Parameters:
   ///   - linkItem: The new link item to replace the current one.
   ///   - isAnimated: A Boolean value that determines whether the replacement is animated.
-  func replace(linkItem: LinkItem<ItemValue>, isAnimated: Bool)
+  func replace(linkItem: LinkItem, isAnimated: Bool)
 
   /// Navigates either back or to the next link item based on the current state.
   /// 
   /// - Parameters:
   ///   - linkItem: The link item to navigate to or back from.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
-  func backOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool)
+  func backOrNext(linkItem: LinkItem, isAnimated: Bool)
 
   /// Navigates either back or to the root next link item based on the current state.
   /// 
   /// - Parameters:
   ///   - linkItem: The link item to navigate to or back from at the root level.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
-  func rootBackOrNext(linkItem: LinkItem<ItemValue>, isAnimated: Bool)
+  func rootBackOrNext(linkItem: LinkItem, isAnimated: Bool)
 
   /// Navigates back in the navigation stack.
   /// 
@@ -119,7 +117,7 @@ public protocol LinkNavigatorURLEncodedItemProtocol {
   /// - Parameters:
   ///   - items: A string representing the raw QueryString for the items to reload.
   ///   - isAnimated: A Boolean value indicating whether the reload should be animated.
-  func rootReloadLast(items: ItemValue, isAnimated: Bool)
+  func rootReloadLast(items: LinkItem, isAnimated: Bool)
 
   /// Displays an alert with the specified target and model. Depending on the target parameter, 
   /// the alert is displayed either on the root or the sub-controller.
@@ -135,25 +133,25 @@ public protocol LinkNavigatorURLEncodedItemProtocol {
   /// This method facilitates communication between pages, allowing data to be transferred to a specific 'sub' or page sheet as defined in the link item.
   ///
   /// - Parameter item: The link item encapsulating the data and the target path to be sent.
-  func send(item: LinkItem<ItemValue>)
+  func send(item: LinkItem)
 
   /// Sends the specified link item to the root controller which governs the page sheets (sub). This method is mainly used for communications directly involving the root controller which has overarching control over page sheets.
   ///
   /// - Parameter item: The link item to be sent to the root controller.
-  func rootSend(item: LinkItem<ItemValue>)
+  func rootSend(item: LinkItem)
 
   /// Sends the main items directly to the appMain, which is a NavigationController that wraps around the link navigator. This method allows for data communication directly with the appMain, facilitating broad-reaching communications within the app.
   ///
   /// - Parameter item: The main items to be sent, often containing key-value pairs of data to be communicated to the appMain.
-  func mainSend(item: ItemValue)
+  func mainSend(item: LinkItem)
 
   /// Sends the specified items to all designated receivers, including both the 'sub' page sheets and the root controllers, within the current navigation stack. This allows for a widespread dissemination of data across various levels of the navigation stack.
   ///
   /// - Parameter item: The items to be sent to all receivers, encapsulating data that may be relevant across multiple page sheets and root controllers.
-  func allSend(item: ItemValue)
+  func allSend(item: LinkItem)
 
   /// Sends the specified items to all root controllers in the navigation stack. This method is instrumental in disseminating information broadly at the root level, which governs the behaviors and states of the 'sub' page sheets.
   ///
   /// - Parameter item: The items to be sent to all root controllers, typically containing information pertinent across all root level pages.
-  func allRootSend(item: ItemValue)
+  func allRootSend(item: LinkItem)
 }
