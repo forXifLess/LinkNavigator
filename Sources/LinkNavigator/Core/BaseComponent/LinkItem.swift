@@ -92,21 +92,18 @@ extension LinkItem: Equatable {
 //  }
 //}
 
-#warning("Decoded 수정")
-
 extension String {
   public func decoded<T: Decodable>() -> T? {
     if let decodedValue = self as? T {
       return decodedValue
     }
 
-    
+    return decoded()
+  }
+}
 
-//    guard let encodedData = try? JSONEncoder().encode(self),
-//          let decodingData = try? JSONDecoder().decode(T.self, from: encodedData) else {
-//      return .none
-//    }
-
-    return .decoded(data: .init())
+extension Encodable {
+  public func encoded() -> String {
+    self.encode()
   }
 }
