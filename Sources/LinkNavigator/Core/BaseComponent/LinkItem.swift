@@ -98,12 +98,12 @@ extension String {
       return decodedValue
     }
 
-    return decoded()
+    return self.decodedObject()
   }
 }
 
 extension Encodable {
   public func encoded() -> String {
-    self.encode()
+    self.encodeString()
   }
 }
