@@ -16,7 +16,7 @@ let package = Package(
   dependencies: [
     .package(
       url: "https://github.com/interactord/URLEncodedForm",
-      .upToNextMajor(from: "1.0.7")),
+      .upToNextMajor(from: "1.0.8")),
   ],
   targets: [
     .target(

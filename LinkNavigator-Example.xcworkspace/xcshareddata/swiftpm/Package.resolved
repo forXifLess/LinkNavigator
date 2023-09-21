@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/interactord/URLEncodedForm",
       "state" : {
-        "revision" : "643c3e3752464b8f5bd44b79a5d1216b632959bb",
-        "version" : "1.0.0"
+        "revision" : "5f51aa13d41b26fc8833cd040df3a3101768bb64",
+        "version" : "1.0.8"
       }
     },
     {
