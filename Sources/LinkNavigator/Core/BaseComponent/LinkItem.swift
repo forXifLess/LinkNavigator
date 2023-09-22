@@ -98,12 +98,17 @@ extension String {
       return decodedValue
     }
 
-    return self.decodedObject()
+    guard let data = Data(base64Encoded: self),
+          let decodedModel = try? JSONDecoder().decode(T.self, from: data) else { return .none }
+
+    return decodedModel
   }
 }
 
 extension Encodable {
   public func encoded() -> String {
-    self.encodeString()
+    guard let data = try? JSONEncoder().encode(self) else { return "" }
+
+    return data.base64EncodedString()
   }
 }
