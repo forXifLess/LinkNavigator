@@ -4,7 +4,6 @@ import SwiftUI
 // MARK: - AppDelegate
 
 final class AppDelegate: NSObject {
-//  let navigator = LinkNavigator(dependency: AppDependency(), builders: AppRouterGroup().routers)
 }
 
 // MARK: UIApplicationDelegate

@@ -5,6 +5,7 @@ import SwiftUI
 
 struct AppDependency: DependencyType {
   let eventObserver: EventObserver<EventState> = .init(state: .init(currentTabID: .tab2))
+  let userManager: UserManager
 }
 
 // MARK: - EventState

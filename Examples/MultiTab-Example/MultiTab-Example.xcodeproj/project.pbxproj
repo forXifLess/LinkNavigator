@@ -13,6 +13,8 @@
 		D24198D62A84B20500BE960F /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = D24198D52A84B20500BE960F /* LinkNavigator */; };
 		D24198D82A84B84600BE960F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24198D72A84B84600BE960F /* AppDelegate.swift */; };
 		D24198DA2A84B85700BE960F /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24198D92A84B85700BE960F /* AppDependency.swift */; };
+		D25671532AC25C9600DE9080 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25671522AC25C9600DE9080 /* UserManager.swift */; };
+		D25671552AC25D5900DE9080 /* TabLinkNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25671542AC25D5900DE9080 /* TabLinkNavigator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		D24198CA2A84B1A300BE960F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D24198D72A84B84600BE960F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D24198D92A84B85700BE960F /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
+		D25671522AC25C9600DE9080 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		D25671542AC25D5900DE9080 /* TabLinkNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabLinkNavigator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 				D24198CA2A84B1A300BE960F /* Assets.xcassets */,
 				D24198D72A84B84600BE960F /* AppDelegate.swift */,
 				D24198D92A84B85700BE960F /* AppDependency.swift */,
+				D25671542AC25D5900DE9080 /* TabLinkNavigator.swift */,
+				D25671522AC25C9600DE9080 /* UserManager.swift */,
 			);
 			path = "MultiTab-Example";
 			sourceTree = "<group>";
@@ -145,8 +151,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D24198D82A84B84600BE960F /* AppDelegate.swift in Sources */,
+				D25671552AC25D5900DE9080 /* TabLinkNavigator.swift in Sources */,
 				D24198C92A84B1A200BE960F /* ContentView.swift in Sources */,
 				D24198DA2A84B85700BE960F /* AppDependency.swift in Sources */,
+				D25671532AC25C9600DE9080 /* UserManager.swift in Sources */,
 				D24198C72A84B1A200BE960F /* AppMain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
