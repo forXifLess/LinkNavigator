@@ -371,22 +371,25 @@ extension SingleLinkNavigator {
     presentWillAction: @escaping (UINavigationController) -> Void = { _ in },
     presentDidAction: @escaping (UINavigationController) -> Void = { _ in })
   {
-    guard let rootController else { return }
+    DispatchQueue.main.async { [weak self] in
+      guard let self else { return }
+      guard let rootController = self.rootController else { return }
 
-    rootController.dismiss(animated: true)
-    let newController = UINavigationController()
-    if let prefersLargeTitles { rootController.navigationBar.prefersLargeTitles = prefersLargeTitles }
+      rootController.dismiss(animated: true)
+      let newController = UINavigationController()
+      if let prefersLargeTitles { rootController.navigationBar.prefersLargeTitles = prefersLargeTitles }
 
-    presentWillAction(newController)
+      presentWillAction(newController)
 
-    newController.setViewControllers(
-      navigationBuilder.build(item: item),
-      animated: false)
+      newController.setViewControllers(
+        navigationBuilder.build(item: item),
+        animated: false)
 
-    rootController.present(newController, animated: isAnimated)
-    presentDidAction(newController)
+      rootController.present(newController, animated: isAnimated)
+      presentDidAction(newController)
 
-    subController = newController
+      subController = newController
+    }
   }
 
   // MARK: Private
