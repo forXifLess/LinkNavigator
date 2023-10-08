@@ -90,8 +90,6 @@ extension LinkNavigator: LinkNavigatorType {
     }
 
     newSubNavigationController.setViewControllers(new, animated: false)
-
-    newSubNavigationController.setViewControllers(new, animated: false)
     newSubNavigationController.presentationController?.delegate = coordinate
     rootNavigationController.present(newSubNavigationController, animated: isAnimated)
 
