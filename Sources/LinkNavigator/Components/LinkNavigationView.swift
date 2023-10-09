@@ -16,14 +16,17 @@ public struct LinkNavigationView {
   /// A `LinkItem` instance that contains information about the page to be requested and the item to be injected.
   let item: LinkItem
 
+  let prefersLargeTitles: Bool
+
   /// Initializes a new instance of `LinkNavigationView`.
   ///
   /// - Parameters:
   ///   - linkNavigator: A `SingleLinkNavigator` instance used for navigating between pages.
   ///   - item: A `LinkItem` instance that contains the path and item details for the page to be requested.
-  public init(linkNavigator: SingleLinkNavigator, item: LinkItem) {
+  public init(linkNavigator: SingleLinkNavigator, item: LinkItem, prefersLargeTitles: Bool = false) {
     self.linkNavigator = linkNavigator
     self.item = item
+    self.prefersLargeTitles = prefersLargeTitles
   }
 }
 
@@ -39,6 +42,7 @@ extension LinkNavigationView: UIViewControllerRepresentable {
   /// - Returns: A `UINavigationController` instance that serves as the base for navigation actions.
   public func makeUIViewController(context _: Context) -> UINavigationController {
     let vc = UINavigationController()
+    vc.navigationBar.prefersLargeTitles = prefersLargeTitles
     vc.setViewControllers(linkNavigator.launch(item: item), animated: false)
     return vc
   }
