@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Examples/Project/Tutorial3-PageCommunications/Tutorial3-PageCommunications.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Examples/TCA-Example/TCA-Example.xcodeproj">
    </FileRef>
    <FileRef
