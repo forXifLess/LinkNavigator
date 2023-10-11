@@ -15,23 +15,14 @@ public final class WrappingController<Content: View>: UIHostingController<Conten
 
   public init(
     matchPath: String,
+    title: String? = .none,
     eventSubscriber: LinkNavigatorItemSubscriberProtocol? = .none,
     @ViewBuilder content: () -> Content)
   {
     self.matchPath = matchPath
     self.eventSubscriber = eventSubscriber
     super.init(rootView: content())
-    super.title = matchPath
-  }
-  
-  public init(
-    matchPath: String,
-    title: String? = .none,
-    @ViewBuilder content: () -> Content)
-  {
-    self.matchPath = matchPath
-    super.init(rootView: content())
-    super.title = title
+    super.title = title ?? matchPath
   }
 
   required init?(coder _: NSCoder) {
