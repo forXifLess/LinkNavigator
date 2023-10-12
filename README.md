@@ -333,6 +333,52 @@ let package = Package(
 
 ```
 
+- Q: In the view controller, I need to handle various tasks such as navigation or calling Firebase events when calling the screen. How should I handle it?
+
+  - You can customize the WrappingController. I will provide an example code for customization.
+```swift 
+import SwiftUI
+public final class DebugWrappingViewController<Content: View>: UIHostingController<Content>, MatchPathUsable {
+
+  // MARK: Lifecycle
+
+  public init(
+    matchPath: String,
+    trackEventUseCase: TrackEventUseCase,
+    @ViewBuilder content: () -> Content)
+  {
+    self.matchPath = matchPath
+    self.eventSubscriber = eventSubscriber
+    self.trackEventUseCase = trackEventUseCase
+    super.init(rootView: content())
+  }
+
+  required init?(coder _: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  deinit {
+    print("✂️ \(matchPath) deinit...")
+  }
+
+  // MARK: Public
+
+  public let matchPath: String
+
+  public override func viewDidLoad() {
+    super.viewDidLoad()
+    view.backgroundColor = SystemColor.Background.Default.Base.getColor()
+    print("🚗 \(matchPath)")
+    trackEventUseCase.sendEvent(.screen(matchPath))
+  }
+
+  // MARK: Private
+
+  private let trackEventUseCase: TrackEventUseCase
+}
+
+```
+
 ## - License
 
 This library is released under the MIT license. See [LICENSE](https://github.com/interactord/LinkNavigator/blob/main/LICENSE.md) for details.
