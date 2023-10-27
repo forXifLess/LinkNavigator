@@ -21,7 +21,6 @@
 		29AFC4C127C895EC0095BB8A /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C027C895EC0095BB8A /* HomeModel.swift */; };
 		29AFC4C327C895F20095BB8A /* HomeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C227C895F20095BB8A /* HomeIntent.swift */; };
 		29AFC4C627C8963F0095BB8A /* IntentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C527C8963F0095BB8A /* IntentType.swift */; };
-		29AFC4C827C8965F0095BB8A /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C727C8965F0095BB8A /* Container.swift */; };
 		7A2DCD2C290B74FE004AE328 /* CodeViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DCD2B290B74FE004AE328 /* CodeViewModifier.swift */; };
 		7A2DCD30290B7D3D004AE328 /* Page4RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DCD2F290B7D3D004AE328 /* Page4RouteBuilder.swift */; };
 		7A2DCD32290B7D62004AE328 /* Page4Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DCD31290B7D62004AE328 /* Page4Model.swift */; };
@@ -39,6 +38,7 @@
 		D2C601CD28AC80BA001CA0A6 /* AppRouterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C601CC28AC80BA001CA0A6 /* AppRouterGroup.swift */; };
 		D2C601D128AC821E001CA0A6 /* HomeRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C601D028AC821E001CA0A6 /* HomeRouteBuilder.swift */; };
 		D2E7AE0328ACB7A200157DA7 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E7AE0228ACB7A200157DA7 /* AppDependency.swift */; };
+		FB055D842AEB6E6800161B4B /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AFC4C727C8965F0095BB8A /* Container.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -134,7 +134,7 @@
 			children = (
 				2983781527D0B47700FD761C /* Info.plist */,
 				29AFC4BC27C895BF0095BB8A /* Feature */,
-				29AFC4C427C896160095BB8A /* ArchetectureKit */,
+				29AFC4C427C896160095BB8A /* ArchitectureKit */,
 				290C8E3227C74D6F0073B327 /* AppDelegate.swift */,
 				D2C601CC28AC80BA001CA0A6 /* AppRouterGroup.swift */,
 				290C8E3427C74D9F0073B327 /* AppMain.swift */,
@@ -178,13 +178,13 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		29AFC4C427C896160095BB8A /* ArchetectureKit */ = {
+		29AFC4C427C896160095BB8A /* ArchitectureKit */ = {
 			isa = PBXGroup;
 			children = (
 				29AFC4C527C8963F0095BB8A /* IntentType.swift */,
 				29AFC4C727C8965F0095BB8A /* Container.swift */,
 			);
-			path = ArchetectureKit;
+			path = ArchitectureKit;
 			sourceTree = "<group>";
 		};
 		7A2DCD2E290B7D0B004AE328 /* Page4 */ = {
@@ -314,6 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB055D842AEB6E6800161B4B /* Container.swift in Sources */,
 				7A2DCD34290B7DD5004AE328 /* Page4Intent.swift in Sources */,
 				294A9A6827CF7283002279C0 /* Page2Model.swift in Sources */,
 				7A2DCD38290B8A19004AE328 /* DeepLinkParser.swift in Sources */,
@@ -321,7 +322,6 @@
 				29AFC4C327C895F20095BB8A /* HomeIntent.swift in Sources */,
 				7A34DE6528BF39780079C6A6 /* Page3Intent.swift in Sources */,
 				D2C601D128AC821E001CA0A6 /* HomeRouteBuilder.swift in Sources */,
-				29AFC4C827C8965F0095BB8A /* Container.swift in Sources */,
 				7ABFED4828BF66FD00395641 /* NavigationStackViewer.swift in Sources */,
 				7A2DCD2C290B74FE004AE328 /* CodeViewModifier.swift in Sources */,
 				294A9A5D27CF6F78002279C0 /* Page1View.swift in Sources */,
