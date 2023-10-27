@@ -14,7 +14,7 @@ final class Container<Intent, State>: ObservableObject {
     self.state = state
 
     modelChangePublisher
-      .receive(on: RunLoop.main)
+      .receive(on: DispatchQueue.main)
       .sink(receiveValue: objectWillChange.send)
       .store(in: &cancellable)
   }
