@@ -182,6 +182,8 @@ extension SingleLinkNavigator {
   ///   - isAnimated: A boolean indicating whether the transition should be animated.
   private func _replace(linkItem: LinkItem, isAnimated: Bool) {
     guard let rootController else { return }
+    let viewControllers = navigationBuilder.build(item: linkItem)
+    guard viewControllers.isEmpty else { return }
 
     rootController.dismiss(animated: isAnimated) { [weak self] in
       guard let self else { return }
@@ -190,7 +192,7 @@ extension SingleLinkNavigator {
     }
 
     rootController.replace(
-      viewController: navigationBuilder.build(item: linkItem),
+      viewController: viewControllers,
       isAnimated: isAnimated)
   }
 
