@@ -122,7 +122,7 @@ extension TabPartialNavigator {
 
   public func replace(linkItem: LinkItem, isAnimated: Bool) {
     let viewControllers = navigationBuilder.build(item: linkItem)
-    guard viewControllers.isEmpty else { return }
+    guard !viewControllers.isEmpty else { return }
 
     currentController?.replace(
       viewController: viewControllers,
@@ -131,7 +131,7 @@ extension TabPartialNavigator {
 
   public func rootReplace(linkItem: LinkItem, isAnimated: Bool) {
     let viewControllers = navigationBuilder.build(item: linkItem)
-    guard viewControllers.isEmpty else { return }
+    guard !viewControllers.isEmpty else { return }
 
     rootController.replace(
       viewController: viewControllers,

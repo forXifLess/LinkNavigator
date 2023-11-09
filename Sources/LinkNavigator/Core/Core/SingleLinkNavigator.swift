@@ -183,7 +183,7 @@ extension SingleLinkNavigator {
   private func _replace(linkItem: LinkItem, isAnimated: Bool) {
     guard let rootController else { return }
     let viewControllers = navigationBuilder.build(item: linkItem)
-    guard viewControllers.isEmpty else { return }
+    guard !viewControllers.isEmpty else { return }
 
     rootController.dismiss(animated: isAnimated) { [weak self] in
       guard let self else { return }
