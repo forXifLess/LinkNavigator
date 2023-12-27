@@ -19,21 +19,24 @@ public final class TabPartialNavigator {
     self.dependency = dependency
   }
 
+  private var tabRootPathableController: TabRootNavigationController = .init(matchPath: "")
+
   // MARK: Public
 
   public let tabItem: TabItem
   public let routeBuilderItemList: [RouteBuilderOf<TabPartialNavigator>]
   public let dependency: DependencyType
 
-  public var rootController: UINavigationController = .init()
+  public var rootController: UINavigationController { tabRootPathableController.navigationController }
 
   public var isFocusedCurrentTab: Bool {
-    rootNavigator?.tabPartialNavigators.first(where: { $0.rootController == rootController })?.tabItem.tag == tabItem.tag
+    (rootController as? MatchPathUsable)?.matchPath == rootNavigator?.currentTabRootPath
   }
 
   // MARK: Private
 
   private weak var rootNavigator: TabLinkNavigator?
+  public var owner: LinkNavigatorItemSubscriberProtocol? = .none
 
   private lazy var navigationBuilder: TabNavigationBuilder<TabPartialNavigator> = .init(
     rootNavigator: self,
@@ -42,10 +45,10 @@ public final class TabPartialNavigator {
 
   private var currentController: UINavigationController? {
     rootNavigator?.modalController != .none
-      ? rootNavigator?.modalController
-      : rootNavigator?.fullSheetController != .none
-        ? rootNavigator?.fullSheetController
-        : rootController
+    ? rootNavigator?.modalController
+    : rootNavigator?.fullSheetController != .none
+    ? rootNavigator?.fullSheetController
+    : rootController
   }
 }
 
@@ -56,24 +59,25 @@ extension TabPartialNavigator: LinkNavigatorFindLocationUsable {
     currentController?.currentItemList() ?? []
   }
 
-  public func getRootCurrentPaths() -> [String] {
+  public func getCurrentRootPaths() -> [String] {
     rootController.currentItemList()
   }
 }
 
 extension TabPartialNavigator {
-  public func moveTab(targetTag: String) {
-    rootNavigator?.moveTab(targetTag: targetTag)
+  public func moveTab(targetPath: String) {
+    rootNavigator?.moveTab(targetPath: targetPath)
   }
 }
 
 extension TabPartialNavigator {
-
-  public func launch(item: LinkItem? = .none, prefersLargeTitles _: Bool = false) -> [UIViewController] {
+  public func launch(rootPath: String, item: LinkItem? = .none, prefersLargeTitles _: Bool = false) -> TabRootNavigationController {
     let viewControllers = navigationBuilder.build(item: item ?? tabItem.linkItem)
 
-    rootController.setViewControllers(viewControllers, animated: false)
-    return viewControllers
+    tabRootPathableController.matchPath = rootPath
+    tabRootPathableController.navigationController.setViewControllers(viewControllers, animated: false)
+    tabRootPathableController.navigationController.delegate = tabRootPathableController.navigationController
+    return tabRootPathableController
   }
 
   public func next(linkItem: LinkItem, isAnimated: Bool) {
@@ -101,9 +105,7 @@ extension TabPartialNavigator {
       let pick = navigationBuilder.firstPick(
         controller: currentController,
         item: linkItem)
-    else {
-      return
-    }
+    else { return }
 
     currentController?.popToViewController(pick, animated: isAnimated)
   }
@@ -171,7 +173,7 @@ extension TabPartialNavigator {
   }
 
   public func range(path: String) -> [String] {
-    getRootCurrentPaths().reduce([String]()) { current, next in
+    getCurrentRootPaths().reduce([String]()) { current, next in
       guard current.contains(path) else { return current + [next] }
       return current
     }
@@ -195,12 +197,88 @@ extension TabPartialNavigator {
       })
   }
 
-  public func close(isAnimated _: Bool) {
-    rootNavigator?.close(isAnimated: true)
+  public func close(isAnimated: Bool, completeAction: () -> Void = { }) {
+    rootNavigator?.close(isAnimated: isAnimated, completion: completeAction)
   }
 
-  public func closeAll(isAnimated: Bool) {
-    rootNavigator?.closeAll(isAnimated: isAnimated)
+  public func closeAll(isAnimated: Bool, completion: () -> Void = { }) {
+    rootNavigator?.closeAll(isAnimated: isAnimated, completion: completion)
+  }
+}
+
+extension TabPartialNavigator: LinkNavigatorProtocol {
+  public func sheet(linkItem: LinkItem, isAnimated: Bool) {
+    self.sheetOpen(item: linkItem, isAnimated: isAnimated, type: .automatic)
+  }
+
+  public func fullSheet(linkItem: LinkItem, isAnimated: Bool, prefersLargeTitles: Bool?) {
+    self.sheetOpen(item: linkItem, isAnimated: isAnimated, type: .fullScreen)
+  }
+
+  public func customSheet(linkItem: LinkItem, isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle, prefersLargeTitles: Bool?) {
+    let type = UIDevice.current.userInterfaceIdiom == .phone ? iPhonePresentationStyle : iPadPresentationStyle
+    self.sheetOpen(item: linkItem, isAnimated: isAnimated, type: type)
+  }
+
+  public func rootReloadLast(items: LinkItem, isAnimated: Bool) {
+    let viewControllers = navigationBuilder.build(item: items)
+    guard !viewControllers.isEmpty else { return }
+
+    let reloadedVC = viewControllers.reduce(rootController.viewControllers) { current, next in
+      guard let idx = current.firstIndex(of: next) else { return current }
+      var variableCurrentVC = current
+      variableCurrentVC[idx] = next
+      return variableCurrentVC
+    }
+
+    rootController.setViewControllers(reloadedVC, animated: isAnimated)
+  }
+
+  public func alert(target: NavigationTarget, model: Alert) {
+    currentController?.present(model.build(), animated: true)
+  }
+
+  public func send(item: LinkItem) {
+    rootNavigator?.tabRootNavigators
+      .flatMap(\.navigationController.viewControllers)
+      .compactMap { $0 as? MatchPathUsable }
+      .filter { item.pathList.contains($0.matchPath) }
+      .forEach {
+        $0.eventSubscriber?.receive(encodedItemString: item.encodedItemString)
+      }
+  }
+
+  public func rootSend(item: LinkItem) {
+    rootController.viewControllers
+      .compactMap { $0 as? MatchPathUsable }
+      .filter { item.pathList.contains($0.matchPath) }
+      .forEach {
+        $0.eventSubscriber?.receive(encodedItemString: item.encodedItemString)
+      }
+  }
+
+  public func mainSend(item: LinkItem) {
+    guard let owner else { return }
+    DispatchQueue.main.async {
+      owner.receive(encodedItemString: item.encodedItemString)
+    }
+  }
+
+  public func allSend(item: LinkItem) {
+    rootNavigator?.tabRootNavigators
+      .flatMap(\.navigationController.viewControllers)
+      .compactMap { $0 as? MatchPathUsable }
+      .forEach {
+        $0.eventSubscriber?.receive(encodedItemString: item.encodedItemString)
+      }
+  }
+
+  public func allRootSend(item: LinkItem) {
+    rootController.viewControllers
+      .compactMap { ($0 as? MatchPathUsable)?.eventSubscriber }
+      .forEach {
+        $0.receive(encodedItemString: item.encodedItemString)
+      }
   }
 }
 
@@ -242,5 +320,14 @@ extension UINavigationController {
 
   private func dropLast() -> [UIViewController] {
     Array(viewControllers.dropLast())
+  }
+}
+
+extension UINavigationController: UINavigationControllerDelegate {
+  public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+    guard let matchPathUsableVC = viewController as? MatchPathUsable else { return }
+
+    NotificationCenter.default
+      .post(name: TabbarEventNotification.onMoved, object: matchPathUsableVC.matchPath)
   }
 }
