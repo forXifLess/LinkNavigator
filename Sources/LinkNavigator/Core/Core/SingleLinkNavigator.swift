@@ -79,13 +79,13 @@ extension SingleLinkNavigator: LinkNavigatorFindLocationUsable {
   ///
   /// - Returns: A collection of strings denoting the present paths.
   public func getCurrentPaths() -> [String] {
-    isSubNavigatorActive ? subNavigatorCurrentPaths() : getRootCurrentPaths()
+    isSubNavigatorActive ? subNavigatorCurrentPaths() : getCurrentRootPaths()
   }
 
   /// Retrieves the current paths from the root controller within the navigation sequence.
   ///
   /// - Returns: A collection of strings representing the current paths in the root navigation controller.
-  public func getRootCurrentPaths() -> [String] {
+  public func getCurrentRootPaths() -> [String] {
     guard let controller = rootController else { return [] }
     return controller.currentItemList()
   }
@@ -315,7 +315,7 @@ extension SingleLinkNavigator {
   ///   - path: A string representing the endpoint of the range retrieval.
   /// - Returns: An array of strings representing the range of paths retrieved.
   private func _range(path: String) -> [String] {
-    getRootCurrentPaths().reduce([String]()) { current, next in
+    getCurrentPaths().reduce([String]()) { current, next in
       guard current.contains(path) else { return current + [next] }
       return current
     }
@@ -327,7 +327,7 @@ extension SingleLinkNavigator {
   ///   - items: The new `ItemValue` to be applied to the last view controller.
   ///   - isAnimated: A flag indicating whether the reload should be animated.
   private func _rootReloadLast(item: LinkItem, isAnimated _: Bool) {
-    guard let lastPath = getRootCurrentPaths().last else { return }
+    guard let lastPath = getCurrentPaths().last else { return }
     guard let rootController else { return }
     guard let new = routeBuilderItemList.first(where: { $0.matchPath == lastPath })?.routeBuild(self, item.encodedItemString, dependency)
     else { return }

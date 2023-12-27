@@ -19,5 +19,5 @@ public protocol LinkNavigatorFindLocationUsable {
     /// Similar to `getCurrentPaths`, but returns the root paths. It returns an array of strings representing the paths.
     ///
     /// - Returns: An array of strings representing the root current paths.
-    func getRootCurrentPaths() -> [String]
+    func getCurrentRootPaths() -> [String]
 }
