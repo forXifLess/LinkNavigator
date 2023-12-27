@@ -65,12 +65,6 @@ extension TabPartialNavigator: LinkNavigatorFindLocationUsable {
 }
 
 extension TabPartialNavigator {
-  public func moveTab(targetPath: String) {
-    rootNavigator?.moveTab(targetPath: targetPath)
-  }
-}
-
-extension TabPartialNavigator {
   public func launch(rootPath: String, item: LinkItem? = .none, prefersLargeTitles _: Bool = false) -> TabRootNavigationController {
     let viewControllers = navigationBuilder.build(item: item ?? tabItem.linkItem)
 
@@ -206,7 +200,7 @@ extension TabPartialNavigator {
   }
 }
 
-extension TabPartialNavigator: LinkNavigatorProtocol {
+extension TabPartialNavigator: TabLinkNavigatorProtocol {
   public func sheet(linkItem: LinkItem, isAnimated: Bool) {
     self.sheetOpen(item: linkItem, isAnimated: isAnimated, type: .automatic)
   }
@@ -279,6 +273,10 @@ extension TabPartialNavigator: LinkNavigatorProtocol {
       .forEach {
         $0.receive(encodedItemString: item.encodedItemString)
       }
+  }
+
+  public func moveTab(path: String) {
+    rootNavigator?.moveTab(targetPath: path)
   }
 }
 
