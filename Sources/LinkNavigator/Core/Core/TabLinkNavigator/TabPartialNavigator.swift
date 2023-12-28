@@ -52,6 +52,17 @@ public final class TabPartialNavigator {
   }
 }
 
+extension TabPartialNavigator {
+  public func launch(rootPath: String, item: LinkItem? = .none, prefersLargeTitles _: Bool = false) -> TabRootNavigationController {
+    let viewControllers = navigationBuilder.build(item: item ?? tabItem.linkItem)
+
+    tabRootPathableController.matchPath = rootPath
+    tabRootPathableController.navigationController.setViewControllers(viewControllers, animated: false)
+    tabRootPathableController.navigationController.delegate = tabRootPathableController.navigationController
+    return tabRootPathableController
+  }
+}
+
 // MARK: LinkNavigatorFindLocationUsable
 
 extension TabPartialNavigator: LinkNavigatorFindLocationUsable {
@@ -64,16 +75,7 @@ extension TabPartialNavigator: LinkNavigatorFindLocationUsable {
   }
 }
 
-extension TabPartialNavigator {
-  public func launch(rootPath: String, item: LinkItem? = .none, prefersLargeTitles _: Bool = false) -> TabRootNavigationController {
-    let viewControllers = navigationBuilder.build(item: item ?? tabItem.linkItem)
-
-    tabRootPathableController.matchPath = rootPath
-    tabRootPathableController.navigationController.setViewControllers(viewControllers, animated: false)
-    tabRootPathableController.navigationController.delegate = tabRootPathableController.navigationController
-    return tabRootPathableController
-  }
-
+extension TabPartialNavigator: TabLinkNavigatorProtocol {
   public func next(linkItem: LinkItem, isAnimated: Bool) {
     currentController?.merge(
       new: navigationBuilder.build(item: linkItem),
@@ -86,8 +88,19 @@ extension TabPartialNavigator {
       isAnimated: isAnimated)
   }
 
+  public func rootNext(linkItem: LinkItem, targetTabPath: String, isAnimated: Bool) {
+    rootNavigator?.targetController(targetTabPath: targetTabPath)?
+      .merge(
+        new: navigationBuilder.build(item: linkItem),
+        isAnimated: isAnimated)
+  }
+
   public func back(isAnimated: Bool) {
     currentController?.back(isAnimated: isAnimated)
+  }
+
+  public func back(targetTabPath: String, isAnimated: Bool) {
+    rootNavigator?.targetController(targetTabPath: targetTabPath)?.back(isAnimated: isAnimated)
   }
 
   public func rootBack(isAnimated: Bool) {
@@ -116,6 +129,19 @@ extension TabPartialNavigator {
     rootController.popToViewController(pick, animated: isAnimated)
   }
 
+  public func rootBackOrNext(linkItem: LinkItem, targetTabPath: String, isAnimated: Bool) {
+    guard
+      let pick = navigationBuilder.firstPick(
+        controller: currentController,
+        item: linkItem)
+    else {
+      return
+    }
+
+    rootNavigator?.targetController(targetTabPath: targetTabPath)?.popToViewController(pick, animated: isAnimated)
+  }
+
+
   public func replace(linkItem: LinkItem, isAnimated: Bool) {
     let viewControllers = navigationBuilder.build(item: linkItem)
     guard !viewControllers.isEmpty else { return }
@@ -125,13 +151,29 @@ extension TabPartialNavigator {
       isAnimated: isAnimated)
   }
 
-  public func rootReplace(linkItem: LinkItem, isAnimated: Bool) {
+  public func rootReplace(linkItem: LinkItem, isAnimated: Bool, closeAll: Bool = true) {
     let viewControllers = navigationBuilder.build(item: linkItem)
     guard !viewControllers.isEmpty else { return }
 
     rootController.replace(
       viewController: viewControllers,
       isAnimated: isAnimated)
+
+    if closeAll {
+      rootNavigator?.closeAll(isAnimated: isAnimated, completion: { })
+    }
+  }
+
+  public func rootReplace(linkItem: LinkItem, targetTabPath: String, isAnimated: Bool, closeAll: Bool) {
+    let viewControllers = navigationBuilder.build(item: linkItem)
+    guard !viewControllers.isEmpty else { return }
+
+    rootNavigator?.targetController(targetTabPath: targetTabPath)?
+      .replace(viewController: viewControllers, isAnimated: isAnimated)
+
+    if closeAll {
+      rootNavigator?.closeAll(isAnimated: isAnimated, completion: { })
+    }
   }
 
   public func remove(pathList: [String]) {
@@ -148,6 +190,15 @@ extension TabPartialNavigator {
         controller: rootController,
         item: .init(pathList: pathList)),
       animated: false)
+  }
+
+  public func rootRemove(pathList: [String], targetTabPath: String) {
+    rootNavigator?.targetController(targetTabPath: targetTabPath)?
+      .setViewControllers(
+        navigationBuilder.exceptFilter(
+          controller: rootController,
+          item: .init(pathList: pathList)),
+        animated: false)
   }
 
   public func backToLast(path: String, isAnimated: Bool) {
@@ -198,9 +249,30 @@ extension TabPartialNavigator {
   public func closeAll(isAnimated: Bool, completion: () -> Void = { }) {
     rootNavigator?.closeAll(isAnimated: isAnimated, completion: completion)
   }
-}
 
-extension TabPartialNavigator: TabLinkNavigatorProtocol {
+  public func rootBackToLast(path: String, targetTabPath: String, isAnimated: Bool) {
+    rootNavigator?.targetController(targetTabPath: targetTabPath)?
+      .popTo(
+        viewController: navigationBuilder.lastPick(
+          controller: rootController,
+          item: .init(path: path)),
+        isAnimated: isAnimated)
+  }
+
+  public func rootReloadLast(items: LinkItem, targetTabPath: String, isAnimated: Bool) {
+    let viewControllers = navigationBuilder.build(item: items)
+    guard !viewControllers.isEmpty else { return }
+
+    let reloadedVC = viewControllers.reduce(rootController.viewControllers) { current, next in
+      guard let idx = current.firstIndex(of: next) else { return current }
+      var variableCurrentVC = current
+      variableCurrentVC[idx] = next
+      return variableCurrentVC
+    }
+
+    rootNavigator?.targetController(targetTabPath: targetTabPath)?.setViewControllers(reloadedVC, animated: isAnimated)
+  }
+
   public func sheet(linkItem: LinkItem, isAnimated: Bool) {
     self.sheetOpen(item: linkItem, isAnimated: isAnimated, type: .automatic)
   }

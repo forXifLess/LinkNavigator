@@ -16,6 +16,7 @@ public protocol TabLinkNavigatorProtocol {
   ///   - linkItem: The link item to navigate to at the root level.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
   func rootNext(linkItem: LinkItem, isAnimated: Bool)
+  func rootNext(linkItem: LinkItem, targetTabPath: String, isAnimated: Bool)
 
   /// Presents a sheet with the given link item.
   ///
@@ -54,6 +55,10 @@ public protocol TabLinkNavigatorProtocol {
   ///   - isAnimated: A Boolean value that determines whether the replacement is animated.
   func replace(linkItem: LinkItem, isAnimated: Bool)
 
+  func rootReplace(linkItem: LinkItem, isAnimated: Bool, closeAll: Bool)
+
+  func rootReplace(linkItem: LinkItem, targetTabPath: String, isAnimated: Bool, closeAll: Bool)
+
   /// Navigates either back or to the next link item based on the current state.
   ///
   /// - Parameters:
@@ -67,11 +72,13 @@ public protocol TabLinkNavigatorProtocol {
   ///   - linkItem: The link item to navigate to or back from at the root level.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
   func rootBackOrNext(linkItem: LinkItem, isAnimated: Bool)
+  func rootBackOrNext(linkItem: LinkItem, targetTabPath: String, isAnimated: Bool)
 
   /// Navigates back in the navigation stack.
   ///
   /// - Parameter isAnimated: A Boolean value that determines whether the navigation is animated.
   func back(isAnimated: Bool)
+  func back(targetTabPath: String, isAnimated: Bool)
 
   /// Removes the specified paths from the navigation stack.
   ///
@@ -82,6 +89,7 @@ public protocol TabLinkNavigatorProtocol {
   ///
   /// - Parameter pathList: A list of paths to remove from the root of the navigation stack.
   func rootRemove(pathList: [String])
+  func rootRemove(pathList: [String], targetTabPath: String)
 
   /// Navigates back to the last specified path.
   ///
@@ -96,6 +104,7 @@ public protocol TabLinkNavigatorProtocol {
   ///   - path: The root path to navigate back to.
   ///   - isAnimated: A Boolean value indicating whether the navigation should be animated.
   func rootBackToLast(path: String, isAnimated: Bool)
+  func rootBackToLast(path: String, targetTabPath: String, isAnimated: Bool)
 
   /// Closes the navigation interface.
   ///
@@ -116,6 +125,7 @@ public protocol TabLinkNavigatorProtocol {
   ///   - items: A string representing the raw QueryString for the items to reload.
   ///   - isAnimated: A Boolean value indicating whether the reload should be animated.
   func rootReloadLast(items: LinkItem, isAnimated: Bool)
+  func rootReloadLast(items: LinkItem, targetTabPath: String, isAnimated: Bool)
 
   /// Displays an alert with the specified target and model. Depending on the target parameter,
   /// the alert is displayed either on the root or the sub-controller.
