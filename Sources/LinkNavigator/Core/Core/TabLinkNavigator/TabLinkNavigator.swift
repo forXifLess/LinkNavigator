@@ -83,8 +83,9 @@ extension TabLinkNavigator {
     presentWillAction: @escaping (UINavigationController) -> Void = { _ in },
     presentDidAction: @escaping (UINavigationController) -> Void = { _ in })
   {
-    if let fullSheetController {
-      fullSheetController.dismiss(animated: true)
+    if fullSheetController != .none {
+      self.fullSheetController?.dismiss(animated: true)
+      self.fullSheetController = .none
     } else {
       mainController?.dismiss(animated: true)
     }
