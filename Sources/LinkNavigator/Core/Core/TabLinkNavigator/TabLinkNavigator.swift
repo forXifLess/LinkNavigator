@@ -46,6 +46,12 @@ public final class TabLinkNavigator {
 }
 
 extension TabLinkNavigator {
+  func targetController(targetTabPath: String) -> UINavigationController? {
+    tabRootNavigators.first(where: { $0.matchPath == targetTabPath })?.navigationController
+  }
+}
+
+extension TabLinkNavigator {
   public func launch(tagItemList: [TabItem]) -> [UINavigationController] {
     let tabPartialNavigators = tagItemList
       .reduce([TabPartialNavigator]()) { curr, next in
