@@ -44,11 +44,7 @@ public final class TabPartialNavigator {
     dependency: dependency)
 
   private var currentController: UINavigationController? {
-    rootNavigator?.modalController != .none
-    ? rootNavigator?.modalController
-    : rootNavigator?.fullSheetController != .none
-    ? rootNavigator?.fullSheetController
-    : rootController
+    rootNavigator?.modalController ?? rootNavigator?.fullSheetController ?? rootController
   }
 }
 
