@@ -2,9 +2,9 @@ import SwiftUI
 
 @main
 struct TabInjectionParameterApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+  var body: some Scene {
+    WindowGroup {
+      ContentView()
     }
+  }
 }
