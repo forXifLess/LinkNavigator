@@ -1,6 +1,7 @@
 import SwiftUI
+import LinkNavigator
 
-struct Tab2Page: View {
+struct Step1Page: View {
   let navigator: RootNavigatorType
   @State var currentPath: String = ""
 
@@ -11,14 +12,14 @@ struct Tab2Page: View {
 
       Spacer()
 
-      Button(action: { navigator.next(linkItem: .init(path: "step1"), isAnimated: true) }) {
-        Text("Next to 'Step1'")
+      Button(action: { navigator.next(linkItem: .init(path: "step2"), isAnimated: true) }) {
+        Text("Next to 'Step2'")
       }
 
       Spacer()
     }
     .onAppear {
-      currentPath = navigator.getCurrentPaths().joined(separator: " -> ")
+      currentPath = navigator.getCurrentPaths().joined(separator: " > ")
     }
   }
 }

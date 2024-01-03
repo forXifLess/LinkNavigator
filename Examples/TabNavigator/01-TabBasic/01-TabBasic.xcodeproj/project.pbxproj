@@ -22,6 +22,17 @@
 		7E7A32642B450E960078DAFF /* Tab3RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A32632B450E960078DAFF /* Tab3RouteBuilder.swift */; };
 		7E7A32662B450EBA0078DAFF /* Tab4Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A32652B450EBA0078DAFF /* Tab4Page.swift */; };
 		7E7A32682B450EC10078DAFF /* Tab4RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A32672B450EC10078DAFF /* Tab4RouteBuilder.swift */; };
+		7E7A32812B4536720078DAFF /* Step1Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A32802B4536720078DAFF /* Step1Page.swift */; };
+		7E7A32832B45367A0078DAFF /* Step1RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A32822B45367A0078DAFF /* Step1RouteBuilder.swift */; };
+		7E7A32852B4536870078DAFF /* Step2Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A32842B4536870078DAFF /* Step2Page.swift */; };
+		7E7A32872B45368D0078DAFF /* Step2RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A32862B45368D0078DAFF /* Step2RouteBuilder.swift */; };
+		7E7A32892B4536C70078DAFF /* Step3Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A32882B4536C70078DAFF /* Step3Page.swift */; };
+		7E7A328B2B4536CE0078DAFF /* Step3RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A328A2B4536CE0078DAFF /* Step3RouteBuilder.swift */; };
+		7E7A328D2B4536D30078DAFF /* Step4Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A328C2B4536D30078DAFF /* Step4Page.swift */; };
+		7E7A328F2B4536DA0078DAFF /* Step4RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A328E2B4536DA0078DAFF /* Step4RouteBuilder.swift */; };
+		7E7A32922B45614E0078DAFF /* PathIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A32912B45614E0078DAFF /* PathIndicator.swift */; };
+		7E7A32952B456DD60078DAFF /* Step2RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A32932B456DD50078DAFF /* Step2RouteBuilder.swift */; };
+		7E7A32962B456DD60078DAFF /* Step2Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A32942B456DD50078DAFF /* Step2Page.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +51,17 @@
 		7E7A32632B450E960078DAFF /* Tab3RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab3RouteBuilder.swift; sourceTree = "<group>"; };
 		7E7A32652B450EBA0078DAFF /* Tab4Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab4Page.swift; sourceTree = "<group>"; };
 		7E7A32672B450EC10078DAFF /* Tab4RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab4RouteBuilder.swift; sourceTree = "<group>"; };
+		7E7A32802B4536720078DAFF /* Step1Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step1Page.swift; sourceTree = "<group>"; };
+		7E7A32822B45367A0078DAFF /* Step1RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step1RouteBuilder.swift; sourceTree = "<group>"; };
+		7E7A32842B4536870078DAFF /* Step2Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step2Page.swift; sourceTree = "<group>"; };
+		7E7A32862B45368D0078DAFF /* Step2RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step2RouteBuilder.swift; sourceTree = "<group>"; };
+		7E7A32882B4536C70078DAFF /* Step3Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step3Page.swift; sourceTree = "<group>"; };
+		7E7A328A2B4536CE0078DAFF /* Step3RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step3RouteBuilder.swift; sourceTree = "<group>"; };
+		7E7A328C2B4536D30078DAFF /* Step4Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step4Page.swift; sourceTree = "<group>"; };
+		7E7A328E2B4536DA0078DAFF /* Step4RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step4RouteBuilder.swift; sourceTree = "<group>"; };
+		7E7A32912B45614E0078DAFF /* PathIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathIndicator.swift; sourceTree = "<group>"; };
+		7E7A32932B456DD50078DAFF /* Step2RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step2RouteBuilder.swift; sourceTree = "<group>"; };
+		7E7A32942B456DD50078DAFF /* Step2Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step2Page.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +96,7 @@
 		298BA87E2B44F0EE005D55FE /* TabBasic */ = {
 			isa = PBXGroup;
 			children = (
+				7E7A32902B4561450078DAFF /* Component */,
 				7E7A32532B45082D0078DAFF /* Pages */,
 				298BA87F2B44F0EE005D55FE /* TabBasicApp.swift */,
 				7E7A324F2B4506D80078DAFF /* TapAppDependency.swift */,
@@ -96,6 +119,7 @@
 		7E7A32532B45082D0078DAFF /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				7E7A327B2B4536330078DAFF /* Common */,
 				7E7A32582B4508480078DAFF /* Tab4 */,
 				7E7A32572B4508450078DAFF /* Tab3 */,
 				7E7A32562B4508410078DAFF /* Tab2 */,
@@ -138,6 +162,63 @@
 				7E7A32672B450EC10078DAFF /* Tab4RouteBuilder.swift */,
 			);
 			path = Tab4;
+			sourceTree = "<group>";
+		};
+		7E7A327B2B4536330078DAFF /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7E7A327F2B4536480078DAFF /* Step4 */,
+				7E7A327E2B4536450078DAFF /* Step3 */,
+				7E7A327D2B4536420078DAFF /* Step2 */,
+				7E7A327C2B4536380078DAFF /* Step1 */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		7E7A327C2B4536380078DAFF /* Step1 */ = {
+			isa = PBXGroup;
+			children = (
+				7E7A32802B4536720078DAFF /* Step1Page.swift */,
+				7E7A32822B45367A0078DAFF /* Step1RouteBuilder.swift */,
+			);
+			path = Step1;
+			sourceTree = "<group>";
+		};
+		7E7A327D2B4536420078DAFF /* Step2 */ = {
+			isa = PBXGroup;
+			children = (
+				7E7A32942B456DD50078DAFF /* Step2Page.swift */,
+				7E7A32932B456DD50078DAFF /* Step2RouteBuilder.swift */,
+				7E7A32842B4536870078DAFF /* Step2Page.swift */,
+				7E7A32862B45368D0078DAFF /* Step2RouteBuilder.swift */,
+			);
+			path = Step2;
+			sourceTree = "<group>";
+		};
+		7E7A327E2B4536450078DAFF /* Step3 */ = {
+			isa = PBXGroup;
+			children = (
+				7E7A32882B4536C70078DAFF /* Step3Page.swift */,
+				7E7A328A2B4536CE0078DAFF /* Step3RouteBuilder.swift */,
+			);
+			path = Step3;
+			sourceTree = "<group>";
+		};
+		7E7A327F2B4536480078DAFF /* Step4 */ = {
+			isa = PBXGroup;
+			children = (
+				7E7A328C2B4536D30078DAFF /* Step4Page.swift */,
+				7E7A328E2B4536DA0078DAFF /* Step4RouteBuilder.swift */,
+			);
+			path = Step4;
+			sourceTree = "<group>";
+		};
+		7E7A32902B4561450078DAFF /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				7E7A32912B45614E0078DAFF /* PathIndicator.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,14 +300,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E7A32602B450E680078DAFF /* Tab2RouteBuilder.swift in Sources */,
+				7E7A32962B456DD60078DAFF /* Step2Page.swift in Sources */,
 				7E7A325E2B450E5F0078DAFF /* Tab2Page.swift in Sources */,
 				7E7A32682B450EC10078DAFF /* Tab4RouteBuilder.swift in Sources */,
+				7E7A328D2B4536D30078DAFF /* Step4Page.swift in Sources */,
 				7E7A32502B4506D80078DAFF /* TapAppDependency.swift in Sources */,
+				7E7A32832B45367A0078DAFF /* Step1RouteBuilder.swift in Sources */,
+				7E7A32812B4536720078DAFF /* Step1Page.swift in Sources */,
+				7E7A32892B4536C70078DAFF /* Step3Page.swift in Sources */,
+				7E7A32872B45368D0078DAFF /* Step2RouteBuilder.swift in Sources */,
 				7E7A32642B450E960078DAFF /* Tab3RouteBuilder.swift in Sources */,
+				7E7A32852B4536870078DAFF /* Step2Page.swift in Sources */,
+				7E7A328B2B4536CE0078DAFF /* Step3RouteBuilder.swift in Sources */,
 				7E7A325C2B45086F0078DAFF /* Tab1RouteBuilder.swift in Sources */,
+				7E7A328F2B4536DA0078DAFF /* Step4RouteBuilder.swift in Sources */,
 				7E7A32622B450E8D0078DAFF /* Tab3Page.swift in Sources */,
 				7E7A32662B450EBA0078DAFF /* Tab4Page.swift in Sources */,
+				7E7A32922B45614E0078DAFF /* PathIndicator.swift in Sources */,
 				7E7A325A2B4508540078DAFF /* Tab1Page.swift in Sources */,
+				7E7A32952B456DD60078DAFF /* Step2RouteBuilder.swift in Sources */,
 				7E7A32522B4507180078DAFF /* AppRouterBuilderGroup.swift in Sources */,
 				298BA8802B44F0EE005D55FE /* TabBasicApp.swift in Sources */,
 			);
