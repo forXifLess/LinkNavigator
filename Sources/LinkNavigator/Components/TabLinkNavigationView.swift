@@ -11,7 +11,7 @@ public struct TabLinkNavigationView {
   public init(
     linkNavigator: TabLinkNavigator,
     isHiddenDefaultTabbar: Bool,
-    tabItemList: [TabItem] = [])
+    tabItemList: [TabItem])
   {
     self.linkNavigator = linkNavigator
     self.isHiddenDefaultTabbar = isHiddenDefaultTabbar
