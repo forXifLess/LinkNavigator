@@ -5,6 +5,58 @@
       location = "group:Examples/SingleNavigator"
       name = "SingleNavigator">
       <Group
+         location = "group:SingleInjectionParameter"
+         name = "SingleInjectionParameter">
+         <Group
+            location = "group:SingleInjectionParameter"
+            name = "SingleInjectionParameter">
+            <FileRef
+               location = "group:SingleInjectionParameter.entitlements">
+            </FileRef>
+            <Group
+               location = "group:Assets.xcassets"
+               name = "Assets.xcassets">
+               <Group
+                  location = "group:AppIcon.appiconset"
+                  name = "AppIcon.appiconset">
+                  <FileRef
+                     location = "group:Contents.json">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:AccentColor.colorset"
+                  name = "AccentColor.colorset">
+                  <FileRef
+                     location = "group:Contents.json">
+                  </FileRef>
+               </Group>
+               <FileRef
+                  location = "group:Contents.json">
+               </FileRef>
+            </Group>
+            <Group
+               location = "group:Preview Content"
+               name = "Preview Content">
+               <Group
+                  location = "group:Preview Assets.xcassets"
+                  name = "Preview Assets.xcassets">
+                  <FileRef
+                     location = "group:Contents.json">
+                  </FileRef>
+               </Group>
+            </Group>
+            <FileRef
+               location = "group:SingleInjectionParameterApp.swift">
+            </FileRef>
+            <FileRef
+               location = "group:ContentView.swift">
+            </FileRef>
+         </Group>
+         <FileRef
+            location = "group:SingleInjectionParameter.xcodeproj">
+         </FileRef>
+      </Group>
+      <Group
          location = "group:SingleBasic"
          name = "SingleBasic">
          <FileRef
@@ -56,10 +108,114 @@
             </FileRef>
          </Group>
       </Group>
+      <Group
+         location = "group:SingleEventSubscriber"
+         name = "SingleEventSubscriber">
+         <FileRef
+            location = "group:SingleEventSubscriber.xcodeproj">
+         </FileRef>
+         <Group
+            location = "group:SingleEventSubscriber"
+            name = "SingleEventSubscriber">
+            <Group
+               location = "group:Assets.xcassets"
+               name = "Assets.xcassets">
+               <Group
+                  location = "group:AppIcon.appiconset"
+                  name = "AppIcon.appiconset">
+                  <FileRef
+                     location = "group:Contents.json">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:AccentColor.colorset"
+                  name = "AccentColor.colorset">
+                  <FileRef
+                     location = "group:Contents.json">
+                  </FileRef>
+               </Group>
+               <FileRef
+                  location = "group:Contents.json">
+               </FileRef>
+            </Group>
+            <Group
+               location = "group:Preview Content"
+               name = "Preview Content">
+               <Group
+                  location = "group:Preview Assets.xcassets"
+                  name = "Preview Assets.xcassets">
+                  <FileRef
+                     location = "group:Contents.json">
+                  </FileRef>
+               </Group>
+            </Group>
+            <FileRef
+               location = "group:SingleEventSubscriberApp.swift">
+            </FileRef>
+            <FileRef
+               location = "group:SingleEventSubscriber.entitlements">
+            </FileRef>
+            <FileRef
+               location = "group:ContentView.swift">
+            </FileRef>
+         </Group>
+      </Group>
    </Group>
    <Group
       location = "group:Examples/TabNavigator"
       name = "TabNavigator">
+      <Group
+         location = "group:TabEventSubscriber"
+         name = "TabEventSubscriber">
+         <Group
+            location = "group:TabEventSubscriber"
+            name = "TabEventSubscriber">
+            <Group
+               location = "group:Assets.xcassets"
+               name = "Assets.xcassets">
+               <Group
+                  location = "group:AppIcon.appiconset"
+                  name = "AppIcon.appiconset">
+                  <FileRef
+                     location = "group:Contents.json">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:AccentColor.colorset"
+                  name = "AccentColor.colorset">
+                  <FileRef
+                     location = "group:Contents.json">
+                  </FileRef>
+               </Group>
+               <FileRef
+                  location = "group:Contents.json">
+               </FileRef>
+            </Group>
+            <Group
+               location = "group:Preview Content"
+               name = "Preview Content">
+               <Group
+                  location = "group:Preview Assets.xcassets"
+                  name = "Preview Assets.xcassets">
+                  <FileRef
+                     location = "group:Contents.json">
+                  </FileRef>
+               </Group>
+            </Group>
+            <FileRef
+               location = "group:TabEventSubscriberApp.swift">
+            </FileRef>
+            <FileRef
+               location = "group:ContentView.swift">
+            </FileRef>
+            <FileRef
+               location = "group:TabEventSubscriber.entitlements">
+            </FileRef>
+         </Group>
+         <FileRef
+            location = "group:TabEventSubscriber.xcodeproj">
+         </FileRef>
+      </Group>
       <Group
          location = "group:TabBasic"
          name = "TabBasic">
@@ -110,6 +266,58 @@
          </Group>
          <FileRef
             location = "group:TabBasic.xcodeproj">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:TabInjectionParameter"
+         name = "TabInjectionParameter">
+         <Group
+            location = "group:TabInjectionParameter"
+            name = "TabInjectionParameter">
+            <Group
+               location = "group:Assets.xcassets"
+               name = "Assets.xcassets">
+               <Group
+                  location = "group:AppIcon.appiconset"
+                  name = "AppIcon.appiconset">
+                  <FileRef
+                     location = "group:Contents.json">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:AccentColor.colorset"
+                  name = "AccentColor.colorset">
+                  <FileRef
+                     location = "group:Contents.json">
+                  </FileRef>
+               </Group>
+               <FileRef
+                  location = "group:Contents.json">
+               </FileRef>
+            </Group>
+            <FileRef
+               location = "group:TabInjectionParameterApp.swift">
+            </FileRef>
+            <Group
+               location = "group:Preview Content"
+               name = "Preview Content">
+               <Group
+                  location = "group:Preview Assets.xcassets"
+                  name = "Preview Assets.xcassets">
+                  <FileRef
+                     location = "group:Contents.json">
+                  </FileRef>
+               </Group>
+            </Group>
+            <FileRef
+               location = "group:TabInjectionParameter.entitlements">
+            </FileRef>
+            <FileRef
+               location = "group:ContentView.swift">
+            </FileRef>
+         </Group>
+         <FileRef
+            location = "group:TabInjectionParameter.xcodeproj">
          </FileRef>
       </Group>
    </Group>
