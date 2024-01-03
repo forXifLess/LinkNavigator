@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
   name: "PageTemplate",
-  platforms: [ .iOS(.v14) ],
+  platforms: [.iOS(.v14)],
   products: [
     .library(
       name: "PageTemplate",
@@ -17,5 +17,4 @@ let package = Package(
     .testTarget(
       name: "PageTemplateTests",
       dependencies: ["PageTemplate"]),
-  ]
-)
+  ])
