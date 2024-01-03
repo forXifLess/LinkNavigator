@@ -1,24 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/airbnb/swift",
-      "state" : {
-        "revision" : "bc6aa7c3e21b6ab951ce75afc0a6e6d16fd6caef",
-        "version" : "1.0.6"
-      }
-    },
-    {
-      "identity" : "swift-argument-parser",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-argument-parser",
-      "state" : {
-        "revision" : "c8ed701b513cf5177118a175d85fbbbcd707ab41",
-        "version" : "1.3.0"
-      }
-    },
-    {
       "identity" : "urlencodedform",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/interactord/URLEncodedForm",

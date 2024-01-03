@@ -3,15 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		299D54D92B45580D003B58EA /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 299D54D82B45580D003B58EA /* LinkNavigator */; };
+		299D54DC2B45581B003B58EA /* PageTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = 299D54DB2B45581B003B58EA /* PageTemplate */; };
 		29C639222B4500FA00FCFE0F /* TabEventSubscriberApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C639212B4500FA00FCFE0F /* TabEventSubscriberApp.swift */; };
 		29C639242B4500FA00FCFE0F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C639232B4500FA00FCFE0F /* ContentView.swift */; };
 		29C639262B4500FA00FCFE0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29C639252B4500FA00FCFE0F /* Assets.xcassets */; };
 		29C6392A2B4500FA00FCFE0F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29C639292B4500FA00FCFE0F /* Preview Assets.xcassets */; };
-		29C639332B45012B00FCFE0F /* LinkNavigator in Resources */ = {isa = PBXBuildFile; fileRef = 29C639322B45012B00FCFE0F /* LinkNavigator */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,7 +22,6 @@
 		29C639252B4500FA00FCFE0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29C639272B4500FA00FCFE0F /* TabEventSubscriber.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TabEventSubscriber.entitlements; sourceTree = "<group>"; };
 		29C639292B4500FA00FCFE0F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		29C639322B45012B00FCFE0F /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ../../Workspace/LinkNavigator; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +29,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				299D54D92B45580D003B58EA /* LinkNavigator in Frameworks */,
+				299D54DC2B45581B003B58EA /* PageTemplate in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,7 +40,6 @@
 		29C639152B4500F900FCFE0F = {
 			isa = PBXGroup;
 			children = (
-				29C639322B45012B00FCFE0F /* LinkNavigator */,
 				29C639202B4500FA00FCFE0F /* TabEventSubscriber */,
 				29C6391F2B4500FA00FCFE0F /* Products */,
 			);
@@ -88,6 +89,10 @@
 			dependencies = (
 			);
 			name = TabEventSubscriber;
+			packageProductDependencies = (
+				299D54D82B45580D003B58EA /* LinkNavigator */,
+				299D54DB2B45581B003B58EA /* PageTemplate */,
+			);
 			productName = TabEventSubscriber;
 			productReference = 29C6391E2B4500FA00FCFE0F /* TabEventSubscriber.app */;
 			productType = "com.apple.product-type.application";
@@ -107,7 +112,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 29C639192B4500F900FCFE0F /* Build configuration list for PBXProject "TabEventSubscriber" */;
+			buildConfigurationList = 29C639192B4500F900FCFE0F /* Build configuration list for PBXProject "03-TabEventSubscriber" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -116,6 +121,10 @@
 				Base,
 			);
 			mainGroup = 29C639152B4500F900FCFE0F;
+			packageReferences = (
+				299D54D72B45580D003B58EA /* XCLocalSwiftPackageReference "../../.." */,
+				299D54DA2B45581B003B58EA /* XCLocalSwiftPackageReference "../../Shared/PageTemplate" */,
+			);
 			productRefGroup = 29C6391F2B4500FA00FCFE0F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -132,7 +141,6 @@
 			files = (
 				29C6392A2B4500FA00FCFE0F /* Preview Assets.xcassets in Resources */,
 				29C639262B4500FA00FCFE0F /* Assets.xcassets in Resources */,
-				29C639332B45012B00FCFE0F /* LinkNavigator in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,7 +302,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.forxifless.linknavigator.TabEventSubscriber;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -330,7 +339,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.forxifless.linknavigator.TabEventSubscriber;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -340,7 +350,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		29C639192B4500F900FCFE0F /* Build configuration list for PBXProject "TabEventSubscriber" */ = {
+		29C639192B4500F900FCFE0F /* Build configuration list for PBXProject "03-TabEventSubscriber" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				29C6392B2B4500FA00FCFE0F /* Debug */,
@@ -359,6 +369,28 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		299D54D72B45580D003B58EA /* XCLocalSwiftPackageReference "../../.." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../..;
+		};
+		299D54DA2B45581B003B58EA /* XCLocalSwiftPackageReference "../../Shared/PageTemplate" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../Shared/PageTemplate;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		299D54D82B45580D003B58EA /* LinkNavigator */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LinkNavigator;
+		};
+		299D54DB2B45581B003B58EA /* PageTemplate */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PageTemplate;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 29C639162B4500F900FCFE0F /* Project object */;
 }

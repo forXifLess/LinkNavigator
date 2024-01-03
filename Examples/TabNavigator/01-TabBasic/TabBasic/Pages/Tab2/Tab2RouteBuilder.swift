@@ -1,5 +1,5 @@
-import LinkNavigator
 import SwiftUI
+import LinkNavigator
 
 struct Tab2RouteBuilder<RootNavigator: RootNavigatorType> {
   static func generate() -> RouteBuilderOf<RootNavigator> {
