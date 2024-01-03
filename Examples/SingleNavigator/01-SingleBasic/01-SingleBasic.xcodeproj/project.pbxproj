@@ -3,15 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		29141E112B44E13900D3ABE7 /* SingleBasicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29141E102B44E13900D3ABE7 /* SingleBasicApp.swift */; };
 		29141E152B44E13A00D3ABE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29141E142B44E13A00D3ABE7 /* Assets.xcassets */; };
 		29141E192B44E13A00D3ABE7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29141E182B44E13A00D3ABE7 /* Preview Assets.xcassets */; };
-		29141E212B44E19800D3ABE7 /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 29141E202B44E19800D3ABE7 /* LinkNavigator */; };
-		29141E232B44E21000D3ABE7 /* LinkNavigator in Resources */ = {isa = PBXBuildFile; fileRef = 29141E222B44E21000D3ABE7 /* LinkNavigator */; };
 		29704ACD2B450B5800418967 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704ABF2B450B5800418967 /* HomeView.swift */; };
 		29704ACE2B450B5800418967 /* HomeRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704AC02B450B5800418967 /* HomeRouteBuilder.swift */; };
 		29704ACF2B450B5800418967 /* Page2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704AC22B450B5800418967 /* Page2View.swift */; };
@@ -22,9 +20,10 @@
 		29704AD42B450B5800418967 /* Page4RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704AC92B450B5800418967 /* Page4RouteBuilder.swift */; };
 		29704AD52B450B5800418967 /* Page1RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704ACB2B450B5800418967 /* Page1RouteBuilder.swift */; };
 		29704AD62B450B5800418967 /* Page1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704ACC2B450B5800418967 /* Page1View.swift */; };
-		29758D042B44FA9B00307B89 /* PageTemplate in Resources */ = {isa = PBXBuildFile; fileRef = 29758D032B44FA9B00307B89 /* PageTemplate */; };
 		9328462B2B450372000243AC /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328462A2B450372000243AC /* AppDependency.swift */; };
 		9328462D2B45037F000243AC /* AppRouterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328462C2B45037F000243AC /* AppRouterGroup.swift */; };
+		933012962B45634400893C91 /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 933012952B45634400893C91 /* LinkNavigator */; };
+		933012992B45634F00893C91 /* PageTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = 933012982B45634F00893C91 /* PageTemplate */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		29141E142B44E13A00D3ABE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29141E162B44E13A00D3ABE7 /* SingleBasic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SingleBasic.entitlements; sourceTree = "<group>"; };
 		29141E182B44E13A00D3ABE7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		29141E222B44E21000D3ABE7 /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ../../..; sourceTree = "<group>"; };
 		29704ABF2B450B5800418967 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		29704AC02B450B5800418967 /* HomeRouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRouteBuilder.swift; sourceTree = "<group>"; };
 		29704AC22B450B5800418967 /* Page2View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page2View.swift; sourceTree = "<group>"; };
@@ -44,7 +42,6 @@
 		29704AC92B450B5800418967 /* Page4RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page4RouteBuilder.swift; sourceTree = "<group>"; };
 		29704ACB2B450B5800418967 /* Page1RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page1RouteBuilder.swift; sourceTree = "<group>"; };
 		29704ACC2B450B5800418967 /* Page1View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page1View.swift; sourceTree = "<group>"; };
-		29758D032B44FA9B00307B89 /* PageTemplate */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PageTemplate; path = ../../Shared/PageTemplate; sourceTree = "<group>"; };
 		9328462A2B450372000243AC /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
 		9328462C2B45037F000243AC /* AppRouterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,7 +51,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29141E212B44E19800D3ABE7 /* LinkNavigator in Frameworks */,
+				933012962B45634400893C91 /* LinkNavigator in Frameworks */,
+				933012992B45634F00893C91 /* PageTemplate in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,8 +62,6 @@
 		29141E042B44E13900D3ABE7 = {
 			isa = PBXGroup;
 			children = (
-				29758D032B44FA9B00307B89 /* PageTemplate */,
-				29141E222B44E21000D3ABE7 /* LinkNavigator */,
 				29141E0F2B44E13900D3ABE7 /* SingleBasic */,
 				29141E0E2B44E13900D3ABE7 /* Products */,
 			);
@@ -175,7 +171,8 @@
 			);
 			name = SingleBasic;
 			packageProductDependencies = (
-				29141E202B44E19800D3ABE7 /* LinkNavigator */,
+				933012952B45634400893C91 /* LinkNavigator */,
+				933012982B45634F00893C91 /* PageTemplate */,
 			);
 			productName = SingleBasic;
 			productReference = 29141E0D2B44E13900D3ABE7 /* SingleBasic.app */;
@@ -206,6 +203,8 @@
 			);
 			mainGroup = 29141E042B44E13900D3ABE7;
 			packageReferences = (
+				933012942B45634400893C91 /* XCLocalSwiftPackageReference "../../.." */,
+				933012972B45634F00893C91 /* XCLocalSwiftPackageReference "../../Shared/PageTemplate" */,
 			);
 			productRefGroup = 29141E0E2B44E13900D3ABE7 /* Products */;
 			projectDirPath = "";
@@ -222,9 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29141E192B44E13A00D3ABE7 /* Preview Assets.xcassets in Resources */,
-				29758D042B44FA9B00307B89 /* PageTemplate in Resources */,
 				29141E152B44E13A00D3ABE7 /* Assets.xcassets in Resources */,
-				29141E232B44E21000D3ABE7 /* LinkNavigator in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,10 +466,25 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		933012942B45634400893C91 /* XCLocalSwiftPackageReference "../../.." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../..;
+		};
+		933012972B45634F00893C91 /* XCLocalSwiftPackageReference "../../Shared/PageTemplate" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../Shared/PageTemplate;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		29141E202B44E19800D3ABE7 /* LinkNavigator */ = {
+		933012952B45634400893C91 /* LinkNavigator */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LinkNavigator;
+		};
+		933012982B45634F00893C91 /* PageTemplate */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PageTemplate;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

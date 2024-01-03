@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,8 +11,8 @@
 		29C639052B44FEAA00FCFE0F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C639042B44FEAA00FCFE0F /* ContentView.swift */; };
 		29C639072B44FEAB00FCFE0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29C639062B44FEAB00FCFE0F /* Assets.xcassets */; };
 		29C6390B2B44FEAB00FCFE0F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29C6390A2B44FEAB00FCFE0F /* Preview Assets.xcassets */; };
-		29C639352B45015D00FCFE0F /* LinkNavigator in Resources */ = {isa = PBXBuildFile; fileRef = 29C639342B45015D00FCFE0F /* LinkNavigator */; };
-		29C639372B45019B00FCFE0F /* PageTemplate in Resources */ = {isa = PBXBuildFile; fileRef = 29C639362B45019B00FCFE0F /* PageTemplate */; };
+		933012A22B4563C700893C91 /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 933012A12B4563C700893C91 /* LinkNavigator */; };
+		933012A52B4563D900893C91 /* PageTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = 933012A42B4563D900893C91 /* PageTemplate */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,8 +22,6 @@
 		29C639062B44FEAB00FCFE0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29C639082B44FEAB00FCFE0F /* SingleEventSubscriber.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SingleEventSubscriber.entitlements; sourceTree = "<group>"; };
 		29C6390A2B44FEAB00FCFE0F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		29C639342B45015D00FCFE0F /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ../../..; sourceTree = "<group>"; };
-		29C639362B45019B00FCFE0F /* PageTemplate */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PageTemplate; path = ../../Shared/PageTemplate; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +29,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				933012A22B4563C700893C91 /* LinkNavigator in Frameworks */,
+				933012A52B4563D900893C91 /* PageTemplate in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,8 +40,6 @@
 		29C638F62B44FEAA00FCFE0F = {
 			isa = PBXGroup;
 			children = (
-				29C639362B45019B00FCFE0F /* PageTemplate */,
-				29C639342B45015D00FCFE0F /* LinkNavigator */,
 				29C639012B44FEAA00FCFE0F /* SingleEventSubscriber */,
 				29C639002B44FEAA00FCFE0F /* Products */,
 			);
@@ -91,6 +89,10 @@
 			dependencies = (
 			);
 			name = SingleEventSubscriber;
+			packageProductDependencies = (
+				933012A12B4563C700893C91 /* LinkNavigator */,
+				933012A42B4563D900893C91 /* PageTemplate */,
+			);
 			productName = SingleEventSubscriber;
 			productReference = 29C638FF2B44FEAA00FCFE0F /* SingleEventSubscriber.app */;
 			productType = "com.apple.product-type.application";
@@ -110,7 +112,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 29C638FA2B44FEAA00FCFE0F /* Build configuration list for PBXProject "SingleEventSubscriber" */;
+			buildConfigurationList = 29C638FA2B44FEAA00FCFE0F /* Build configuration list for PBXProject "02-SingleEventSubscriber" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -119,6 +121,10 @@
 				Base,
 			);
 			mainGroup = 29C638F62B44FEAA00FCFE0F;
+			packageReferences = (
+				933012A02B4563C700893C91 /* XCLocalSwiftPackageReference "../../.." */,
+				933012A32B4563D900893C91 /* XCLocalSwiftPackageReference "../../Shared/PageTemplate" */,
+			);
 			productRefGroup = 29C639002B44FEAA00FCFE0F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -134,9 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29C6390B2B44FEAB00FCFE0F /* Preview Assets.xcassets in Resources */,
-				29C639372B45019B00FCFE0F /* PageTemplate in Resources */,
 				29C639072B44FEAB00FCFE0F /* Assets.xcassets in Resources */,
-				29C639352B45015D00FCFE0F /* LinkNavigator in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,7 +302,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.forxifless.linknavigator.SingleEventSubscriber;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -334,7 +339,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.forxifless.linknavigator.SingleEventSubscriber;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -344,7 +350,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		29C638FA2B44FEAA00FCFE0F /* Build configuration list for PBXProject "SingleEventSubscriber" */ = {
+		29C638FA2B44FEAA00FCFE0F /* Build configuration list for PBXProject "02-SingleEventSubscriber" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				29C6390C2B44FEAB00FCFE0F /* Debug */,
@@ -363,6 +369,28 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		933012A02B4563C700893C91 /* XCLocalSwiftPackageReference "../../.." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../..;
+		};
+		933012A32B4563D900893C91 /* XCLocalSwiftPackageReference "../../Shared/PageTemplate" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../Shared/PageTemplate;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		933012A12B4563C700893C91 /* LinkNavigator */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LinkNavigator;
+		};
+		933012A42B4563D900893C91 /* PageTemplate */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PageTemplate;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 29C638F72B44FEAA00FCFE0F /* Project object */;
 }
