@@ -11,6 +11,8 @@
 		29758CF72B44F95B00307B89 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29758CF62B44F95B00307B89 /* ContentView.swift */; };
 		29758CF92B44F95C00307B89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29758CF82B44F95C00307B89 /* Assets.xcassets */; };
 		29758CFD2B44F95C00307B89 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29758CFC2B44F95C00307B89 /* Preview Assets.xcassets */; };
+		29D4692B2B44FB2100672CB4 /* LinkNavigator in Resources */ = {isa = PBXBuildFile; fileRef = 29D4692A2B44FB2100672CB4 /* LinkNavigator */; };
+		29D4692D2B44FB2A00672CB4 /* PageTemplate in Resources */ = {isa = PBXBuildFile; fileRef = 29D4692C2B44FB2A00672CB4 /* PageTemplate */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		29758CF82B44F95C00307B89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29758CFA2B44F95C00307B89 /* TabInjectionParameter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TabInjectionParameter.entitlements; sourceTree = "<group>"; };
 		29758CFC2B44F95C00307B89 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		29D4692A2B44FB2100672CB4 /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ../../..; sourceTree = "<group>"; };
+		29D4692C2B44FB2A00672CB4 /* PageTemplate */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PageTemplate; path = ../../Shared/PageTemplate; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +40,8 @@
 		29758CE82B44F95B00307B89 = {
 			isa = PBXGroup;
 			children = (
+				29D4692C2B44FB2A00672CB4 /* PageTemplate */,
+				29D4692A2B44FB2100672CB4 /* LinkNavigator */,
 				29758CF32B44F95B00307B89 /* TabInjectionParameter */,
 				29758CF22B44F95B00307B89 /* Products */,
 			);
@@ -128,7 +134,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				29758CFD2B44F95C00307B89 /* Preview Assets.xcassets in Resources */,
+				29D4692D2B44FB2A00672CB4 /* PageTemplate in Resources */,
 				29758CF92B44F95C00307B89 /* Assets.xcassets in Resources */,
+				29D4692B2B44FB2100672CB4 /* LinkNavigator in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

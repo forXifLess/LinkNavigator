@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29758D062B44FABF00307B89 /* LinkNavigator in Resources */ = {isa = PBXBuildFile; fileRef = 29758D052B44FABF00307B89 /* LinkNavigator */; };
+		29758D082B44FACC00307B89 /* PageTemplate in Resources */ = {isa = PBXBuildFile; fileRef = 29758D072B44FACC00307B89 /* PageTemplate */; };
 		29E086962B44F8E7002E0008 /* SingleInjectionParameterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E086952B44F8E7002E0008 /* SingleInjectionParameterApp.swift */; };
 		29E086982B44F8E7002E0008 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E086972B44F8E7002E0008 /* ContentView.swift */; };
 		29E0869A2B44F8E8002E0008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29E086992B44F8E8002E0008 /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29758D052B44FABF00307B89 /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ../../..; sourceTree = "<group>"; };
+		29758D072B44FACC00307B89 /* PageTemplate */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PageTemplate; path = ../../Shared/PageTemplate; sourceTree = "<group>"; };
 		29E086922B44F8E7002E0008 /* SingleInjectionParameter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleInjectionParameter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29E086952B44F8E7002E0008 /* SingleInjectionParameterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleInjectionParameterApp.swift; sourceTree = "<group>"; };
 		29E086972B44F8E7002E0008 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,6 +40,8 @@
 		29E086892B44F8E7002E0008 = {
 			isa = PBXGroup;
 			children = (
+				29758D072B44FACC00307B89 /* PageTemplate */,
+				29758D052B44FABF00307B89 /* LinkNavigator */,
 				29E086942B44F8E7002E0008 /* SingleInjectionParameter */,
 				29E086932B44F8E7002E0008 /* Products */,
 			);
@@ -128,7 +134,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				29E0869E2B44F8E8002E0008 /* Preview Assets.xcassets in Resources */,
+				29758D082B44FACC00307B89 /* PageTemplate in Resources */,
 				29E0869A2B44F8E8002E0008 /* Assets.xcassets in Resources */,
+				29758D062B44FABF00307B89 /* LinkNavigator in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

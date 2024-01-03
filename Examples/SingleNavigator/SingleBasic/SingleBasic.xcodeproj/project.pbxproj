@@ -13,6 +13,7 @@
 		29141E192B44E13A00D3ABE7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29141E182B44E13A00D3ABE7 /* Preview Assets.xcassets */; };
 		29141E212B44E19800D3ABE7 /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 29141E202B44E19800D3ABE7 /* LinkNavigator */; };
 		29141E232B44E21000D3ABE7 /* LinkNavigator in Resources */ = {isa = PBXBuildFile; fileRef = 29141E222B44E21000D3ABE7 /* LinkNavigator */; };
+		29758D042B44FA9B00307B89 /* PageTemplate in Resources */ = {isa = PBXBuildFile; fileRef = 29758D032B44FA9B00307B89 /* PageTemplate */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		29141E162B44E13A00D3ABE7 /* SingleBasic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SingleBasic.entitlements; sourceTree = "<group>"; };
 		29141E182B44E13A00D3ABE7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		29141E222B44E21000D3ABE7 /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ../../..; sourceTree = "<group>"; };
+		29758D032B44FA9B00307B89 /* PageTemplate */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PageTemplate; path = ../../Shared/PageTemplate; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +42,7 @@
 		29141E042B44E13900D3ABE7 = {
 			isa = PBXGroup;
 			children = (
+				29758D032B44FA9B00307B89 /* PageTemplate */,
 				29141E222B44E21000D3ABE7 /* LinkNavigator */,
 				29141E0F2B44E13900D3ABE7 /* SingleBasic */,
 				29141E0E2B44E13900D3ABE7 /* Products */,
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29141E192B44E13A00D3ABE7 /* Preview Assets.xcassets in Resources */,
+				29758D042B44FA9B00307B89 /* PageTemplate in Resources */,
 				29141E152B44E13A00D3ABE7 /* Assets.xcassets in Resources */,
 				29141E232B44E21000D3ABE7 /* LinkNavigator in Resources */,
 			);

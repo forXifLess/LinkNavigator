@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29758D0C2B44FAF900307B89 /* PageTemplate in Resources */ = {isa = PBXBuildFile; fileRef = 29758D0B2B44FAF900307B89 /* PageTemplate */; };
 		298BA8802B44F0EE005D55FE /* TabBasicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BA87F2B44F0EE005D55FE /* TabBasicApp.swift */; };
 		298BA8822B44F0EE005D55FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BA8812B44F0EE005D55FE /* ContentView.swift */; };
 		298BA8842B44F0EF005D55FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 298BA8832B44F0EF005D55FE /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29758D0B2B44FAF900307B89 /* PageTemplate */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PageTemplate; path = ../../Shared/PageTemplate; sourceTree = "<group>"; };
 		298BA87C2B44F0EE005D55FE /* TabBasic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabBasic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		298BA87F2B44F0EE005D55FE /* TabBasicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBasicApp.swift; sourceTree = "<group>"; };
 		298BA8812B44F0EE005D55FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -38,6 +40,7 @@
 		298BA8732B44F0EE005D55FE = {
 			isa = PBXGroup;
 			children = (
+				29758D0B2B44FAF900307B89 /* PageTemplate */,
 				298BA88E2B44F110005D55FE /* LinkNavigator */,
 				298BA87E2B44F0EE005D55FE /* TabBasic */,
 				298BA87D2B44F0EE005D55FE /* Products */,
@@ -131,6 +134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				298BA8882B44F0EF005D55FE /* Preview Assets.xcassets in Resources */,
+				29758D0C2B44FAF900307B89 /* PageTemplate in Resources */,
 				298BA8842B44F0EF005D55FE /* Assets.xcassets in Resources */,
 				298BA88F2B44F110005D55FE /* LinkNavigator in Resources */,
 			);
