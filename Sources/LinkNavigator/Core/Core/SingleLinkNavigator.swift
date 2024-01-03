@@ -20,6 +20,10 @@ public final class SingleLinkNavigator {
   {
     self.routeBuilderItemList = routeBuilderItemList
     self.dependency = dependency
+    coordinate = .init(sheetDidDismiss: { [weak self] presentVC in
+      self?.subController = .none
+      presentVC.delegate = .none
+    })
   }
 
   // MARK: Public
@@ -45,7 +49,7 @@ public final class SingleLinkNavigator {
 
   // MARK: - Private Properties
 
-  private var coordinate: Coordinate = .init(sheetDidDismiss: { })
+  private var coordinate: SheetCoordinate = .init(sheetDidDismiss: { _ in })
 
   private lazy var navigationBuilder: SingleNavigationBuilder<SingleLinkNavigator> = .init(
     rootNavigator: self,
@@ -557,27 +561,6 @@ extension SingleLinkNavigator: LinkNavigatorProtocol {
       }
   }
 
-}
-
-// MARK: SingleLinkNavigator.Coordinate
-
-extension SingleLinkNavigator {
-  fileprivate class Coordinate: NSObject, UIAdaptivePresentationControllerDelegate {
-
-    // MARK: Lifecycle
-
-    init(sheetDidDismiss: @escaping () -> Void) {
-      self.sheetDidDismiss = sheetDidDismiss
-    }
-
-    // MARK: Internal
-
-    var sheetDidDismiss: () -> Void
-
-    func presentationControllerDidDismiss(_: UIPresentationController) {
-      sheetDidDismiss()
-    }
-  }
 }
 
 extension UINavigationController {

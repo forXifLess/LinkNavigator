@@ -13,7 +13,7 @@ public final class LinkNavigator {
     self.dependency = dependency
     self.builders = builders
 
-    coordinate = .init(sheetDidDismiss: { [weak self] in
+    coordinate = .init(sheetDidDismiss: { [weak self] _ in
       self?.subNavigationController.setViewControllers([], animated: false)
       self?.subNavigationController.presentationController?.delegate = .none
     })
@@ -28,7 +28,7 @@ public final class LinkNavigator {
 
   // MARK: Private
 
-  private var coordinate: Coordinate = .init(sheetDidDismiss: { })
+  private var coordinate: SheetCoordinate = .init(sheetDidDismiss: { _ in })
 
 }
 
@@ -307,26 +307,5 @@ extension LinkNavigator {
       .viewControllers
       .compactMap { $0 as? MatchPathUsable & UIViewController }
       .last(where: { $0.matchPath == path })
-  }
-}
-
-// MARK: LinkNavigator.Coordinate
-
-extension LinkNavigator {
-  fileprivate class Coordinate: NSObject, UIAdaptivePresentationControllerDelegate {
-
-    // MARK: Lifecycle
-
-    init(sheetDidDismiss: @escaping () -> Void) {
-      self.sheetDidDismiss = sheetDidDismiss
-    }
-
-    // MARK: Internal
-
-    var sheetDidDismiss: () -> Void
-
-    func presentationControllerDidDismiss(_: UIPresentationController) {
-      sheetDidDismiss()
-    }
   }
 }

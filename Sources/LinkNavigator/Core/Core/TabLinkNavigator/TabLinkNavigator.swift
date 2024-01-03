@@ -12,6 +12,14 @@ public final class TabLinkNavigator {
   {
     self.routeBuilderItemList = routeBuilderItemList
     self.dependency = dependency
+    coordinate = .init(sheetDidDismiss: { [weak self] presentVC in
+      if presentVC.presentedViewController == self?.fullSheetController {
+        self?.fullSheetController = .none
+      } else {
+        self?.modalController = .none
+      }
+      presentVC.delegate = .none
+    })
   }
 
   // MARK: Public
@@ -37,6 +45,10 @@ public final class TabLinkNavigator {
       $0.navigationController == mainController?.selectedViewController
     })?.navigationController.topViewController as? MatchPathUsable)?.matchPath
   }
+
+  // MARK: - Private Properties
+
+  private var coordinate: SheetCoordinate = .init(sheetDidDismiss: { _ in })
 
   // MARK: Internal
 
@@ -85,12 +97,13 @@ extension TabLinkNavigator {
   {
     if fullSheetController != .none {
       fullSheetController?.dismiss(animated: true)
-      fullSheetController = .none
     } else {
       mainController?.dismiss(animated: true)
     }
 
     presentWillAction(subViewController)
+
+    subViewController.presentationController?.delegate = coordinate
 
     switch type {
     case .fullScreen, .overFullScreen:
@@ -115,16 +128,15 @@ extension TabLinkNavigator {
   }
 
   public func close(isAnimated: Bool, completion: () -> Void) {
-    if let modalController {
+    if modalController != .none {
       if let fullSheetController {
         fullSheetController.dismiss(animated: isAnimated)
       } else {
         mainController?.dismiss(animated: isAnimated)
       }
-      self.modalController = .none
-    } else if let fullSheetController {
+      self.mainController?.dismiss(animated: true)
+    } else if fullSheetController != .none {
       mainController?.dismiss(animated: isAnimated)
-      self.fullSheetController = .none
 
       completion()
     }
