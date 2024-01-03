@@ -5,7 +5,7 @@ import UIKit
 /// This struct allows you to create an alert with a specified title, message, an array of buttons, and a flag type.
 public struct Alert: Equatable {
 
-  // MARK: - Lifecycle
+  // MARK: Lifecycle
 
   /// Initializes a new alert with the provided parameters.
   ///
@@ -21,17 +21,17 @@ public struct Alert: Equatable {
     self.flagType = flagType
   }
 
-  // MARK: - Public
+  // MARK: Public
 
   /// Enumeration representing the different flag types an alert can have.
   ///
   /// Flag types help to categorize the alerts into various categories such as error or default.
   public enum FlagType: Equatable {
-    case error       ///< Represents an error flag type, used to indicate that the alert is presenting an error.
-    case `default`   ///< Represents a default flag type, used when no specific categorization is needed.
+    case error /// < Represents an error flag type, used to indicate that the alert is presenting an error.
+    case `default` /// < Represents a default flag type, used when no specific categorization is needed.
   }
 
-  // MARK: - Internal
+  // MARK: Internal
 
   /// The title of the alert.
   let title: String?

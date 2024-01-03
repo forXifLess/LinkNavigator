@@ -1,6 +1,8 @@
 import Foundation
 import SwiftUI
 
+// MARK: - LinkNavigationView
+
 /// Represents a view for navigation using `SingleLinkNavigator`.
 ///
 /// This struct is used to initialize a navigation view with a link navigator and a link item. The link navigator
@@ -30,7 +32,7 @@ public struct LinkNavigationView {
   }
 }
 
-// MARK: - UIViewControllerRepresentable
+// MARK: UIViewControllerRepresentable
 
 extension LinkNavigationView: UIViewControllerRepresentable {
 

@@ -17,6 +17,9 @@ let package = Package(
     .package(
       url: "https://github.com/interactord/URLEncodedForm",
       .upToNextMajor(from: "1.0.8")),
+    .package(
+      url: "https://github.com/airbnb/swift",
+      .upToNextMajor(from: "1.0.6")),
   ],
   targets: [
     .target(

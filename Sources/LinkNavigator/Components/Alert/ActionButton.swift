@@ -5,7 +5,7 @@ import UIKit
 /// This struct allows you to create a button with a specified title, style, and action closure.
 public struct ActionButton: Equatable {
 
-  // MARK: - Lifecycle
+  // MARK: Lifecycle
 
   /// Initializes a new action button with the provided parameters.
   ///
@@ -19,15 +19,15 @@ public struct ActionButton: Equatable {
     self.action = action
   }
 
-  // MARK: - Public
+  // MARK: Public
 
   /// Enumeration representing the different styles a button can have.
   ///
   /// These styles influence the button's appearance and behavior in the UI.
   public enum ActionStyle {
-    case `default`       ///< Represents the default style for a button.
-    case cancel         ///< Represents a cancel style, generally used for cancel buttons.
-    case destructive    ///< Represents a destructive style, generally used for actions that have destructive behaviors.
+    case `default` /// < Represents the default style for a button.
+    case cancel /// < Represents a cancel style, generally used for cancel buttons.
+    case destructive /// < Represents a destructive style, generally used for actions that have destructive behaviors.
 
     /// Computed property that maps ActionStyle cases to their corresponding UIAlertAction.Style counterparts.
     var uiRawValue: UIAlertAction.Style {
@@ -50,7 +50,7 @@ public struct ActionButton: Equatable {
     lhs.title == rhs.title
   }
 
-  // MARK: - Internal
+  // MARK: Internal
 
   /// The title of the action button.
   let title: String

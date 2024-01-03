@@ -1,7 +1,7 @@
 import SwiftUI
 import UIKit
 
-// MARK: - NavigationBuilder
+// MARK: - SingleNavigationBuilder
 
 /// A class that facilitates the construction of a navigation structure.
 ///
@@ -11,7 +11,7 @@ import UIKit
 public class SingleNavigationBuilder<Root> {
 
   // MARK: Lifecycle
-  
+
   /// Initializes a new instance of `NavigationBuilder`.
   ///
   /// - Parameters:
@@ -29,19 +29,19 @@ public class SingleNavigationBuilder<Root> {
   }
 
   // MARK: Internal
-  
+
   /// The root navigator object.
   let rootNavigator: Root
-  
+
   /// An array of `RouteBuilderOf` objects used to construct the routes.
   let routeBuilderList: [RouteBuilderOf<Root>]
-  
+
   /// The dependency required for constructing the routes.
   let dependency: DependencyType
 }
 
 extension SingleNavigationBuilder {
-  
+
   /// Builds a list of `RouteViewController` based on the provided `LinkItem`.
   ///
   /// - Parameter item: A `LinkItem` containing the paths and associated values.

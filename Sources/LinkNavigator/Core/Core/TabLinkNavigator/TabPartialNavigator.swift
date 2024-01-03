@@ -19,13 +19,13 @@ public final class TabPartialNavigator {
     self.dependency = dependency
   }
 
-  private var tabRootPathableController: TabRootNavigationController = .init(matchPath: "")
-
   // MARK: Public
 
   public let tabItem: TabItem
   public let routeBuilderItemList: [RouteBuilderOf<TabPartialNavigator>]
   public let dependency: DependencyType
+
+  public var owner: LinkNavigatorItemSubscriberProtocol? = .none
 
   public var rootController: UINavigationController { tabRootPathableController.navigationController }
 
@@ -35,9 +35,9 @@ public final class TabPartialNavigator {
 
   // MARK: Private
 
-  private weak var rootNavigator: TabLinkNavigator?
-  public var owner: LinkNavigatorItemSubscriberProtocol? = .none
+  private var tabRootPathableController: TabRootNavigationController = .init(matchPath: "")
 
+  private weak var rootNavigator: TabLinkNavigator?
   private lazy var navigationBuilder: TabNavigationBuilder<TabPartialNavigator> = .init(
     rootNavigator: self,
     routeBuilderList: routeBuilderItemList,
@@ -49,7 +49,12 @@ public final class TabPartialNavigator {
 }
 
 extension TabPartialNavigator {
-  public func launch(rootPath: String, item: LinkItem? = .none, prefersLargeTitles _: Bool = false) -> TabRootNavigationController {
+  public func launch(
+    rootPath: String,
+    item: LinkItem? = .none,
+    prefersLargeTitles _: Bool = false)
+    -> TabRootNavigationController
+  {
     let viewControllers = navigationBuilder.build(item: item ?? tabItem.linkItem)
 
     tabRootPathableController.matchPath = rootPath
@@ -70,6 +75,8 @@ extension TabPartialNavigator: LinkNavigatorFindLocationUsable {
     rootController.currentItemList()
   }
 }
+
+// MARK: TabLinkNavigatorProtocol
 
 extension TabPartialNavigator: TabLinkNavigatorProtocol {
   public func next(linkItem: LinkItem, isAnimated: Bool) {
@@ -136,7 +143,6 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
 
     rootNavigator?.targetController(targetTabPath: targetTabPath)?.popToViewController(pick, animated: isAnimated)
   }
-
 
   public func replace(linkItem: LinkItem, isAnimated: Bool) {
     let viewControllers = navigationBuilder.build(item: linkItem)
@@ -270,16 +276,22 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
   }
 
   public func sheet(linkItem: LinkItem, isAnimated: Bool) {
-    self.sheetOpen(item: linkItem, isAnimated: isAnimated, type: .automatic)
+    sheetOpen(item: linkItem, isAnimated: isAnimated, type: .automatic)
   }
 
-  public func fullSheet(linkItem: LinkItem, isAnimated: Bool, prefersLargeTitles: Bool?) {
-    self.sheetOpen(item: linkItem, isAnimated: isAnimated, type: .fullScreen)
+  public func fullSheet(linkItem: LinkItem, isAnimated: Bool, prefersLargeTitles _: Bool?) {
+    sheetOpen(item: linkItem, isAnimated: isAnimated, type: .fullScreen)
   }
 
-  public func customSheet(linkItem: LinkItem, isAnimated: Bool, iPhonePresentationStyle: UIModalPresentationStyle, iPadPresentationStyle: UIModalPresentationStyle, prefersLargeTitles: Bool?) {
+  public func customSheet(
+    linkItem: LinkItem,
+    isAnimated: Bool,
+    iPhonePresentationStyle: UIModalPresentationStyle,
+    iPadPresentationStyle: UIModalPresentationStyle,
+    prefersLargeTitles _: Bool?)
+  {
     let type = UIDevice.current.userInterfaceIdiom == .phone ? iPhonePresentationStyle : iPadPresentationStyle
-    self.sheetOpen(item: linkItem, isAnimated: isAnimated, type: type)
+    sheetOpen(item: linkItem, isAnimated: isAnimated, type: type)
   }
 
   public func rootReloadLast(items: LinkItem, isAnimated: Bool) {
@@ -296,7 +308,7 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
     rootController.setViewControllers(reloadedVC, animated: isAnimated)
   }
 
-  public func alert(target: NavigationTarget, model: Alert) {
+  public func alert(target _: NavigationTarget, model: Alert) {
     currentController?.present(model.build(), animated: true)
   }
 
@@ -389,8 +401,10 @@ extension UINavigationController {
   }
 }
 
+// MARK: - UINavigationController + UINavigationControllerDelegate
+
 extension UINavigationController: UINavigationControllerDelegate {
-  public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+  public func navigationController(_: UINavigationController, didShow viewController: UIViewController, animated _: Bool) {
     guard let matchPathUsableVC = viewController as? MatchPathUsable else { return }
 
     NotificationCenter.default
