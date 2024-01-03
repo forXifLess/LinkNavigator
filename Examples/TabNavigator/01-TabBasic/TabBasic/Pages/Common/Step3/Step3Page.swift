@@ -1,7 +1,7 @@
 import SwiftUI
 import LinkNavigator
 
-struct Tab3Page: View {
+struct Step3Page: View {
   let navigator: RootNavigatorType
   @State var currentPath: String = ""
 
@@ -12,8 +12,12 @@ struct Tab3Page: View {
 
       Spacer()
 
-      Button(action: { navigator.next(linkItem: .init(path: "step1"), isAnimated: true) }) {
-        Text("Next to 'Step1'")
+      Button(action: { navigator.next(linkItem: .init(path: "step4"), isAnimated: true) }) {
+        Text("Next to 'Step4'")
+      }
+
+      Button(action: { navigator.back(isAnimated: true) }) {
+        Text("Back")
       }
 
       Spacer()

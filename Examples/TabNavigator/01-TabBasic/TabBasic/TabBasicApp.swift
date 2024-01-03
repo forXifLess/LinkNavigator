@@ -24,8 +24,8 @@ struct TabBasicApp: App {
             tag: 1,
             tabItem: .init(
               title: "tab2",
-              image: UIImage(systemName: "list.bullet.clipboard"),
-              selectedImage: UIImage(systemName: "list.bullet.clipboard.fill")),
+              image: UIImage(systemName: "folder"),
+              selectedImage: UIImage(systemName: "folder.fill")),
             linkItem: .init(path: "tab2")),
           .init(
             tag: 2,
