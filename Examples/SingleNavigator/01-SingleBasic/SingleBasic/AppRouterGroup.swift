@@ -7,6 +7,11 @@ struct AppRouterGroup<RootNavigator: RootNavigatorType> {
 
   var routers: [RouteBuilderOf<RootNavigator>] {
     [
+      HomeRouteBuilder.generate(),
+      Page1RouteBuilder.generate(),
+      Page2RouteBuilder.generate(),
+      Page3RouteBuilder.generate(),
+      Page4RouteBuilder.generate(),
     ]
   }
 }

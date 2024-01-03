@@ -12,6 +12,16 @@
 		29141E192B44E13A00D3ABE7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29141E182B44E13A00D3ABE7 /* Preview Assets.xcassets */; };
 		29141E212B44E19800D3ABE7 /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 29141E202B44E19800D3ABE7 /* LinkNavigator */; };
 		29141E232B44E21000D3ABE7 /* LinkNavigator in Resources */ = {isa = PBXBuildFile; fileRef = 29141E222B44E21000D3ABE7 /* LinkNavigator */; };
+		29704ACD2B450B5800418967 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704ABF2B450B5800418967 /* HomeView.swift */; };
+		29704ACE2B450B5800418967 /* HomeRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704AC02B450B5800418967 /* HomeRouteBuilder.swift */; };
+		29704ACF2B450B5800418967 /* Page2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704AC22B450B5800418967 /* Page2View.swift */; };
+		29704AD02B450B5800418967 /* Page2RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704AC32B450B5800418967 /* Page2RouteBuilder.swift */; };
+		29704AD12B450B5800418967 /* Page3RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704AC52B450B5800418967 /* Page3RouteBuilder.swift */; };
+		29704AD22B450B5800418967 /* Page3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704AC62B450B5800418967 /* Page3View.swift */; };
+		29704AD32B450B5800418967 /* Page4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704AC82B450B5800418967 /* Page4View.swift */; };
+		29704AD42B450B5800418967 /* Page4RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704AC92B450B5800418967 /* Page4RouteBuilder.swift */; };
+		29704AD52B450B5800418967 /* Page1RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704ACB2B450B5800418967 /* Page1RouteBuilder.swift */; };
+		29704AD62B450B5800418967 /* Page1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704ACC2B450B5800418967 /* Page1View.swift */; };
 		29758D042B44FA9B00307B89 /* PageTemplate in Resources */ = {isa = PBXBuildFile; fileRef = 29758D032B44FA9B00307B89 /* PageTemplate */; };
 		9328462B2B450372000243AC /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328462A2B450372000243AC /* AppDependency.swift */; };
 		9328462D2B45037F000243AC /* AppRouterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328462C2B45037F000243AC /* AppRouterGroup.swift */; };
@@ -24,6 +34,16 @@
 		29141E162B44E13A00D3ABE7 /* SingleBasic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SingleBasic.entitlements; sourceTree = "<group>"; };
 		29141E182B44E13A00D3ABE7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		29141E222B44E21000D3ABE7 /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ../../..; sourceTree = "<group>"; };
+		29704ABF2B450B5800418967 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		29704AC02B450B5800418967 /* HomeRouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRouteBuilder.swift; sourceTree = "<group>"; };
+		29704AC22B450B5800418967 /* Page2View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page2View.swift; sourceTree = "<group>"; };
+		29704AC32B450B5800418967 /* Page2RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page2RouteBuilder.swift; sourceTree = "<group>"; };
+		29704AC52B450B5800418967 /* Page3RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page3RouteBuilder.swift; sourceTree = "<group>"; };
+		29704AC62B450B5800418967 /* Page3View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page3View.swift; sourceTree = "<group>"; };
+		29704AC82B450B5800418967 /* Page4View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page4View.swift; sourceTree = "<group>"; };
+		29704AC92B450B5800418967 /* Page4RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page4RouteBuilder.swift; sourceTree = "<group>"; };
+		29704ACB2B450B5800418967 /* Page1RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page1RouteBuilder.swift; sourceTree = "<group>"; };
+		29704ACC2B450B5800418967 /* Page1View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page1View.swift; sourceTree = "<group>"; };
 		29758D032B44FA9B00307B89 /* PageTemplate */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PageTemplate; path = ../../Shared/PageTemplate; sourceTree = "<group>"; };
 		9328462A2B450372000243AC /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
 		9328462C2B45037F000243AC /* AppRouterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterGroup.swift; sourceTree = "<group>"; };
@@ -62,6 +82,7 @@
 		29141E0F2B44E13900D3ABE7 /* SingleBasic */ = {
 			isa = PBXGroup;
 			children = (
+				29704ABD2B450B5800418967 /* Page */,
 				29141E102B44E13900D3ABE7 /* SingleBasicApp.swift */,
 				9328462A2B450372000243AC /* AppDependency.swift */,
 				9328462C2B45037F000243AC /* AppRouterGroup.swift */,
@@ -78,6 +99,63 @@
 				29141E182B44E13A00D3ABE7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		29704ABD2B450B5800418967 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				29704ABE2B450B5800418967 /* Home */,
+				29704AC12B450B5800418967 /* Page2 */,
+				29704AC42B450B5800418967 /* Page3 */,
+				29704AC72B450B5800418967 /* Page4 */,
+				29704ACA2B450B5800418967 /* Page1 */,
+			);
+			path = Page;
+			sourceTree = "<group>";
+		};
+		29704ABE2B450B5800418967 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				29704ABF2B450B5800418967 /* HomeView.swift */,
+				29704AC02B450B5800418967 /* HomeRouteBuilder.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		29704AC12B450B5800418967 /* Page2 */ = {
+			isa = PBXGroup;
+			children = (
+				29704AC22B450B5800418967 /* Page2View.swift */,
+				29704AC32B450B5800418967 /* Page2RouteBuilder.swift */,
+			);
+			path = Page2;
+			sourceTree = "<group>";
+		};
+		29704AC42B450B5800418967 /* Page3 */ = {
+			isa = PBXGroup;
+			children = (
+				29704AC52B450B5800418967 /* Page3RouteBuilder.swift */,
+				29704AC62B450B5800418967 /* Page3View.swift */,
+			);
+			path = Page3;
+			sourceTree = "<group>";
+		};
+		29704AC72B450B5800418967 /* Page4 */ = {
+			isa = PBXGroup;
+			children = (
+				29704AC82B450B5800418967 /* Page4View.swift */,
+				29704AC92B450B5800418967 /* Page4RouteBuilder.swift */,
+			);
+			path = Page4;
+			sourceTree = "<group>";
+		};
+		29704ACA2B450B5800418967 /* Page1 */ = {
+			isa = PBXGroup;
+			children = (
+				29704ACB2B450B5800418967 /* Page1RouteBuilder.swift */,
+				29704ACC2B450B5800418967 /* Page1View.swift */,
+			);
+			path = Page1;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,7 +196,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 29141E082B44E13900D3ABE7 /* Build configuration list for PBXProject "SingleBasic" */;
+			buildConfigurationList = 29141E082B44E13900D3ABE7 /* Build configuration list for PBXProject "01-SingleBasic" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -157,9 +235,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29704AD12B450B5800418967 /* Page3RouteBuilder.swift in Sources */,
 				9328462B2B450372000243AC /* AppDependency.swift in Sources */,
+				29704ACD2B450B5800418967 /* HomeView.swift in Sources */,
+				29704AD02B450B5800418967 /* Page2RouteBuilder.swift in Sources */,
+				29704AD32B450B5800418967 /* Page4View.swift in Sources */,
+				29704AD62B450B5800418967 /* Page1View.swift in Sources */,
+				29704ACF2B450B5800418967 /* Page2View.swift in Sources */,
 				9328462D2B45037F000243AC /* AppRouterGroup.swift in Sources */,
+				29704AD22B450B5800418967 /* Page3View.swift in Sources */,
+				29704AD42B450B5800418967 /* Page4RouteBuilder.swift in Sources */,
 				29141E112B44E13900D3ABE7 /* SingleBasicApp.swift in Sources */,
+				29704AD52B450B5800418967 /* Page1RouteBuilder.swift in Sources */,
+				29704ACE2B450B5800418967 /* HomeRouteBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,7 +445,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		29141E082B44E13900D3ABE7 /* Build configuration list for PBXProject "SingleBasic" */ = {
+		29141E082B44E13900D3ABE7 /* Build configuration list for PBXProject "01-SingleBasic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				29141E1A2B44E13A00D3ABE7 /* Debug */,

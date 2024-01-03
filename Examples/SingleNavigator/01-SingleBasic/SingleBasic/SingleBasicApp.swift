@@ -12,7 +12,7 @@ struct SingleBasicApp: App {
     WindowGroup {
       LinkNavigationView(
         linkNavigator: singleNavigator,
-        item: .init(path: "")
+        item: .init(path: "home")
       )
       .ignoresSafeArea()
     }
