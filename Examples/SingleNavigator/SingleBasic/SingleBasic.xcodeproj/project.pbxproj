@@ -8,23 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		29141E112B44E13900D3ABE7 /* SingleBasicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29141E102B44E13900D3ABE7 /* SingleBasicApp.swift */; };
-		29141E132B44E13900D3ABE7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29141E122B44E13900D3ABE7 /* ContentView.swift */; };
 		29141E152B44E13A00D3ABE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29141E142B44E13A00D3ABE7 /* Assets.xcassets */; };
 		29141E192B44E13A00D3ABE7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29141E182B44E13A00D3ABE7 /* Preview Assets.xcassets */; };
 		29141E212B44E19800D3ABE7 /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 29141E202B44E19800D3ABE7 /* LinkNavigator */; };
 		29141E232B44E21000D3ABE7 /* LinkNavigator in Resources */ = {isa = PBXBuildFile; fileRef = 29141E222B44E21000D3ABE7 /* LinkNavigator */; };
 		29758D042B44FA9B00307B89 /* PageTemplate in Resources */ = {isa = PBXBuildFile; fileRef = 29758D032B44FA9B00307B89 /* PageTemplate */; };
+		9328462B2B450372000243AC /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328462A2B450372000243AC /* AppDependency.swift */; };
+		9328462D2B45037F000243AC /* AppRouterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328462C2B45037F000243AC /* AppRouterGroup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		29141E0D2B44E13900D3ABE7 /* SingleBasic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleBasic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29141E102B44E13900D3ABE7 /* SingleBasicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleBasicApp.swift; sourceTree = "<group>"; };
-		29141E122B44E13900D3ABE7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		29141E142B44E13A00D3ABE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29141E162B44E13A00D3ABE7 /* SingleBasic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SingleBasic.entitlements; sourceTree = "<group>"; };
 		29141E182B44E13A00D3ABE7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		29141E222B44E21000D3ABE7 /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ../../..; sourceTree = "<group>"; };
 		29758D032B44FA9B00307B89 /* PageTemplate */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PageTemplate; path = ../../Shared/PageTemplate; sourceTree = "<group>"; };
+		9328462A2B450372000243AC /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
+		9328462C2B45037F000243AC /* AppRouterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +63,8 @@
 			isa = PBXGroup;
 			children = (
 				29141E102B44E13900D3ABE7 /* SingleBasicApp.swift */,
-				29141E122B44E13900D3ABE7 /* ContentView.swift */,
+				9328462A2B450372000243AC /* AppDependency.swift */,
+				9328462C2B45037F000243AC /* AppRouterGroup.swift */,
 				29141E142B44E13A00D3ABE7 /* Assets.xcassets */,
 				29141E162B44E13A00D3ABE7 /* SingleBasic.entitlements */,
 				29141E172B44E13A00D3ABE7 /* Preview Content */,
@@ -154,7 +157,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29141E132B44E13900D3ABE7 /* ContentView.swift in Sources */,
+				9328462B2B450372000243AC /* AppDependency.swift in Sources */,
+				9328462D2B45037F000243AC /* AppRouterGroup.swift in Sources */,
 				29141E112B44E13900D3ABE7 /* SingleBasicApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
