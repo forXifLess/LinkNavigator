@@ -1,5 +1,4 @@
 import SwiftUI
-import LinkNavigator
 
 struct Tab2Page: View {
   let navigator: RootNavigatorType

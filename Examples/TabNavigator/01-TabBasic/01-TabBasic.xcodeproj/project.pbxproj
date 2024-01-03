@@ -3,15 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		29758D0C2B44FAF900307B89 /* PageTemplate in Resources */ = {isa = PBXBuildFile; fileRef = 29758D0B2B44FAF900307B89 /* PageTemplate */; };
+		295C297E2B4556D300ED8C6F /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 295C297D2B4556D300ED8C6F /* LinkNavigator */; };
+		295C29812B4556F100ED8C6F /* PageTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = 295C29802B4556F100ED8C6F /* PageTemplate */; };
 		298BA8802B44F0EE005D55FE /* TabBasicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BA87F2B44F0EE005D55FE /* TabBasicApp.swift */; };
 		298BA8842B44F0EF005D55FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 298BA8832B44F0EF005D55FE /* Assets.xcassets */; };
 		298BA8882B44F0EF005D55FE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 298BA8872B44F0EF005D55FE /* Preview Assets.xcassets */; };
-		298BA88F2B44F110005D55FE /* LinkNavigator in Resources */ = {isa = PBXBuildFile; fileRef = 298BA88E2B44F110005D55FE /* LinkNavigator */; };
 		7E7A32502B4506D80078DAFF /* TapAppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A324F2B4506D80078DAFF /* TapAppDependency.swift */; };
 		7E7A32522B4507180078DAFF /* AppRouterBuilderGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A32512B4507180078DAFF /* AppRouterBuilderGroup.swift */; };
 		7E7A325A2B4508540078DAFF /* Tab1Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A32592B4508540078DAFF /* Tab1Page.swift */; };
@@ -25,13 +25,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		29758D0B2B44FAF900307B89 /* PageTemplate */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PageTemplate; path = ../../Shared/PageTemplate; sourceTree = "<group>"; };
 		298BA87C2B44F0EE005D55FE /* TabBasic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabBasic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		298BA87F2B44F0EE005D55FE /* TabBasicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBasicApp.swift; sourceTree = "<group>"; };
 		298BA8832B44F0EF005D55FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		298BA8852B44F0EF005D55FE /* TabBasic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TabBasic.entitlements; sourceTree = "<group>"; };
 		298BA8872B44F0EF005D55FE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		298BA88E2B44F110005D55FE /* LinkNavigator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LinkNavigator; path = ../../..; sourceTree = "<group>"; };
 		7E7A324F2B4506D80078DAFF /* TapAppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapAppDependency.swift; sourceTree = "<group>"; };
 		7E7A32512B4507180078DAFF /* AppRouterBuilderGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterBuilderGroup.swift; sourceTree = "<group>"; };
 		7E7A32592B4508540078DAFF /* Tab1Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab1Page.swift; sourceTree = "<group>"; };
@@ -49,6 +47,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				295C297E2B4556D300ED8C6F /* LinkNavigator in Frameworks */,
+				295C29812B4556F100ED8C6F /* PageTemplate in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,8 +58,6 @@
 		298BA8732B44F0EE005D55FE = {
 			isa = PBXGroup;
 			children = (
-				29758D0B2B44FAF900307B89 /* PageTemplate */,
-				298BA88E2B44F110005D55FE /* LinkNavigator */,
 				298BA87E2B44F0EE005D55FE /* TabBasic */,
 				298BA87D2B44F0EE005D55FE /* Products */,
 			);
@@ -158,6 +156,10 @@
 			dependencies = (
 			);
 			name = TabBasic;
+			packageProductDependencies = (
+				295C297D2B4556D300ED8C6F /* LinkNavigator */,
+				295C29802B4556F100ED8C6F /* PageTemplate */,
+			);
 			productName = TabBasic;
 			productReference = 298BA87C2B44F0EE005D55FE /* TabBasic.app */;
 			productType = "com.apple.product-type.application";
@@ -186,6 +188,10 @@
 				Base,
 			);
 			mainGroup = 298BA8732B44F0EE005D55FE;
+			packageReferences = (
+				295C297C2B4556D300ED8C6F /* XCLocalSwiftPackageReference "../../.." */,
+				295C297F2B4556F100ED8C6F /* XCLocalSwiftPackageReference "../../Shared/PageTemplate" */,
+			);
 			productRefGroup = 298BA87D2B44F0EE005D55FE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -201,9 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				298BA8882B44F0EF005D55FE /* Preview Assets.xcassets in Resources */,
-				29758D0C2B44FAF900307B89 /* PageTemplate in Resources */,
 				298BA8842B44F0EF005D55FE /* Assets.xcassets in Resources */,
-				298BA88F2B44F110005D55FE /* LinkNavigator in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,10 +355,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TabBasic/TabBasic.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TabBasic/Preview Content\"";
-				DEVELOPMENT_TEAM = 7836J6Z5N8;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -374,8 +378,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.forxifless.linknavigator.TabBasic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -388,10 +394,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TabBasic/TabBasic.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TabBasic/Preview Content\"";
-				DEVELOPMENT_TEAM = 7836J6Z5N8;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -411,8 +417,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.forxifless.linknavigator.TabBasic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -441,6 +449,28 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		295C297C2B4556D300ED8C6F /* XCLocalSwiftPackageReference "../../.." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../..;
+		};
+		295C297F2B4556F100ED8C6F /* XCLocalSwiftPackageReference "../../Shared/PageTemplate" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../Shared/PageTemplate;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		295C297D2B4556D300ED8C6F /* LinkNavigator */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LinkNavigator;
+		};
+		295C29802B4556F100ED8C6F /* PageTemplate */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PageTemplate;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 298BA8742B44F0EE005D55FE /* Project object */;
 }
