@@ -1,6 +1,8 @@
 import Foundation
 import UIKit
 
+// MARK: - TabNavigationBuilder
+
 public struct TabNavigationBuilder<Root> {
 
   // MARK: Lifecycle
@@ -21,6 +23,10 @@ public struct TabNavigationBuilder<Root> {
     self.dependency = dependency
   }
 
+  // MARK: Public
+
+  public typealias MatchedViewController = MatchPathUsable & UIViewController
+
   // MARK: Internal
 
   /// The root navigator object.
@@ -32,7 +38,6 @@ public struct TabNavigationBuilder<Root> {
   /// The dependency required for constructing the routes.
   let dependency: DependencyType
 
-  public typealias MatchedViewController = MatchPathUsable & UIViewController
 }
 
 extension TabNavigationBuilder {
@@ -49,7 +54,8 @@ extension TabNavigationBuilder {
   }
 
   public func firstPick(controller: UINavigationController?, item: LinkItem)
-  -> RouteViewController? {
+    -> RouteViewController?
+  {
     guard let controller, let first = item.pathList.first else { return .none }
     return controller.viewControllers
       .compactMap { $0 as? RouteViewController }

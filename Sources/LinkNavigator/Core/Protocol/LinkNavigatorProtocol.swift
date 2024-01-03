@@ -6,28 +6,28 @@ import UIKit
 public protocol LinkNavigatorProtocol {
 
   /// Navigates to the next link item.
-  /// 
+  ///
   /// - Parameters:
   ///   - linkItem: The link item to navigate to.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
   func next(linkItem: LinkItem, isAnimated: Bool)
 
   /// Navigates to the root next link item.
-  /// 
+  ///
   /// - Parameters:
   ///   - linkItem: The link item to navigate to at the root level.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
   func rootNext(linkItem: LinkItem, isAnimated: Bool)
 
   /// Presents a sheet with the given link item.
-  /// 
+  ///
   /// - Parameters:
   ///   - linkItem: The link item to present.
   ///   - isAnimated: A Boolean value that determines whether the presentation is animated.
   func sheet(linkItem: LinkItem, isAnimated: Bool)
 
   /// Presents a full sheet with the given link item.
-  /// 
+  ///
   /// - Parameters:
   ///   - linkItem: The link item to present.
   ///   - isAnimated: A Boolean value that determines whether the presentation is animated.
@@ -35,7 +35,7 @@ public protocol LinkNavigatorProtocol {
   func fullSheet(linkItem: LinkItem, isAnimated: Bool, prefersLargeTitles: Bool?)
 
   /// Presents a custom sheet with the specified characteristics.
-  /// 
+  ///
   /// - Parameters:
   ///   - linkItem: The link item to present.
   ///   - isAnimated: A Boolean value that determines whether the presentation is animated.
@@ -50,36 +50,36 @@ public protocol LinkNavigatorProtocol {
     prefersLargeTitles: Bool?)
 
   /// Replaces the current link item with the given link item.
-  /// 
+  ///
   /// - Parameters:
   ///   - linkItem: The new link item to replace the current one.
   ///   - isAnimated: A Boolean value that determines whether the replacement is animated.
   func replace(linkItem: LinkItem, isAnimated: Bool)
 
   /// Navigates either back or to the next link item based on the current state.
-  /// 
+  ///
   /// - Parameters:
   ///   - linkItem: The link item to navigate to or back from.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
   func backOrNext(linkItem: LinkItem, isAnimated: Bool)
 
   /// Navigates either back or to the root next link item based on the current state.
-  /// 
+  ///
   /// - Parameters:
   ///   - linkItem: The link item to navigate to or back from at the root level.
   ///   - isAnimated: A Boolean value that determines whether the navigation is animated.
   func rootBackOrNext(linkItem: LinkItem, isAnimated: Bool)
 
   /// Navigates back in the navigation stack.
-  /// 
+  ///
   /// - Parameter isAnimated: A Boolean value that determines whether the navigation is animated.
   func back(isAnimated: Bool)
 
   /// Removes the specified paths from the navigation stack.
-  /// 
+  ///
   /// - Parameter pathList: A list of paths to remove.
   func remove(pathList: [String])
-  
+
   /// Removes the specified paths at the root level from the navigation stack.
   ///
   /// - Parameter pathList: A list of paths to remove from the root of the navigation stack.
@@ -119,16 +119,16 @@ public protocol LinkNavigatorProtocol {
   ///   - isAnimated: A Boolean value indicating whether the reload should be animated.
   func rootReloadLast(items: LinkItem, isAnimated: Bool)
 
-  /// Displays an alert with the specified target and model. Depending on the target parameter, 
+  /// Displays an alert with the specified target and model. Depending on the target parameter,
   /// the alert is displayed either on the root or the sub-controller.
   ///
   /// - Parameters:
   ///   - target: The target specifying where to display the alert. It can be root, sub, or default.
-  ///             If the target is default, it determines whether to present the alert on sub or root based 
+  ///             If the target is default, it determines whether to present the alert on sub or root based
   ///             on the `isSubNavigatorActive` property.
   ///   - model: The model containing information for building and displaying the alert.
   func alert(target: NavigationTarget, model: Alert)
-  
+
   /// Sends the specified link item to a specific subscriber ('sub') or page sheet within the current navigation stack.
   /// This method facilitates communication between pages, allowing data to be transferred to a specific 'sub' or page sheet as defined in the link item.
   ///

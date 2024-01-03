@@ -1,11 +1,13 @@
 import Foundation
 import UIKit
 
+// MARK: - SingleLinkNavigator
+
 /// The `SingleLinkNavigator` class manages the navigation within a single link setup.
 /// It coordinates navigation functionalities like adding, removing, and navigating back to pages.
 public final class SingleLinkNavigator {
 
-  // MARK: - Lifecycle
+  // MARK: Lifecycle
 
   /// Initializes a new instance of `SingleLinkNavigator`.
   ///
@@ -20,22 +22,26 @@ public final class SingleLinkNavigator {
     self.dependency = dependency
   }
 
+  // MARK: Public
+
   // MARK: - Public Properties
 
   /// A collection of `RouteBuilderOf` objects utilized for the creation of new pages.
   public let routeBuilderItemList: [RouteBuilderOf<SingleLinkNavigator>]
-  
+
   /// A requirement for injecting MVI SideEffects that are utilized across the entire project.
   public let dependency: DependencyType
-  
+
   /// The central navigation controller that orchestrates the navigation flow.
   public weak var rootController: UINavigationController?
-  
+
   /// A subscriber that holds the current link navigator.
   public var owner: LinkNavigatorItemSubscriberProtocol? = .none
-  
+
   /// A navigation controller that oversees the display of subordinate navigation sequences.
   public var subController: UINavigationController?
+
+  // MARK: Private
 
   // MARK: - Private Properties
 
@@ -50,6 +56,8 @@ public final class SingleLinkNavigator {
 
 extension SingleLinkNavigator {
 
+  // MARK: Public
+
   // MARK: - Public Methods
 
   /// Starts the navigation process with a specified item as the initial point.
@@ -57,11 +65,13 @@ extension SingleLinkNavigator {
   /// - Parameters:
   ///   - item: The initial link item used to commence the navigation process.
   ///   - prefersLargeTitles: A Boolean flag that indicates if the navigation bar prefers large titles. Defaults to `false`.
-  /// 
+  ///
   /// - Returns: A collection of `UIViewController` objects representing the initiated navigation flow.
   public func launch(item: LinkItem, prefersLargeTitles _: Bool = false) -> [UIViewController] {
     navigationBuilder.build(item: item)
   }
+
+  // MARK: Private
 
   // MARK: - Private Methods
 
@@ -71,7 +81,7 @@ extension SingleLinkNavigator {
   }
 }
 
-// MARK: - LinkNavigatorFindLocationUsable
+// MARK: LinkNavigatorFindLocationUsable
 
 extension SingleLinkNavigator: LinkNavigatorFindLocationUsable {
 
@@ -94,7 +104,7 @@ extension SingleLinkNavigator: LinkNavigatorFindLocationUsable {
 extension SingleLinkNavigator {
 
   /// Initiates navigation to the next link item with the option of animation.
-  /// 
+  ///
   /// - Parameters:
   ///   - linkItem: An object representing the item to navigate to, it accepts either a `String` or a dictionary with `String` keys and values as `ItemValue`.
   ///   - isAnimated: A boolean to indicate if the navigation transition should be animated.
@@ -232,7 +242,7 @@ extension SingleLinkNavigator {
     rootController.popToViewController(pick, animated: isAnimated)
   }
 
-// 다시
+  // 다시
   /// Navigates backwards either through the sub navigator or the root controller based on the `isSubNavigatorActive` flag.
   ///
   /// - Parameter:
@@ -309,7 +319,7 @@ extension SingleLinkNavigator {
     }
   }
 
-   /// Retrieves a range of paths up to the specified path from the current paths in the root controller.
+  /// Retrieves a range of paths up to the specified path from the current paths in the root controller.
   ///
   /// - Parameter:
   ///   - path: A string representing the endpoint of the range retrieval.
@@ -329,7 +339,11 @@ extension SingleLinkNavigator {
   private func _rootReloadLast(item: LinkItem, isAnimated _: Bool) {
     guard let lastPath = getCurrentPaths().last else { return }
     guard let rootController else { return }
-    guard let new = routeBuilderItemList.first(where: { $0.matchPath == lastPath })?.routeBuild(self, item.encodedItemString, dependency)
+    guard
+      let new = routeBuilderItemList.first(where: { $0.matchPath == lastPath })?.routeBuild(
+        self,
+        item.encodedItemString,
+        dependency)
     else { return }
 
     let newList = rootController.dropLast() + [new]
@@ -375,7 +389,7 @@ extension SingleLinkNavigator {
   {
     DispatchQueue.main.async { [weak self] in
       guard let self else { return }
-      guard let rootController = self.rootController else { return }
+      guard let rootController else { return }
 
       rootController.dismiss(animated: true)
       let newController = UINavigationController()
@@ -413,7 +427,7 @@ extension SingleLinkNavigator {
   }
 }
 
-// MARK: LinkNavigatorURLEncodedItemProtocol
+// MARK: LinkNavigatorProtocol
 
 extension SingleLinkNavigator: LinkNavigatorProtocol {
   public func next(linkItem: LinkItem, isAnimated: Bool) {

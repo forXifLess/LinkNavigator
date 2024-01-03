@@ -21,6 +21,6 @@ extension DependencyType {
   ///
   /// It tries to cast `self` to the specified type and returns it if successful. If the cast fails, it returns `nil`.
   public func resolve<T>() -> T? {
-    return self as? T
+    self as? T
   }
 }

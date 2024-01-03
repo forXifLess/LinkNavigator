@@ -1,6 +1,8 @@
 import Foundation
 import SwiftUI
 
+// MARK: - TabLinkNavigationView
+
 public struct TabLinkNavigationView {
   let linkNavigator: TabLinkNavigator
   let isHiddenDefaultTabbar: Bool
@@ -9,14 +11,15 @@ public struct TabLinkNavigationView {
   public init(
     linkNavigator: TabLinkNavigator,
     isHiddenDefaultTabbar: Bool,
-    tabItemList: [TabItem] = []) {
-      self.linkNavigator = linkNavigator
-      self.isHiddenDefaultTabbar = isHiddenDefaultTabbar
-      self.tabItemList = tabItemList
-    }
+    tabItemList: [TabItem] = [])
+  {
+    self.linkNavigator = linkNavigator
+    self.isHiddenDefaultTabbar = isHiddenDefaultTabbar
+    self.tabItemList = tabItemList
+  }
 }
 
-// MARK: - UIViewControllerRepresentable
+// MARK: UIViewControllerRepresentable
 
 extension TabLinkNavigationView: UIViewControllerRepresentable {
   public func makeUIViewController(context _: Context) -> UITabBarController {

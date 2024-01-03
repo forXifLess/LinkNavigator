@@ -16,7 +16,7 @@ public struct LinkItem {
   ///   - items: The items associated with the pathList.
   public init(pathList: [String], items: String = "") {
     self.pathList = pathList
-    self.encodedItemString = items
+    encodedItemString = items
   }
 
   /// Initializes a LinkItem instance with a given path and an items parameter.
@@ -26,7 +26,7 @@ public struct LinkItem {
   ///   - items: The items associated with the path.
   public init(path: String, items: String = "") {
     pathList = [path]
-    self.encodedItemString = items
+    encodedItemString = items
   }
 
   // MARK: Internal
@@ -48,7 +48,7 @@ extension LinkItem: Equatable {
   }
 }
 
-//extension LinkItem where ItemType == String {
+// extension LinkItem where ItemType == String {
 //  /// Initializes a LinkItem instance with a given path list and an optional items parameter.
 //  ///
 //  /// - Parameters:
@@ -68,9 +68,9 @@ extension LinkItem: Equatable {
 //    pathList = [path]
 //    self.items = items
 //  }
-//}
+// }
 
-//extension LinkItem where ItemType == [String: String] {
+// extension LinkItem where ItemType == [String: String] {
 //  /// Initializes a LinkItem instance with a given path list and an optional items dictionary.
 //  ///
 //  /// - Parameters:
@@ -90,7 +90,7 @@ extension LinkItem: Equatable {
 //    pathList = [path]
 //    self.items = items
 //  }
-//}
+// }
 
 extension String {
   public func decoded<T: Decodable>() -> T? {
@@ -98,8 +98,10 @@ extension String {
       return decodedValue
     }
 
-    guard let data = Data(base64Encoded: self),
-          let decodedModel = try? JSONDecoder().decode(T.self, from: data) else { return .none }
+    guard
+      let data = Data(base64Encoded: self),
+      let decodedModel = try? JSONDecoder().decode(T.self, from: data)
+    else { return .none }
 
     return decodedModel
   }

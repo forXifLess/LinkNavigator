@@ -8,8 +8,7 @@ public final class TabLinkNavigator {
 
   public init(
     routeBuilderItemList: [RouteBuilderOf<TabPartialNavigator>],
-    dependency: DependencyType
-  )
+    dependency: DependencyType)
   {
     self.routeBuilderItemList = routeBuilderItemList
     self.dependency = dependency
@@ -26,11 +25,6 @@ public final class TabLinkNavigator {
 
   public weak var mainController: UITabBarController?
 
-  // MARK: Internal
-
-  var modalController: UINavigationController? = .none
-  var fullSheetController: UINavigationController? = .none
-
   public var currentTabRootPath: String? {
     guard let currentController = mainController?.selectedViewController else { return .none }
     let currentTabRootController = tabRootNavigators.first(where: { $0.navigationController == currentController })
@@ -43,6 +37,12 @@ public final class TabLinkNavigator {
       $0.navigationController == mainController?.selectedViewController
     })?.navigationController.topViewController as? MatchPathUsable)?.matchPath
   }
+
+  // MARK: Internal
+
+  var modalController: UINavigationController? = .none
+  var fullSheetController: UINavigationController? = .none
+
 }
 
 extension TabLinkNavigator {
@@ -84,8 +84,8 @@ extension TabLinkNavigator {
     presentDidAction: @escaping (UINavigationController) -> Void = { _ in })
   {
     if fullSheetController != .none {
-      self.fullSheetController?.dismiss(animated: true)
-      self.fullSheetController = .none
+      fullSheetController?.dismiss(animated: true)
+      fullSheetController = .none
     } else {
       mainController?.dismiss(animated: true)
     }
@@ -138,7 +138,8 @@ extension TabLinkNavigator {
   }
 
   public func moveTab(targetPath: String) {
-    guard let targetController = tabRootNavigators.first(where: { $0.matchPath == targetPath })?.navigationController else { return }
+    guard let targetController = tabRootNavigators.first(where: { $0.matchPath == targetPath })?.navigationController
+    else { return }
 
     if mainController?.selectedViewController == targetController {
       targetController.popToRootViewController(animated: true)
@@ -150,9 +151,7 @@ extension TabLinkNavigator {
       .post(name: TabbarEventNotification.onSelectedTab, object: targetPath)
   }
 
-  public func reload(items: LinkItem, isAnimated: Bool) {
-
-  }
+  public func reload(items _: LinkItem, isAnimated _: Bool) { }
 }
 
 extension UINavigationController {
