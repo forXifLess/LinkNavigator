@@ -95,10 +95,8 @@ extension TabLinkNavigator {
     presentWillAction: @escaping (UINavigationController) -> Void = { _ in },
     presentDidAction: @escaping (UINavigationController) -> Void = { _ in })
   {
-    if fullSheetController != .none {
-      fullSheetController?.dismiss(animated: true)
-    } else {
-      mainController?.dismiss(animated: true)
+    if modalController != .none {
+      modalController?.dismiss(animated: true)
     }
 
     presentWillAction(subViewController)
@@ -128,18 +126,15 @@ extension TabLinkNavigator {
   }
 
   public func close(isAnimated: Bool, completion: () -> Void) {
-    if modalController != .none {
-      if let fullSheetController {
-        fullSheetController.dismiss(animated: isAnimated)
-      } else {
-        mainController?.dismiss(animated: isAnimated)
-      }
-      self.mainController?.dismiss(animated: true)
-    } else if fullSheetController != .none {
-      mainController?.dismiss(animated: isAnimated)
-
-      completion()
+    if let modalController {
+      modalController.dismiss(animated: isAnimated)
+      self.modalController = .none
+    } else if let fullSheetController {
+      fullSheetController.dismiss(animated: isAnimated)
+      self.fullSheetController = .none
     }
+
+    completion()
   }
 
   public func closeAll(isAnimated: Bool, completion: () -> Void) {
