@@ -227,8 +227,8 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
     sheetOpen(item: linkItem, isAnimated: isAnimated, type: type)
   }
 
-  public func rootReloadLast(items: LinkItem, isAnimated: Bool) {
-    let viewControllers = navigationBuilder.build(item: items)
+  public func rootReloadLast(linkItem: LinkItem, isAnimated: Bool) {
+    let viewControllers = navigationBuilder.build(item: linkItem)
     guard !viewControllers.isEmpty else { return }
 
     let reloadedVC = viewControllers.reduce(rootController.viewControllers) { current, next in
@@ -245,46 +245,46 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
     currentController?.present(model.build(), animated: true)
   }
 
-  public func send(item: LinkItem) {
+  public func send(linkItem: LinkItem) {
     rootNavigator?.tabRootNavigators
       .flatMap(\.navigationController.viewControllers)
       .compactMap { $0 as? MatchPathUsable }
-      .filter { item.pathList.contains($0.matchPath) }
+      .filter { linkItem.pathList.contains($0.matchPath) }
       .forEach {
-        $0.eventSubscriber?.receive(encodedItemString: item.encodedItemString)
+        $0.eventSubscriber?.receive(encodedItemString: linkItem.encodedItemString)
       }
   }
 
-  public func rootSend(item: LinkItem) {
+  public func rootSend(linkItem: LinkItem) {
     rootController.viewControllers
       .compactMap { $0 as? MatchPathUsable }
-      .filter { item.pathList.contains($0.matchPath) }
+      .filter { linkItem.pathList.contains($0.matchPath) }
       .forEach {
-        $0.eventSubscriber?.receive(encodedItemString: item.encodedItemString)
+        $0.eventSubscriber?.receive(encodedItemString: linkItem.encodedItemString)
       }
   }
 
-  public func mainSend(item: LinkItem) {
+  public func mainSend(linkItem: LinkItem) {
     guard let owner else { return }
     DispatchQueue.main.async {
-      owner.receive(encodedItemString: item.encodedItemString)
+      owner.receive(encodedItemString: linkItem.encodedItemString)
     }
   }
 
-  public func allSend(item: LinkItem) {
+  public func allSend(linkItem: LinkItem) {
     rootNavigator?.tabRootNavigators
       .flatMap(\.navigationController.viewControllers)
       .compactMap { $0 as? MatchPathUsable }
       .forEach {
-        $0.eventSubscriber?.receive(encodedItemString: item.encodedItemString)
+        $0.eventSubscriber?.receive(encodedItemString: linkItem.encodedItemString)
       }
   }
 
-  public func allRootSend(item: LinkItem) {
+  public func allRootSend(linkItem: LinkItem) {
     rootController.viewControllers
       .compactMap { ($0 as? MatchPathUsable)?.eventSubscriber }
       .forEach {
-        $0.receive(encodedItemString: item.encodedItemString)
+        $0.receive(encodedItemString: linkItem.encodedItemString)
       }
   }
 

@@ -117,7 +117,7 @@ public protocol TabLinkNavigatorProtocol {
   /// - Parameters:
   ///   - items: A string representing the raw QueryString for the items to reload.
   ///   - isAnimated: A Boolean value indicating whether the reload should be animated.
-  func rootReloadLast(items: LinkItem, isAnimated: Bool)
+  func rootReloadLast(linkItem: LinkItem, isAnimated: Bool)
 
   /// Displays an alert with the specified target and model. Depending on the target parameter,
   /// the alert is displayed either on the root or the sub-controller.
@@ -133,27 +133,27 @@ public protocol TabLinkNavigatorProtocol {
   /// This method facilitates communication between pages, allowing data to be transferred to a specific 'sub' or page sheet as defined in the link item.
   ///
   /// - Parameter item: The link item encapsulating the data and the target path to be sent.
-  func send(item: LinkItem)
+  func send(linkItem: LinkItem)
 
   /// Sends the specified link item to the root controller which governs the page sheets (sub). This method is mainly used for communications directly involving the root controller which has overarching control over page sheets.
   ///
   /// - Parameter item: The link item to be sent to the root controller.
-  func rootSend(item: LinkItem)
+  func rootSend(linkItem: LinkItem)
 
   /// Sends the main items directly to the appMain, which is a NavigationController that wraps around the link navigator. This method allows for data communication directly with the appMain, facilitating broad-reaching communications within the app.
   ///
   /// - Parameter item: The main items to be sent, often containing key-value pairs of data to be communicated to the appMain.
-  func mainSend(item: LinkItem)
+  func mainSend(linkItem: LinkItem)
 
   /// Sends the specified items to all designated receivers, including both the 'sub' page sheets and the root controllers, within the current navigation stack. This allows for a widespread dissemination of data across various levels of the navigation stack.
   ///
   /// - Parameter item: The items to be sent to all receivers, encapsulating data that may be relevant across multiple page sheets and root controllers.
-  func allSend(item: LinkItem)
+  func allSend(linkItem: LinkItem)
 
   /// Sends the specified items to all root controllers in the navigation stack. This method is instrumental in disseminating information broadly at the root level, which governs the behaviors and states of the 'sub' page sheets.
   ///
   /// - Parameter item: The items to be sent to all root controllers, typically containing information pertinent across all root level pages.
-  func allRootSend(item: LinkItem)
+  func allRootSend(linkItem: LinkItem)
 
   func moveTab(path: String)
 }
