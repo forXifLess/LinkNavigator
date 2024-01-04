@@ -7,10 +7,13 @@ struct Page1RouteBuilder<RootNavigator: RootNavigatorType> {
     var matchPath: String { "page1" }
     return .init(matchPath: matchPath) { navigator, items, diContainer -> RouteViewController? in
       let query: HomeToPage1Item? = items.decoded()
+      let deepLinkItem: DeepLinkItem? = items.decoded()
       return WrappingController(matchPath: matchPath) {
         Page1View(
           navigator: navigator,
-          item: query)
+          item: query,
+          deepLinkItem: deepLinkItem
+        )
       }
     }
   }

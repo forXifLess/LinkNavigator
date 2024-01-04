@@ -5,6 +5,7 @@ struct Page1View: View {
 
   let navigator: RootNavigatorType
   let item: HomeToPage1Item?
+  let deepLinkItem: DeepLinkItem?
 
   var body: some View {
     VStack(spacing: 30) {
@@ -15,12 +16,25 @@ struct Page1View: View {
         VStack(spacing: 10) {
           HStack {
             Image(systemName: "envelope")
-            Text("Received Message")
+            Text("HomePage Received Message")
           }
           .font(.footnote)
           .foregroundColor(.secondary)
 
           Text(item?.message ?? "-")
+        }
+      }
+
+      GroupBox {
+        VStack(spacing: 10) {
+          HStack {
+            Image(systemName: "envelope")
+            Text("DeepLink Received Message")
+          }
+          .font(.footnote)
+          .foregroundColor(.secondary)
+
+          Text(deepLinkItem?.message ?? "-")
         }
       }
 
