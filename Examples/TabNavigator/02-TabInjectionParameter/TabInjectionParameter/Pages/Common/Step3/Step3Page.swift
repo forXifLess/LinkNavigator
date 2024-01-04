@@ -17,7 +17,7 @@ struct Step3Page: View {
       }
 
       Button(action: { 
-        navigator.rootReloadLast(linkItem: .init(path: "step2", items: Step2InjectionData(message: "Replaced message!")), isAnimated: true) }) {
+        navigator.reloadLast(linkItem: .init(path: "step2", items: Step2InjectionData(message: "Replaced message!")), isAnimated: true) }) {
         Text("Replaced 'Step3' message")
       }
 

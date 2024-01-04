@@ -112,6 +112,13 @@ public protocol TabLinkNavigatorProtocol {
   /// - Returns: An array of paths representing the range.
   func range(path: String) -> [String]
 
+  /// Reloads the last current item with the specified items.
+  ///
+  /// - Parameters:
+  ///   - items: A string representing the raw QueryString for the items to reload.
+  ///   - isAnimated: A Boolean value indicating whether the reload should be animated.
+  func reloadLast(linkItem: LinkItem, isAnimated: Bool)
+
   /// Reloads the last root item with the specified items.
   ///
   /// - Parameters:

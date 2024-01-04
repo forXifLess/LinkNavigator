@@ -227,6 +227,20 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
     sheetOpen(item: linkItem, isAnimated: isAnimated, type: type)
   }
 
+  public func reloadLast(linkItem: LinkItem, isAnimated: Bool) {
+    let viewControllers = navigationBuilder.build(item: linkItem)
+    guard !viewControllers.isEmpty else { return }
+
+    let reloadedVC = viewControllers.reduce(currentController?.viewControllers ?? []) { current, next in
+      guard let idx = current.firstIndex(where: { ($0 as? MatchPathUsable)?.matchPath == next.matchPath }) else { return current }
+      var variableCurrentVC = current
+      variableCurrentVC[idx] = next
+      return variableCurrentVC
+    }
+
+    currentController?.setViewControllers(reloadedVC, animated: isAnimated)
+  }
+
   public func rootReloadLast(linkItem: LinkItem, isAnimated: Bool) {
     let viewControllers = navigationBuilder.build(item: linkItem)
     guard !viewControllers.isEmpty else { return }
