@@ -14,8 +14,6 @@ struct Page2View: View {
     self.linkSubscriber = linkSubscriber
   }
 
-  @State var message: String = ""
-
   var body: some View {
     ScrollView {
       VStack(spacing: 40) {
@@ -39,20 +37,13 @@ struct Page2View: View {
             .font(.footnote)
             .foregroundColor(.secondary)
 
-            Text(message)
+            Text(linkSubscriber.linkAction?.message ?? "-")
           }
         }
 
         Spacer()
       }
       .padding()
-    }
-    .onReceive(linkSubscriber.linkAction) { action in
-      switch action {
-      case .page2ToData(let eventData):
-        message = eventData.message
-        return
-      }
     }
   }
 }
