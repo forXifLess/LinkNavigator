@@ -7,36 +7,36 @@ struct HomeView: View {
   @State var message: String = ""
 
   var body: some View {
-    ScrollView {
-      VStack(spacing: 40) {
+    VStack(spacing: 30) {
+      PathIndicator(currentPath: navigator.getCurrentPaths().joined(separator: " -> "))
+        .padding(.top, 32)
 
-        VStack(spacing: 16) {
-          TextField("Type message here", text: $message)
-            .textFieldStyle(.roundedBorder)
-            .padding(.horizontal)
-
-          Button(action: {
-            navigator.backOrNext(
-              linkItem: .init(
-                path: "page1",
-                items: HomeToPage1Item(message: message).encoded()
-              ),
-              isAnimated: true)
-          }) {
-            Text("go to next Page with Message")
-          }
-        }
+      VStack(spacing: 16) {
+        TextField("Type message here", text: $message)
+          .textFieldStyle(.roundedBorder)
+          .padding(.horizontal)
 
         Button(action: {
-          navigator.backOrNext(linkItem: .init(path: "page1"), isAnimated: true)
+          navigator.backOrNext(
+            linkItem: .init(
+              path: "page1",
+              items: HomeToPage1Item(message: message).encoded()
+            ),
+            isAnimated: true)
         }) {
-          Text("go to next Page")
+          Text("go to next Page with Message")
         }
-
-        Spacer()
       }
-      .padding()
+
+      Button(action: {
+        navigator.backOrNext(linkItem: .init(path: "page1"), isAnimated: true)
+      }) {
+        Text("go to next Page")
+      }
+
+      Spacer()
     }
+    .padding()
   }
 }
 
