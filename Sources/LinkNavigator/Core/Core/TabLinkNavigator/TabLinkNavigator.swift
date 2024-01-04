@@ -97,11 +97,10 @@ extension TabLinkNavigator {
   {
     if modalController != .none {
       modalController?.dismiss(animated: true)
+      modalController = .none
     }
 
     presentWillAction(subViewController)
-
-    subViewController.presentationController?.delegate = coordinate
 
     switch type {
     case .fullScreen, .overFullScreen:
@@ -122,6 +121,8 @@ extension TabLinkNavigator {
       }
       modalController = subViewController
     }
+
+    subViewController.presentationController?.delegate = coordinate
     presentDidAction(subViewController)
   }
 
