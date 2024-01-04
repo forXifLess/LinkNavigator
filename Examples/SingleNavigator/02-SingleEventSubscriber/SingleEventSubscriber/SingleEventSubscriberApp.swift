@@ -15,6 +15,14 @@ struct SingleEventSubscriberApp: App {
         item: .init(path: "home")
       )
       .ignoresSafeArea()
+      .onOpenURL { url in
+        DeepLinkParser.parse(url: url) { linkItem in
+          guard let linkItem else { return }
+          singleNavigator.getCurrentPaths().count > 1
+            ? singleNavigator.next(linkItem: linkItem, isAnimated: true)
+            : singleNavigator.replace(linkItem: linkItem, isAnimated: true)
+        }
+      }
     }
   }
 }
