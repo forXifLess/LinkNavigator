@@ -5,7 +5,7 @@ import LinkNavigator
 struct TabBasicApp: App {
   let tabLinkNavigator = TabLinkNavigator(
     routeBuilderItemList: AppRouterBuilderGroup().routers,
-    dependency: TabAppDependency())
+    dependency: AppDependency())
 
   var body: some Scene {
     WindowGroup {

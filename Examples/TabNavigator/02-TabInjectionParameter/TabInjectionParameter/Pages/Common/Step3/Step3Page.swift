@@ -1,7 +1,7 @@
 import SwiftUI
 import LinkNavigator
 
-struct Step2Page: View {
+struct Step3Page: View {
   let navigator: RootNavigatorType
   @State var currentPath: String = ""
 
@@ -12,12 +12,13 @@ struct Step2Page: View {
 
       Spacer()
 
-      Button(action: { navigator.next(linkItem: .init(path: "step3"), isAnimated: true) }) {
-        Text("Next to 'Step3'")
+      Button(action: { navigator.next(linkItem: .init(path: "step4"), isAnimated: true) }) {
+        Text("Next to 'Step4'")
       }
 
-      Button(action: { navigator.fullSheet(linkItem: .init(path: "step1"), isAnimated: true, prefersLargeTitles: false) }) {
-        Text("Open Full-Sheet 'Step1'")
+      Button(action: { 
+        navigator.rootReloadLast(linkItem: .init(path: "step2", items: Step2InjectionData(message: "Replaced message!")), isAnimated: true) }) {
+        Text("Replaced 'Step3' message")
       }
 
       Button(action: { navigator.back(isAnimated: true) }) {

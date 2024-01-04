@@ -3,12 +3,26 @@ import LinkNavigator
 
 struct Step2Page: View {
   let navigator: RootNavigatorType
+  let message: String
   @State var currentPath: String = ""
 
   var body: some View {
     VStack(spacing: 16) {
       PathIndicator(currentPath: currentPath)
       .padding(.top, 32)
+
+      GroupBox {
+        VStack(spacing: 10) {
+          HStack {
+            Image(systemName: "envelope")
+            Text("injected message from Step1")
+          }
+          .font(.footnote)
+          .foregroundColor(.secondary)
+          
+          Text(message)
+        }
+      }
 
       Spacer()
 
