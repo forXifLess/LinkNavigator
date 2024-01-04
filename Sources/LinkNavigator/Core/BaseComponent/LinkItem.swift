@@ -29,6 +29,16 @@ public struct LinkItem {
     encodedItemString = items
   }
 
+  public init(path: String, items: Codable) {
+    pathList = [path]
+    encodedItemString = items.encoded()
+  }
+
+  public init(pathList: [String], items: Codable) {
+    self.pathList = pathList
+    encodedItemString = items.encoded()
+  }
+
   // MARK: Internal
 
   /// An array of strings representing the path list.
