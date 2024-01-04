@@ -27,6 +27,12 @@ struct Page1View: View {
           }
         }
 
+        Button(action: {
+          navigator.backOrNext(linkItem: .init(path: "page2"), isAnimated: true)
+        }) {
+          Text("go to next Page")
+        }
+
         Spacer()
       }
       .padding()

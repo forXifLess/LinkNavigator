@@ -20,6 +20,9 @@
 		93D683FE2B463E4600FD2C24 /* Page1RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D683FD2B463E4600FD2C24 /* Page1RouteBuilder.swift */; };
 		93D684012B463E5E00FD2C24 /* Page2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D684002B463E5E00FD2C24 /* Page2View.swift */; };
 		93D684032B463E7300FD2C24 /* Page2RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D684022B463E7300FD2C24 /* Page2RouteBuilder.swift */; };
+		93D684052B46523300FD2C24 /* Page2LinkSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D684042B46523300FD2C24 /* Page2LinkSubscriber.swift */; };
+		93D684082B46589300FD2C24 /* Page3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D684072B46589300FD2C24 /* Page3View.swift */; };
+		93D6840A2B4658AF00FD2C24 /* Page3RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D684092B4658AF00FD2C24 /* Page3RouteBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,9 @@
 		93D683FD2B463E4600FD2C24 /* Page1RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page1RouteBuilder.swift; sourceTree = "<group>"; };
 		93D684002B463E5E00FD2C24 /* Page2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page2View.swift; sourceTree = "<group>"; };
 		93D684022B463E7300FD2C24 /* Page2RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page2RouteBuilder.swift; sourceTree = "<group>"; };
+		93D684042B46523300FD2C24 /* Page2LinkSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page2LinkSubscriber.swift; sourceTree = "<group>"; };
+		93D684072B46589300FD2C24 /* Page3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page3View.swift; sourceTree = "<group>"; };
+		93D684092B4658AF00FD2C24 /* Page3RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page3RouteBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +98,7 @@
 		93D683F42B463DD800FD2C24 /* Page */ = {
 			isa = PBXGroup;
 			children = (
+				93D684062B46588000FD2C24 /* Page3 */,
 				93D683FF2B463E5600FD2C24 /* Page2 */,
 				93D683FA2B463E1E00FD2C24 /* Page1 */,
 				93D683F52B463DD800FD2C24 /* Home */,
@@ -121,9 +128,19 @@
 			isa = PBXGroup;
 			children = (
 				93D684002B463E5E00FD2C24 /* Page2View.swift */,
+				93D684042B46523300FD2C24 /* Page2LinkSubscriber.swift */,
 				93D684022B463E7300FD2C24 /* Page2RouteBuilder.swift */,
 			);
 			path = Page2;
+			sourceTree = "<group>";
+		};
+		93D684062B46588000FD2C24 /* Page3 */ = {
+			isa = PBXGroup;
+			children = (
+				93D684072B46589300FD2C24 /* Page3View.swift */,
+				93D684092B4658AF00FD2C24 /* Page3RouteBuilder.swift */,
+			);
+			path = Page3;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,14 +221,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93D6840A2B4658AF00FD2C24 /* Page3RouteBuilder.swift in Sources */,
 				93D683F02B463DA700FD2C24 /* AppDependency.swift in Sources */,
 				93D684032B463E7300FD2C24 /* Page2RouteBuilder.swift in Sources */,
 				93D684012B463E5E00FD2C24 /* Page2View.swift in Sources */,
 				93D683F22B463DB100FD2C24 /* AppRouterGroup.swift in Sources */,
+				93D684082B46589300FD2C24 /* Page3View.swift in Sources */,
 				93D683F72B463DE600FD2C24 /* HomeView.swift in Sources */,
 				93D683F92B463DFC00FD2C24 /* HomeRouteBuilder.swift in Sources */,
 				29C639032B44FEAA00FCFE0F /* SingleEventSubscriberApp.swift in Sources */,
 				93D683FE2B463E4600FD2C24 /* Page1RouteBuilder.swift in Sources */,
+				93D684052B46523300FD2C24 /* Page2LinkSubscriber.swift in Sources */,
 				93D683FC2B463E2800FD2C24 /* Page1View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
