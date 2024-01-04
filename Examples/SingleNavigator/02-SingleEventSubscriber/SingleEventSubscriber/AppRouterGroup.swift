@@ -10,6 +10,7 @@ struct AppRouterGroup<RootNavigator: RootNavigatorType> {
       HomeRouteBuilder.generate(),
       Page1RouteBuilder.generate(),
       Page2RouteBuilder.generate(),
+      Page3RouteBuilder.generate(),
     ]
   }
 }
