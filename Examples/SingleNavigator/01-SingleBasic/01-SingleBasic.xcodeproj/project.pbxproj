@@ -22,6 +22,7 @@
 		29704AD62B450B5800418967 /* Page1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704ACC2B450B5800418967 /* Page1View.swift */; };
 		9328462B2B450372000243AC /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328462A2B450372000243AC /* AppDependency.swift */; };
 		9328462D2B45037F000243AC /* AppRouterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328462C2B45037F000243AC /* AppRouterGroup.swift */; };
+		932D1E852B46A988000E50C3 /* PathIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932D1E842B46A988000E50C3 /* PathIndicator.swift */; };
 		933012962B45634400893C91 /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 933012952B45634400893C91 /* LinkNavigator */; };
 		933012992B45634F00893C91 /* PageTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = 933012982B45634F00893C91 /* PageTemplate */; };
 /* End PBXBuildFile section */
@@ -44,6 +45,7 @@
 		29704ACC2B450B5800418967 /* Page1View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page1View.swift; sourceTree = "<group>"; };
 		9328462A2B450372000243AC /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
 		9328462C2B45037F000243AC /* AppRouterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterGroup.swift; sourceTree = "<group>"; };
+		932D1E842B46A988000E50C3 /* PathIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 		29141E0F2B44E13900D3ABE7 /* SingleBasic */ = {
 			isa = PBXGroup;
 			children = (
+				932D1E832B46A97C000E50C3 /* Component */,
 				29704ABD2B450B5800418967 /* Page */,
 				29141E102B44E13900D3ABE7 /* SingleBasicApp.swift */,
 				9328462A2B450372000243AC /* AppDependency.swift */,
@@ -152,6 +155,14 @@
 				29704ACC2B450B5800418967 /* Page1View.swift */,
 			);
 			path = Page1;
+			sourceTree = "<group>";
+		};
+		932D1E832B46A97C000E50C3 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				932D1E842B46A988000E50C3 /* PathIndicator.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +247,7 @@
 				9328462B2B450372000243AC /* AppDependency.swift in Sources */,
 				29704ACD2B450B5800418967 /* HomeView.swift in Sources */,
 				29704AD02B450B5800418967 /* Page2RouteBuilder.swift in Sources */,
+				932D1E852B46A988000E50C3 /* PathIndicator.swift in Sources */,
 				29704AD32B450B5800418967 /* Page4View.swift in Sources */,
 				29704AD62B450B5800418967 /* Page1View.swift in Sources */,
 				29704ACF2B450B5800418967 /* Page2View.swift in Sources */,

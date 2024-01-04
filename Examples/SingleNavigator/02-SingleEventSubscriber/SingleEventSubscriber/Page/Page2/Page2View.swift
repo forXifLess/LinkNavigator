@@ -15,35 +15,31 @@ struct Page2View: View {
   }
 
   var body: some View {
-    ScrollView {
-      VStack(spacing: 40) {
-        Text("2")
-          .font(.system(size: 70, weight: .thin))
+    VStack(spacing: 30) {
+      PathIndicator(currentPath: navigator.getCurrentPaths().joined(separator: " -> "))
+        .padding(.top, 32)
 
-        Text(navigator.getCurrentPaths().map { $0.replacingOccurrences(of: "page", with: "") }.joined(separator: " → "))
-
-        Button(action: {
-          navigator.backOrNext(linkItem: .init(path: "page3"), isAnimated: true)
-        }) {
-          Text("go to next Page")
-        }
-
-        GroupBox {
-          VStack(spacing: 10) {
-            HStack {
-              Image(systemName: "envelope")
-              Text("page3 event handler")
-            }
-            .font(.footnote)
-            .foregroundColor(.secondary)
-
-            Text(linkSubscriber.linkAction?.message ?? "-")
-          }
-        }
-
-        Spacer()
+      Button(action: {
+        navigator.backOrNext(linkItem: .init(path: "page3"), isAnimated: true)
+      }) {
+        Text("go to next Page")
       }
-      .padding()
+
+      GroupBox {
+        VStack(spacing: 10) {
+          HStack {
+            Image(systemName: "envelope")
+            Text("page3 event handler")
+          }
+          .font(.footnote)
+          .foregroundColor(.secondary)
+
+          Text(linkSubscriber.linkAction?.message ?? "-")
+        }
+      }
+
+      Spacer()
     }
+    .padding()
   }
 }
