@@ -232,7 +232,7 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
     guard !viewControllers.isEmpty else { return }
 
     let reloadedVC = viewControllers.reduce(rootController.viewControllers) { current, next in
-      guard let idx = current.firstIndex(of: next) else { return current }
+      guard let idx = current.firstIndex(where: { ($0 as? MatchPathUsable)?.matchPath == next.matchPath }) else { return current }
       var variableCurrentVC = current
       variableCurrentVC[idx] = next
       return variableCurrentVC
