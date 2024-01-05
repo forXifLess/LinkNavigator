@@ -29,14 +29,14 @@ public struct LinkItem {
     encodedItemString = items
   }
 
-  public init(path: String, items: Codable) {
+  public init(path: String, items: Codable?) {
     pathList = [path]
-    encodedItemString = items.encoded()
+    encodedItemString = items?.encoded() ?? ""
   }
 
-  public init(pathList: [String], items: Codable) {
+  public init(pathList: [String], items: Codable?) {
     self.pathList = pathList
-    encodedItemString = items.encoded()
+    encodedItemString = items?.encoded() ?? ""
   }
 
   // MARK: Internal
