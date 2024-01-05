@@ -34,7 +34,7 @@ struct Page1View: View {
           .font(.footnote)
           .foregroundColor(.secondary)
 
-          Text(deepLinkItem?.message ?? "-")
+          Text(deepLinkItem?.deepLinkMessage ?? "-")
         }
       }
 

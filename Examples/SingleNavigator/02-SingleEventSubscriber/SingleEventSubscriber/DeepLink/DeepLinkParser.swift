@@ -10,7 +10,7 @@ enum DeepLinkParser {
     }
 
     let pathList = component.path.split(separator: "/").map(String.init)
-    let item = try? URLEncodedFormDecoder().decode(HomeToPage1Item.self, from: component.query ?? "")
+    let item = try? URLEncodedFormDecoder().decode(DeepLinkItem.self, from: component.query ?? "")
     completeAction(.init(pathList: pathList, items: item))
   }
 }
