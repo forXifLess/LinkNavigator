@@ -1,5 +1,6 @@
 import Foundation
 import LinkNavigator
+import URLEncodedForm
 
 enum DeepLinkParser {
   static func parse(url: URL, completeAction: @escaping (LinkItem?) -> Void) {
@@ -9,7 +10,7 @@ enum DeepLinkParser {
     }
 
     let pathList = component.path.split(separator: "/").map(String.init)
-    let item: String = component.query ?? ""
+    let item = try? URLEncodedFormDecoder().decode(HomeToPage1Item.self, from: component.query ?? "")
     completeAction(.init(pathList: pathList, items: item))
   }
 }
