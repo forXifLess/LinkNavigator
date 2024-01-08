@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct SingleInjectionParameterApp: App {
+struct SingleTicTacToeApp: App {
   var body: some Scene {
     WindowGroup {
       ContentView()
