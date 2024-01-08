@@ -1,10 +1,20 @@
 import SwiftUI
+import LinkNavigator
 
 @main
 struct SingleTicTacToeApp: App {
+  let singleNavigator = SingleLinkNavigator(
+    routeBuilderItemList: AppRouterGroup().routers,
+    dependency: AppDependency()
+  )
+
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      LinkNavigationView(
+        linkNavigator: singleNavigator,
+        item: .init(path: "home")
+      )
+      .ignoresSafeArea()
     }
   }
 }
