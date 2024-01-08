@@ -100,24 +100,24 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
   }
 
   public func backOrNext(linkItem: LinkItem, isAnimated: Bool) {
-    guard
-      let pick = navigationBuilder.firstPick(
-        controller: currentController,
-        item: linkItem)
-    else { return }
-
+    guard navigationBuilder.isContainSequence(item: linkItem),
+          let pick = navigationBuilder.lastPick(
+            controller: currentController,
+            item: linkItem) else {
+      currentController?.merge(new: navigationBuilder.build(item: linkItem), isAnimated: isAnimated)
+      return
+    }
     currentController?.popToViewController(pick, animated: isAnimated)
   }
 
   public func rootBackOrNext(linkItem: LinkItem, isAnimated: Bool) {
-    guard
-      let pick = navigationBuilder.firstPick(
-        controller: currentController,
-        item: linkItem)
-    else {
+    guard navigationBuilder.isContainSequence(item: linkItem),
+          let pick = navigationBuilder.lastPick(
+            controller: rootController,
+            item: linkItem) else {
+      rootController.merge(new: navigationBuilder.build(item: linkItem), isAnimated: isAnimated)
       return
     }
-
     rootController.popToViewController(pick, animated: isAnimated)
   }
 

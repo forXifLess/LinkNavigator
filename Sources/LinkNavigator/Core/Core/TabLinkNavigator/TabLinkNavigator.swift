@@ -158,8 +158,6 @@ extension TabLinkNavigator {
     NotificationCenter.default
       .post(name: TabbarEventNotification.onSelectedTab, object: targetPath)
   }
-
-  public func reload(items _: LinkItem, isAnimated _: Bool) { }
 }
 
 extension UINavigationController {
