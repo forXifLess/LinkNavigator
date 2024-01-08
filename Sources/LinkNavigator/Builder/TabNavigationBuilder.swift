@@ -63,10 +63,10 @@ extension TabNavigationBuilder {
   }
 
   public func lastPick(controller: UINavigationController?, item: LinkItem) -> RouteViewController? {
-    guard let controller, let first = item.pathList.first else { return .none }
+    guard let controller, let last = item.pathList.last else { return .none }
     return controller.viewControllers
       .compactMap { $0 as? RouteViewController }
-      .last(where: { $0.matchPath == first })
+      .last(where: { $0.matchPath == last })
   }
 
   public func exceptFilter(
@@ -78,4 +78,10 @@ extension TabNavigationBuilder {
       .filter { !item.pathList.contains($0.matchPath) }
   }
 
+  public func isContainSequence(item: LinkItem) -> Bool {
+    let currentPathJoin = routeBuilderList.map { $0.matchPath }.joined(separator: ",")
+    let itemPathJoin = item.pathList.joined(separator: ",")
+
+    return currentPathJoin.contains(itemPathJoin)
+  }
 }
