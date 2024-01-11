@@ -82,10 +82,10 @@ extension SingleNavigationBuilder {
   ///   - item: A `LinkItem` containing the paths and associated values.
   /// - Returns: A `RouteViewController` instance that matches the first path in the `LinkItem` or nil if no match is found.
   func lastPick(controller: UINavigationController?, item: LinkItem) -> RouteViewController? {
-    guard let controller, let first = item.pathList.first else { return .none }
+    guard let controller, let last = item.pathList.first else { return .none }
     return controller.viewControllers
       .compactMap { $0 as? RouteViewController }
-      .last(where: { $0.matchPath == first })
+      .last(where: { $0.matchPath == last })
   }
 
   /// Filters out `RouteViewController` instances that match the paths in the `LinkItem` from the navigation stack.
@@ -98,5 +98,12 @@ extension SingleNavigationBuilder {
     (controller?.viewControllers ?? [])
       .compactMap { $0 as? RouteViewController }
       .filter { !item.pathList.contains($0.matchPath) }
+  }
+
+  public func isContainSequence(item: LinkItem) -> Bool {
+    let currentPathJoin = routeBuilderList.map { $0.matchPath }.joined(separator: ",")
+    let itemPathJoin = item.pathList.joined(separator: ",")
+
+    return currentPathJoin.contains(itemPathJoin)
   }
 }
