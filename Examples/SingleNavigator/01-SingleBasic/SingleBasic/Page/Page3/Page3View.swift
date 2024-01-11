@@ -8,7 +8,7 @@ struct Page3View: View {
 
   var body: some View {
     VStack(spacing: 30) {
-      PathIndicator(currentPath: navigator.getCurrentPaths().joined(separator: " -> "))
+      PathIndicator(currentPath: paths.joined(separator: " -> "))
         .padding(.top, 32)
 
       Button(action: {
