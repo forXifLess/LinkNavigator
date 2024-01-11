@@ -216,16 +216,11 @@ extension SingleLinkNavigator {
   ///   - linkItem: The link item containing the `ItemValue` to define the navigation endpoint.
   ///   - isAnimated: A flag indicating whether the navigation should be animated.
   private func _backOrNext(linkItem: LinkItem, isAnimated: Bool) {
-    guard let activeController else { return }
-
-    guard let pick = navigationBuilder.firstPick(controller: activeController, item: linkItem) else {
-      activeController.push(
-        viewController: navigationBuilder.pickBuild(item: linkItem),
-        isAnimated: isAnimated)
+    guard let pick = navigationBuilder.lastPick(controller: activeController, item: linkItem) else {
+      activeController?.merge(new: navigationBuilder.build(item: linkItem), isAnimated: isAnimated)
       return
     }
-
-    activeController.popToViewController(pick, animated: isAnimated)
+    activeController?.popToViewController(pick, animated: isAnimated)
   }
 
   /// Navigates backwards or forwards from the root controller based on the first pick from the navigation builder.
@@ -234,16 +229,11 @@ extension SingleLinkNavigator {
   ///   - linkItem: The link item containing the `ItemValue` to define the navigation endpoint.
   ///   - isAnimated: A flag indicating whether the navigation should be animated.
   private func _rootBackOrNext(linkItem: LinkItem, isAnimated: Bool) {
-    guard let rootController else { return }
-
-    guard let pick = navigationBuilder.firstPick(controller: rootController, item: linkItem) else {
-      rootController.push(
-        viewController: navigationBuilder.pickBuild(item: linkItem),
-        isAnimated: isAnimated)
+    guard let pick = navigationBuilder.lastPick(controller: rootController, item: linkItem) else {
+      rootController?.merge(new: navigationBuilder.build(item: linkItem), isAnimated: isAnimated)
       return
     }
-
-    rootController.popToViewController(pick, animated: isAnimated)
+    rootController?.popToViewController(pick, animated: isAnimated)
   }
 
   // 다시
