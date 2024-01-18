@@ -10,18 +10,58 @@
 		299D54D92B45580D003B58EA /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 299D54D82B45580D003B58EA /* LinkNavigator */; };
 		299D54DC2B45581B003B58EA /* PageTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = 299D54DB2B45581B003B58EA /* PageTemplate */; };
 		29C639222B4500FA00FCFE0F /* TabEventSubscriberApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C639212B4500FA00FCFE0F /* TabEventSubscriberApp.swift */; };
-		29C639242B4500FA00FCFE0F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C639232B4500FA00FCFE0F /* ContentView.swift */; };
-		29C639262B4500FA00FCFE0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29C639252B4500FA00FCFE0F /* Assets.xcassets */; };
 		29C6392A2B4500FA00FCFE0F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29C639292B4500FA00FCFE0F /* Preview Assets.xcassets */; };
+		7EE2D7BC2B58BFAE000DCB27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EE2D79A2B58BFAE000DCB27 /* Assets.xcassets */; };
+		7EE2D7BD2B58BFAE000DCB27 /* PathIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D79C2B58BFAE000DCB27 /* PathIndicator.swift */; };
+		7EE2D7BE2B58BFAE000DCB27 /* Tab1Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D79F2B58BFAE000DCB27 /* Tab1Page.swift */; };
+		7EE2D7BF2B58BFAE000DCB27 /* Tab1RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7A02B58BFAE000DCB27 /* Tab1RouteBuilder.swift */; };
+		7EE2D7C02B58BFAE000DCB27 /* Tab2RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7A22B58BFAE000DCB27 /* Tab2RouteBuilder.swift */; };
+		7EE2D7C12B58BFAE000DCB27 /* Tab2Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7A32B58BFAE000DCB27 /* Tab2Page.swift */; };
+		7EE2D7C22B58BFAE000DCB27 /* Step4RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7A62B58BFAE000DCB27 /* Step4RouteBuilder.swift */; };
+		7EE2D7C32B58BFAE000DCB27 /* Step4Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7A72B58BFAE000DCB27 /* Step4Page.swift */; };
+		7EE2D7C42B58BFAE000DCB27 /* Step3RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7A92B58BFAE000DCB27 /* Step3RouteBuilder.swift */; };
+		7EE2D7C52B58BFAE000DCB27 /* Step3Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7AA2B58BFAE000DCB27 /* Step3Page.swift */; };
+		7EE2D7C62B58BFAE000DCB27 /* Step2RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7AC2B58BFAE000DCB27 /* Step2RouteBuilder.swift */; };
+		7EE2D7C72B58BFAE000DCB27 /* Step2Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7AD2B58BFAE000DCB27 /* Step2Page.swift */; };
+		7EE2D7C82B58BFAE000DCB27 /* Step1RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7AF2B58BFAE000DCB27 /* Step1RouteBuilder.swift */; };
+		7EE2D7C92B58BFAE000DCB27 /* Step1Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7B02B58BFAE000DCB27 /* Step1Page.swift */; };
+		7EE2D7CA2B58BFAE000DCB27 /* Tab3RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7B22B58BFAE000DCB27 /* Tab3RouteBuilder.swift */; };
+		7EE2D7CB2B58BFAE000DCB27 /* Tab3Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7B32B58BFAE000DCB27 /* Tab3Page.swift */; };
+		7EE2D7CC2B58BFAE000DCB27 /* Tab4RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7B52B58BFAE000DCB27 /* Tab4RouteBuilder.swift */; };
+		7EE2D7CD2B58BFAE000DCB27 /* Tab4Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7B62B58BFAE000DCB27 /* Tab4Page.swift */; };
+		7EE2D7CE2B58BFAE000DCB27 /* EventSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7B72B58BFAE000DCB27 /* EventSubscriber.swift */; };
+		7EE2D7CF2B58BFAE000DCB27 /* AppRouterBuilderGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7B82B58BFAE000DCB27 /* AppRouterBuilderGroup.swift */; };
+		7EE2D7D02B58BFAE000DCB27 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EE2D7BA2B58BFAE000DCB27 /* Preview Assets.xcassets */; };
+		7EE2D7D12B58BFAE000DCB27 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2D7BB2B58BFAE000DCB27 /* AppDependency.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		29C6391E2B4500FA00FCFE0F /* TabEventSubscriber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabEventSubscriber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29C639212B4500FA00FCFE0F /* TabEventSubscriberApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabEventSubscriberApp.swift; sourceTree = "<group>"; };
-		29C639232B4500FA00FCFE0F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		29C639252B4500FA00FCFE0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29C639272B4500FA00FCFE0F /* TabEventSubscriber.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TabEventSubscriber.entitlements; sourceTree = "<group>"; };
 		29C639292B4500FA00FCFE0F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7EE2D79A2B58BFAE000DCB27 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7EE2D79C2B58BFAE000DCB27 /* PathIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathIndicator.swift; sourceTree = "<group>"; };
+		7EE2D79F2B58BFAE000DCB27 /* Tab1Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab1Page.swift; sourceTree = "<group>"; };
+		7EE2D7A02B58BFAE000DCB27 /* Tab1RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab1RouteBuilder.swift; sourceTree = "<group>"; };
+		7EE2D7A22B58BFAE000DCB27 /* Tab2RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab2RouteBuilder.swift; sourceTree = "<group>"; };
+		7EE2D7A32B58BFAE000DCB27 /* Tab2Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab2Page.swift; sourceTree = "<group>"; };
+		7EE2D7A62B58BFAE000DCB27 /* Step4RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step4RouteBuilder.swift; sourceTree = "<group>"; };
+		7EE2D7A72B58BFAE000DCB27 /* Step4Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step4Page.swift; sourceTree = "<group>"; };
+		7EE2D7A92B58BFAE000DCB27 /* Step3RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step3RouteBuilder.swift; sourceTree = "<group>"; };
+		7EE2D7AA2B58BFAE000DCB27 /* Step3Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step3Page.swift; sourceTree = "<group>"; };
+		7EE2D7AC2B58BFAE000DCB27 /* Step2RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step2RouteBuilder.swift; sourceTree = "<group>"; };
+		7EE2D7AD2B58BFAE000DCB27 /* Step2Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step2Page.swift; sourceTree = "<group>"; };
+		7EE2D7AF2B58BFAE000DCB27 /* Step1RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step1RouteBuilder.swift; sourceTree = "<group>"; };
+		7EE2D7B02B58BFAE000DCB27 /* Step1Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step1Page.swift; sourceTree = "<group>"; };
+		7EE2D7B22B58BFAE000DCB27 /* Tab3RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab3RouteBuilder.swift; sourceTree = "<group>"; };
+		7EE2D7B32B58BFAE000DCB27 /* Tab3Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab3Page.swift; sourceTree = "<group>"; };
+		7EE2D7B52B58BFAE000DCB27 /* Tab4RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab4RouteBuilder.swift; sourceTree = "<group>"; };
+		7EE2D7B62B58BFAE000DCB27 /* Tab4Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab4Page.swift; sourceTree = "<group>"; };
+		7EE2D7B72B58BFAE000DCB27 /* EventSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventSubscriber.swift; sourceTree = "<group>"; };
+		7EE2D7B82B58BFAE000DCB27 /* AppRouterBuilderGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouterBuilderGroup.swift; sourceTree = "<group>"; };
+		7EE2D7BA2B58BFAE000DCB27 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7EE2D7BB2B58BFAE000DCB27 /* AppDependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +97,12 @@
 			isa = PBXGroup;
 			children = (
 				29C639212B4500FA00FCFE0F /* TabEventSubscriberApp.swift */,
-				29C639232B4500FA00FCFE0F /* ContentView.swift */,
-				29C639252B4500FA00FCFE0F /* Assets.xcassets */,
+				7EE2D7BB2B58BFAE000DCB27 /* AppDependency.swift */,
+				7EE2D7B82B58BFAE000DCB27 /* AppRouterBuilderGroup.swift */,
+				7EE2D79A2B58BFAE000DCB27 /* Assets.xcassets */,
+				7EE2D79B2B58BFAE000DCB27 /* Component */,
+				7EE2D79D2B58BFAE000DCB27 /* Pages */,
+				7EE2D7B92B58BFAE000DCB27 /* Preview Content */,
 				29C639272B4500FA00FCFE0F /* TabEventSubscriber.entitlements */,
 				29C639282B4500FA00FCFE0F /* Preview Content */,
 			);
@@ -69,6 +113,118 @@
 			isa = PBXGroup;
 			children = (
 				29C639292B4500FA00FCFE0F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7EE2D79B2B58BFAE000DCB27 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2D79C2B58BFAE000DCB27 /* PathIndicator.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		7EE2D79D2B58BFAE000DCB27 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2D79E2B58BFAE000DCB27 /* Tab1 */,
+				7EE2D7A12B58BFAE000DCB27 /* Tab2 */,
+				7EE2D7A42B58BFAE000DCB27 /* Common */,
+				7EE2D7B12B58BFAE000DCB27 /* Tab3 */,
+				7EE2D7B42B58BFAE000DCB27 /* Tab4 */,
+				7EE2D7B72B58BFAE000DCB27 /* EventSubscriber.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		7EE2D79E2B58BFAE000DCB27 /* Tab1 */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2D79F2B58BFAE000DCB27 /* Tab1Page.swift */,
+				7EE2D7A02B58BFAE000DCB27 /* Tab1RouteBuilder.swift */,
+			);
+			path = Tab1;
+			sourceTree = "<group>";
+		};
+		7EE2D7A12B58BFAE000DCB27 /* Tab2 */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2D7A22B58BFAE000DCB27 /* Tab2RouteBuilder.swift */,
+				7EE2D7A32B58BFAE000DCB27 /* Tab2Page.swift */,
+			);
+			path = Tab2;
+			sourceTree = "<group>";
+		};
+		7EE2D7A42B58BFAE000DCB27 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2D7A52B58BFAE000DCB27 /* Step4 */,
+				7EE2D7A82B58BFAE000DCB27 /* Step3 */,
+				7EE2D7AB2B58BFAE000DCB27 /* Step2 */,
+				7EE2D7AE2B58BFAE000DCB27 /* Step1 */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		7EE2D7A52B58BFAE000DCB27 /* Step4 */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2D7A62B58BFAE000DCB27 /* Step4RouteBuilder.swift */,
+				7EE2D7A72B58BFAE000DCB27 /* Step4Page.swift */,
+			);
+			path = Step4;
+			sourceTree = "<group>";
+		};
+		7EE2D7A82B58BFAE000DCB27 /* Step3 */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2D7A92B58BFAE000DCB27 /* Step3RouteBuilder.swift */,
+				7EE2D7AA2B58BFAE000DCB27 /* Step3Page.swift */,
+			);
+			path = Step3;
+			sourceTree = "<group>";
+		};
+		7EE2D7AB2B58BFAE000DCB27 /* Step2 */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2D7AC2B58BFAE000DCB27 /* Step2RouteBuilder.swift */,
+				7EE2D7AD2B58BFAE000DCB27 /* Step2Page.swift */,
+			);
+			path = Step2;
+			sourceTree = "<group>";
+		};
+		7EE2D7AE2B58BFAE000DCB27 /* Step1 */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2D7AF2B58BFAE000DCB27 /* Step1RouteBuilder.swift */,
+				7EE2D7B02B58BFAE000DCB27 /* Step1Page.swift */,
+			);
+			path = Step1;
+			sourceTree = "<group>";
+		};
+		7EE2D7B12B58BFAE000DCB27 /* Tab3 */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2D7B22B58BFAE000DCB27 /* Tab3RouteBuilder.swift */,
+				7EE2D7B32B58BFAE000DCB27 /* Tab3Page.swift */,
+			);
+			path = Tab3;
+			sourceTree = "<group>";
+		};
+		7EE2D7B42B58BFAE000DCB27 /* Tab4 */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2D7B52B58BFAE000DCB27 /* Tab4RouteBuilder.swift */,
+				7EE2D7B62B58BFAE000DCB27 /* Tab4Page.swift */,
+			);
+			path = Tab4;
+			sourceTree = "<group>";
+		};
+		7EE2D7B92B58BFAE000DCB27 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2D7BA2B58BFAE000DCB27 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -139,8 +295,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EE2D7D02B58BFAE000DCB27 /* Preview Assets.xcassets in Resources */,
 				29C6392A2B4500FA00FCFE0F /* Preview Assets.xcassets in Resources */,
-				29C639262B4500FA00FCFE0F /* Assets.xcassets in Resources */,
+				7EE2D7BC2B58BFAE000DCB27 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,8 +308,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29C639242B4500FA00FCFE0F /* ContentView.swift in Sources */,
+				7EE2D7CB2B58BFAE000DCB27 /* Tab3Page.swift in Sources */,
+				7EE2D7C92B58BFAE000DCB27 /* Step1Page.swift in Sources */,
+				7EE2D7C62B58BFAE000DCB27 /* Step2RouteBuilder.swift in Sources */,
+				7EE2D7C42B58BFAE000DCB27 /* Step3RouteBuilder.swift in Sources */,
+				7EE2D7CF2B58BFAE000DCB27 /* AppRouterBuilderGroup.swift in Sources */,
+				7EE2D7C02B58BFAE000DCB27 /* Tab2RouteBuilder.swift in Sources */,
+				7EE2D7D12B58BFAE000DCB27 /* AppDependency.swift in Sources */,
+				7EE2D7BD2B58BFAE000DCB27 /* PathIndicator.swift in Sources */,
+				7EE2D7C82B58BFAE000DCB27 /* Step1RouteBuilder.swift in Sources */,
+				7EE2D7C22B58BFAE000DCB27 /* Step4RouteBuilder.swift in Sources */,
+				7EE2D7C52B58BFAE000DCB27 /* Step3Page.swift in Sources */,
+				7EE2D7BE2B58BFAE000DCB27 /* Tab1Page.swift in Sources */,
 				29C639222B4500FA00FCFE0F /* TabEventSubscriberApp.swift in Sources */,
+				7EE2D7CE2B58BFAE000DCB27 /* EventSubscriber.swift in Sources */,
+				7EE2D7CD2B58BFAE000DCB27 /* Tab4Page.swift in Sources */,
+				7EE2D7CC2B58BFAE000DCB27 /* Tab4RouteBuilder.swift in Sources */,
+				7EE2D7BF2B58BFAE000DCB27 /* Tab1RouteBuilder.swift in Sources */,
+				7EE2D7C72B58BFAE000DCB27 /* Step2Page.swift in Sources */,
+				7EE2D7C12B58BFAE000DCB27 /* Tab2Page.swift in Sources */,
+				7EE2D7CA2B58BFAE000DCB27 /* Tab3RouteBuilder.swift in Sources */,
+				7EE2D7C32B58BFAE000DCB27 /* Step4Page.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

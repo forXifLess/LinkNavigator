@@ -27,15 +27,15 @@ public final class TabPartialNavigator {
 
   public var owner: LinkNavigatorItemSubscriberProtocol? = .none
 
-  public var rootController: UINavigationController { tabRootPathableController.navigationController }
+  public var currentTabNavigationController: UINavigationController { currentTabPathableController.navigationController }
 
   public var isFocusedCurrentTab: Bool {
-    (rootController as? MatchPathUsable)?.matchPath == rootNavigator?.currentTabRootPath
+    (currentTabNavigationController as? MatchPathUsable)?.matchPath == rootNavigator?.currentTabRootPath
   }
 
   // MARK: Private
 
-  private var tabRootPathableController: TabRootNavigationController = .init(matchPath: "")
+  private var currentTabPathableController: TabRootNavigationController = .init(matchPath: "")
 
   private weak var rootNavigator: TabLinkNavigator?
   private lazy var navigationBuilder: TabNavigationBuilder<TabPartialNavigator> = .init(
@@ -44,7 +44,7 @@ public final class TabPartialNavigator {
     dependency: dependency)
 
   private var currentController: UINavigationController? {
-    rootNavigator?.modalController ?? rootNavigator?.fullSheetController ?? rootController
+    rootNavigator?.modalController ?? rootNavigator?.fullSheetController ?? currentTabNavigationController
   }
 }
 
@@ -57,10 +57,10 @@ extension TabPartialNavigator {
   {
     let viewControllers = navigationBuilder.build(item: item ?? tabItem.linkItem)
 
-    tabRootPathableController.matchPath = rootPath
-    tabRootPathableController.navigationController.setViewControllers(viewControllers, animated: false)
-    tabRootPathableController.navigationController.delegate = tabRootPathableController.navigationController
-    return tabRootPathableController
+    currentTabPathableController.matchPath = rootPath
+    currentTabPathableController.navigationController.setViewControllers(viewControllers, animated: false)
+    currentTabPathableController.navigationController.delegate = currentTabPathableController.navigationController
+    return currentTabPathableController
   }
 }
 
@@ -72,7 +72,7 @@ extension TabPartialNavigator: LinkNavigatorFindLocationUsable {
   }
 
   public func getCurrentRootPaths() -> [String] {
-    rootController.currentItemList()
+    currentTabNavigationController.currentItemList()
   }
 }
 
@@ -86,7 +86,7 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
   }
 
   public func rootNext(linkItem: LinkItem, isAnimated: Bool) {
-    rootController.merge(
+    currentTabNavigationController.merge(
       new: navigationBuilder.build(item: linkItem),
       isAnimated: isAnimated)
   }
@@ -96,7 +96,7 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
   }
 
   public func rootBack(isAnimated: Bool) {
-    rootController.back(isAnimated: isAnimated)
+    currentTabNavigationController.back(isAnimated: isAnimated)
   }
 
   public func backOrNext(linkItem: LinkItem, isAnimated: Bool) {
@@ -113,12 +113,12 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
   public func rootBackOrNext(linkItem: LinkItem, isAnimated: Bool) {
     guard navigationBuilder.isContainSequence(item: linkItem),
           let pick = navigationBuilder.lastPick(
-            controller: rootController,
+            controller: currentTabNavigationController,
             item: linkItem) else {
-      rootController.merge(new: navigationBuilder.build(item: linkItem), isAnimated: isAnimated)
+      currentTabNavigationController.merge(new: navigationBuilder.build(item: linkItem), isAnimated: isAnimated)
       return
     }
-    rootController.popToViewController(pick, animated: isAnimated)
+    currentTabNavigationController.popToViewController(pick, animated: isAnimated)
   }
 
   public func replace(linkItem: LinkItem, isAnimated: Bool) {
@@ -134,7 +134,7 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
     let viewControllers = navigationBuilder.build(item: linkItem)
     guard !viewControllers.isEmpty else { return }
 
-    rootController.replace(
+    currentTabNavigationController.replace(
       viewController: viewControllers,
       isAnimated: isAnimated)
 
@@ -152,9 +152,9 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
   }
 
   public func rootRemove(pathList: [String]) {
-    rootController.setViewControllers(
+    currentTabNavigationController.setViewControllers(
       navigationBuilder.exceptFilter(
-        controller: rootController,
+        controller: currentTabNavigationController,
         item: .init(pathList: pathList)),
       animated: false)
   }
@@ -168,9 +168,9 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
   }
 
   public func rootBackToLast(path: String, isAnimated: Bool) {
-    rootController.popTo(
+    currentTabNavigationController.popTo(
       viewController: navigationBuilder.lastPick(
-        controller: rootController,
+        controller: currentTabNavigationController,
         item: .init(path: path)),
       isAnimated: isAnimated)
   }
@@ -245,32 +245,42 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
     let viewControllers = navigationBuilder.build(item: linkItem)
     guard !viewControllers.isEmpty else { return }
 
-    let reloadedVC = viewControllers.reduce(rootController.viewControllers) { current, next in
+    let reloadedVC = viewControllers.reduce(currentTabNavigationController.viewControllers) { current, next in
       guard let idx = current.firstIndex(where: { ($0 as? MatchPathUsable)?.matchPath == next.matchPath }) else { return current }
       var variableCurrentVC = current
       variableCurrentVC[idx] = next
       return variableCurrentVC
     }
 
-    rootController.setViewControllers(reloadedVC, animated: isAnimated)
+    currentTabNavigationController.setViewControllers(reloadedVC, animated: isAnimated)
   }
 
   public func alert(target _: NavigationTarget, model: Alert) {
     currentController?.present(model.build(), animated: true)
   }
 
-  public func send(linkItem: LinkItem) {
-    rootNavigator?.tabRootNavigators
-      .flatMap(\.navigationController.viewControllers)
-      .compactMap { $0 as? MatchPathUsable }
+  public func send(targetTabPath: String?, linkItem: LinkItem) {
+    var matchPathUsables: [MatchPathUsable] = []
+
+    if let targetTabPath {
+      matchPathUsables = rootNavigator?
+        .targetController(targetTabPath: targetTabPath)?.viewControllers
+        .compactMap { $0 as? MatchPathUsable } ?? []
+    } else {
+      matchPathUsables = rootNavigator?.tabRootNavigators
+        .flatMap(\.navigationController.viewControllers)
+        .compactMap { $0 as? MatchPathUsable } ?? []
+    }
+
+    matchPathUsables
       .filter { linkItem.pathList.contains($0.matchPath) }
       .forEach {
         $0.eventSubscriber?.receive(encodedItemString: linkItem.encodedItemString)
       }
   }
 
-  public func rootSend(linkItem: LinkItem) {
-    rootController.viewControllers
+  public func currentTabSend(linkItem: LinkItem) {
+    currentTabNavigationController.viewControllers
       .compactMap { $0 as? MatchPathUsable }
       .filter { linkItem.pathList.contains($0.matchPath) }
       .forEach {
@@ -294,8 +304,8 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
       }
   }
 
-  public func allRootSend(linkItem: LinkItem) {
-    rootController.viewControllers
+  public func currentTabAllSend(linkItem: LinkItem) {
+    currentTabNavigationController.viewControllers
       .compactMap { ($0 as? MatchPathUsable)?.eventSubscriber }
       .forEach {
         $0.receive(encodedItemString: linkItem.encodedItemString)
