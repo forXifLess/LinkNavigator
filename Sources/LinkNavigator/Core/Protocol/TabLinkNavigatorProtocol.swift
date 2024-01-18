@@ -140,12 +140,12 @@ public protocol TabLinkNavigatorProtocol {
   /// This method facilitates communication between pages, allowing data to be transferred to a specific 'sub' or page sheet as defined in the link item.
   ///
   /// - Parameter item: The link item encapsulating the data and the target path to be sent.
-  func send(linkItem: LinkItem)
+  func send(targetTabPath: String?, linkItem: LinkItem)
 
   /// Sends the specified link item to the root controller which governs the page sheets (sub). This method is mainly used for communications directly involving the root controller which has overarching control over page sheets.
   ///
   /// - Parameter item: The link item to be sent to the root controller.
-  func rootSend(linkItem: LinkItem)
+  func currentTabSend(linkItem: LinkItem)
 
   /// Sends the main items directly to the appMain, which is a NavigationController that wraps around the link navigator. This method allows for data communication directly with the appMain, facilitating broad-reaching communications within the app.
   ///
@@ -160,7 +160,7 @@ public protocol TabLinkNavigatorProtocol {
   /// Sends the specified items to all root controllers in the navigation stack. This method is instrumental in disseminating information broadly at the root level, which governs the behaviors and states of the 'sub' page sheets.
   ///
   /// - Parameter item: The items to be sent to all root controllers, typically containing information pertinent across all root level pages.
-  func allRootSend(linkItem: LinkItem)
+  func currentTabAllSend(linkItem: LinkItem)
 
   func moveTab(path: String)
 }

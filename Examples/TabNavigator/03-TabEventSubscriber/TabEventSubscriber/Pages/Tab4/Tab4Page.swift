@@ -22,6 +22,7 @@ struct Tab4Page: View {
         navigator.moveTab(path: "tab1")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
           navigator.send(
+            targetTabPath: "tab1",
             linkItem: .init(
               path: "tab1",
               items: EventParam(action: .sendMessage("Message From \(navigator.getCurrentPaths().first ?? "-")"))))
