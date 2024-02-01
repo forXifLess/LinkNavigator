@@ -1,5 +1,5 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
 
 @main
 struct TabBasicApp: App {
@@ -40,7 +40,7 @@ struct TabBasicApp: App {
               title: "tab4",
               image: UIImage(systemName: "person"),
               selectedImage: UIImage(systemName: "person.fill")),
-            linkItem: .init(path: "tab4"))
+            linkItem: .init(path: "tab4")),
         ])
     }
   }

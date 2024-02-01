@@ -10,6 +10,8 @@
 		29141E112B44E13900D3ABE7 /* SingleBasicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29141E102B44E13900D3ABE7 /* SingleBasicApp.swift */; };
 		29141E152B44E13A00D3ABE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29141E142B44E13A00D3ABE7 /* Assets.xcassets */; };
 		29141E192B44E13A00D3ABE7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29141E182B44E13A00D3ABE7 /* Preview Assets.xcassets */; };
+		292248012B6B1207006CCA00 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 292248002B6B1207006CCA00 /* Logging */; };
+		292248032B6B1233006CCA00 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292248022B6B1233006CCA00 /* LogManager.swift */; };
 		29704ACD2B450B5800418967 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704ABF2B450B5800418967 /* HomeView.swift */; };
 		29704ACE2B450B5800418967 /* HomeRouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704AC02B450B5800418967 /* HomeRouteBuilder.swift */; };
 		29704ACF2B450B5800418967 /* Page2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29704AC22B450B5800418967 /* Page2View.swift */; };
@@ -33,6 +35,7 @@
 		29141E142B44E13A00D3ABE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29141E162B44E13A00D3ABE7 /* SingleBasic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SingleBasic.entitlements; sourceTree = "<group>"; };
 		29141E182B44E13A00D3ABE7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		292248022B6B1233006CCA00 /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		29704ABF2B450B5800418967 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		29704AC02B450B5800418967 /* HomeRouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRouteBuilder.swift; sourceTree = "<group>"; };
 		29704AC22B450B5800418967 /* Page2View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page2View.swift; sourceTree = "<group>"; };
@@ -53,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				292248012B6B1207006CCA00 /* Logging in Frameworks */,
 				933012962B45634400893C91 /* LinkNavigator in Frameworks */,
 				933012992B45634F00893C91 /* PageTemplate in Frameworks */,
 			);
@@ -85,6 +89,7 @@
 				29141E102B44E13900D3ABE7 /* SingleBasicApp.swift */,
 				9328462A2B450372000243AC /* AppDependency.swift */,
 				9328462C2B45037F000243AC /* AppRouterGroup.swift */,
+				292248022B6B1233006CCA00 /* LogManager.swift */,
 				29141E142B44E13A00D3ABE7 /* Assets.xcassets */,
 				29141E162B44E13A00D3ABE7 /* SingleBasic.entitlements */,
 				29141E172B44E13A00D3ABE7 /* Preview Content */,
@@ -184,6 +189,7 @@
 			packageProductDependencies = (
 				933012952B45634400893C91 /* LinkNavigator */,
 				933012982B45634F00893C91 /* PageTemplate */,
+				292248002B6B1207006CCA00 /* Logging */,
 			);
 			productName = SingleBasic;
 			productReference = 29141E0D2B44E13900D3ABE7 /* SingleBasic.app */;
@@ -216,6 +222,7 @@
 			packageReferences = (
 				933012942B45634400893C91 /* XCLocalSwiftPackageReference "../../.." */,
 				933012972B45634F00893C91 /* XCLocalSwiftPackageReference "../../Shared/PageTemplate" */,
+				292247FF2B6B1207006CCA00 /* XCRemoteSwiftPackageReference "swift-log" */,
 			);
 			productRefGroup = 29141E0E2B44E13900D3ABE7 /* Products */;
 			projectDirPath = "";
@@ -253,6 +260,7 @@
 				29704ACF2B450B5800418967 /* Page2View.swift in Sources */,
 				9328462D2B45037F000243AC /* AppRouterGroup.swift in Sources */,
 				29704AD22B450B5800418967 /* Page3View.swift in Sources */,
+				292248032B6B1233006CCA00 /* LogManager.swift in Sources */,
 				29704AD42B450B5800418967 /* Page4RouteBuilder.swift in Sources */,
 				29141E112B44E13900D3ABE7 /* SingleBasicApp.swift in Sources */,
 				29704AD52B450B5800418967 /* Page1RouteBuilder.swift in Sources */,
@@ -489,7 +497,23 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		292247FF2B6B1207006CCA00 /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		292248002B6B1207006CCA00 /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 292247FF2B6B1207006CCA00 /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
 		933012952B45634400893C91 /* LinkNavigator */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LinkNavigator;

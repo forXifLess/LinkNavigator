@@ -554,6 +554,9 @@ extension SingleLinkNavigator: LinkNavigatorProtocol {
 }
 
 extension UINavigationController {
+
+  // MARK: Fileprivate
+
   fileprivate func currentItemList() -> [String] {
     viewControllers.compactMap { $0 as? MatchPathUsable }.map(\.matchPath)
   }
@@ -570,11 +573,6 @@ extension UINavigationController {
     setViewControllers([], animated: isAnimated)
   }
 
-  fileprivate func push(viewController: UIViewController?, isAnimated: Bool) {
-    guard let viewController else { return }
-    pushViewController(viewController, animated: isAnimated)
-  }
-
   fileprivate func replace(viewController: [UIViewController], isAnimated: Bool) {
     setViewControllers(viewController, animated: isAnimated)
   }
@@ -587,4 +585,12 @@ extension UINavigationController {
   fileprivate func dropLast() -> [UIViewController] {
     Array(viewControllers.dropLast())
   }
+
+  // MARK: Private
+
+  private func push(viewController: UIViewController?, isAnimated: Bool) {
+    guard let viewController else { return }
+    pushViewController(viewController, animated: isAnimated)
+  }
+
 }

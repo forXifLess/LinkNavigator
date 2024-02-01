@@ -1,5 +1,5 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
 
 struct Page1View: View {
 
@@ -49,4 +49,3 @@ struct Page1View: View {
     .padding()
   }
 }
-

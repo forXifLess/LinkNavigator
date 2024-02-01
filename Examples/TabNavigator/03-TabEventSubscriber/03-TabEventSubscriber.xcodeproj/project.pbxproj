@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2922480A2B6B1500006CCA00 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292248092B6B1500006CCA00 /* LogManager.swift */; };
+		2922480D2B6B1512006CCA00 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 2922480C2B6B1512006CCA00 /* Logging */; };
 		299D54D92B45580D003B58EA /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 299D54D82B45580D003B58EA /* LinkNavigator */; };
 		299D54DC2B45581B003B58EA /* PageTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = 299D54DB2B45581B003B58EA /* PageTemplate */; };
 		29C639222B4500FA00FCFE0F /* TabEventSubscriberApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C639212B4500FA00FCFE0F /* TabEventSubscriberApp.swift */; };
@@ -36,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		292248092B6B1500006CCA00 /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
 		29C6391E2B4500FA00FCFE0F /* TabEventSubscriber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabEventSubscriber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29C639212B4500FA00FCFE0F /* TabEventSubscriberApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabEventSubscriberApp.swift; sourceTree = "<group>"; };
 		29C639272B4500FA00FCFE0F /* TabEventSubscriber.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TabEventSubscriber.entitlements; sourceTree = "<group>"; };
@@ -69,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2922480D2B6B1512006CCA00 /* Logging in Frameworks */,
 				299D54D92B45580D003B58EA /* LinkNavigator in Frameworks */,
 				299D54DC2B45581B003B58EA /* PageTemplate in Frameworks */,
 			);
@@ -97,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				29C639212B4500FA00FCFE0F /* TabEventSubscriberApp.swift */,
+				292248092B6B1500006CCA00 /* LogManager.swift */,
 				7EE2D7BB2B58BFAE000DCB27 /* AppDependency.swift */,
 				7EE2D7B82B58BFAE000DCB27 /* AppRouterBuilderGroup.swift */,
 				7EE2D79A2B58BFAE000DCB27 /* Assets.xcassets */,
@@ -248,6 +253,7 @@
 			packageProductDependencies = (
 				299D54D82B45580D003B58EA /* LinkNavigator */,
 				299D54DB2B45581B003B58EA /* PageTemplate */,
+				2922480C2B6B1512006CCA00 /* Logging */,
 			);
 			productName = TabEventSubscriber;
 			productReference = 29C6391E2B4500FA00FCFE0F /* TabEventSubscriber.app */;
@@ -280,6 +286,7 @@
 			packageReferences = (
 				299D54D72B45580D003B58EA /* XCLocalSwiftPackageReference "../../.." */,
 				299D54DA2B45581B003B58EA /* XCLocalSwiftPackageReference "../../Shared/PageTemplate" */,
+				2922480B2B6B1512006CCA00 /* XCRemoteSwiftPackageReference "swift-log" */,
 			);
 			productRefGroup = 29C6391F2B4500FA00FCFE0F /* Products */;
 			projectDirPath = "";
@@ -320,6 +327,7 @@
 				7EE2D7C22B58BFAE000DCB27 /* Step4RouteBuilder.swift in Sources */,
 				7EE2D7C52B58BFAE000DCB27 /* Step3Page.swift in Sources */,
 				7EE2D7BE2B58BFAE000DCB27 /* Tab1Page.swift in Sources */,
+				2922480A2B6B1500006CCA00 /* LogManager.swift in Sources */,
 				29C639222B4500FA00FCFE0F /* TabEventSubscriberApp.swift in Sources */,
 				7EE2D7CE2B58BFAE000DCB27 /* EventSubscriber.swift in Sources */,
 				7EE2D7CD2B58BFAE000DCB27 /* Tab4Page.swift in Sources */,
@@ -557,7 +565,23 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		2922480B2B6B1512006CCA00 /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		2922480C2B6B1512006CCA00 /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2922480B2B6B1512006CCA00 /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
 		299D54D82B45580D003B58EA /* LinkNavigator */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LinkNavigator;

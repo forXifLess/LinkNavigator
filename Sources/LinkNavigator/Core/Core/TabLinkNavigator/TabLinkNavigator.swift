@@ -46,14 +46,16 @@ public final class TabLinkNavigator {
     })?.navigationController.topViewController as? MatchPathUsable)?.matchPath
   }
 
-  // MARK: - Private Properties
-
-  private var coordinate: SheetCoordinate = .init(sheetDidDismiss: { _ in })
-
   // MARK: Internal
 
   var modalController: UINavigationController? = .none
   var fullSheetController: UINavigationController? = .none
+
+  // MARK: Private
+
+  // MARK: - Private Properties
+
+  private var coordinate: SheetCoordinate = .init(sheetDidDismiss: { _ in })
 
 }
 

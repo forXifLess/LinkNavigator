@@ -1,10 +1,12 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
+
+// MARK: - HomeView
 
 struct HomeView: View {
 
   let navigator: RootNavigatorType
-  @State var message: String = ""
+  @State var message = ""
 
   var body: some View {
     VStack(spacing: 30) {
@@ -20,8 +22,7 @@ struct HomeView: View {
           navigator.backOrNext(
             linkItem: .init(
               path: "page1",
-              items: HomeToPage1Item(message: message).encoded()
-            ),
+              items: HomeToPage1Item(message: message).encoded()),
             isAnimated: true)
         }) {
           Text("go to next Page with Message")
@@ -39,6 +40,8 @@ struct HomeView: View {
     .padding()
   }
 }
+
+// MARK: - HomeToPage1Item
 
 struct HomeToPage1Item: Equatable, Codable {
   let message: String

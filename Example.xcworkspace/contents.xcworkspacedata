@@ -11,7 +11,7 @@
          location = "group:Examples/SingleNavigator/02-SingleEventSubscriber/02-SingleEventSubscriber.xcodeproj">
       </FileRef>
       <FileRef
-         location = "group:/Users/kyungseoklee/workspace/dev/iOS/LinkNavigator/Examples/SingleNavigator/SingleTicTacToe/03-SingleTicTacToe.xcodeproj">
+         location = "group:Examples/SingleNavigator/03-SingleTicTacToe/03-SingleTicTacToe.xcodeproj">
       </FileRef>
    </Group>
    <Group

@@ -1,10 +1,11 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
 
 struct Page1View: View {
 
+  // MARK: Internal
+
   let navigator: RootNavigatorType
-  @State private var paths: [String] = []
 
   var body: some View {
     VStack(spacing: 30) {
@@ -49,5 +50,9 @@ struct Page1View: View {
       paths = navigator.getCurrentPaths()
     }
   }
-}
 
+  // MARK: Private
+
+  @State private var paths: [String] = []
+
+}

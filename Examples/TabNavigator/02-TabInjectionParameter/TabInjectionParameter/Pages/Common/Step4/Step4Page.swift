@@ -1,14 +1,14 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
 
 struct Step4Page: View {
   let navigator: RootNavigatorType
-  @State var currentPath: String = ""
+  @State var currentPath = ""
 
   var body: some View {
     VStack(spacing: 16) {
       PathIndicator(currentPath: currentPath)
-      .padding(.top, 32)
+        .padding(.top, 32)
 
       Spacer()
 
@@ -27,7 +27,8 @@ struct Step4Page: View {
         Text("Remove path 'Step2, Step3'")
       }
 
-      Button(action: { navigator.backOrNext(linkItem: .init(path: navigator.getCurrentRootPaths().first ?? ""), isAnimated: true) }) {
+      Button(action: { navigator.backOrNext(linkItem: .init(path: navigator.getCurrentRootPaths().first ?? ""), isAnimated: true)
+      }) {
         Text("Back to root")
       }
 
@@ -38,4 +39,3 @@ struct Step4Page: View {
     }
   }
 }
-

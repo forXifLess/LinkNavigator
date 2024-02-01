@@ -1,6 +1,8 @@
 import LinkNavigator
 
-public typealias RootNavigatorType = TabLinkNavigatorProtocol & LinkNavigatorFindLocationUsable
+public typealias RootNavigatorType = LinkNavigatorFindLocationUsable & TabLinkNavigatorProtocol
+
+// MARK: - AppRouterBuilderGroup
 
 struct AppRouterBuilderGroup<RootNavigator: RootNavigatorType> {
   init() { }

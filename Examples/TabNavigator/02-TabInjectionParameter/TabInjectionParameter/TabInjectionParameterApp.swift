@@ -1,6 +1,6 @@
-import SwiftUI
 import LinkNavigator
 import PageTemplate
+import SwiftUI
 
 @main
 struct TabInjectionParameterApp: App {
@@ -41,7 +41,7 @@ struct TabInjectionParameterApp: App {
               title: "tab4",
               image: UIImage(systemName: "person"),
               selectedImage: UIImage(systemName: "person.fill")),
-            linkItem: .init(path: "tab4"))
+            linkItem: .init(path: "tab4")),
         ])
     }
   }

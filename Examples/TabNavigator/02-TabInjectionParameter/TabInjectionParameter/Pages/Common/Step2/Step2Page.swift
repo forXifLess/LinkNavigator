@@ -1,15 +1,15 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
 
 struct Step2Page: View {
   let navigator: RootNavigatorType
   let message: String
-  @State var currentPath: String = ""
+  @State var currentPath = ""
 
   var body: some View {
     VStack(spacing: 16) {
       PathIndicator(currentPath: currentPath)
-      .padding(.top, 32)
+        .padding(.top, 32)
 
       GroupBox {
         VStack(spacing: 10) {
@@ -19,7 +19,7 @@ struct Step2Page: View {
           }
           .font(.footnote)
           .foregroundColor(.secondary)
-          
+
           Text(message)
         }
       }

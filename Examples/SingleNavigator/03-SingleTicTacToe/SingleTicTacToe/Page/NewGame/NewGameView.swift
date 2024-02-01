@@ -1,29 +1,27 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
 
 struct NewGameView: View {
 
   let navigator: RootNavigatorType
-  @State var gameTitle: String = ""
+  @State var gameTitle = ""
 
   var body: some View {
     VStack(spacing: 30) {
       PathIndicator(currentPath: navigator.getCurrentPaths().joined(separator: " -> "))
         .padding(.top, 32)
 
-
       VStack(spacing: 16) {
         Text("새로운 게임 생성")
         TextField("Type message here", text: $gameTitle)
           .textFieldStyle(.roundedBorder)
           .padding(.horizontal)
-        
+
         Button(action: {
           navigator.next(
             linkItem: .init(
               path: "game",
-              items: GameInjectionData(gameTitle: gameTitle).encoded()
-            ),
+              items: GameInjectionData(gameTitle: gameTitle).encoded()),
             isAnimated: true)
         }) {
           Text("게임 시작")
@@ -44,4 +42,3 @@ struct NewGameView: View {
     .padding()
   }
 }
-

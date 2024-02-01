@@ -100,10 +100,12 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
   }
 
   public func backOrNext(linkItem: LinkItem, isAnimated: Bool) {
-    guard navigationBuilder.isContainSequence(item: linkItem),
-          let pick = navigationBuilder.lastPick(
-            controller: currentController,
-            item: linkItem) else {
+    guard
+      navigationBuilder.isContainSequence(item: linkItem),
+      let pick = navigationBuilder.lastPick(
+        controller: currentController,
+        item: linkItem)
+    else {
       currentController?.merge(new: navigationBuilder.build(item: linkItem), isAnimated: isAnimated)
       return
     }
@@ -111,10 +113,12 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
   }
 
   public func rootBackOrNext(linkItem: LinkItem, isAnimated: Bool) {
-    guard navigationBuilder.isContainSequence(item: linkItem),
-          let pick = navigationBuilder.lastPick(
-            controller: currentTabNavigationController,
-            item: linkItem) else {
+    guard
+      navigationBuilder.isContainSequence(item: linkItem),
+      let pick = navigationBuilder.lastPick(
+        controller: currentTabNavigationController,
+        item: linkItem)
+    else {
       currentTabNavigationController.merge(new: navigationBuilder.build(item: linkItem), isAnimated: isAnimated)
       return
     }

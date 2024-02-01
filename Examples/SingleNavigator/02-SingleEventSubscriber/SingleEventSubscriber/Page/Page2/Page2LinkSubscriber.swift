@@ -1,13 +1,23 @@
-import LinkNavigator
 import Combine
+import LinkNavigator
+
+// MARK: - Page2LinkSubscriber
 
 class Page2LinkSubscriber: ObservableObject {
-  @Published var linkAction: Page3View.Page2InjectionData? = .none
+
+  // MARK: Lifecycle
 
   deinit {
-    print("Page2LinkSubscriber deinit...")
+    LogManager.default.debug("Page2LinkSubscriber deinit...")
   }
+
+  // MARK: Internal
+
+  @Published var linkAction: Page3View.Page2InjectionData? = .none
+
 }
+
+// MARK: LinkNavigatorItemSubscriberProtocol
 
 extension Page2LinkSubscriber: LinkNavigatorItemSubscriberProtocol {
   func receive(encodedItemString: String) {

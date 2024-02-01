@@ -1,10 +1,12 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
+
+// MARK: - Page3View
 
 struct Page3View: View {
 
   let navigator: RootNavigatorType
-  @State var message: String = ""
+  @State var message = ""
 
   var body: some View {
     VStack(spacing: 30) {
@@ -20,9 +22,7 @@ struct Page3View: View {
           navigator.rootSend(
             item: .init(
               path: "page2",
-              items: Page2InjectionData(message: message).encoded()
-            )
-          )
+              items: Page2InjectionData(message: message).encoded()))
           navigator.back(isAnimated: true)
 
         }) {
@@ -31,14 +31,15 @@ struct Page3View: View {
       }
 
       Spacer()
-
     }
     .padding()
   }
 }
+
+// MARK: Page3View.Page2InjectionData
+
 extension Page3View {
   struct Page2InjectionData: Equatable, Codable {
     let message: String
   }
 }
-

@@ -1,16 +1,16 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
 
 struct Tab3Page: View {
   let navigator: RootNavigatorType
   let eventSubscriber: EventSubscriber
 
-  @State var currentPath: String = ""
+  @State var currentPath = ""
 
   var body: some View {
     VStack(spacing: 16) {
       PathIndicator(currentPath: currentPath)
-      .padding(.top, 32)
+        .padding(.top, 32)
 
       Spacer()
 
@@ -36,7 +36,9 @@ struct Tab3Page: View {
     .onReceive(eventSubscriber.action) { event in
       switch event.action {
       case .sendMessage(let message):
-        navigator.backOrNext(linkItem: .init(pathList: ["step1", "step2"], items: Step2InjectionData(message: message)), isAnimated: true)
+        navigator.backOrNext(
+          linkItem: .init(pathList: ["step1", "step2"], items: Step2InjectionData(message: message)),
+          isAnimated: true)
       }
     }
     .onAppear {

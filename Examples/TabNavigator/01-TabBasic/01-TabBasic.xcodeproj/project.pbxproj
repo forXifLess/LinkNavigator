@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2922480F2B6B15F3006CCA00 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2922480E2B6B15F3006CCA00 /* AppDependency.swift */; };
 		295C297E2B4556D300ED8C6F /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 295C297D2B4556D300ED8C6F /* LinkNavigator */; };
 		295C29812B4556F100ED8C6F /* PageTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = 295C29802B4556F100ED8C6F /* PageTemplate */; };
 		298BA8802B44F0EE005D55FE /* TabBasicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BA87F2B44F0EE005D55FE /* TabBasicApp.swift */; };
 		298BA8842B44F0EF005D55FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 298BA8832B44F0EF005D55FE /* Assets.xcassets */; };
 		298BA8882B44F0EF005D55FE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 298BA8872B44F0EF005D55FE /* Preview Assets.xcassets */; };
-		7E7A32502B4506D80078DAFF /* TapAppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A324F2B4506D80078DAFF /* TapAppDependency.swift */; };
 		7E7A32522B4507180078DAFF /* AppRouterBuilderGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A32512B4507180078DAFF /* AppRouterBuilderGroup.swift */; };
 		7E7A325A2B4508540078DAFF /* Tab1Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A32592B4508540078DAFF /* Tab1Page.swift */; };
 		7E7A325C2B45086F0078DAFF /* Tab1RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A325B2B45086F0078DAFF /* Tab1RouteBuilder.swift */; };
@@ -36,12 +36,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2922480E2B6B15F3006CCA00 /* AppDependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
 		298BA87C2B44F0EE005D55FE /* TabBasic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabBasic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		298BA87F2B44F0EE005D55FE /* TabBasicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBasicApp.swift; sourceTree = "<group>"; };
 		298BA8832B44F0EF005D55FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		298BA8852B44F0EF005D55FE /* TabBasic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TabBasic.entitlements; sourceTree = "<group>"; };
 		298BA8872B44F0EF005D55FE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		7E7A324F2B4506D80078DAFF /* TapAppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapAppDependency.swift; sourceTree = "<group>"; };
 		7E7A32512B4507180078DAFF /* AppRouterBuilderGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterBuilderGroup.swift; sourceTree = "<group>"; };
 		7E7A32592B4508540078DAFF /* Tab1Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab1Page.swift; sourceTree = "<group>"; };
 		7E7A325B2B45086F0078DAFF /* Tab1RouteBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab1RouteBuilder.swift; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 				7E7A32902B4561450078DAFF /* Component */,
 				7E7A32532B45082D0078DAFF /* Pages */,
 				298BA87F2B44F0EE005D55FE /* TabBasicApp.swift */,
-				7E7A324F2B4506D80078DAFF /* TapAppDependency.swift */,
+				2922480E2B6B15F3006CCA00 /* AppDependency.swift */,
 				7E7A32512B4507180078DAFF /* AppRouterBuilderGroup.swift */,
 				298BA8832B44F0EF005D55FE /* Assets.xcassets */,
 				298BA8852B44F0EF005D55FE /* TabBasic.entitlements */,
@@ -299,12 +299,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2922480F2B6B15F3006CCA00 /* AppDependency.swift in Sources */,
 				7E7A32602B450E680078DAFF /* Tab2RouteBuilder.swift in Sources */,
 				7E7A32962B456DD60078DAFF /* Step2Page.swift in Sources */,
 				7E7A325E2B450E5F0078DAFF /* Tab2Page.swift in Sources */,
 				7E7A32682B450EC10078DAFF /* Tab4RouteBuilder.swift in Sources */,
 				7E7A328D2B4536D30078DAFF /* Step4Page.swift in Sources */,
-				7E7A32502B4506D80078DAFF /* TapAppDependency.swift in Sources */,
 				7E7A32832B45367A0078DAFF /* Step1RouteBuilder.swift in Sources */,
 				7E7A32812B4536720078DAFF /* Step1Page.swift in Sources */,
 				7E7A32892B4536C70078DAFF /* Step3Page.swift in Sources */,

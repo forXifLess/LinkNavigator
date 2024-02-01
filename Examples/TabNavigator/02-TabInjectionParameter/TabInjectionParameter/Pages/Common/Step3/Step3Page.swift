@@ -1,14 +1,14 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
 
 struct Step3Page: View {
   let navigator: RootNavigatorType
-  @State var currentPath: String = ""
+  @State var currentPath = ""
 
   var body: some View {
     VStack(spacing: 16) {
       PathIndicator(currentPath: currentPath)
-      .padding(.top, 32)
+        .padding(.top, 32)
 
       Spacer()
 
@@ -16,8 +16,11 @@ struct Step3Page: View {
         Text("Next to 'Step4'")
       }
 
-      Button(action: { 
-        navigator.reloadLast(linkItem: .init(path: "step2", items: Step2InjectionData(message: "Replaced message!")), isAnimated: true) }) {
+      Button(action: {
+        navigator.reloadLast(
+          linkItem: .init(path: "step2", items: Step2InjectionData(message: "Replaced message!")),
+          isAnimated: true)
+      }) {
         Text("Replaced 'Step2' message")
       }
 

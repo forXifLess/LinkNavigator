@@ -1,16 +1,17 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
 
 struct HomeView: View {
 
+  // MARK: Internal
+
   let navigator: RootNavigatorType
-  @State private var paths: [String] = []
 
   var body: some View {
     VStack(spacing: 30) {
       PathIndicator(currentPath: paths.joined(separator: " -> "))
         .padding(.top, 32)
-      
+
       Button(action: {
         navigator.backOrNext(linkItem: .init(path: "page1"), isAnimated: true)
       }) {
@@ -27,7 +28,7 @@ struct HomeView: View {
         let alertModel = Alert(
           title: "Title",
           message: "message",
-          buttons: [.init(title: "OK", style: .default, action: { print("OK tapped") })],
+          buttons: [.init(title: "OK", style: .default, action: { LogManager.default.debug("OK Tapped") })],
           flagType: .default)
         navigator.alert(target: .default, model: alertModel)
       }) {
@@ -56,4 +57,9 @@ struct HomeView: View {
       paths = navigator.getCurrentPaths()
     }
   }
+
+  // MARK: Private
+
+  @State private var paths: [String] = []
+
 }

@@ -1,10 +1,9 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
 
 struct Page2View: View {
 
-  private let navigator: RootNavigatorType
-  @ObservedObject private var linkSubscriber: Page2LinkSubscriber
+  // MARK: Lifecycle
 
   init(
     navigator: RootNavigatorType,
@@ -13,6 +12,8 @@ struct Page2View: View {
     self.navigator = navigator
     self.linkSubscriber = linkSubscriber
   }
+
+  // MARK: Internal
 
   var body: some View {
     VStack(spacing: 30) {
@@ -42,4 +43,10 @@ struct Page2View: View {
     }
     .padding()
   }
+
+  // MARK: Private
+
+  private let navigator: RootNavigatorType
+  @ObservedObject private var linkSubscriber: Page2LinkSubscriber
+
 }

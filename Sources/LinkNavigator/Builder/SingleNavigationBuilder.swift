@@ -42,6 +42,17 @@ public class SingleNavigationBuilder<Root> {
 
 extension SingleNavigationBuilder {
 
+  // MARK: Public
+
+  public func isContainSequence(item: LinkItem) -> Bool {
+    let currentPathJoin = routeBuilderList.map { $0.matchPath }.joined(separator: ",")
+    let itemPathJoin = item.pathList.joined(separator: ",")
+
+    return currentPathJoin.contains(itemPathJoin)
+  }
+
+  // MARK: Internal
+
   /// Builds a list of `RouteViewController` based on the provided `LinkItem`.
   ///
   /// - Parameter item: A `LinkItem` containing the paths and associated values.
@@ -100,10 +111,4 @@ extension SingleNavigationBuilder {
       .filter { !item.pathList.contains($0.matchPath) }
   }
 
-  public func isContainSequence(item: LinkItem) -> Bool {
-    let currentPathJoin = routeBuilderList.map { $0.matchPath }.joined(separator: ",")
-    let itemPathJoin = item.pathList.joined(separator: ",")
-
-    return currentPathJoin.contains(itemPathJoin)
-  }
 }

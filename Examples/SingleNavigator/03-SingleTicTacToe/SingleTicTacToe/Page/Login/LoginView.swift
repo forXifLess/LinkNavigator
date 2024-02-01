@@ -1,12 +1,11 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
 
 struct LoginView: View {
 
-  let navigator: RootNavigatorType
+  // MARK: Internal
 
-  @State private var message: String = ""
-  @State private var password: String = ""
+  let navigator: RootNavigatorType
 
   var body: some View {
     VStack(spacing: 30) {
@@ -35,4 +34,10 @@ struct LoginView: View {
     }
     .padding()
   }
+
+  // MARK: Private
+
+  @State private var message = ""
+  @State private var password = ""
+
 }

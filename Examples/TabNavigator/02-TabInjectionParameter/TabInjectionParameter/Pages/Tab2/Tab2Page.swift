@@ -2,12 +2,12 @@ import SwiftUI
 
 struct Tab2Page: View {
   let navigator: RootNavigatorType
-  @State var currentPath: String = ""
+  @State var currentPath = ""
 
   var body: some View {
     VStack(spacing: 16) {
       PathIndicator(currentPath: currentPath)
-      .padding(.top, 32)
+        .padding(.top, 32)
 
       Spacer()
 

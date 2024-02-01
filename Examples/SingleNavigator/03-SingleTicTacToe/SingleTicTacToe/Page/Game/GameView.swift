@@ -1,5 +1,5 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
 
 struct GameView: View {
 

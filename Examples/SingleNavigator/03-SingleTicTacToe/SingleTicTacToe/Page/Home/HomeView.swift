@@ -1,17 +1,17 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
 
 struct HomeView: View {
 
-  let navigator: RootNavigatorType
+  // MARK: Internal
 
-  @State private var isLogin = UserDefaults.standard.bool(forKey: "isLogin")
+  let navigator: RootNavigatorType
 
   var body: some View {
     VStack(spacing: 30) {
       PathIndicator(currentPath: navigator.getCurrentPaths().joined(separator: " -> "))
         .padding(.top, 32)
-      
+
       Button(action: {
         navigator.sheet(linkItem: .init(path: "login"), isAnimated: true)
       }) {
@@ -27,4 +27,9 @@ struct HomeView: View {
       }
     }
   }
+
+  // MARK: Private
+
+  @State private var isLogin = UserDefaults.standard.bool(forKey: "isLogin")
+
 }

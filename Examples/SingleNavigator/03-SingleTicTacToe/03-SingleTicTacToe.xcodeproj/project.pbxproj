@@ -27,7 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		93782DC82B4B98F900D16F44 /* 03-SingleTicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "03-SingleTicTacToe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93782DC82B4B98F900D16F44 /* SingleTicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleTicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93782DCB2B4B98F900D16F44 /* SingleTicTacToeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTicTacToeApp.swift; sourceTree = "<group>"; };
 		93782DCD2B4B98F900D16F44 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		93782DCF2B4B98FA00D16F44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 		93782DC92B4B98F900D16F44 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				93782DC82B4B98F900D16F44 /* 03-SingleTicTacToe.app */,
+				93782DC82B4B98F900D16F44 /* SingleTicTacToe.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -155,9 +155,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		93782DC72B4B98F900D16F44 /* 03-SingleTicTacToe */ = {
+		93782DC72B4B98F900D16F44 /* SingleTicTacToe */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 93782DD62B4B98FA00D16F44 /* Build configuration list for PBXNativeTarget "03-SingleTicTacToe" */;
+			buildConfigurationList = 93782DD62B4B98FA00D16F44 /* Build configuration list for PBXNativeTarget "SingleTicTacToe" */;
 			buildPhases = (
 				93782DC42B4B98F900D16F44 /* Sources */,
 				93782DC52B4B98F900D16F44 /* Frameworks */,
@@ -167,13 +167,13 @@
 			);
 			dependencies = (
 			);
-			name = "03-SingleTicTacToe";
+			name = SingleTicTacToe;
 			packageProductDependencies = (
 				93782DDA2B4B994700D16F44 /* LinkNavigator */,
 				93782DDD2B4B995400D16F44 /* PageTemplate */,
 			);
 			productName = SingleTicTacToe;
-			productReference = 93782DC82B4B98F900D16F44 /* 03-SingleTicTacToe.app */;
+			productReference = 93782DC82B4B98F900D16F44 /* SingleTicTacToe.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -208,7 +208,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				93782DC72B4B98F900D16F44 /* 03-SingleTicTacToe */,
+				93782DC72B4B98F900D16F44 /* SingleTicTacToe */,
 			);
 		};
 /* End PBXProject section */
@@ -438,7 +438,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		93782DD62B4B98FA00D16F44 /* Build configuration list for PBXNativeTarget "03-SingleTicTacToe" */ = {
+		93782DD62B4B98FA00D16F44 /* Build configuration list for PBXNativeTarget "SingleTicTacToe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				93782DD72B4B98FA00D16F44 /* Debug */,
