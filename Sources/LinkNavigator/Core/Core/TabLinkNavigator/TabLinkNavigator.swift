@@ -68,20 +68,21 @@ extension TabLinkNavigator {
 extension TabLinkNavigator {
   public func launch(tagItemList: [TabItem]) -> [UINavigationController] {
     let tabPartialNavigators = tagItemList
-      .reduce([TabPartialNavigator]()) { curr, next in
+      .reduce([(Bool, TabPartialNavigator)]()) { curr, next in
         let newNavigatorList = TabPartialNavigator(
           rootNavigator: self,
           tabItem: next,
           routeBuilderItemList: routeBuilderItemList,
           dependency: dependency)
-        return curr + [newNavigatorList]
+        return curr + [(next.prefersLargeTitles, newNavigatorList)]
       }
 
     tabRootNavigators = tabPartialNavigators
-      .map { navigator in
+      .map { (prefersLargeTitles, navigator) in
         let partialNavigationVC = navigator.launch(rootPath: navigator.tabItem.linkItem.pathList.first ?? "")
         let item = tagItemList.first(where: { $0.linkItem == navigator.tabItem.linkItem })
         partialNavigationVC.navigationController.tabBarItem = item?.tabItem
+        partialNavigationVC.navigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
         return partialNavigationVC
       }
 
