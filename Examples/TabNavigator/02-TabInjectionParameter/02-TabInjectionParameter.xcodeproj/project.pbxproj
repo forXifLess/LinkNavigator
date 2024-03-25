@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		29758CF52B44F95B00307B89 /* TabInjectionParameterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29758CF42B44F95B00307B89 /* TabInjectionParameterApp.swift */; };
-		29758CF72B44F95B00307B89 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29758CF62B44F95B00307B89 /* ContentView.swift */; };
 		29758CF92B44F95C00307B89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29758CF82B44F95C00307B89 /* Assets.xcassets */; };
 		29758CFD2B44F95C00307B89 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29758CFC2B44F95C00307B89 /* Preview Assets.xcassets */; };
 		29AB43432B4557C800C32F2A /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 29AB43422B4557C800C32F2A /* LinkNavigator */; };
@@ -37,7 +36,6 @@
 /* Begin PBXFileReference section */
 		29758CF12B44F95B00307B89 /* TabInjectionParameter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabInjectionParameter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29758CF42B44F95B00307B89 /* TabInjectionParameterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabInjectionParameterApp.swift; sourceTree = "<group>"; };
-		29758CF62B44F95B00307B89 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		29758CF82B44F95C00307B89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29758CFA2B44F95C00307B89 /* TabInjectionParameter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TabInjectionParameter.entitlements; sourceTree = "<group>"; };
 		29758CFC2B44F95C00307B89 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -97,7 +95,6 @@
 				7E7A32C72B469C2D0078DAFF /* Pages */,
 				7E7A32C62B469C280078DAFF /* Component */,
 				29758CF42B44F95B00307B89 /* TabInjectionParameterApp.swift */,
-				29758CF62B44F95B00307B89 /* ContentView.swift */,
 				7E7A32C42B469C010078DAFF /* AppRouteBuilderGroup.swift */,
 				7E7A32C22B469BF50078DAFF /* AppDependency.swift */,
 				29758CF82B44F95C00307B89 /* Assets.xcassets */,
@@ -307,7 +304,6 @@
 				7E7A32E82B469D680078DAFF /* Tab1RouteBuilder.swift in Sources */,
 				7E7A32F12B469D680078DAFF /* Step3RouteBuilder.swift in Sources */,
 				7E7A32C52B469C010078DAFF /* AppRouteBuilderGroup.swift in Sources */,
-				29758CF72B44F95B00307B89 /* ContentView.swift in Sources */,
 				7E7A32F02B469D680078DAFF /* Step4Page.swift in Sources */,
 				7E7A32EC2B469D680078DAFF /* Tab3Page.swift in Sources */,
 				7E7A32F52B469D680078DAFF /* Step1RouteBuilder.swift in Sources */,

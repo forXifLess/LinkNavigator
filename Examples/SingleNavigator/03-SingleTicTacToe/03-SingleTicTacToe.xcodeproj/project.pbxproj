@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		93782DCC2B4B98F900D16F44 /* SingleTicTacToeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93782DCB2B4B98F900D16F44 /* SingleTicTacToeApp.swift */; };
-		93782DCE2B4B98F900D16F44 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93782DCD2B4B98F900D16F44 /* ContentView.swift */; };
 		93782DD02B4B98FA00D16F44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93782DCF2B4B98FA00D16F44 /* Assets.xcassets */; };
 		93782DD32B4B98FA00D16F44 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93782DD22B4B98FA00D16F44 /* Preview Assets.xcassets */; };
 		93782DDB2B4B994700D16F44 /* LinkNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 93782DDA2B4B994700D16F44 /* LinkNavigator */; };
@@ -29,7 +28,6 @@
 /* Begin PBXFileReference section */
 		93782DC82B4B98F900D16F44 /* SingleTicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleTicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93782DCB2B4B98F900D16F44 /* SingleTicTacToeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTicTacToeApp.swift; sourceTree = "<group>"; };
-		93782DCD2B4B98F900D16F44 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		93782DCF2B4B98FA00D16F44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93782DD22B4B98FA00D16F44 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		93782DDF2B4B9C0100D16F44 /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
@@ -82,7 +80,6 @@
 				93782DCB2B4B98F900D16F44 /* SingleTicTacToeApp.swift */,
 				93782DDF2B4B9C0100D16F44 /* AppDependency.swift */,
 				93782DE12B4B9C0D00D16F44 /* AppRouterGroup.swift */,
-				93782DCD2B4B98F900D16F44 /* ContentView.swift */,
 				93782DCF2B4B98FA00D16F44 /* Assets.xcassets */,
 				93782DD12B4B98FA00D16F44 /* Preview Content */,
 			);
@@ -232,7 +229,6 @@
 			files = (
 				93782DE02B4B9C0100D16F44 /* AppDependency.swift in Sources */,
 				93782DFA2B4BA40B00D16F44 /* GameRoutebuilder.swift in Sources */,
-				93782DCE2B4B98F900D16F44 /* ContentView.swift in Sources */,
 				93782DF02B4BA32100D16F44 /* LoginRouteBuilder.swift in Sources */,
 				93782DF52B4BA3C800D16F44 /* NewGameRouteBuilder.swift in Sources */,
 				93782DE22B4B9C0D00D16F44 /* AppRouterGroup.swift in Sources */,
