@@ -7,15 +7,18 @@ public struct TabLinkNavigationView {
   let linkNavigator: TabLinkNavigator
   let isHiddenDefaultTabbar: Bool
   let tabItemList: [TabItem]
+  let isAnimatedForUpdateTabbar: Bool
 
   public init(
     linkNavigator: TabLinkNavigator,
     isHiddenDefaultTabbar: Bool,
-    tabItemList: [TabItem])
+    tabItemList: [TabItem],
+    isAnimatedForUpdateTabbar: Bool = false)
   {
     self.linkNavigator = linkNavigator
     self.isHiddenDefaultTabbar = isHiddenDefaultTabbar
     self.tabItemList = tabItemList
+    self.isAnimatedForUpdateTabbar = isAnimatedForUpdateTabbar
   }
 }
 
@@ -27,7 +30,7 @@ extension TabLinkNavigationView: UIViewControllerRepresentable {
   }
 
   public func updateUIViewController(_ uiViewController: UITabBarController, context _: Context) {
-    uiViewController.setViewControllers(linkNavigator.launch(tagItemList: tabItemList), animated: true)
+    uiViewController.setViewControllers(linkNavigator.launch(tagItemList: tabItemList), animated: isAnimatedForUpdateTabbar)
     uiViewController.tabBar.isHidden = isHiddenDefaultTabbar
     linkNavigator.mainController = uiViewController
   }
