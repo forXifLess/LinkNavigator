@@ -130,11 +130,8 @@ public protocol TabLinkNavigatorProtocol {
   /// the alert is displayed either on the root or the sub-controller.
   ///
   /// - Parameters:
-  ///   - target: The target specifying where to display the alert. It can be root, sub, or default.
-  ///             If the target is default, it determines whether to present the alert on sub or root based
-  ///             on the `isSubNavigatorActive` property.
   ///   - model: The model containing information for building and displaying the alert.
-  func alert(target: NavigationTarget, model: Alert)
+  func alert(model: Alert)
 
   /// Sends the specified link item to a specific subscriber ('sub') or page sheet within the current navigation stack.
   /// This method facilitates communication between pages, allowing data to be transferred to a specific 'sub' or page sheet as defined in the link item.

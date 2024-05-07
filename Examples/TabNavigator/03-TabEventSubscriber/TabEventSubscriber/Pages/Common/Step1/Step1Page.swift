@@ -20,6 +20,20 @@ struct Step1Page: View {
         Text("Close Sheet")
       }
 
+      Button(action: {
+        navigator.alert(model: .init(
+          title: "Test Title",
+          message: "Message",
+          buttons: [
+            .init(
+              title: "OK",
+              style: .default)
+          ],
+          flagType: .default))
+      }) {
+        Text("Show Alert")
+      }
+
       Spacer()
     }
     .onAppear {

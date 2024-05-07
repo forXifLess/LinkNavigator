@@ -161,6 +161,11 @@ extension TabLinkNavigator {
     NotificationCenter.default
       .post(name: TabbarEventNotification.onSelectedTab, object: targetPath)
   }
+
+  public func alert(model: Alert) {
+    let currentController = modalController ?? fullSheetController ?? mainController?.selectedViewController
+    currentController?.present(model.build(), animated: true)
+  }
 }
 
 extension UINavigationController {

@@ -259,8 +259,8 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
     currentTabNavigationController.setViewControllers(reloadedVC, animated: isAnimated)
   }
 
-  public func alert(target _: NavigationTarget, model: Alert) {
-    currentController?.present(model.build(), animated: true)
+  public func alert(model: Alert) {
+    rootNavigator?.alert(model: model)
   }
 
   public func send(targetTabPath: String?, linkItem: LinkItem) {
