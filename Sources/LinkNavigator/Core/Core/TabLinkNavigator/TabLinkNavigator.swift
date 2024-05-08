@@ -27,23 +27,18 @@ public final class TabLinkNavigator {
   public let routeBuilderItemList: [RouteBuilderOf<TabPartialNavigator>]
   public let dependency: DependencyType
 
-  public var tabRootNavigators: [TabRootNavigationController] = []
+  public var tabRootPartialNavigators: [TabPartialNavigator] = []
 
   public var owner: LinkNavigatorItemSubscriberProtocol? = .none
 
   public weak var mainController: UITabBarController?
 
   public var currentTabRootPath: String? {
-    guard let currentController = mainController?.selectedViewController else { return .none }
-    let currentTabRootController = tabRootNavigators.first(where: { $0.navigationController == currentController })
-
-    return currentTabRootController?.matchPath
+    ((mainController?.selectedViewController as? UINavigationController)?.viewControllers.first as? MatchPathUsable)?.matchPath
   }
 
   public var currentPath: String? {
-    (tabRootNavigators.first(where: {
-      $0.navigationController == mainController?.selectedViewController
-    })?.navigationController.topViewController as? MatchPathUsable)?.matchPath
+    ((mainController?.selectedViewController as? UINavigationController)?.topViewController as? MatchPathUsable)?.matchPath
   }
 
   // MARK: Internal
@@ -60,14 +55,18 @@ public final class TabLinkNavigator {
 }
 
 extension TabLinkNavigator {
-  func targetController(targetTabPath: String) -> UINavigationController? {
-    tabRootNavigators.first(where: { $0.matchPath == targetTabPath })?.navigationController
+  public func targetController(targetTabPath: String) -> UINavigationController? {
+    tabRootPartialNavigators.first(where: { $0.getCurrentRootPaths().first == targetTabPath })?.currentTabNavigationController
+  }
+
+  public func targetPartialNavigator(tabPath: String) -> TabPartialNavigator? {
+    tabRootPartialNavigators.first(where: { $0.getCurrentRootPaths().first == tabPath })
   }
 }
 
 extension TabLinkNavigator {
   public func launch(tagItemList: [TabItem]) -> [UINavigationController] {
-    let tabPartialNavigators = tagItemList
+    let partialNavigators = tagItemList
       .reduce([(Bool, TabPartialNavigator)]()) { curr, next in
         let newNavigatorList = TabPartialNavigator(
           rootNavigator: self,
@@ -77,16 +76,16 @@ extension TabLinkNavigator {
         return curr + [(next.prefersLargeTitles, newNavigatorList)]
       }
 
-    tabRootNavigators = tabPartialNavigators
+    self.tabRootPartialNavigators = partialNavigators.map(\.1)
+
+    return partialNavigators
       .map { (prefersLargeTitles, navigator) in
         let partialNavigationVC = navigator.launch(rootPath: navigator.tabItem.linkItem.pathList.first ?? "")
         let item = tagItemList.first(where: { $0.linkItem == navigator.tabItem.linkItem })
         partialNavigationVC.navigationController.tabBarItem = item?.tabItem
         partialNavigationVC.navigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
-        return partialNavigationVC
+        return partialNavigationVC.navigationController
       }
-
-    return tabRootNavigators.map(\.navigationController)
   }
 }
 
@@ -149,8 +148,7 @@ extension TabLinkNavigator {
   }
 
   public func moveTab(targetPath: String) {
-    guard let targetController = tabRootNavigators.first(where: { $0.matchPath == targetPath })?.navigationController
-    else { return }
+    guard let targetController = tabRootPartialNavigators.first(where: { $0.getCurrentRootPaths().first == targetPath })?.currentTabNavigationController else { return }
 
     if mainController?.selectedViewController == targetController {
       targetController.popToRootViewController(animated: true)
@@ -166,40 +164,19 @@ extension TabLinkNavigator {
     let currentController = modalController ?? fullSheetController ?? mainController?.selectedViewController
     currentController?.present(model.build(), animated: true)
   }
-}
 
-extension UINavigationController {
-  private func currentItemList() -> [String] {
-    viewControllers.compactMap { $0 as? MatchPathUsable }.map(\.matchPath)
-  }
+  /// Sends event to navigators that match path of link item
+  public func send(linkItem: LinkItem) {
+    var matchPathUsables: [MatchPathUsable] = []
 
-  private func merge(new: [UIViewController], isAnimated: Bool) {
-    setViewControllers(viewControllers + new, animated: isAnimated)
-  }
+    matchPathUsables = tabRootPartialNavigators
+      .flatMap(\.currentTabNavigationController.viewControllers)
+      .compactMap { $0 as? MatchPathUsable }
 
-  private func back(isAnimated: Bool) {
-    popViewController(animated: isAnimated)
-  }
-
-  private func clear(isAnimated: Bool) {
-    setViewControllers([], animated: isAnimated)
-  }
-
-  private func push(viewController: UIViewController?, isAnimated: Bool) {
-    guard let viewController else { return }
-    pushViewController(viewController, animated: isAnimated)
-  }
-
-  private func replace(viewController: [UIViewController], isAnimated: Bool) {
-    setViewControllers(viewController, animated: isAnimated)
-  }
-
-  private func popTo(viewController: UIViewController?, isAnimated: Bool) {
-    guard let viewController else { return }
-    popToViewController(viewController, animated: isAnimated)
-  }
-
-  private func dropLast() -> [UIViewController] {
-    Array(viewControllers.dropLast())
+    matchPathUsables
+      .filter { linkItem.pathList.contains($0.matchPath) }
+      .forEach {
+        $0.eventSubscriber?.receive(encodedItemString: linkItem.encodedItemString)
+      }
   }
 }
