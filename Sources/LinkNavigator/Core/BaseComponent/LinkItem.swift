@@ -53,13 +53,13 @@ public struct LinkItem {
 }
 
 extension LinkItem {
-  @available(*, deprecated, message: "Please use init(pathList:itemsString:isConvertBase64:) instead.")
+  @available(*, deprecated, message: "Please use init(pathList:itemsString:isBase64EncodedItemsString:) instead.")
   public init(pathList: [String], items: String) {
     self.pathList = pathList
     encodedItemString = items
   }
 
-  @available(*, deprecated, message: "Please use init(path:itemsString:isConvertBase64:) instead.")
+  @available(*, deprecated, message: "Please use init(path:itemsString:isBase64EncodedItemsString:) instead.")
   public init(path: String, items: String) {
     pathList = [path]
     encodedItemString = items
