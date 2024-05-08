@@ -6,34 +6,38 @@ import URLEncodedForm
 /// Represents a link item that contains paths and associated items.
 /// It is used to manage the links and state values that are injected into a page.
 public struct LinkItem {
-
   // MARK: Lifecycle
-
   /// Initializes a LinkItem instance with a given path list and an items parameter.
-  ///
-  /// - Parameters:
-  ///   - pathList: An array of strings representing the path list.
-  ///   - items: The items associated with the pathList.
-  public init(pathList: [String], items: String = "") {
-    self.pathList = pathList
-    encodedItemString = items
-  }
 
-  /// Initializes a LinkItem instance with a given path and an items parameter.
-  ///
   /// - Parameters:
   ///   - path: A string representing the path.
-  ///   - items: The items associated with the path.
-  public init(path: String, items: String = "") {
+  ///   - itemsString: The objects to be injected into pathList are in string format (e.g., queryString, base64EncodedString, etc.).
+  ///   - isBase64EncodedItemsString: The 'itemsString' indicates whether it is base64 encoded or not.
+  public init(path: String, itemsString: String = "", isBase64EncodedItemsString: Bool = false) {
     pathList = [path]
-    encodedItemString = items
+    encodedItemString = isBase64EncodedItemsString ? itemsString : itemsString.encodedBase64()
   }
 
+  /// - Parameters:
+  ///   - pathList: An array of strings representing the path list.
+  ///   - itemsString: The objects to be injected into pathList are in string format (e.g., queryString, base64EncodedString, etc.).
+  ///   - isBase64EncodedItemsString: The 'itemsString' indicates whether it is base64 encoded or not.
+  public init(pathList: [String], itemsString: String = "", isBase64EncodedItemsString: Bool = false) {
+    self.pathList = pathList
+    encodedItemString = isBase64EncodedItemsString ? itemsString : itemsString.encodedBase64()
+  }
+
+  /// - Parameters:
+  ///   - path: A string representing the path.
+  ///   - items: The object to be injected into the RouteBuilder corresponding to each path .
   public init(path: String, items: Codable?) {
     pathList = [path]
     encodedItemString = items?.encoded() ?? ""
   }
 
+  /// - Parameters:
+  ///   - pathList: An array of strings representing the path list.
+  ///   - items: The object to be injected into the RouteBuilder corresponding to each path .
   public init(pathList: [String], items: Codable?) {
     self.pathList = pathList
     encodedItemString = items?.encoded() ?? ""
@@ -46,7 +50,20 @@ public struct LinkItem {
 
   /// A parameter containing the items associated with the path or path list.
   let encodedItemString: String
+}
 
+extension LinkItem {
+  @available(*, deprecated, message: "Please use init(pathList:itemsString:isConvertBase64:) instead.")
+  public init(pathList: [String], items: String) {
+    self.pathList = pathList
+    encodedItemString = items
+  }
+
+  @available(*, deprecated, message: "Please use init(path:itemsString:isConvertBase64:) instead.")
+  public init(path: String, items: String) {
+    pathList = [path]
+    encodedItemString = items
+  }
 }
 
 // MARK: Equatable
@@ -58,62 +75,18 @@ extension LinkItem: Equatable {
   }
 }
 
-// extension LinkItem where ItemType == String {
-//  /// Initializes a LinkItem instance with a given path list and an optional items parameter.
-//  ///
-//  /// - Parameters:
-//  ///   - pathList: An array of strings representing the path list.
-//  ///   - items: Encoded URLEncodedQuery items. Defaults to an empty string.
-//  public init(pathList: [String], items: ItemType = "") {
-//    self.pathList = pathList
-//    self.items = items
-//  }
-//
-//  /// Initializes a LinkItem instance with a given path and an optional items parameter.
-//  ///
-//  /// - Parameters:
-//  ///   - path: A string representing the path.
-//  ///   - items: Encoded URLEncodedQuery items. Defaults to an empty string.
-//  public init(path: String, items: ItemType = "") {
-//    pathList = [path]
-//    self.items = items
-//  }
-// }
-
-// extension LinkItem where ItemType == [String: String] {
-//  /// Initializes a LinkItem instance with a given path list and an optional items dictionary.
-//  ///
-//  /// - Parameters:
-//  ///   - pathList: An array of strings representing the path list.
-//  ///   - items: A dictionary containing key-value pairs representing the items. Defaults to an empty dictionary.
-//  public init(pathList: [String], items: ItemType = [:]) {
-//    self.pathList = pathList
-//    self.items = items
-//  }
-//
-//  /// Initializes a LinkItem instance with a given path and an optional items dictionary.
-//  ///
-//  /// - Parameters:
-//  ///   - path: A string representing the path.
-//  ///   - items: A dictionary containing key-value pairs representing the items. Defaults to an empty dictionary.
-//  public init(path: String, items: ItemType = [:]) {
-//    pathList = [path]
-//    self.items = items
-//  }
-// }
-
 extension String {
   public func decoded<T: Decodable>() -> T? {
     if let decodedValue = self as? T {
       return decodedValue
     }
 
-    guard
-      let data = Data(base64Encoded: self),
-      let decodedModel = try? JSONDecoder().decode(T.self, from: data)
-    else { return .none }
+    guard let data = Data(base64Encoded: self) else { return .none }
+    return (try? JSONDecoder().decode(T.self, from: data)) ?? (try? URLEncodedFormDecoder().decode(T.self, from: data))
+  }
 
-    return decodedModel
+  fileprivate func encodedBase64() -> Self {
+    data(using: .utf8)?.base64EncodedString() ?? self
   }
 }
 
