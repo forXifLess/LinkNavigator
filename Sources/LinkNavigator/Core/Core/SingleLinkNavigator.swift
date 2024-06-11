@@ -331,7 +331,7 @@ extension SingleLinkNavigator {
   ///   - items: The new `ItemValue` to be applied to the last view controller.
   ///   - isAnimated: A flag indicating whether the reload should be animated.
   private func _rootReloadLast(item: LinkItem, isAnimated _: Bool) {
-    guard let lastPath = getCurrentPaths().last else { return }
+    guard let lastPath = getCurrentRootPaths().last else { return }
     guard let rootController else { return }
     guard
       let new = routeBuilderItemList.first(where: { $0.matchPath == lastPath })?.routeBuild(
