@@ -140,7 +140,20 @@ extension SingleLinkNavigator {
   private func _sheet(linkItem: LinkItem, isAnimated: Bool) {
     sheetOpen(item: linkItem, isAnimated: isAnimated)
   }
-
+  
+  /// Opens a sheet with the specified link item and an option to animate the presentation.
+  ///
+  /// - Parameters:
+  ///   - linkItem: An object representing the item to be presented in the sheet, can be a `String` or a dictionary with `String` keys and values as `ItemValue`.
+  ///   - isAnimated: A boolean to indicate if the presentation should be animated.
+  ///   - configuration: A `DetentConfiguration` object that defines the appearance and behavior of the sheet.
+  ///
+  /// - Available from iOS 15.0 and later.
+  @available(iOS 15.0, *)
+  private func _detentSheet(linkItem: LinkItem, isAnimated: Bool, configuration: DetentConfiguration) {
+      detentSheetOpen(item: linkItem, isAnimated: isAnimated, configuration: configuration)
+    }
+  
   /// Opens a full-screen sheet with options for animation and large titles.
   ///
   /// - Parameters:
@@ -401,6 +414,40 @@ extension SingleLinkNavigator {
       subController = newController
     }
   }
+  
+  @available(iOS 15.0, *)
+  public func detentSheetOpen(
+    item: LinkItem,
+    isAnimated: Bool,
+    configuration: DetentConfiguration)
+  {
+    DispatchQueue.main.async { [weak self] in
+      guard let self else { return }
+      guard let rootController else { return }
+
+      rootController.dismiss(animated: true)
+      let newController = UINavigationController()
+      
+      if let sheetPresentationController = newController.sheetPresentationController {
+        sheetPresentationController.detents = configuration.detents
+        sheetPresentationController.preferredCornerRadius = configuration.cornerRadius
+        sheetPresentationController.largestUndimmedDetentIdentifier = configuration.largestUndimmedDetentIdentifier
+        sheetPresentationController.prefersScrollingExpandsWhenScrolledToEdge = configuration.prefersScrollingExpandsWhenScrolledToEdge
+        sheetPresentationController.prefersGrabberVisible = configuration.prefersGrabberVisible
+        sheetPresentationController.prefersEdgeAttachedInCompactHeight = configuration.prefersEdgeAttachedInCompactHeight
+        sheetPresentationController.widthFollowsPreferredContentSizeWhenEdgeAttached = configuration.widthFollowsPreferredContentSizeWhenEdgeAttached
+        sheetPresentationController.selectedDetentIdentifier = configuration.selectedDetentIdentifier
+      }
+
+      newController.setViewControllers(
+        navigationBuilder.build(item: item),
+        animated: false)
+
+      rootController.present(newController, animated: isAnimated)
+      
+      subController = newController
+    }
+  }
 
   // MARK: Private
 
@@ -434,6 +481,15 @@ extension SingleLinkNavigator: LinkNavigatorProtocol {
 
   public func sheet(linkItem: LinkItem, isAnimated: Bool) {
     _sheet(linkItem: linkItem, isAnimated: isAnimated)
+  }
+  
+  @available(iOS 15.0, *)
+  public func detentSheet(
+    linkItem: LinkItem,
+    isAnimated: Bool,
+    configuration: DetentConfiguration
+  ) {
+    _detentSheet(linkItem: linkItem, isAnimated: isAnimated, configuration: configuration)
   }
 
   public func fullSheet(linkItem: LinkItem, isAnimated: Bool, prefersLargeTitles: Bool?) {
