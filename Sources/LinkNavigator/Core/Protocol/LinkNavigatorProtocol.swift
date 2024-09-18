@@ -25,7 +25,22 @@ public protocol LinkNavigatorProtocol {
   ///   - linkItem: The link item to present.
   ///   - isAnimated: A Boolean value that determines whether the presentation is animated.
   func sheet(linkItem: LinkItem, isAnimated: Bool)
-
+  
+  /// Presents a sheet with the given link item.
+  ///
+  /// - Parameters:
+  ///   - linkItem: The link item to present.
+  ///   - isAnimated: A Boolean value that determines whether the presentation is animated.
+  ///   - configuration: A `DetentConfiguration` object that defines the appearance and behavior of the sheet.
+  ///
+  /// - Available from iOS 15.0 and later.
+  @available(iOS 15.0, *)
+  func detentSheet(
+      linkItem: LinkItem,
+      isAnimated: Bool,
+      configuration: DetentConfiguration
+  )
+  
   /// Presents a full sheet with the given link item.
   ///
   /// - Parameters:
