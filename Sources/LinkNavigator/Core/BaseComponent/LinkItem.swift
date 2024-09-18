@@ -6,7 +6,9 @@ import URLEncodedForm
 /// Represents a link item that contains paths and associated items.
 /// It is used to manage the links and state values that are injected into a page.
 public struct LinkItem {
+
   // MARK: Lifecycle
+
   /// Initializes a LinkItem instance with a given path list and an items parameter.
 
   /// - Parameters:
@@ -76,6 +78,9 @@ extension LinkItem: Equatable {
 }
 
 extension String {
+
+  // MARK: Public
+
   public func decoded<T: Decodable>() -> T? {
     if let decodedValue = self as? T {
       return decodedValue
@@ -84,6 +89,8 @@ extension String {
     guard let data = Data(base64Encoded: self) else { return .none }
     return (try? JSONDecoder().decode(T.self, from: data)) ?? (try? URLEncodedFormDecoder().decode(T.self, from: data))
   }
+
+  // MARK: Fileprivate
 
   fileprivate func encodedBase64() -> Self {
     data(using: .utf8)?.base64EncodedString() ?? self

@@ -5,8 +5,7 @@ import UIKit
 
 public final class TabLinkNavigatorMock {
 
-  public var value: Value
-  public var event: Event
+  // MARK: Lifecycle
 
   public init(
     value: Value = .init(),
@@ -15,6 +14,11 @@ public final class TabLinkNavigatorMock {
     self.value = value
     self.event = event
   }
+
+  // MARK: Public
+
+  public var value: Value
+  public var event: Event
 
   public func resetEvent() {
     event = .init()
@@ -36,10 +40,17 @@ extension TabLinkNavigatorMock {
     public var currentRootPaths: [String] = []
     public var rangePaths: [String] = []
 
-    public init() {}
+    public init() { }
   }
 
   public struct Event: Equatable, Sendable {
+
+    // MARK: Lifecycle
+
+    public init() { }
+
+    // MARK: Public
+
     public var next: Int = .zero
     public var rootNext: Int = .zero
     public var sheet: Int = .zero
@@ -68,19 +79,17 @@ extension TabLinkNavigatorMock {
     public var getCurrentRootPaths: Int = .zero
     public var getCurrentPaths: Int = .zero
 
-    public init() {
-    }
   }
 }
 
 // MARK: LinkNavigatorFindLocationUsable, TabLinkNavigatorProtocol
 
 extension TabLinkNavigatorMock: LinkNavigatorFindLocationUsable, TabLinkNavigatorProtocol {
-  
-  public func alert(model: Alert) {
+
+  public func alert(model _: Alert) {
     event.alert += 1
   }
-  
+
   public func getCurrentPaths() -> [String] {
     event.getCurrentPaths += 1
     return value.currentPaths

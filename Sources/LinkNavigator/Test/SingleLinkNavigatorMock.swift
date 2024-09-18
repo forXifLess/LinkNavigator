@@ -1,15 +1,21 @@
 import Foundation
 import UIKit
 
+// MARK: - SingleLinkNavigatorMock
+
 public final class SingleLinkNavigatorMock {
 
-  public var value: Value
-  public var event: Event
+  // MARK: Lifecycle
 
   public init(value: Value = .init(), event: Event = .init()) {
     self.value = value
     self.event = event
   }
+
+  // MARK: Public
+
+  public var value: Value
+  public var event: Event
 
   public func resetEvent() {
     event = .init()
@@ -32,11 +38,18 @@ extension SingleLinkNavigatorMock {
     public var currentPaths: [String] = []
     public var currentRootPaths: [String] = []
     public var rangePaths: [String] = []
-    
-    public init() {}
+
+    public init() { }
   }
 
   public struct Event: Equatable, Sendable {
+
+    // MARK: Lifecycle
+
+    public init() { }
+
+    // MARK: Public
+
     public var getCurrentPaths: Int = .zero
     public var getCurrentRootPaths: Int = .zero
     public var next: Int = .zero
@@ -62,9 +75,10 @@ extension SingleLinkNavigatorMock {
     public var rootSend: Int = .zero
     public var allRootSend: Int = .zero
 
-    public init() {}
   }
 }
+
+// MARK: LinkNavigatorFindLocationUsable
 
 extension SingleLinkNavigatorMock: LinkNavigatorFindLocationUsable {
   public func getCurrentPaths() -> [String] {
@@ -78,99 +92,101 @@ extension SingleLinkNavigatorMock: LinkNavigatorFindLocationUsable {
   }
 }
 
+// MARK: LinkNavigatorProtocol
+
 extension SingleLinkNavigatorMock: LinkNavigatorProtocol {
-  public func rootBackToLast(path: String, isAnimated: Bool) {
+  public func rootBackToLast(path _: String, isAnimated _: Bool) {
     event.rootBackToLast += 1
   }
-  
-  public func rootSend(item: LinkItem) {
+
+  public func rootSend(item _: LinkItem) {
     event.rootSend += 1
   }
-  
-  public func allRootSend(item: LinkItem) {
+
+  public func allRootSend(item _: LinkItem) {
     event.allRootSend += 1
   }
-  
-  public func next(linkItem: LinkItem, isAnimated: Bool) {
+
+  public func next(linkItem _: LinkItem, isAnimated _: Bool) {
     event.next += 1
   }
 
-  public func rootNext(linkItem: LinkItem, isAnimated: Bool) {
+  public func rootNext(linkItem _: LinkItem, isAnimated _: Bool) {
     event.rootNext += 1
   }
 
-  public func sheet(linkItem: LinkItem, isAnimated: Bool) {
+  public func sheet(linkItem _: LinkItem, isAnimated _: Bool) {
     event.sheet += 1
   }
 
-  public func fullSheet(linkItem: LinkItem, isAnimated: Bool, prefersLargeTitles: Bool?) {
+  public func fullSheet(linkItem _: LinkItem, isAnimated _: Bool, prefersLargeTitles _: Bool?) {
     event.fullSheet += 1
   }
 
   public func customSheet(
-    linkItem: LinkItem,
-    isAnimated: Bool,
-    iPhonePresentationStyle: UIModalPresentationStyle,
-    iPadPresentationStyle: UIModalPresentationStyle,
-    prefersLargeTitles: Bool?)
+    linkItem _: LinkItem,
+    isAnimated _: Bool,
+    iPhonePresentationStyle _: UIModalPresentationStyle,
+    iPadPresentationStyle _: UIModalPresentationStyle,
+    prefersLargeTitles _: Bool?)
   {
     event.customSheet += 1
   }
 
-  public func replace(linkItem: LinkItem, isAnimated: Bool) {
+  public func replace(linkItem _: LinkItem, isAnimated _: Bool) {
     event.replace += 1
   }
 
-  public func backOrNext(linkItem: LinkItem, isAnimated: Bool) {
+  public func backOrNext(linkItem _: LinkItem, isAnimated _: Bool) {
     event.backOrNext += 1
   }
 
-  public func rootBackOrNext(linkItem: LinkItem, isAnimated: Bool) {
+  public func rootBackOrNext(linkItem _: LinkItem, isAnimated _: Bool) {
     event.rootBackOrNext += 1
   }
 
-  public func back(isAnimated: Bool) {
+  public func back(isAnimated _: Bool) {
     event.back += 1
   }
 
-  public func remove(pathList: [String]) {
+  public func remove(pathList _: [String]) {
     event.remove += 1
   }
 
-  public func rootRemove(pathList: [String]) {
+  public func rootRemove(pathList _: [String]) {
     event.rootRemove += 1
   }
 
-  public func backToLast(path: String, isAnimated: Bool) {
+  public func backToLast(path _: String, isAnimated _: Bool) {
     event.backToLast += 1
   }
 
-  public func close(isAnimated: Bool, completeAction: @escaping () -> Void) {
+  public func close(isAnimated _: Bool, completeAction _: @escaping () -> Void) {
     event.close += 1
   }
 
-  public func range(path: String) -> [String] {
+  public func range(path _: String) -> [String] {
     event.range += 1
     return value.rangePaths
   }
 
-  public func rootReloadLast(items: LinkItem, isAnimated: Bool) {
+  public func rootReloadLast(items _: LinkItem, isAnimated _: Bool) {
     event.rootReloadLast += 1
   }
 
-  public func alert(target: NavigationTarget, model: Alert) {
+  public func alert(target _: NavigationTarget, model _: Alert) {
     event.rootReloadLast += 1
   }
 
-  public func send(item: LinkItem) {
+  public func send(item _: LinkItem) {
     event.send += 1
   }
 
-  public func mainSend(item: LinkItem) {
+  public func mainSend(item _: LinkItem) {
     event.mainSend += 1
   }
 
-  public func allSend(item: LinkItem) {
+  public func allSend(item _: LinkItem) {
     event.allSend += 1
   }
 

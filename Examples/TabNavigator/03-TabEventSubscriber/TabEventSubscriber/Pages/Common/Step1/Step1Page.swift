@@ -27,7 +27,7 @@ struct Step1Page: View {
           buttons: [
             .init(
               title: "OK",
-              style: .default)
+              style: .default),
           ],
           flagType: .default))
       }) {

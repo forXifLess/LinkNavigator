@@ -76,10 +76,10 @@ extension TabLinkNavigator {
         return curr + [(next.prefersLargeTitles, newNavigatorList)]
       }
 
-    self.tabRootPartialNavigators = partialNavigators.map(\.1)
+    tabRootPartialNavigators = partialNavigators.map(\.1)
 
     return partialNavigators
-      .map { (prefersLargeTitles, navigator) in
+      .map { prefersLargeTitles, navigator in
         let partialNavigationVC = navigator.launch(rootPath: navigator.tabItem.linkItem.pathList.first ?? "")
         let item = tagItemList.first(where: { $0.linkItem == navigator.tabItem.linkItem })
         partialNavigationVC.navigationController.tabBarItem = item?.tabItem
@@ -148,7 +148,10 @@ extension TabLinkNavigator {
   }
 
   public func moveTab(targetPath: String) {
-    guard let targetController = tabRootPartialNavigators.first(where: { $0.getCurrentRootPaths().first == targetPath })?.currentTabNavigationController else { return }
+    guard
+      let targetController = tabRootPartialNavigators.first(where: { $0.getCurrentRootPaths().first == targetPath })?
+        .currentTabNavigationController
+    else { return }
 
     if mainController?.selectedViewController == targetController {
       targetController.popToRootViewController(animated: true)

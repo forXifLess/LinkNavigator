@@ -2,6 +2,8 @@ import LinkNavigator
 import PageTemplate
 import SwiftUI
 
+// MARK: - TabEventSubscriberApp
+
 @main
 struct TabEventSubscriberApp: App {
   let tabLinkNavigator = TabLinkNavigator(
@@ -45,29 +47,31 @@ struct TabEventSubscriberApp: App {
         linkNavigator: tabLinkNavigator,
         isHiddenDefaultTabbar: false,
         tabItemList: tabList)
-      .onOpenURL { url in
-        /// You can test deep links by setting the URL Scheme to "tab-e-s".
-        /// Example: 
-        /// tab-e-s://navigation/tab2/step1/step2?message=opened+by+deep+link
+        .onOpenURL { url in
+          /// You can test deep links by setting the URL Scheme to "tab-e-s".
+          /// Example:
+          /// tab-e-s://navigation/tab2/step1/step2?message=opened+by+deep+link
 
-        guard let tabPath = getTabPathByDeeplink(url: url),
-              let linkItem = getLinkItemByDeepLink(url: url),
-              let targetTab = tabLinkNavigator.targetPartialNavigator(tabPath: tabPath) else { return }
+          guard
+            let tabPath = getTabPathByDeeplink(url: url),
+            let linkItem = getLinkItemByDeepLink(url: url),
+            let targetTab = tabLinkNavigator.targetPartialNavigator(tabPath: tabPath)
+          else { return }
 
-        tabLinkNavigator.moveTab(targetPath: tabPath)
-        targetTab.replace(linkItem: linkItem, isAnimated: true)
-      }
+          tabLinkNavigator.moveTab(targetPath: tabPath)
+          targetTab.replace(linkItem: linkItem, isAnimated: true)
+        }
     }
   }
 }
 
 extension TabEventSubscriberApp {
-  fileprivate func getTabPathByDeeplink(url: URL) -> String? {
+  private func getTabPathByDeeplink(url: URL) -> String? {
     let components = URLComponents(string: url.absoluteString)
     return components?.path.split(separator: "/").map(String.init).first
   }
 
-  fileprivate func getLinkItemByDeepLink(url: URL) -> LinkItem? {
+  private func getLinkItemByDeepLink(url: URL) -> LinkItem? {
     let components = URLComponents(string: url.absoluteString)
     guard let paths = components?.path.split(separator: "/").map(String.init) else { return .none }
 
