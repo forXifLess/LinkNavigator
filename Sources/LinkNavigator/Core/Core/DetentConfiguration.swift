@@ -2,18 +2,9 @@ import UIKit
 
 @available(iOS 15.0, *)
 public struct DetentConfiguration {
-  
-  public static let `default` = DetentConfiguration(detents: [.medium(), .large()])
-  
-  public let detents: [UISheetPresentationController.Detent]
-  public let cornerRadius: CGFloat?
-  public let largestUndimmedDetentIdentifier: UISheetPresentationController.Detent.Identifier?
-  public let prefersScrollingExpandsWhenScrolledToEdge: Bool
-  public let prefersGrabberVisible: Bool
-  public let prefersEdgeAttachedInCompactHeight: Bool
-  public let widthFollowsPreferredContentSizeWhenEdgeAttached: Bool
-  public let selectedDetentIdentifier: UISheetPresentationController.Detent.Identifier?
-  
+
+  // MARK: Lifecycle
+
   /// Initializes a new DetentConfiguration.
   ///
   /// - Parameters:
@@ -33,8 +24,8 @@ public struct DetentConfiguration {
     prefersGrabberVisible: Bool = false,
     prefersEdgeAttachedInCompactHeight: Bool = false,
     widthFollowsPreferredContentSizeWhenEdgeAttached: Bool = false,
-    selectedDetentIdentifier: UISheetPresentationController.Detent.Identifier? = nil
-  ) {
+    selectedDetentIdentifier: UISheetPresentationController.Detent.Identifier? = nil)
+  {
     self.detents = detents
     self.cornerRadius = cornerRadius
     self.largestUndimmedDetentIdentifier = largestUndimmedDetentIdentifier
@@ -44,4 +35,17 @@ public struct DetentConfiguration {
     self.widthFollowsPreferredContentSizeWhenEdgeAttached = widthFollowsPreferredContentSizeWhenEdgeAttached
     self.selectedDetentIdentifier = selectedDetentIdentifier
   }
+
+  // MARK: Public
+
+  public static let `default` = DetentConfiguration(detents: [.medium(), .large()])
+
+  public let detents: [UISheetPresentationController.Detent]
+  public let cornerRadius: CGFloat?
+  public let largestUndimmedDetentIdentifier: UISheetPresentationController.Detent.Identifier?
+  public let prefersScrollingExpandsWhenScrolledToEdge: Bool
+  public let prefersGrabberVisible: Bool
+  public let prefersEdgeAttachedInCompactHeight: Bool
+  public let widthFollowsPreferredContentSizeWhenEdgeAttached: Bool
+  public let selectedDetentIdentifier: UISheetPresentationController.Detent.Identifier?
 }

@@ -42,7 +42,7 @@ struct HomeView: View {
         Text("open Page 2 as Sheet")
           .foregroundColor(.purple)
       }
-      
+
       Button(action: {
         if #available(iOS 15.0, *) {
           navigator.detentSheet(linkItem: .init(pathList: ["page1", "page2"]), isAnimated: true, configuration: .default)

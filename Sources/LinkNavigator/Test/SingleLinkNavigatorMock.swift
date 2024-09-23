@@ -118,9 +118,9 @@ extension SingleLinkNavigatorMock: LinkNavigatorProtocol {
   public func sheet(linkItem _: LinkItem, isAnimated _: Bool) {
     event.sheet += 1
   }
-  
+
   @available(iOS 15.0, *)
-  public func detentSheet(linkItem: LinkItem, isAnimated: Bool, configuration: DetentConfiguration) {
+  public func detentSheet(linkItem _: LinkItem, isAnimated _: Bool, configuration _: DetentConfiguration) {
     event.sheet += 1
   }
 
