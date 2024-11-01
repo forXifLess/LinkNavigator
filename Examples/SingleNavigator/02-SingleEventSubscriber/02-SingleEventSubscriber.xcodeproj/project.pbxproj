@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		292248052B6B1438006CCA00 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292248042B6B1438006CCA00 /* LogManager.swift */; };
 		292248082B6B144D006CCA00 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 292248072B6B144D006CCA00 /* Logging */; };
+		29BD3A652CD5144E009DC84F /* SharedRootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BD3A642CD5144E009DC84F /* SharedRootViewModel.swift */; };
 		29C639032B44FEAA00FCFE0F /* SingleEventSubscriberApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C639022B44FEAA00FCFE0F /* SingleEventSubscriberApp.swift */; };
 		29C639072B44FEAB00FCFE0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29C639062B44FEAB00FCFE0F /* Assets.xcassets */; };
 		29C6390B2B44FEAB00FCFE0F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29C6390A2B44FEAB00FCFE0F /* Preview Assets.xcassets */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		292248042B6B1438006CCA00 /* LogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
+		29BD3A642CD5144E009DC84F /* SharedRootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedRootViewModel.swift; sourceTree = "<group>"; };
 		29C638FF2B44FEAA00FCFE0F /* SingleEventSubscriber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleEventSubscriber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29C639022B44FEAA00FCFE0F /* SingleEventSubscriberApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEventSubscriberApp.swift; sourceTree = "<group>"; };
 		29C639062B44FEAB00FCFE0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				29C639022B44FEAA00FCFE0F /* SingleEventSubscriberApp.swift */,
 				93D683EF2B463DA700FD2C24 /* AppDependency.swift */,
 				93D683F12B463DB100FD2C24 /* AppRouterGroup.swift */,
+				29BD3A642CD5144E009DC84F /* SharedRootViewModel.swift */,
 				292248042B6B1438006CCA00 /* LogManager.swift */,
 				29C639062B44FEAB00FCFE0F /* Assets.xcassets */,
 				29C639082B44FEAB00FCFE0F /* SingleEventSubscriber.entitlements */,
@@ -268,6 +271,7 @@
 				932D1E8A2B46B190000E50C3 /* DeepLinkItem.swift in Sources */,
 				93D683F92B463DFC00FD2C24 /* HomeRouteBuilder.swift in Sources */,
 				29C639032B44FEAA00FCFE0F /* SingleEventSubscriberApp.swift in Sources */,
+				29BD3A652CD5144E009DC84F /* SharedRootViewModel.swift in Sources */,
 				93D683FE2B463E4600FD2C24 /* Page1RouteBuilder.swift in Sources */,
 				93D684052B46523300FD2C24 /* Page2LinkSubscriber.swift in Sources */,
 				93D683FC2B463E2800FD2C24 /* Page1View.swift in Sources */,

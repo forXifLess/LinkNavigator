@@ -6,12 +6,15 @@ import SwiftUI
 struct HomeView: View {
 
   let navigator: RootNavigatorType
+  @ObservedObject var sharedViewModel: SharedRootViewModel
   @State var message = ""
 
   var body: some View {
     VStack(spacing: 30) {
       PathIndicator(currentPath: navigator.getCurrentPaths().joined(separator: " -> "))
         .padding(.top, 32)
+
+      Text("Shared Text: \(sharedViewModel.text)")
 
       VStack(spacing: 16) {
         TextField("Type message here", text: $message)

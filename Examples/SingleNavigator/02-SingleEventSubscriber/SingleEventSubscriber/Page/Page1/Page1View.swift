@@ -6,11 +6,22 @@ struct Page1View: View {
   let navigator: RootNavigatorType
   let item: HomeToPage1Item?
   let deepLinkItem: DeepLinkItem?
+  @ObservedObject var sharedViewModel: SharedRootViewModel
 
   var body: some View {
     VStack(spacing: 30) {
       PathIndicator(currentPath: navigator.getCurrentPaths().joined(separator: " -> "))
         .padding(.top, 32)
+
+      Text("Shared Text: \(sharedViewModel.text)")
+
+      Button(action: { sharedViewModel.update(text: "Page1View Updated!!") }) {
+        Text("Change Shared ViewModel Text")
+      }
+
+      Button(action: { navigator.back(isAnimated: true) }) {
+        Text("Back")
+      }
 
       GroupBox {
         VStack(spacing: 10) {
