@@ -82,10 +82,10 @@ extension String {
   // MARK: Public
 
   public func decoded<T: Decodable>() -> T? {
+    guard !self.isEmpty else { return .none }
     if let decodedValue = self as? T {
       return decodedValue
     }
-
     guard let data = Data(base64Encoded: self) else { return .none }
     return (try? JSONDecoder().decode(T.self, from: data)) ?? (try? URLEncodedFormDecoder().decode(T.self, from: data))
   }
