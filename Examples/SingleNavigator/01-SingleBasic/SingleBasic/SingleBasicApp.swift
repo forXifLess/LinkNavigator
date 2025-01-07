@@ -4,7 +4,7 @@ import SwiftUI
 @main
 struct SingleBasicApp: App {
   let singleNavigator = SingleLinkNavigator(
-    routeBuilderItemList: AppRouterGroup().routers,
+    routeBuilderItemList: AppRouterGroup().routers(),
     dependency: AppDependency())
 
   var body: some Scene {

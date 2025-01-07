@@ -2,7 +2,7 @@ import LinkNavigator
 import SwiftUI
 
 struct Step2Page: View {
-  let navigator: RootNavigatorType
+  let navigator: TabPartialNavigator
   let injectionData: Step2InjectionData
 
   @State var currentPath = ""

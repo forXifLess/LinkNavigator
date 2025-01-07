@@ -1,10 +1,11 @@
 import LinkNavigator
 import SwiftUI
 
-struct Tab3RouteBuilder<RootNavigator: RootNavigatorType> {
+struct Tab3RouteBuilder {
 
-  static func generate() -> RouteBuilderOf<RootNavigator> {
-    var matchPath: String { "tab3" }
+  @MainActor
+  func generate() -> RouteBuilderOf<TabPartialNavigator> {
+    let matchPath: String = "tab3"
     return .init(matchPath: matchPath) { navigator, _, _ -> RouteViewController? in
       WrappingController(matchPath: matchPath) {
         Tab3Page(navigator: navigator)

@@ -5,7 +5,7 @@ struct LoginView: View {
 
   // MARK: Internal
 
-  let navigator: RootNavigatorType
+  let navigator: SingleLinkNavigator
 
   var body: some View {
     VStack(spacing: 30) {

@@ -5,7 +5,7 @@ import SwiftUI
 
 struct HomeView: View {
 
-  let navigator: RootNavigatorType
+  let navigator: SingleLinkNavigator
   @ObservedObject var sharedViewModel: SharedRootViewModel
   @State var message = ""
 
@@ -25,7 +25,7 @@ struct HomeView: View {
           navigator.backOrNext(
             linkItem: .init(
               path: "page1",
-              items: HomeToPage1Item(message: message).encoded()),
+              items: HomeToPage1Item(message: message)),
             isAnimated: true)
         }) {
           Text("go to next Page with Message")

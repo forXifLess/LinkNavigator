@@ -3,10 +3,11 @@ import SwiftUI
 
 // MARK: - Step2RouteBuilder
 
-struct Step2RouteBuilder<RootNavigator: RootNavigatorType> {
+struct Step2RouteBuilder {
 
-  static func generate() -> RouteBuilderOf<RootNavigator> {
-    var matchPath: String { "step2" }
+  @MainActor
+  func generate() -> RouteBuilderOf<TabPartialNavigator> {
+    let matchPath: String = "step2"
     return .init(matchPath: matchPath) { navigator, items, _ -> RouteViewController? in
       let param: Step2InjectionData = items.decoded() ?? .init(message: "")
       return WrappingController(matchPath: matchPath) {

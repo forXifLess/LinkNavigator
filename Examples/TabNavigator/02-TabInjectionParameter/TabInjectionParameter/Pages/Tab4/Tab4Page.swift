@@ -2,7 +2,7 @@ import LinkNavigator
 import SwiftUI
 
 struct Tab4Page: View {
-  let navigator: RootNavigatorType
+  let navigator: TabPartialNavigator
   @State var currentPath = ""
 
   var body: some View {

@@ -5,7 +5,7 @@ import SwiftUI
 @main
 struct TabInjectionParameterApp: App {
   let tabLinkNavigator = TabLinkNavigator(
-    routeBuilderItemList: AppRouterBuilderGroup().routers,
+    routeBuilderItemList: AppRouterBuilderGroup().routers(),
     dependency: AppDependency())
 
   var body: some Scene {

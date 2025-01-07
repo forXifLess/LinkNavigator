@@ -7,7 +7,7 @@ import SwiftUI
 @main
 struct TabEventSubscriberApp: App {
   let tabLinkNavigator = TabLinkNavigator(
-    routeBuilderItemList: AppRouterBuilderGroup().routers,
+    routeBuilderItemList: AppRouterBuilderGroup().routers(),
     dependency: AppDependency())
 
   let tabList: [TabItem] = [

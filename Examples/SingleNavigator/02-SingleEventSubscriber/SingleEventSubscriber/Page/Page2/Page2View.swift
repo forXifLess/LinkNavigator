@@ -6,7 +6,7 @@ struct Page2View: View {
   // MARK: Lifecycle
 
   init(
-    navigator: RootNavigatorType,
+    navigator: SingleLinkNavigator,
     linkSubscriber: Page2LinkSubscriber)
   {
     self.navigator = navigator
@@ -46,7 +46,7 @@ struct Page2View: View {
 
   // MARK: Private
 
-  private let navigator: RootNavigatorType
+  private let navigator: SingleLinkNavigator
   @ObservedObject private var linkSubscriber: Page2LinkSubscriber
 
 }

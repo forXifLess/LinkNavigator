@@ -1,18 +1,20 @@
 import LinkNavigator
 
-public typealias RootNavigatorType = LinkNavigatorFindLocationUsable & LinkNavigatorProtocol
-
 // MARK: - AppRouterGroup
 
-struct AppRouterGroup<RootNavigator: RootNavigatorType> {
-  init() { }
+public struct AppRouterGroup {
+  public init() { }
+}
 
-  var routers: [RouteBuilderOf<RootNavigator>] {
+extension AppRouterGroup {
+
+  @MainActor
+  func routers() -> [RouteBuilderOf<SingleLinkNavigator>] {
     [
-      HomeRouteBuilder.generate(),
-      Page1RouteBuilder.generate(),
-      Page2RouteBuilder.generate(),
-      Page3RouteBuilder.generate(),
+      HomeRouteBuilder().generate(),
+      Page1RouteBuilder().generate(),
+      Page2RouteBuilder().generate(),
+      Page3RouteBuilder().generate(),
     ]
   }
 }

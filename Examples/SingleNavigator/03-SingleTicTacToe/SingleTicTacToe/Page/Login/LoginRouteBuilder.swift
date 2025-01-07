@@ -1,10 +1,11 @@
 import LinkNavigator
 import SwiftUI
 
-struct LoginRouteBuilder<RootNavigator: RootNavigatorType> {
+struct LoginRouteBuilder {
 
-  static func generate() -> RouteBuilderOf<RootNavigator> {
-    var matchPath: String { "login" }
+  @MainActor
+  func generate() -> RouteBuilderOf<SingleLinkNavigator> {
+    let matchPath: String = "login"
     return .init(matchPath: matchPath) { navigator, _, _ -> RouteViewController? in
       WrappingController(matchPath: matchPath) {
         LoginView(navigator: navigator)

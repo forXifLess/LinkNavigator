@@ -3,7 +3,7 @@ import SwiftUI
 
 struct Page1View: View {
 
-  let navigator: RootNavigatorType
+  let navigator: SingleLinkNavigator
   let item: HomeToPage1Item?
   let deepLinkItem: DeepLinkItem?
   @ObservedObject var sharedViewModel: SharedRootViewModel
