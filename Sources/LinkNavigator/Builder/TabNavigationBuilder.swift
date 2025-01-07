@@ -3,7 +3,7 @@ import UIKit
 
 // MARK: - TabNavigationBuilder
 
-public struct TabNavigationBuilder<Root> {
+public struct TabNavigationBuilder {
 
   // MARK: Lifecycle
 
@@ -14,8 +14,8 @@ public struct TabNavigationBuilder<Root> {
   ///   - routeBuilderList: An array of route builders.
   ///   - dependency: The dependency required for constructing the routes.
   public init(
-    rootNavigator: Root,
-    routeBuilderList: [RouteBuilderOf<Root>],
+    rootNavigator: TabPartialNavigator,
+    routeBuilderList: [RouteBuilderOf<TabPartialNavigator>],
     dependency: DependencyType)
   {
     self.rootNavigator = rootNavigator
@@ -30,10 +30,10 @@ public struct TabNavigationBuilder<Root> {
   // MARK: Internal
 
   /// The root navigator object.
-  let rootNavigator: Root
+  let rootNavigator: TabPartialNavigator
 
   /// An array of `RouteBuilderOf` objects used to construct the routes.
-  let routeBuilderList: [RouteBuilderOf<Root>]
+  let routeBuilderList: [RouteBuilderOf<TabPartialNavigator>]
 
   /// The dependency required for constructing the routes.
   let dependency: DependencyType
