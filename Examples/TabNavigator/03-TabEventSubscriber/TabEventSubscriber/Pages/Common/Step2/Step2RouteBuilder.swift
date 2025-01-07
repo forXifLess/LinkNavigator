@@ -7,7 +7,7 @@ struct Step2RouteBuilder {
 
   @MainActor
   func generate() -> RouteBuilderOf<TabPartialNavigator> {
-    let matchPath: String = "step2"
+    let matchPath = "step2"
     return .init(matchPath: matchPath) { navigator, items, _ -> RouteViewController? in
       let param: Step2InjectionData = items.decoded() ?? .init(message: "")
 

@@ -7,7 +7,7 @@ struct GameRouteBuilder<RootNavigator: SingleLinkNavigator> {
 
   @MainActor
   func generate() -> RouteBuilderOf<SingleLinkNavigator> {
-    let matchPath: String = "game"
+    let matchPath = "game"
     return .init(matchPath: matchPath) { navigator, items, _ -> RouteViewController? in
       let query: GameInjectionData? = items.decoded()
       return WrappingController(matchPath: matchPath) {

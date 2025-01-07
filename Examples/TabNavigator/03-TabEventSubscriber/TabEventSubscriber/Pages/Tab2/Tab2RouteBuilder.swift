@@ -5,7 +5,7 @@ struct Tab2RouteBuilder {
 
   @MainActor
   func generate() -> RouteBuilderOf<TabPartialNavigator> {
-    let matchPath: String = "tab2"
+    let matchPath = "tab2"
     return .init(matchPath: matchPath) { navigator, _, _ -> RouteViewController? in
       let eventSubscriber = EventSubscriber()
 

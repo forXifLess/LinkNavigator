@@ -1,5 +1,7 @@
 import LinkNavigator
 
+// MARK: - AppRouterGroup
+
 public struct AppRouterGroup {
   public init() { }
 }
