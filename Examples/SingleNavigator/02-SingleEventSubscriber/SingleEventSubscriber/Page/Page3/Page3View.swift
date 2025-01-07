@@ -5,7 +5,7 @@ import SwiftUI
 
 struct Page3View: View {
 
-  let navigator: RootNavigatorType
+  let navigator: SingleLinkNavigator
   @State var message = ""
 
   var body: some View {
@@ -22,7 +22,7 @@ struct Page3View: View {
           navigator.rootSend(
             item: .init(
               path: "page2",
-              items: Page2InjectionData(message: message).encoded()))
+              items: Page2InjectionData(message: message)))
           navigator.back(isAnimated: true)
 
         }) {

@@ -4,7 +4,7 @@ import SwiftUI
 @main
 struct SingleEventSubscriberApp: App {
   let singleNavigator = SingleLinkNavigator(
-    routeBuilderItemList: AppRouterGroup().routers,
+    routeBuilderItemList: AppRouterGroup().routers(),
     dependency: AppDependency(sharedRootViewModel: .init()))
 
   var body: some Scene {

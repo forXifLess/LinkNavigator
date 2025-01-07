@@ -4,7 +4,7 @@ import SwiftUI
 @main
 struct TabBasicApp: App {
   let tabLinkNavigator = TabLinkNavigator(
-    routeBuilderItemList: AppRouterBuilderGroup().routers,
+    routeBuilderItemList: AppRouterBuilderGroup().routers(),
     dependency: AppDependency())
 
   var body: some Scene {

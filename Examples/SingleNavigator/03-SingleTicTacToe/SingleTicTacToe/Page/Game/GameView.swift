@@ -3,7 +3,7 @@ import SwiftUI
 
 struct GameView: View {
 
-  let navigator: RootNavigatorType
+  let navigator: SingleLinkNavigator
   let injectionData: GameInjectionData?
 
   var gameTitle: String {

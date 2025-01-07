@@ -2,7 +2,7 @@ import LinkNavigator
 import SwiftUI
 
 struct Step1Page: View {
-  let navigator: RootNavigatorType
+  let navigator: TabPartialNavigator
   @State var currentPath = ""
   @State var message = ""
 
@@ -29,7 +29,7 @@ struct Step1Page: View {
 
       Button(action: { navigator.next(linkItem: .init(
         path: "step2",
-        items: Step2InjectionData(message: message).encoded()), isAnimated: true) })
+        items: Step2InjectionData(message: message)), isAnimated: true) })
       {
         Text("Next to 'Step2'")
       }

@@ -1,10 +1,11 @@
 import LinkNavigator
 import SwiftUI
 
-struct Page1RouteBuilder<RootNavigator: RootNavigatorType> {
+struct Page1RouteBuilder {
 
-  static func generate() -> RouteBuilderOf<RootNavigator> {
-    var matchPath: String { "page1" }
+  @MainActor
+  func generate() -> RouteBuilderOf<SingleLinkNavigator> {
+    let matchPath: String = "page1"
     return .init(matchPath: matchPath) { navigator, items, diContainer -> RouteViewController? in
       guard let env: AppDependency = diContainer.resolve() else { return .none }
       let query: HomeToPage1Item? = items.decoded()

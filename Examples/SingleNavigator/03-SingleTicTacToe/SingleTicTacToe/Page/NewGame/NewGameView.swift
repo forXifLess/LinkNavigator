@@ -3,7 +3,7 @@ import SwiftUI
 
 struct NewGameView: View {
 
-  let navigator: RootNavigatorType
+  let navigator: SingleLinkNavigator
   @State var gameTitle = ""
 
   var body: some View {
@@ -21,7 +21,7 @@ struct NewGameView: View {
           navigator.next(
             linkItem: .init(
               path: "game",
-              items: GameInjectionData(gameTitle: gameTitle).encoded()),
+              items: GameInjectionData(gameTitle: gameTitle)),
             isAnimated: true)
         }) {
           Text("게임 시작")

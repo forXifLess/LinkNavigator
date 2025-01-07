@@ -1,10 +1,11 @@
 import LinkNavigator
 import SwiftUI
 
-struct Tab1RouteBuilder<RootNavigator: RootNavigatorType> {
+struct Tab1RouteBuilder {
 
-  static func generate() -> RouteBuilderOf<RootNavigator> {
-    var matchPath: String { "tab1" }
+  @MainActor
+  func generate() -> RouteBuilderOf<TabPartialNavigator> {
+    let matchPath: String = "tab1"
     return .init(matchPath: matchPath) { navigator, _, _ -> RouteViewController? in
       let eventSubscriber = EventSubscriber()
 

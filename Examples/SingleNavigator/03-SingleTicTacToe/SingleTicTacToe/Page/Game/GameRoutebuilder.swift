@@ -3,10 +3,11 @@ import SwiftUI
 
 // MARK: - GameRouteBuilder
 
-struct GameRouteBuilder<RootNavigator: RootNavigatorType> {
+struct GameRouteBuilder<RootNavigator: SingleLinkNavigator> {
 
-  static func generate() -> RouteBuilderOf<RootNavigator> {
-    var matchPath: String { "game" }
+  @MainActor
+  func generate() -> RouteBuilderOf<SingleLinkNavigator> {
+    let matchPath: String = "game"
     return .init(matchPath: matchPath) { navigator, items, _ -> RouteViewController? in
       let query: GameInjectionData? = items.decoded()
       return WrappingController(matchPath: matchPath) {

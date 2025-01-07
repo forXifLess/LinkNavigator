@@ -1,7 +1,8 @@
 import SwiftUI
+import LinkNavigator
 
 struct Tab2Page: View {
-  let navigator: RootNavigatorType
+  let navigator: TabPartialNavigator
   @State var currentPath = ""
 
   var body: some View {

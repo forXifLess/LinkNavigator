@@ -1,10 +1,11 @@
 import LinkNavigator
 import SwiftUI
 
-struct Step1RouteBuilder<RootNavigator: RootNavigatorType> {
+struct Step1RouteBuilder {
 
-  static func generate() -> RouteBuilderOf<RootNavigator> {
-    var matchPath: String { "step1" }
+  @MainActor
+  func generate() -> RouteBuilderOf<TabPartialNavigator> {
+    let matchPath: String = "step1"
     return .init(matchPath: matchPath) { navigator, _, _ -> RouteViewController? in
       WrappingController(matchPath: matchPath) {
         Step1Page(navigator: navigator)
