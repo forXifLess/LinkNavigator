@@ -82,7 +82,7 @@ extension String {
   // MARK: Public
 
   public func decoded<T: Decodable>() -> T? {
-    guard !self.isEmpty else { return .none }
+    guard !isEmpty else { return .none }
     if let decodedValue = self as? T {
       return decodedValue
     }

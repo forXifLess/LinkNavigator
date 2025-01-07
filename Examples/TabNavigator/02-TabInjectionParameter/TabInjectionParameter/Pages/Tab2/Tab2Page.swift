@@ -1,5 +1,5 @@
-import SwiftUI
 import LinkNavigator
+import SwiftUI
 
 struct Tab2Page: View {
   let navigator: TabPartialNavigator
