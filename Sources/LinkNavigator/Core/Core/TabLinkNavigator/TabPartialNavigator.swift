@@ -27,7 +27,7 @@ public final class TabPartialNavigator {
 
   public var owner: LinkNavigatorItemSubscriberProtocol? = .none
 
-  public var currentTabNavigationController: UINavigationController { currentTabPathableController.navigationController }
+  public var currentTabNavigationController: UINavigationController { pathableNavigationController.navigationController }
 
   public var isFocusedCurrentTab: Bool {
     (currentTabNavigationController as? MatchPathUsable)?.matchPath == rootNavigator?.currentTabRootPath
@@ -35,10 +35,10 @@ public final class TabPartialNavigator {
 
   // MARK: Private
 
-  private var currentTabPathableController: TabRootNavigationController = .init(matchPath: "")
+  private var pathableNavigationController: TabRootNavigationController = .init(matchPath: "")
 
   private weak var rootNavigator: TabLinkNavigator?
-  private lazy var navigationBuilder: TabNavigationBuilder<TabPartialNavigator> = .init(
+  private lazy var navigationBuilder: TabNavigationBuilder = .init(
     rootNavigator: self,
     routeBuilderList: routeBuilderItemList,
     dependency: dependency)
@@ -57,10 +57,10 @@ extension TabPartialNavigator {
   {
     let viewControllers = navigationBuilder.build(item: item ?? tabItem.linkItem)
 
-    currentTabPathableController.matchPath = rootPath
-    currentTabPathableController.navigationController.setViewControllers(viewControllers, animated: false)
-    currentTabPathableController.navigationController.delegate = currentTabPathableController.navigationController
-    return currentTabPathableController
+    pathableNavigationController.matchPath = rootPath
+    pathableNavigationController.navigationController.setViewControllers(viewControllers, animated: false)
+    pathableNavigationController.navigationController.delegate = pathableNavigationController.navigationController
+    return pathableNavigationController
   }
 }
 
