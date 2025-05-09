@@ -70,6 +70,16 @@ public protocol LinkNavigatorProtocol {
   ///   - isAnimated: A Boolean value that determines whether the replacement is animated.
   func replace(linkItem: LinkItem, isAnimated: Bool)
 
+  /// Collapses overlap: keeps view controllers before the first duplicated `matchPath`
+  /// and appends new controllers built from `linkItem`.
+  ///
+  /// - Parameters:
+  ///   - linkItem: The link item used to build the new sequence of view
+  ///     controllers.
+  ///   - isAnimated: A Boolean value indicating whether the replacement should
+  ///     be animated.
+  func mergeReplace(linkItem: LinkItem, isAnimated: Bool)
+
   /// Navigates either back or to the next link item based on the current state.
   ///
   /// - Parameters:

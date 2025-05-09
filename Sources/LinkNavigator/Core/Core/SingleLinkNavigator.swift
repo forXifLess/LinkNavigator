@@ -372,6 +372,28 @@ extension SingleLinkNavigator {
       subController?.present(model.build(), animated: true)
     }
   }
+  
+  /// Collapses overlap: keeps view controllers before the first duplicated `matchPath`
+  /// and appends new controllers built from `linkItem`.
+  ///
+  /// - Parameters:
+  ///   - linkItem: The link item used to build the new sequence of view
+  ///     controllers.
+  ///   - isAnimated: A Boolean value indicating whether the replacement should
+  ///     be animated.
+  private func _mergedReplace(linkItem: LinkItem, isAnimated: Bool) {
+    guard let firstLinkPath = linkItem.pathList.first else { return }
+    let activeViewControllers = activeController?.viewControllers.compactMap { $0 as? RouteViewController } ?? []
+    var mergedViewController: [RouteViewController] = []
+
+    for activeViewController in activeViewControllers {
+      guard activeViewController.matchPath != firstLinkPath else { break }
+      mergedViewController.append(activeViewController)
+    }
+
+    mergedViewController.append(contentsOf: navigationBuilder.build(item: linkItem))
+    activeController?.replace(viewController: mergedViewController, isAnimated: isAnimated)
+  }
 }
 
 /// MARK: - Main
@@ -479,6 +501,10 @@ extension SingleLinkNavigator: LinkNavigatorProtocol {
 
   public func rootNext(linkItem: LinkItem, isAnimated: Bool) {
     _rootNext(linkItem: linkItem, isAnimated: isAnimated)
+  }
+
+  public func mergeReplace(linkItem: LinkItem, isAnimated: Bool) {
+    _mergedReplace(linkItem: linkItem, isAnimated: isAnimated)
   }
 
   public func sheet(linkItem: LinkItem, isAnimated: Bool) {

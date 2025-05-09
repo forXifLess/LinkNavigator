@@ -78,7 +78,7 @@ extension TabLinkNavigatorMock {
     public var range: Int = .zero
     public var getCurrentRootPaths: Int = .zero
     public var getCurrentPaths: Int = .zero
-
+    public var mergeReplace: Int = .zero
   }
 }
 
@@ -207,4 +207,7 @@ extension TabLinkNavigatorMock: LinkNavigatorFindLocationUsable, TabLinkNavigato
     event.moveTab += 1
   }
 
+  public func mergeReplace(linkItem: LinkItem, isAnimated: Bool) {
+    event.mergeReplace += 1
+  }
 }

@@ -319,6 +319,20 @@ extension TabPartialNavigator: TabLinkNavigatorProtocol {
   public func moveTab(path: String) {
     rootNavigator?.moveTab(targetPath: path)
   }
+
+  public func mergeReplace(linkItem: LinkItem, isAnimated: Bool) {
+    guard let firstLinkPath = linkItem.pathList.first else { return }
+    let activeViewControllers = currentController?.viewControllers.compactMap { $0 as? RouteViewController } ?? []
+    var mergedViewController: [RouteViewController] = []
+
+    for activeViewController in activeViewControllers {
+      guard activeViewController.matchPath != firstLinkPath else { break }
+      mergedViewController.append(activeViewController)
+    }
+
+    mergedViewController.append(contentsOf: navigationBuilder.build(item: linkItem))
+    currentController?.replace(viewController: mergedViewController, isAnimated: isAnimated)
+  }
 }
 
 extension UINavigationController {

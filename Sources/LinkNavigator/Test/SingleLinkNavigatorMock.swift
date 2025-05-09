@@ -74,7 +74,7 @@ extension SingleLinkNavigatorMock {
     public var rootBackToLast: Int = .zero
     public var rootSend: Int = .zero
     public var allRootSend: Int = .zero
-
+    public var mergeReplace: Int = .zero
   }
 }
 
@@ -95,6 +95,10 @@ extension SingleLinkNavigatorMock: LinkNavigatorFindLocationUsable {
 // MARK: LinkNavigatorProtocol
 
 extension SingleLinkNavigatorMock: LinkNavigatorProtocol {
+  public func mergeReplace(linkItem: LinkItem, isAnimated: Bool) {
+    event.mergeReplace += 1
+  }
+  
   public func rootBackToLast(path _: String, isAnimated _: Bool) {
     event.rootBackToLast += 1
   }
