@@ -48,10 +48,10 @@ public struct LinkItem {
   // MARK: Internal
 
   /// An array of strings representing the path list.
-  let pathList: [String]
+  public let pathList: [String]
 
   /// A parameter containing the items associated with the path or path list.
-  let encodedItemString: String
+  public let encodedItemString: String
 }
 
 extension LinkItem {
