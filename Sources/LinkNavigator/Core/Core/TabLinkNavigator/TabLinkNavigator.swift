@@ -176,6 +176,16 @@ extension TabLinkNavigator {
       .flatMap(\.currentTabNavigationController.viewControllers)
       .compactMap { $0 as? MatchPathUsable }
 
+    if let fullSheetController {
+      let fullSheetMatchPathUsables = fullSheetController.viewControllers.compactMap { $0 as? MatchPathUsable }
+      matchPathUsables.insert(contentsOf: fullSheetMatchPathUsables, at: .zero)
+    }
+
+    if let modalController {
+      let modalMatchPathUsables = modalController.viewControllers.compactMap { $0 as? MatchPathUsable }
+      matchPathUsables.insert(contentsOf: modalMatchPathUsables, at: .zero)
+    }
+
     matchPathUsables
       .filter { linkItem.pathList.contains($0.matchPath) }
       .forEach {
