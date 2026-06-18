@@ -307,7 +307,7 @@ extension SingleLinkNavigator {
   private func _rootBackToLast(path: String, isAnimated: Bool) {
     rootController?.popTo(
       viewController: navigationBuilder.lastPick(
-        controller: activeController,
+        controller: rootController,
         item: .init(path: path)),
       isAnimated: isAnimated)
   }
