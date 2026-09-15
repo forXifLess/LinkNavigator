@@ -38,10 +38,12 @@ public final class TabPartialNavigator {
   private var currentTabPathableController: TabRootNavigationController = .init(matchPath: "")
 
   private weak var rootNavigator: TabLinkNavigator?
-  private lazy var navigationBuilder: TabNavigationBuilder<TabPartialNavigator> = .init(
-    rootNavigator: self,
-    routeBuilderList: routeBuilderItemList,
-    dependency: dependency)
+  private var navigationBuilder: TabNavigationBuilder<TabPartialNavigator> {
+    .init(
+      rootNavigator: self,
+      routeBuilderList: routeBuilderItemList,
+      dependency: dependency)
+  }
 
   private var currentController: UINavigationController? {
     rootNavigator?.modalController ?? rootNavigator?.fullSheetController ?? currentTabNavigationController
