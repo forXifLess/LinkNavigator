@@ -38,10 +38,15 @@ public final class TabPartialNavigator {
   private var currentTabPathableController: TabRootNavigationController = .init(matchPath: "")
 
   private weak var rootNavigator: TabLinkNavigator?
-  private lazy var navigationBuilder: TabNavigationBuilder<TabPartialNavigator> = .init(
-    rootNavigator: self,
-    routeBuilderList: routeBuilderItemList,
-    dependency: dependency)
+  /// `TabNavigationBuilder` holds `rootNavigator` strongly, so keeping it in a stored property
+  /// creates a retain cycle with `self`. The navigator, its `UINavigationController` and every page
+  /// on it would then never be released. It is a struct with no state, so rebuilding it is cheap.
+  private var navigationBuilder: TabNavigationBuilder<TabPartialNavigator> {
+    .init(
+      rootNavigator: self,
+      routeBuilderList: routeBuilderItemList,
+      dependency: dependency)
+  }
 
   private var currentController: UINavigationController? {
     rootNavigator?.modalController ?? rootNavigator?.fullSheetController ?? currentTabNavigationController
