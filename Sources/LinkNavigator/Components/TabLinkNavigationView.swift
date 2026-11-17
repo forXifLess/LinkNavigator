@@ -5,20 +5,17 @@ import SwiftUI
 
 public struct TabLinkNavigationView {
   let linkNavigator: TabLinkNavigator
-  let isHiddenDefaultTabbar: Bool
   let tabItemList: [TabItem]
   let isAnimatedForUpdateTabbar: Bool
   let reloadToken: Int
 
   public init(
     linkNavigator: TabLinkNavigator,
-    isHiddenDefaultTabbar: Bool,
     tabItemList: [TabItem],
     isAnimatedForUpdateTabbar: Bool = false,
     reloadToken: Int = .zero)
   {
     self.linkNavigator = linkNavigator
-    self.isHiddenDefaultTabbar = isHiddenDefaultTabbar
     self.tabItemList = tabItemList
     self.isAnimatedForUpdateTabbar = isAnimatedForUpdateTabbar
     self.reloadToken = reloadToken
@@ -51,10 +48,6 @@ extension TabLinkNavigationView: UIViewControllerRepresentable {
       zip(uiViewController.viewControllers ?? [], tabItemList).forEach { controller, item in
         controller.tabBarItem = item.tabItem
       }
-    }
-
-    if uiViewController.tabBar.isHidden != isHiddenDefaultTabbar {
-      uiViewController.tabBar.isHidden = isHiddenDefaultTabbar
     }
 
     linkNavigator.mainController = uiViewController

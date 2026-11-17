@@ -45,7 +45,6 @@ struct TabEventSubscriberApp: App {
     WindowGroup {
       TabLinkNavigationView(
         linkNavigator: tabLinkNavigator,
-        isHiddenDefaultTabbar: false,
         tabItemList: tabList)
         .onOpenURL { url in
           /// You can test deep links by setting the URL Scheme to "tab-e-s".

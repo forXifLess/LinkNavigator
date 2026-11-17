@@ -12,7 +12,6 @@ struct TabInjectionParameterApp: App {
     WindowGroup {
       TabLinkNavigationView(
         linkNavigator: tabLinkNavigator,
-        isHiddenDefaultTabbar: false,
         tabItemList: [
           .init(
             tag: .zero,
